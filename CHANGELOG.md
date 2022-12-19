@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2022-26-22
 
 ### Added
+- Parsing EcoSpold01MetaInformation XML files.
 
 ### Changed
 
