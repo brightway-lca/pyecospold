@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import List
 
 from lxml import etree
 
@@ -39,7 +40,7 @@ class ReferenceFunction(etree.ElementBase):
     """
 
     @property
-    def synonym(self) -> list[str]:
+    def synonym(self) -> List[str]:
         """Synonyms for the name, localName. In the Excel editor they are separated by two slashes ('//'). Synonyms are a
         subset of referenceFunction. 0..n entries are allowed with a max. length of 80 each."""
         return [synonym.text for synonym in self.findall("synonym")]
