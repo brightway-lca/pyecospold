@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="fff527b1-0fe4-491a-b16f-46500eca6d2f" activityNameId="93a6c9b5-0ec4-4538-b372-f10b1dff783a" parentActivityId="7fd5c16b-6a5f-40a5-b67e-8323babb6adf" inheritanceDepth="-1" type="1" specialActivityType="0">
+        <activityName xml:lang="en">sawing, hardwood</activityName>
+        <includedActivitiesStart xml:lang="en">Sawing process starting from debarked hardwood, at sawmill.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">This activity ends with sawn hardwood, at sawmill. The dataset does not include transportation.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="1">This dataset represents the service of sawing one m3 debarked hardwood at a sawmill. </text>
+          <text xml:lang="en" index="2">The data was provided by and approved by the Swiss forest industry (Holzindustrie Schweiz HIS).</text>
+          <imageUrl index="3">https://db3.ecoinvent.org/images/8873fe08-ea91-4621-9368-7989f7df627f</imageUrl>
+        </generalComment>
+      </activity>
+      <classification classificationId="45e0d63f-f176-49f2-a053-8033c5f89e77">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">1610:Sawmilling and planing of wood</classificationValue>
+      </classification>
+      <geography geographyId="131278d6-7d7e-11de-9ae2-0019e336be3a">
+        <shortname xml:lang="en">CH</shortname>
+        <comment>
+          <text xml:lang="en" index="1">Represents average Swiss conditions.</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="3" />
+      <timePeriod startDate="2011-01-01" endDate="2014-12-31" isDataValidForEntirePeriod="true" />
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="3cca3faa-909d-4c1a-98ed-1c288e5633d4" unitId="5b972631-34e3-4db7-a615-f6931770a0cb" variableName="sawmill" amount="5.84041912992439E-11" intermediateExchangeId="ec8fb345-3751-4db5-a67a-fddc6c72a183" activityLinkId="eed4a0bc-8072-4d4e-9991-477d9594d424">
+        <name xml:lang="en">sawmill</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment xml:lang="en">data from industry</comment>
+        <uncertainty>
+          <lognormal meanValue="5.84041912992439E-11" mu="0.78" variance="0.25" varianceWithPedigreeUncertainty="0.2508" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="2" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="e5a5cc97-fd93-42b9-810d-163ee69951a1" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" variableName="sawlog_debarked_hard" amount="0.000437364720231781" intermediateExchangeId="39a9ae63-2eb6-4f4a-adf9-b23713627f97" activityLinkId="24644b68-d919-4ed8-ac55-ab314a997edc">
+        <name xml:lang="en">sawlog and veneer log, hardwood, debarked, measured as solid wood</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">processed internally within the sawmill</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000437364720231781" mu="0.49" variance="0.25" varianceWithPedigreeUncertainty="0.2508" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="2" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="489e550c-242f-46d3-bee1-a24baf36774b" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" variableName="elec_midvol" amount="0.00392028133378486" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="28da396b-4288-4a17-8eff-9c1dba1a4a82">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">data from industry</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00392028133378486" mu="2.6" variance="0.25" varianceWithPedigreeUncertainty="0.2508" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="2" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="033770b2-ca52-4e8c-82b3-3bfa4908cdc4" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" variableName="sawnwood_raw" amount="0" intermediateExchangeId="0982b66c-afa0-4610-b54d-601132149726" productionVolumeAmount="55858">
+        <name xml:lang="en">sawnwood, hardwood, raw, debarked</name>
+        <unitName xml:lang="en">m3</unitName>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.7" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="sawnwood_raw_price_EUR2005" amount="265" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based on: 2004 export prices for the World+ according to: http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor downloaded 28 April 2009; calculated as export value divided by export volume.</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.494" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="563.2" mathematicalRelation="basic_wood_d" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">kg oven-dry matter/wet volume</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="394.24" mathematicalRelation="WM- basic_wood_d" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" variableName="WM" amount="957.44" mathematicalRelation="basic_wood_d*(1+moisture_sawnwood/100)" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">calculated as kg wet matter/wet volume</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="278.2208" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Data submitted by the Swiss industry</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="d6ad9e7f-5f69-4bc8-8b4f-fd838fc25440" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="sawdust" amount="1" isCalculatedAmount="true" mathematicalRelation="sawnwood_raw* share_sawdust/100* basic_wood_d" intermediateExchangeId="dfaef357-a79e-4846-aabc-848b1ab59fbb" productionVolumeAmount="3775107.072" productionVolumeMathematicalRelation=" Ref('033770b2-ca52-4e8c-82b3-3bfa4908cdc4', 'ProductionVolume') *  sawdust / ( sawnwood_raw )">
+        <name xml:lang="en">saw dust, wet, measured as dry mass</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">calculated by the share and basic denisty as the moisture content is over 30%</comment>
+        <uncertainty>
+          <lognormal meanValue="1" mu="3.84" variance="0.25" varianceWithPedigreeUncertainty="0.2508" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="2" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" variableName="sawdust_C_content_fossil" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="sawdust_price_EUR2005" amount="0.0766078031975772" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated based on data from FAOSTAT (accessed 20140429). The price is calculated by using data on total world import quantity (m3) and import value (1000 USD), year 2005. 13564451 m3 of Wood Residues was imported in the world in 2005. The import value was 690978000 USD. The calculated price is thus (690978000/13564451=50.9*0.8=) 41.1 Euro/m3. The density of saw dust, wet, measured as dry mass is 550 kg/m3. The recalculated price is (1/550*41.1=) 0.075 Euro/kg. Using the same approach the calculated price for 2010 was 0.121 Euro/kg.</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" variableName="sawdust_C_content_non_fossil" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" variableName="sawdust_water_content" amount="0.7" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" variableName="sawdust_WM" amount="1.7" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">calculated as kg wet matter/wet volume</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" variableName="sawdust_WWM" amount="0.7" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" variableName="sawdust_DM" amount="1" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">kg oven-dry matter</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.494" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from production volume of reference product using the relative outputs.</productionVolumeComment>
+        <productionVolumeUncertainty>
+          <lognormal meanValue="3775107.072" mu="18.22" variance="0.0006" varianceWithPedigreeUncertainty="0.0012" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </productionVolumeUncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="1d930b65-4c30-4a12-8747-6d0623d60a98" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="slab_hardwood_wet" amount="0" isCalculatedAmount="true" mathematicalRelation="sawnwood_raw* share_slab/100* basic_wood_d" intermediateExchangeId="ec25a8e0-8a4a-4fb7-ad61-8302b7744a82" productionVolumeAmount="8493990.912" productionVolumeMathematicalRelation="Ref('033770b2-ca52-4e8c-82b3-3bfa4908cdc4', 'ProductionVolume')* slab_hardwood_wet">
+        <name xml:lang="en">slab and siding, hardwood, wet, measured as dry mass</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">calculated by the share and basic denisty as the moisture content is over 30%</comment>
+        <uncertainty>
+          <normal meanValue="0" variance="0" varianceWithPedigreeUncertainty="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" variableName="slab_hardwood_wet_water_content" amount="0.7" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" variableName="slab_hardwood_wet_C_content_fossil" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" variableName="slab_hardwood_wet_C_content_non_fossil" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" variableName="slab_hardwood_wet_WM" amount="1.7" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">calculated as kg wet matter/wet volume</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" variableName="slab_hardwood_wet_WWM" amount="0.7" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="slab_hardwood_wet_price_EUR2005" amount="0.112328914172984" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated based on data from FAOSTAT (accessed 20140429). The price is calculated by using data on total world import quantity (m3) and import value (1000 USD), year 2005. 40461924 m3 of Chips and Particles was imported in the world in 2005. The import value was 3022227000 USD. The calculated price is thus (3022227000/40461924=74.7*0.8=) 62.2 Euro/m3. It is estimated, that the chips and particles are half hardwood (of density 650 kg/m3) and half softwood (of density 450 kg/m3), thus the remaining mixture has a density of 550 kg/m3. The recalculated price is (1/550*62.2=) 0.11 Euro/kg. Using the same approach the calculated price for 2010 was 0.123 Euro/kg.</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" variableName="slab_hardwood_wet_DM" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">kg oven dry</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.494" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from production volume of reference product using the relative outputs.</productionVolumeComment>
+        <productionVolumeUncertainty>
+          <lognormal meanValue="8493990.912" mu="18.22" variance="0.0006" varianceWithPedigreeUncertainty="0.0012" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </productionVolumeUncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>2</outputGroup>
+      </intermediateExchange>
+      <parameter parameterId="08b6c714-f853-4598-9e57-3a16dc8e7eef" variableName="share_sawdust" amount="12">
+        <name xml:lang="en">share of sawdust</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <comment xml:lang="en">share of sawdust production per volume</comment>
+      </parameter>
+      <parameter parameterId="3665c98e-6d16-442a-a5d5-9ae016ae434e" variableName="moisture_sawdust" amount="70">
+        <name xml:lang="en">moisture content saw dust</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <comment xml:lang="en">moisture content of sawdust</comment>
+      </parameter>
+      <parameter parameterId="8f5d0a21-b4eb-4e7e-bc3f-14cc21f705cd" variableName="share_sawnwood" amount="61">
+        <name xml:lang="en">share of sawnwood</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <comment xml:lang="en">share of sawnwood production per volume</comment>
+      </parameter>
+      <parameter parameterId="ef1f75f9-0011-4957-ba61-6d8519fa495c" variableName="moisture_slab" amount="70">
+        <name xml:lang="en">moisture content slab</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <comment xml:lang="en">moisture content of slab</comment>
+      </parameter>
+      <parameter parameterId="95f951f6-bc5d-41d3-b90a-4b67dac31997" variableName="moisture_sawnwood" amount="70">
+        <name xml:lang="en">moisture content sawnwood</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <comment xml:lang="en">moisture content of sawnwood</comment>
+      </parameter>
+      <parameter parameterId="53e45fb3-7ea7-407c-a0c3-9ff8b8539a16" variableName="basic_wood_d" mathematicalRelation="dry_wood_d*(1-30*shrinkage_ratio)" isCalculatedAmount="true" amount="563.2">
+        <name xml:lang="en">wood density, basic</name>
+        <unitName xml:lang="en">kg/m3</unitName>
+        <comment xml:lang="en">kg oven-dry matter/wet volume</comment>
+      </parameter>
+      <parameter parameterId="c7a18acd-20fe-4620-a31a-935a7c4ba3e9" variableName="shrinkage_ratio" amount="0.004">
+        <name xml:lang="en">shrinkage ratio (u=30% - 0%)</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <comment xml:lang="en">shrinkage ratio between u=30% to 0%</comment>
+      </parameter>
+      <parameter parameterId="1d981cd7-3abe-4200-b492-5f2114d35e11" variableName="dry_wood_d" amount="640">
+        <name xml:lang="en">wood density, dry</name>
+        <unitName xml:lang="en">kg/m3</unitName>
+        <comment xml:lang="en">kg oven-dry matter/oven-dry volume</comment>
+      </parameter>
+      <parameter parameterId="230ac055-050d-42db-bc6d-1d89ffddaba7" variableName="share_slab" amount="27">
+        <name xml:lang="en">share of slab</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+      </parameter>
+      <parameter parameterId="ab98e311-cd01-4544-9e13-e1b85337e05f" variableName="wood_d_apparent" mathematicalRelation="(1+moisture_sawnwood/100)* basic_wood_d" isCalculatedAmount="true" amount="957.44">
+        <name xml:lang="en">wood density, apparent</name>
+        <unitName xml:lang="en">kg/m3</unitName>
+        <comment xml:lang="en">kg wet matter/wet volume</comment>
+      </parameter>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness percent="100" systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">complementary literature and sampling from sawmills</samplingProcedure>
+      </representativeness>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="2f4e8677-9711-48be-a513-b7ba58307f3c" isActiveAuthor="false" personName="Jun Kono" personEmail="jun.kono@chalmers.se" />
+      <dataGeneratorAndPublication personId="2f4e8677-9711-48be-a513-b7ba58307f3c" personName="Jun Kono" personEmail="jun.kono@chalmers.se" dataPublishedIn="1" publishedSourceId="a4f0da80-40f2-4e99-a4d1-b7bff67bb7f9" publishedSourceYear="2013" publishedSourceFirstAuthor="BFS" isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="2" minorRevision="0" internalSchemaVersion="2.0.8" defaultLanguage="en" creationTimestamp="2014-02-03T12:48:38" lastEditTimestamp="2014-04-30T19:32:42" fileGenerator="EcoEditor 3.3.65.11046" fileTimestamp="2014-04-30T19:32:42" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>
