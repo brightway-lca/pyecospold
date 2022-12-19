@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Dict, List
 
 from lxml import etree
 
@@ -39,7 +40,7 @@ class ReferenceFunction(etree.ElementBase):
     """
 
     @property
-    def synonym(self) -> list[str]:
+    def synonym(self) -> List[str]:
         """Synonyms for the name, localName. In the Excel editor they are separated by two slashes ('//'). Synonyms are a
         subset of referenceFunction. 0..n entries are allowed with a max. length of 80 each."""
         return [synonym.text for synonym in self.findall("synonym")]
@@ -214,7 +215,7 @@ class DataSetInformation(etree.ElementBase):
 
     timestampFormat = "%Y-%m-%dT%H:%M:%S"
 
-    typeMap: dict[int, str] = {
+    typeMap: Dict[int, str] = {
         0: "System non-terminated",
         1: "Unit process",
         2: "System terminated",
@@ -223,7 +224,7 @@ class DataSetInformation(etree.ElementBase):
         5: "Multioutput process"
     }
 
-    energyValuesMap: dict[int, str] = {
+    energyValuesMap: Dict[int, str] = {
         0: "Undefined",
         1: "Net values",
         2: "Gross values"
@@ -332,7 +333,7 @@ class Source(etree.ElementBase):
     Contains information about author(s), title, kind of publication, place of publication, name of editors (if any), etc..
     """
 
-    sourceTypeMap: dict[int, str] = {
+    sourceTypeMap: Dict[int, str] = {
         0: "Undefined (default)",
         1: "Article",
         2: "Chapters in anthology",
@@ -445,13 +446,13 @@ class DataGeneratorAndPublication(etree.ElementBase):
     """Contains information about who compiled for and entered data into the database. Furthermore contains information
     about kind of publication underlying the dataset and the accessibility of the dataset."""
 
-    dataPublishedInMap: dict[int, str] = {
+    dataPublishedInMap: Dict[int, str] = {
         0: "Data as such notpublished (default)",
         1: "The data of some unit processes or subsystems are published",
         2: "Data has been published entirely in 'referenceToPublishedSource'"
     }
 
-    accessRestrictedToMap: dict[int, str] = {
+    accessRestrictedToMap: Dict[int, str] = {
         0: "Public",
         1: "ETH Domain",
         2: "ecoinvent 2000",
