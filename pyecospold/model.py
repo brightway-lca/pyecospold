@@ -2,7 +2,7 @@ from datetime import datetime
 
 from lxml import etree
 
-from pyecospold.helpers import DataTypesConverter
+from .helpers import DataTypesConverter
 
 
 class MetaInformation(etree.ElementBase):

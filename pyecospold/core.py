@@ -1,6 +1,6 @@
 from lxml import etree, objectify
 
-from pyecospold.model import *
+from .model import *
 
 
 class EcospoldLookup(etree.CustomElementClassLookup):
