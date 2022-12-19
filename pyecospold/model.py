@@ -3,7 +3,7 @@ from typing import Dict, List
 
 from lxml import etree
 
-from pyecospold.helpers import DataTypesConverter
+from .helpers import DataTypesConverter
 
 
 class MetaInformation(etree.ElementBase):
