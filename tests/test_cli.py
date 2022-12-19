@@ -5,6 +5,7 @@ from click.testing import CliRunner
 
 from pyecospold import cli
 
+
 @pytest.fixture
 def runner() -> CliRunner:
     """Fixture for invoking command-line interfaces."""

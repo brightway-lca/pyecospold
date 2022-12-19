@@ -17,4 +17,5 @@ def get_version_tuple() -> tuple:
         .split(".")
     )
 
+
 __version__ = get_version_tuple()
