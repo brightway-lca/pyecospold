@@ -1,4 +1,8 @@
-"""pyecospold."""
+__all__ = (
+    "__version__",
+    "parse_file",
+)
+
 import importlib.metadata
 from typing import Union
 
@@ -18,3 +22,5 @@ def get_version_tuple() -> tuple:
     )
 
 __version__ = get_version_tuple()
+
+from .core import parse_file
