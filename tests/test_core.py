@@ -225,13 +225,12 @@ def test_parse_file_validation() -> None:
 
 def test_parse_file_source() -> None:
     firstAuthor = "Nemecek, T."
-    additionalAuthors = \
-        "Heil A., Huguenin, O., Meier, S., Erzinger S., " + \
-        "Blaser S., Dux. D., Zimmermann A.,"
+    additionalAuthors = "Heil A., Huguenin, O., Meier, S., Erzinger S., " + \
+                        "Blaser S., Dux. D., Zimmermann A.,"
     title = "Life Cycle Inventories of Agricultural Production Systems"
     titleOfAnthology = "Final report ecoinvent 2000"
     placeOfPublications = "Dübendorf, CH"
-    publisher = "Swiss Centre for LCI, FAL &amp; FAT"
+    publisher = "Swiss Centre for LCI, FAL and FAT"
     text = "CD-ROM"
     pageNumbers = "pageNumbers"
     nameOfEditors = "Dones R."
@@ -259,7 +258,7 @@ def test_parse_file_source() -> None:
     assert source.title == title
     assert source.titleOfAnthology == titleOfAnthology
     assert source.placeOfPublications == placeOfPublications
-    # assert source.publisher == publisher  FIXME: parsing &amp
+    assert source.publisher == publisher
     assert source.volumeNo == 15
     assert source.text == text
     assert source.pageNumbers == pageNumbers
@@ -321,6 +320,10 @@ def test_parse_file_representativeness() -> None:
 def test_parse_file_timePeriod() -> None:
     text = "Year when reference used for this inventory was published."
     startYear = "1999"
+    startYearMonth = "0000-00"
+    startDate = "0000-00"
+    endYearMonth = "0000-00"
+    endDate = "0000-00"
     endYear = "1999"
     timePeriod = parse_file(
         StringIO(
@@ -328,7 +331,11 @@ def test_parse_file_timePeriod() -> None:
             <timePeriod dataValidForEntirePeriod="true"
                 text="{text}">
                 <startYear>{startYear}</startYear>
+                <startYearMonth>{startYearMonth}</startYearMonth>
+                <startDate>{startDate}</startDate>
                 <endYear>{endYear}</endYear>
+                <endYearMonth>{endYearMonth}</endYearMonth>
+                <endDate>{endDate}</endDate>
             </timePeriod>
             """
         )
@@ -337,7 +344,11 @@ def test_parse_file_timePeriod() -> None:
     assert timePeriod.dataValidForEntirePeriod
     assert timePeriod.text == text
     assert timePeriod.startYear == startYear
+    assert timePeriod.startYearMonth == startYearMonth
+    assert timePeriod.startDate == startDate
     assert timePeriod.endYear == endYear
+    assert timePeriod.endYearMonth == endYearMonth
+    assert timePeriod.endDate == endDate
 
 
 def test_parse_file_dataEntryBy() -> None:
