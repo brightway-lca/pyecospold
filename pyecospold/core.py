@@ -1,3 +1,5 @@
+import argparse
+
 from lxml import etree, objectify
 
 from .model import (MetaInformation, ProcessInformation, ReferenceFunction,
@@ -32,3 +34,14 @@ def parse_file(path: str) -> ProcessInformation:
     parser = objectify.makeparser()
     parser.set_element_class_lookup(EcospoldLookup())
     return objectify.parse(path, parser).getroot()
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-i", "--input_file", help="Path to the xml input file.",
+        type=str, required=True
+    )
+    pargs = parser.parse_args()
+
+    parse_file(pargs.input_file)
