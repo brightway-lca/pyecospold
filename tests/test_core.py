@@ -1,5 +1,4 @@
 import os
-import filecmp
 import tempfile
 from datetime import datetime
 from io import StringIO
@@ -369,4 +368,6 @@ def test_save_file() -> None:
     output_path = os.path.join(tempfile.gettempdir(),  os.urandom(24).hex())
     save_file(metaInformation, output_path)
 
-    assert filecmp.cmp(output_path, input_path)
+    with open(input_path) as input_file:
+        with open(output_path) as output_file:
+            assert output_file.read() == input_file.read()
