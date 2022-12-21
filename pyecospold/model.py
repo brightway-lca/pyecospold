@@ -3,6 +3,7 @@ from typing import Dict, List
 
 from lxml import etree
 
+from .config import Defaults
 from .helpers import DataTypesConverter
 
 
@@ -751,4 +752,4 @@ class DataEntryBy(etree.ElementBase):
         """Indicates a project team that works on the database. The information is
         used, e.g., for restricting the accessibility of dataset information to one
         particular quality network. The code used is: 1=ecoinvent"""
-        return int(self.get("qualityNetwork"))
+        return int(self.get("qualityNetwork", Defaults.qualityNetwork))
