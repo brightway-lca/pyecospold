@@ -32,3 +32,7 @@ def parse_file(path: str) -> ProcessInformation:
     parser = objectify.makeparser()
     parser.set_element_class_lookup(EcospoldLookup())
     return objectify.parse(path, parser).getroot()
+
+
+def save_file(root: etree.ElementBase, path: str) -> None:
+    etree.ElementTree(root).write(path, pretty_print=True)

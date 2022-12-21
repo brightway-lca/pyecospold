@@ -1,7 +1,10 @@
+import os
+import filecmp
+import tempfile
 from datetime import datetime
 from io import StringIO
 
-from pyecospold.core import parse_file
+from pyecospold.core import parse_file, save_file
 from pyecospold.model import (ProcessInformation, ReferenceFunction, Geography,
                               Technology, DataSetInformation, TimePeriod)
 
@@ -358,3 +361,12 @@ def test_parse_file_dataEntryBy() -> None:
 
     assert dataEntryBy.person == 309
     assert dataEntryBy.qualityNetwork == 1
+
+
+def test_save_file() -> None:
+    input_path = "data/metaInformation.xml"
+    metaInformation = parse_file(input_path)
+    output_path = os.path.join(tempfile.gettempdir(),  os.urandom(24).hex())
+    save_file(metaInformation, output_path)
+
+    assert filecmp.cmp(output_path, input_path)

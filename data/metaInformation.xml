@@ -1,0 +1,14 @@
+<metaInformation>
+  <processInformation>
+    <referenceFunction name="compost plant, open" localName="Kompostieranlage, offen" infrastructureProcess="true" unit="unit" category="agricultural means of production" subCategory="buildings" localCategory="Landwirtschaftliche Produktionsmittel" localSubCategory="Geb&#228;ude" amount="1" includedProcesses="Building materials required for a compost plant and its construction as well as the disposal of these materials were included. Land use during construction and use is considered. The lifetime of the plant was assumed as 25  years. Transport of the building materials to the construction site were included." generalComment="The inventory refers to a compost plant over the lifetime of 25 years. The compost plant is constructed for a treating capactiy of 10&#8216;000 tons biogenic waste per year. The total turnover of the plant over the entire lifetime of 25 years amounts thus 250&#8216;000 tons biogenic waste." formula="0" infrastructureIncluded="true" datasetRelatesToProduct="true">
+      <synonym>0</synonym>
+    </referenceFunction>
+    <geography location="CH" text="Values refer to the situtation in Switzerland."/>
+    <technology text="Refer to open plant composting."/>
+    <timePeriod dataValidForEntirePeriod="true" text="Year when reference used for this inventory was published.">
+      <startYear>1999</startYear>
+      <endYear>1999</endYear>
+    </timePeriod>
+    <dataSetInformation type="1" impactAssessmentResult="false" timestamp="2003-09-12T10:14:36" version="1.3" internalVersion="53.03" energyValues="0" languageCode="en" localLanguageCode="de"/>
+  </processInformation>
+</metaInformation>
