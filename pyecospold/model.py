@@ -8,22 +8,45 @@ from .helpers import DataTypesConverter
 
 
 class EcoSpold(etree.ElementBase):
+    """"The data (exchange) format of the ECOINVENT quality network. A dataset
+    describes LCI related information of a unit process or a terminated system
+    comprising metaInformation (description of the process) and flowData
+    (quantified inputs and outputs and allocation factors, if any)."""
+
     @property
     def dataset(self) -> "Dataset":
+        """Contains information about one individual unit process (or terminated
+        system). Information is divided into metaInformation and flowData."""
         return self.find("dataset")
 
 
 class Dataset(etree.ElementBase):
+    """Contains information about one individual unit process (or terminated
+    system). Information is divided into metaInformation and flowData."""
+
     @property
     def metaInformation(self) -> "MetaInformation":
+        """Contains information about the process (its name, (functional) unit,
+        classification, technology, geography, time, etc.), about modelling
+        assumptions and validation details and about dataset administration
+        (version number, kind of dataset, language)."""
         return self.find("metaInformation")
 
     @property
     def flowData(self) -> "FlowData":
+        """Contains information about inputs and outputs (to and from nature
+        as well as to and from technosphere) and information about allocation
+        (flows to be allocated, co-products to be allocated to, allocation
+        factors)."""
         return self.find("flowData")
 
 
 class MetaInformation(etree.ElementBase):
+    """Contains information about the process (its name, (functional) unit,
+    classification, technology, geography, time, etc.), about modelling
+    assumptions and validation details and about dataset administration
+    (version number, kind of dataset, language)."""
+
     @property
     def processInformation(self) -> "ProcessInformation":
         return self.find("processInformation")
@@ -38,57 +61,112 @@ class MetaInformation(etree.ElementBase):
 
 
 class FlowData(etree.ElementBase):
+    """Contains information about inputs and outputs (to and from nature
+    as well as to and from technosphere) and information about allocation
+    (flows to be allocated, co-products to be allocated to, allocation
+    factors)."""
+
     pass
 
 
 class ProcessInformation(etree.ElementBase):
+    """Contains content-related metainformation for the unit process."""
+
     @property
     def referenceFunction(self) -> "ReferenceFunction":
+        """Comprises information which identifies and characterises one particular
+        dataset (=unit process or system terminated)."""
         return self.find("referenceFunction")
 
     @property
     def geography(self) -> "Geography":
+        """Contains information about the geographic validity of the process. The region
+        described with regional code and free text is the market area of the
+        product / service at issue and not necessarily the place of production."""
         return self.find("geography")
 
     @property
     def technology(self) -> "Technology":
+        """Contains a description of the technology for which flow data have been
+        collected. Free text can be used. Pictures, graphs and tables are not allowed.
+        The text should cover information necessary to identify the properties and
+        particularities of the technology(ies) underlying the process data."""
         return self.find("technology")
 
     @property
     def dataSetInformation(self) -> "DataSetInformation":
+        """Contains the administrative information about the dataset at issue: type of
+        dataset (unit process, elementary flow, impact category, multi-output process)
+        timestamp, version and internalVersion number as well as language and
+        localLanguage code."""
         return self.find("dataSetInformation")
 
     @property
     def timePeriod(self) -> "TimePeriod":
+        """Contains all possible date-formats applicable to describe start and end date
+        of the time period for which the dataset is valid."""
         return self.find("timePeriod")
 
 
 class ModellingAndValidation(etree.ElementBase):
+    """Contains metaInformation about how unit processes are modelled
+    and about the review/validation of the dataset."""
+
     @property
     def representativeness(self) -> "Representativeness":
+        """Contains information about the fraction of the relevant market supplied by
+        the product/service described in the dataset. Information about market share,
+        production volume (in the ecoinvent quality network: also consumption volume in
+        the market area) and information about how data have been sampled."""
         return self.find("representativeness")
 
     @property
     def source(self) -> "Source":
+        """Contains information about author(s), title, kind of publication,
+        place of publication, name of editors (if any), etc.."""
         return self.find("source")
 
     @property
     def validation(self) -> "Validation":
+        """Contains information about who carried out the critical review
+        and about the main results and conclusions of the revie and the
+        recommendations made."""
         return self.find("validation")
 
 
 class AdministrativeInformation(etree.ElementBase):
+    """Contains information about the person that compiled and entered
+    the dataset in the database and about kind of publication and the
+    accessibility of the dataset."""
+
     @property
     def dataEntryBy(self) -> "DataEntryBy":
+        """Contains information about the person that entered data in the
+        database or transformed data into the format of the ecoinvent
+        (or any other) quality network."""
         return self.find("dataEntryBy")
 
     @property
     def dataGeneratorAndPublication(self) -> "DataGeneratorAndPublication":
+        """Contains information about who compiled for and entered data into
+        the database. Furthermore contains information about kind of publication
+        underlying the dataset and the accessibility of the dataset."""
         return self.find("dataGeneratorAndPublication")
 
     @property
     def person(self) -> List["Person"]:
+        """Used for the identification of members of the organisation institute
+        co-operating within a quality network (e.g., ecoinvent) referred to in
+        the areas Validation, dataEntryBy and dataGeneratorAndPublication."""
         return self.findall("person")
+
+
+class Exchange(etree.ElementBase):
+    """Comprises all inputs and outputs (both elementary flows and
+    intermediate product flows) recorded in a unit process and its
+    related information."""
+
+    pass
 
 
 class ReferenceFunction(etree.ElementBase):
