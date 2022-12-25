@@ -7,10 +7,38 @@ from .config import Defaults
 from .helpers import DataTypesConverter
 
 
+class EcoSpold(etree.ElementBase):
+    @property
+    def dataset(self) -> "Dataset":
+        return self.find("dataset")
+
+
+class Dataset(etree.ElementBase):
+    @property
+    def metaInformation(self) -> "MetaInformation":
+        return self.find("metaInformation")
+
+    @property
+    def flowData(self) -> "FlowData":
+        return self.find("flowData")
+
+
 class MetaInformation(etree.ElementBase):
     @property
     def processInformation(self) -> "ProcessInformation":
         return self.find("processInformation")
+
+    @property
+    def modellingAndValidation(self) -> "ModellingAndValidation":
+        return self.find("modellingAndValidation")
+
+    @property
+    def administrativeInformation(self) -> "AdministrativeInformation":
+        return self.find("administrativeInformation")
+
+
+class FlowData(etree.ElementBase):
+    pass
 
 
 class ProcessInformation(etree.ElementBase):
@@ -33,6 +61,34 @@ class ProcessInformation(etree.ElementBase):
     @property
     def timePeriod(self) -> "TimePeriod":
         return self.find("timePeriod")
+
+
+class ModellingAndValidation(etree.ElementBase):
+    @property
+    def representativeness(self) -> "Representativeness":
+        return self.find("representativeness")
+
+    @property
+    def source(self) -> "Source":
+        return self.find("source")
+
+    @property
+    def validation(self) -> "Validation":
+        return self.find("validation")
+
+
+class AdministrativeInformation(etree.ElementBase):
+    @property
+    def dataEntryBy(self) -> "DataEntryBy":
+        return self.find("dataEntryBy")
+
+    @property
+    def dataGeneratorAndPublication(self) -> "DataGeneratorAndPublication":
+        return self.find("dataGeneratorAndPublication")
+
+    @property
+    def person(self) -> List["Person"]:
+        return self.findall("person")
 
 
 class ReferenceFunction(etree.ElementBase):
@@ -613,6 +669,62 @@ class DataGeneratorAndPublication(etree.ElementBase):
         process raw data, and the characterisation, damage or weighting factors of the
         impact category, respectively are documented."""
         return self.get("pageNumbers")
+
+
+class Person(etree.ElementBase):
+    """Used for the identification of members of the organisation institute co-operating
+    within a quality network (e.g., ecoinvent) referred to in the areas Validation,
+    dataEntryBy and dataGeneratorAndPublication."""
+
+    @property
+    def number(self) -> int:
+        """ID number is attributed to each person of an organisation/institute
+        co-operating in a quality network such as ecoinvent. It is used to identify
+        persons cited within one dataset."""
+        return int(self.get("number"))
+
+    @property
+    def name(self) -> str:
+        """Name and surname of the person working in an organisation/institute which is
+        a member of the quality network. Identifies the person together with
+        'address' (#5803)."""
+        return self.get("name")
+
+    @property
+    def address(self) -> str:
+        """Complete address, including street, po-box (if applicable), zip-code,
+        city, state (if applicable), country. Identifies the person together with
+        'name' (#5802)."""
+        return self.get("address")
+
+    @property
+    def telephone(self) -> str:
+        """Phone number including country and regional codes."""
+        return self.get("telephone")
+
+    @property
+    def telefax(self) -> str:
+        """Fax number including country and regional codes."""
+        return self.get("telefax")
+
+    @property
+    def email(self) -> str:
+        """Complete email address."""
+        return self.get("email")
+
+    @property
+    def companyCode(self) -> str:
+        """7 letter company code of the organisation/institute co-operating in a
+        quality network. Identifies the co-operation partner together with the
+        countryCode (#5808)."""
+        return self.get("companyCode")
+
+    @property
+    def countryCode(self) -> str:
+        """2 letter ISO-country code of the organisation/institute co-operating
+        in a quality network. Identifying the co-operation partner together with
+        the companyCode (#5807)."""
+        return self.get("countryCode")
 
 
 class Representativeness(etree.ElementBase):
