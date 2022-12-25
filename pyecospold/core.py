@@ -1,18 +1,16 @@
 from lxml import etree, objectify
 
-# TODO: sort me
-from pyecospold.model import (EcoSpold, Dataset, FlowData, MetaInformation,
-                              ProcessInformation,
-                              ReferenceFunction, Geography, Technology,
-                              DataSetInformation, Validation, Source,
-                              DataGeneratorAndPublication, Representativeness,
-                              TimePeriod, DataEntryBy, ModellingAndValidation,
-                              AdministrativeInformation, Person)
+from pyecospold.model import (EcoSpold, Dataset, MetaInformation, FlowData,
+                              ProcessInformation, ModellingAndValidation,
+                              AdministrativeInformation, ReferenceFunction,
+                              Geography, Technology, TimePeriod,
+                              DataSetInformation, Representativeness,
+                              Source, Validation, DataEntryBy,
+                              DataGeneratorAndPublication, Person)
 
 
 class EcospoldLookup(etree.CustomElementClassLookup):
     def lookup(self, node_type, document, namespace, name):
-        # TODO: sort me
         lookupmap = {
             "ecoSpold": EcoSpold,
             "dataset": Dataset,
@@ -24,13 +22,13 @@ class EcospoldLookup(etree.CustomElementClassLookup):
             "referenceFunction" : ReferenceFunction,
             "geography": Geography,
             "technology": Technology,
-            "dataSetInformation": DataSetInformation,
-            "validation": Validation,
-            "source": Source,
-            "dataGeneratorAndPublication": DataGeneratorAndPublication,
-            "representativeness": Representativeness,
             "timePeriod": TimePeriod,
+            "dataSetInformation": DataSetInformation,
+            "representativeness": Representativeness,
+            "source": Source,
+            "validation": Validation,
             "dataEntryBy": DataEntryBy,
+            "dataGeneratorAndPublication": DataGeneratorAndPublication,
             "person": Person
         }
         try:

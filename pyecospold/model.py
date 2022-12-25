@@ -411,33 +411,124 @@ class DataSetInformation(etree.ElementBase):
         return self.get("localLanguageCode")
 
 
-class Validation(etree.ElementBase):
-    """Contains information about who carried out the critical review and about
-    the main results and conclusions of the revie and the recommendations made."""
+class TimePeriod(etree.ElementBase):
+    """Contains all possible date-formats applicable to describe start and end date of
+    the time period for which the dataset is valid."""
 
     @property
-    def proofReadingDetails(self) -> str:
-        """Contains the comment of the reviewer of the dataset. For the ecoinvent
-        quality network the review text should cover the following items:
-        1. completeness and transparency of the documentation, 2. conformity with
-        the ecoinvent quality guidelines, 3. plausibility of the data (unit process
-        elementary and intermediate product flows), 4. completeness regarding
-        elementary and intermediate product flows, 5. mathematical correctness.
-        The review is limited to sample audits (not covering each and every figure).
+    def startYear(self) -> str:
+        """Start date of the time period for which the dataset is valid, entered
+        as year only."""
+        return self.find("startYear").text
+
+    @property
+    def startYearMonth(self) -> str:
+        """Start date of the time period for which the dataset is valid, entered
+        as year and month."""
+        return self.find("startYearMonth").text
+
+    @property
+    def startDate(self) -> str:
+        """Start date of the time period for which the dataset is valid, presented
+        as a complete date (year-month-day). StartDate may as well be entered as year
+        (0000) or year-month (0000-00) only. 2000 and 2000-01 means: from 01.01.2000.
+        If it is only known that data is older than a certain data, 'startDate' is left
+        blank."""
+        return self.find("startDate").text
+
+    @property
+    def endYear(self) -> str:
+        """End date of the time period for which the dataset is valid, entered as year
+        only."""
+        return self.find("endYear").text
+
+    @property
+    def endYearMonth(self) -> str:
+        """End date of the time period for which the dataset is valid, entered as year
+        and month."""
+        return self.find("endYearMonth").text
+
+    @property
+    def endDate(self) -> str:
+        """End date of the time period for which the dataset is valid, presented as a
+        complete date (year-month-day). EndDate may as well be entered as year (0000)
+        or year-month (0000-00) only. 2000 and 2000-12 means: until 31.12.2000."""
+        return self.find("endDate").text
+
+    @property
+    def dataValidForEntirePeriod(self) -> bool:
+        """Indicates whether or not the process data (elementary and intermediate
+        product flows reported under flow data) are valid for the entire time period
+        stated. If not, explanations may be given under 'text'."""
+        return DataTypesConverter.str_to_bool(self.get("dataValidForEntirePeriod"))
+
+    @property
+    def text(self) -> str:
+        """Additional explanations concerning the temporal validity of the flow data
+        reported. It may comprise information about:
+            - how strong the temporal correlation is for the unit process at issue
+            (e.g., are four year old data still adequate for the process operated
+            today?),
+            - why data is not valid for the entire period,
+            - for which smaller periods data are valid,
+            - whether for certain elementary and intermediate product flows a different
+            time period is valid.
+        The fact that data are based on forecasts should be reported under
+        'representativeness'."""
+        return self.get("text")
+
+
+class Representativeness(etree.ElementBase):
+    """Contains information about the fraction of the relevant market supplied by the
+    product/service described in the dataset. Information about market share,
+    production volume (in the ecoinvent quality network: also consumption volume in
+    the market area) and information about how data have been sampled."""
+
+    @property
+    def percent(self) -> float:
+        """Indicates the share in market supply in the geographical area indicated
+        of the product/service at issue. If data representative for a process operated
+        in one country is used for another country's process, the entry should be '0'.
+        The representativity for the original country is reported under
+        'extrapolations'."""
+        return float(self.get("percent"))
+
+    @property
+    def productionVolume(self) -> str:
+        """Indicates the market area consumption volume (NOT necessarily identical with
+        the production volume) in the geographical area indicated of the product/service
+        at issue. The market volume should be given in absolute terms per year and in
+        common units. It is related to the time period specified elsewhere.
         """
-        return self.get("proofReadingDetails")
+        return self.get("productionVolume")
 
     @property
-    def proofReadingValidator(self) -> int:
-        """Indicates the person who carried out the review. ID number must correspond
-        to an ID number of a person listed in the respective dataset."""
-        return int(self.get("proofReadingValidator"))
+    def samplingProcedure(self) -> str:
+        """Indicates the sampling procedure applied for quantifying the exchanges. It
+        should be reported whether the sampling procedure for particular elementary
+        and intermediate product flows differ from the general procedure. Possible
+        problems in combining different sampling procedures should be mentioned."""
+        return self.get("samplingProcedure")
 
     @property
-    def otherDetails(self) -> str:
-        """Contains further information from the review process, especially comments
-        received from third parties once the dataset has been published."""
-        return self.get("otherDetails")
+    def extrapolations(self) -> str:
+        """Describes extrapolations of data from another time period, another
+        geographical area or another technology and the way these extrapolations
+        have been carried out. It should be reported whether different extrapolations
+        have been done on the level of individual exchanges. If data representative for
+        a process operated in one country is used for another country's process, its
+        original representativity can be indicated here. Changes in mean values
+        due to extrapolations may also be reported here."""
+        return self.get("extrapolations")
+
+    @property
+    def uncertaintyAdjustments(self) -> str:
+        """For datasets where the additional uncertainty from lacking representativeness
+        has been included in the quantified uncertainty values ('minValue' and
+        'maxValue'), thus raising the value in 'percent' of the dataset to 100%, this
+        field also reports the original representativeness, the additional uncertainty
+        and the procedure by which it was assessed or calculated."""
+        return self.get("uncertaintyAdjustments")
 
 
 class Source(etree.ElementBase):
@@ -561,6 +652,55 @@ class Source(etree.ElementBase):
         brief summary of the publication and the kind of medium used (e.g. CD-ROM,
         hard copy)"""
         return self.get("text")
+
+
+class Validation(etree.ElementBase):
+    """Contains information about who carried out the critical review and about
+    the main results and conclusions of the revie and the recommendations made."""
+
+    @property
+    def proofReadingDetails(self) -> str:
+        """Contains the comment of the reviewer of the dataset. For the ecoinvent
+        quality network the review text should cover the following items:
+        1. completeness and transparency of the documentation, 2. conformity with
+        the ecoinvent quality guidelines, 3. plausibility of the data (unit process
+        elementary and intermediate product flows), 4. completeness regarding
+        elementary and intermediate product flows, 5. mathematical correctness.
+        The review is limited to sample audits (not covering each and every figure).
+        """
+        return self.get("proofReadingDetails")
+
+    @property
+    def proofReadingValidator(self) -> int:
+        """Indicates the person who carried out the review. ID number must correspond
+        to an ID number of a person listed in the respective dataset."""
+        return int(self.get("proofReadingValidator"))
+
+    @property
+    def otherDetails(self) -> str:
+        """Contains further information from the review process, especially comments
+        received from third parties once the dataset has been published."""
+        return self.get("otherDetails")
+
+
+class DataEntryBy(etree.ElementBase):
+    """Contains information about the person that entered data in the database or
+    transformed data into the format of the ecoinvent (or any other) quality network.
+    """
+
+    @property
+    def person(self) -> int:
+        """ID number for the person that prepared the dataset and enters the dataset
+        into the database. It must correspond to an ID number of a person listed in
+        the respective dataset."""
+        return int(self.get("person"))
+
+    @property
+    def qualityNetwork(self) -> int:
+        """Indicates a project team that works on the database. The information is
+        used, e.g., for restricting the accessibility of dataset information to one
+        particular quality network. The code used is: 1=ecoinvent"""
+        return int(self.get("qualityNetwork", Defaults.qualityNetwork))
 
 
 class DataGeneratorAndPublication(etree.ElementBase):
@@ -725,143 +865,3 @@ class Person(etree.ElementBase):
         in a quality network. Identifying the co-operation partner together with
         the companyCode (#5807)."""
         return self.get("countryCode")
-
-
-class Representativeness(etree.ElementBase):
-    """Contains information about the fraction of the relevant market supplied by the
-    product/service described in the dataset. Information about market share,
-    production volume (in the ecoinvent quality network: also consumption volume in
-    the market area) and information about how data have been sampled."""
-
-    @property
-    def percent(self) -> float:
-        """Indicates the share in market supply in the geographical area indicated
-        of the product/service at issue. If data representative for a process operated
-        in one country is used for another country's process, the entry should be '0'.
-        The representativity for the original country is reported under
-        'extrapolations'."""
-        return float(self.get("percent"))
-
-    @property
-    def productionVolume(self) -> str:
-        """Indicates the market area consumption volume (NOT necessarily identical with
-        the production volume) in the geographical area indicated of the product/service
-        at issue. The market volume should be given in absolute terms per year and in
-        common units. It is related to the time period specified elsewhere.
-        """
-        return self.get("productionVolume")
-
-    @property
-    def samplingProcedure(self) -> str:
-        """Indicates the sampling procedure applied for quantifying the exchanges. It
-        should be reported whether the sampling procedure for particular elementary
-        and intermediate product flows differ from the general procedure. Possible
-        problems in combining different sampling procedures should be mentioned."""
-        return self.get("samplingProcedure")
-
-    @property
-    def extrapolations(self) -> str:
-        """Describes extrapolations of data from another time period, another
-        geographical area or another technology and the way these extrapolations
-        have been carried out. It should be reported whether different extrapolations
-        have been done on the level of individual exchanges. If data representative for
-        a process operated in one country is used for another country's process, its
-        original representativity can be indicated here. Changes in mean values
-        due to extrapolations may also be reported here."""
-        return self.get("extrapolations")
-
-    @property
-    def uncertaintyAdjustments(self) -> str:
-        """For datasets where the additional uncertainty from lacking representativeness
-        has been included in the quantified uncertainty values ('minValue' and
-        'maxValue'), thus raising the value in 'percent' of the dataset to 100%, this
-        field also reports the original representativeness, the additional uncertainty
-        and the procedure by which it was assessed or calculated."""
-        return self.get("uncertaintyAdjustments")
-
-
-class TimePeriod(etree.ElementBase):
-    """Contains all possible date-formats applicable to describe start and end date of
-    the time period for which the dataset is valid."""
-
-    @property
-    def startYear(self) -> str:
-        """Start date of the time period for which the dataset is valid, entered
-        as year only."""
-        return self.find("startYear").text
-
-    @property
-    def startYearMonth(self) -> str:
-        """Start date of the time period for which the dataset is valid, entered
-        as year and month."""
-        return self.find("startYearMonth").text
-
-    @property
-    def startDate(self) -> str:
-        """Start date of the time period for which the dataset is valid, presented
-        as a complete date (year-month-day). StartDate may as well be entered as year
-        (0000) or year-month (0000-00) only. 2000 and 2000-01 means: from 01.01.2000.
-        If it is only known that data is older than a certain data, 'startDate' is left
-        blank."""
-        return self.find("startDate").text
-
-    @property
-    def endYear(self) -> str:
-        """End date of the time period for which the dataset is valid, entered as year
-        only."""
-        return self.find("endYear").text
-
-    @property
-    def endYearMonth(self) -> str:
-        """End date of the time period for which the dataset is valid, entered as year
-        and month."""
-        return self.find("endYearMonth").text
-
-    @property
-    def endDate(self) -> str:
-        """End date of the time period for which the dataset is valid, presented as a
-        complete date (year-month-day). EndDate may as well be entered as year (0000)
-        or year-month (0000-00) only. 2000 and 2000-12 means: until 31.12.2000."""
-        return self.find("endDate").text
-
-    @property
-    def dataValidForEntirePeriod(self) -> bool:
-        """Indicates whether or not the process data (elementary and intermediate
-        product flows reported under flow data) are valid for the entire time period
-        stated. If not, explanations may be given under 'text'."""
-        return DataTypesConverter.str_to_bool(self.get("dataValidForEntirePeriod"))
-
-    @property
-    def text(self) -> str:
-        """Additional explanations concerning the temporal validity of the flow data
-        reported. It may comprise information about:
-            - how strong the temporal correlation is for the unit process at issue
-            (e.g., are four year old data still adequate for the process operated
-            today?),
-            - why data is not valid for the entire period,
-            - for which smaller periods data are valid,
-            - whether for certain elementary and intermediate product flows a different
-            time period is valid.
-        The fact that data are based on forecasts should be reported under
-        'representativeness'."""
-        return self.get("text")
-
-
-class DataEntryBy(etree.ElementBase):
-    """Contains information about the person that entered data in the database or
-    transformed data into the format of the ecoinvent (or any other) quality network.
-    """
-
-    @property
-    def person(self) -> int:
-        """ID number for the person that prepared the dataset and enters the dataset
-        into the database. It must correspond to an ID number of a person listed in
-        the respective dataset."""
-        return int(self.get("person"))
-
-    @property
-    def qualityNetwork(self) -> int:
-        """Indicates a project team that works on the database. The information is
-        used, e.g., for restricting the accessibility of dataset information to one
-        particular quality network. The code used is: 1=ecoinvent"""
-        return int(self.get("qualityNetwork", Defaults.qualityNetwork))
