@@ -4,7 +4,7 @@ from typing import Dict, List
 from lxml import etree
 
 from .config import Defaults
-from .helpers import DataTypesConverter
+from .helpers import DataTypesConverter, DataValidator
 
 
 class EcoSpold(etree.ElementBase):
@@ -235,6 +235,10 @@ class ReferenceFunction(etree.ElementBase):
         impact category).  Within the ecoinvent quality network the amount of the
         reference flow always equals 1."""
         return float(self.get("amount"))
+
+    @amount.setter
+    def amount(self, value: str) -> bool:
+        return DataValidator.try_set(self, "amount", value)
 
     @property
     def unit(self) -> str:
