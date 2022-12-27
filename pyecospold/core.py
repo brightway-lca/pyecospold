@@ -1,12 +1,12 @@
 from lxml import etree, objectify
 
-from pyecospold.model import (EcoSpold, Dataset, MetaInformation, FlowData,
-                              ProcessInformation, ModellingAndValidation,
-                              AdministrativeInformation, ReferenceFunction,
-                              Geography, Technology, TimePeriod,
-                              DataSetInformation, Representativeness,
-                              Source, Validation, DataEntryBy,
-                              DataGeneratorAndPublication, Person)
+from .model import (EcoSpold, Dataset, MetaInformation, FlowData,
+                    ProcessInformation, ModellingAndValidation,
+                    AdministrativeInformation, ReferenceFunction,
+                    Geography, Technology, TimePeriod,
+                    DataSetInformation, Representativeness,
+                    Source, Validation, DataEntryBy,
+                    DataGeneratorAndPublication, Person)
 
 
 class EcospoldLookup(etree.CustomElementClassLookup):
@@ -37,11 +37,15 @@ class EcospoldLookup(etree.CustomElementClassLookup):
             return None
 
 
-def parse_file(path: str) -> EcoSpold:
-    parser = objectify.makeparser()
+def parse_file(
+    file_path: str, schema_path: str = "data/schema/EcoSpold01Dataset.xsd"
+) -> EcoSpold:
+    schema = etree.XMLSchema(file=schema_path)
+    parser = objectify.makeparser(schema=schema)
     parser.set_element_class_lookup(EcospoldLookup())
-    return objectify.parse(path, parser).getroot()
+    return objectify.parse(file_path, parser).getroot()
 
 
 def save_file(root: etree.ElementBase, path: str) -> None:
-    etree.ElementTree(root).write(path, pretty_print=True)
+    root = etree.ElementTree(root)
+    root.write(path, pretty_print=True, xml_declaration=True, encoding="UTF-8")

@@ -17,7 +17,7 @@ class EcoSpold(etree.ElementBase):
     def dataset(self) -> "Dataset":
         """Contains information about one individual unit process (or terminated
         system). Information is divided into metaInformation and flowData."""
-        return self.find("dataset")
+        return self.find("dataset", namespaces=self.nsmap)
 
 
 class Dataset(etree.ElementBase):
@@ -30,7 +30,7 @@ class Dataset(etree.ElementBase):
         classification, technology, geography, time, etc.), about modelling
         assumptions and validation details and about dataset administration
         (version number, kind of dataset, language)."""
-        return self.find("metaInformation")
+        return self.find("metaInformation", namespaces=self.nsmap)
 
     @property
     def flowData(self) -> "FlowData":
@@ -38,7 +38,7 @@ class Dataset(etree.ElementBase):
         as well as to and from technosphere) and information about allocation
         (flows to be allocated, co-products to be allocated to, allocation
         factors)."""
-        return self.find("flowData")
+        return self.find("flowData", namespaces=self.nsmap)
 
 
 class MetaInformation(etree.ElementBase):
@@ -49,15 +49,15 @@ class MetaInformation(etree.ElementBase):
 
     @property
     def processInformation(self) -> "ProcessInformation":
-        return self.find("processInformation")
+        return self.find("processInformation", namespaces=self.nsmap)
 
     @property
     def modellingAndValidation(self) -> "ModellingAndValidation":
-        return self.find("modellingAndValidation")
+        return self.find("modellingAndValidation", namespaces=self.nsmap)
 
     @property
     def administrativeInformation(self) -> "AdministrativeInformation":
-        return self.find("administrativeInformation")
+        return self.find("administrativeInformation", namespaces=self.nsmap)
 
 
 class FlowData(etree.ElementBase):
@@ -76,14 +76,14 @@ class ProcessInformation(etree.ElementBase):
     def referenceFunction(self) -> "ReferenceFunction":
         """Comprises information which identifies and characterises one particular
         dataset (=unit process or system terminated)."""
-        return self.find("referenceFunction")
+        return self.find("referenceFunction", namespaces=self.nsmap)
 
     @property
     def geography(self) -> "Geography":
         """Contains information about the geographic validity of the process. The region
         described with regional code and free text is the market area of the
         product / service at issue and not necessarily the place of production."""
-        return self.find("geography")
+        return self.find("geography", namespaces=self.nsmap)
 
     @property
     def technology(self) -> "Technology":
@@ -91,7 +91,7 @@ class ProcessInformation(etree.ElementBase):
         collected. Free text can be used. Pictures, graphs and tables are not allowed.
         The text should cover information necessary to identify the properties and
         particularities of the technology(ies) underlying the process data."""
-        return self.find("technology")
+        return self.find("technology", namespaces=self.nsmap)
 
     @property
     def dataSetInformation(self) -> "DataSetInformation":
@@ -99,13 +99,13 @@ class ProcessInformation(etree.ElementBase):
         dataset (unit process, elementary flow, impact category, multi-output process)
         timestamp, version and internalVersion number as well as language and
         localLanguage code."""
-        return self.find("dataSetInformation")
+        return self.find("dataSetInformation", namespaces=self.nsmap)
 
     @property
     def timePeriod(self) -> "TimePeriod":
         """Contains all possible date-formats applicable to describe start and end date
         of the time period for which the dataset is valid."""
-        return self.find("timePeriod")
+        return self.find("timePeriod", namespaces=self.nsmap)
 
 
 class ModellingAndValidation(etree.ElementBase):
@@ -118,20 +118,20 @@ class ModellingAndValidation(etree.ElementBase):
         the product/service described in the dataset. Information about market share,
         production volume (in the ecoinvent quality network: also consumption volume in
         the market area) and information about how data have been sampled."""
-        return self.find("representativeness")
+        return self.find("representativeness", namespaces=self.nsmap)
 
     @property
     def source(self) -> "Source":
         """Contains information about author(s), title, kind of publication,
         place of publication, name of editors (if any), etc.."""
-        return self.find("source")
+        return self.find("source", namespaces=self.nsmap)
 
     @property
     def validation(self) -> "Validation":
         """Contains information about who carried out the critical review
         and about the main results and conclusions of the revie and the
         recommendations made."""
-        return self.find("validation")
+        return self.find("validation", namespaces=self.nsmap)
 
 
 class AdministrativeInformation(etree.ElementBase):
@@ -144,21 +144,21 @@ class AdministrativeInformation(etree.ElementBase):
         """Contains information about the person that entered data in the
         database or transformed data into the format of the ecoinvent
         (or any other) quality network."""
-        return self.find("dataEntryBy")
+        return self.find("dataEntryBy", namespaces=self.nsmap)
 
     @property
     def dataGeneratorAndPublication(self) -> "DataGeneratorAndPublication":
         """Contains information about who compiled for and entered data into
         the database. Furthermore contains information about kind of publication
         underlying the dataset and the accessibility of the dataset."""
-        return self.find("dataGeneratorAndPublication")
+        return self.find("dataGeneratorAndPublication", namespaces=self.nsmap)
 
     @property
     def person(self) -> List["Person"]:
         """Used for the identification of members of the organisation institute
         co-operating within a quality network (e.g., ecoinvent) referred to in
         the areas Validation, dataEntryBy and dataGeneratorAndPublication."""
-        return self.findall("person")
+        return self.findall("person", namespaces=self.nsmap)
 
 
 class Exchange(etree.ElementBase):
@@ -176,11 +176,13 @@ class ReferenceFunction(etree.ElementBase):
     """
 
     @property
-    def synonym(self) -> List[str]:
+    def synonyms(self) -> List[str]:
         """Synonyms for the name, localName. In the Excel editor they are separated
         by two slashes ('//'). Synonyms are a subset of referenceFunction. 0..n
         entries are allowed with a max. length of 80 each."""
-        return [synonym.text for synonym in self.findall("synonym")]
+        return [
+            synonym.text for synonym in self.findall("synonym", namespaces=self.nsmap)
+        ]
 
     @property
     def datasetRelatesToProduct(self) -> bool:
@@ -497,13 +499,13 @@ class TimePeriod(etree.ElementBase):
     def startYear(self) -> str:
         """Start date of the time period for which the dataset is valid, entered
         as year only."""
-        return self.find("startYear").text
+        return self.find("startYear", namespaces=self.nsmap).text
 
     @property
     def startYearMonth(self) -> str:
         """Start date of the time period for which the dataset is valid, entered
         as year and month."""
-        return self.find("startYearMonth").text
+        return self.find("startYearMonth", namespaces=self.nsmap).text
 
     @property
     def startDate(self) -> str:
@@ -512,26 +514,26 @@ class TimePeriod(etree.ElementBase):
         (0000) or year-month (0000-00) only. 2000 and 2000-01 means: from 01.01.2000.
         If it is only known that data is older than a certain data, 'startDate' is left
         blank."""
-        return self.find("startDate").text
+        return self.find("startDate", namespaces=self.nsmap).text
 
     @property
     def endYear(self) -> str:
         """End date of the time period for which the dataset is valid, entered as year
         only."""
-        return self.find("endYear").text
+        return self.find("endYear", namespaces=self.nsmap).text
 
     @property
     def endYearMonth(self) -> str:
         """End date of the time period for which the dataset is valid, entered as year
         and month."""
-        return self.find("endYearMonth").text
+        return self.find("endYearMonth", namespaces=self.nsmap).text
 
     @property
     def endDate(self) -> str:
         """End date of the time period for which the dataset is valid, presented as a
         complete date (year-month-day). EndDate may as well be entered as year (0000)
         or year-month (0000-00) only. 2000 and 2000-12 means: until 31.12.2000."""
-        return self.find("endDate").text
+        return self.find("endDate", namespaces=self.nsmap).text
 
     @property
     def dataValidForEntirePeriod(self) -> bool:
