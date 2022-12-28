@@ -19,6 +19,14 @@ class EcoSpold(etree.ElementBase):
         system). Information is divided into metaInformation and flowData."""
         return self.find("dataset", namespaces=self.nsmap)
 
+    @property
+    def validationId(self) -> int:
+        return int(self.get("validationId"))
+
+    @property
+    def validationStatus(self) -> str:
+        return self.get("validationStatus")
+
 
 class Dataset(etree.ElementBase):
     """Contains information about one individual unit process (or terminated
@@ -40,6 +48,42 @@ class Dataset(etree.ElementBase):
         factors)."""
         return self.find("flowData", namespaces=self.nsmap)
 
+    @property
+    def number(self) -> int:
+        """ID number used as an identifier of the dataset."""
+        return int(self.get("number"))
+
+    @property
+    def internalSchemaVersion(self) -> str:
+        return self.get("internalSchemaVersion")
+
+    @property
+    def generator(self) -> str:
+        return self.get("generator")
+
+    @property
+    def timestamp(self) -> datetime:
+        """Automatically generated date when dataset is created"""
+        return datetime.strptime(
+            self.get("timestamp"), DataTypesConverter.timestampFormat
+        )
+
+    @property
+    def validCompanyCodes(self) -> str:
+        return self.get("validCompanyCodes")
+
+    @property
+    def validRegionalCodes(self) -> str:
+        return self.get("validRegionalCodes")
+
+    @property
+    def validCategories(self) -> str:
+        return self.get("validCategories")
+
+    @property
+    def validUnits(self) -> str:
+        return self.get("validUnits")
+
 
 class MetaInformation(etree.ElementBase):
     """Contains information about the process (its name, (functional) unit,
@@ -49,14 +93,20 @@ class MetaInformation(etree.ElementBase):
 
     @property
     def processInformation(self) -> "ProcessInformation":
+        """Contains content-related metainformation for the unit process."""
         return self.find("processInformation", namespaces=self.nsmap)
 
     @property
     def modellingAndValidation(self) -> "ModellingAndValidation":
+        """Contains metaInformation about how unit processes are modelled
+        and about the review/validation of the dataset."""
         return self.find("modellingAndValidation", namespaces=self.nsmap)
 
     @property
     def administrativeInformation(self) -> "AdministrativeInformation":
+        """Contains information about the person that compiled and entered
+        the dataset in the database and about kind of publication and the
+        accessibility of the dataset."""
         return self.find("administrativeInformation", namespaces=self.nsmap)
 
 
@@ -66,7 +116,16 @@ class FlowData(etree.ElementBase):
     (flows to be allocated, co-products to be allocated to, allocation
     factors)."""
 
-    pass
+    @property
+    def exchanges(self) -> List["Exchange"]:
+        """Comprises all inputs and outputs (both elementary flows and
+        intermediate product flows) registered in a unit process."""
+        return self.findall("exchange", self.nsmap)
+
+    @property
+    def allocations(self) -> List["Allocation"]:
+        """Comprises all referenceToInputOutput."""
+        return self.findall("allocation", self.nsmap)
 
 
 class ProcessInformation(etree.ElementBase):
@@ -154,7 +213,7 @@ class AdministrativeInformation(etree.ElementBase):
         return self.find("dataGeneratorAndPublication", namespaces=self.nsmap)
 
     @property
-    def person(self) -> List["Person"]:
+    def persons(self) -> List["Person"]:
         """Used for the identification of members of the organisation institute
         co-operating within a quality network (e.g., ecoinvent) referred to in
         the areas Validation, dataEntryBy and dataGeneratorAndPublication."""
@@ -165,6 +224,252 @@ class Exchange(etree.ElementBase):
     """Comprises all inputs and outputs (both elementary flows and
     intermediate product flows) recorded in a unit process and its
     related information."""
+
+    inputGroupsMap: Dict[int, str] = {
+        1: "Materials/Fuels",
+        2: "Electricity/Heat",
+        3: "Services",
+        4: "FromNature",
+        5: "FromTechnosphere"
+    }
+
+    outputGroupsMap: Dict[int, str] = {
+        0: "ReferenceProduct",
+        1: "Include avoided product system",
+        2: "Allocated by product",
+        3: "WasteToTreatment",
+        4: "ToNature"
+    }
+
+    uncertaintyTypeMap: Dict[int, str] = {
+        0: "undefined",
+        1: "lognormal",
+        2: "normal",
+        3: "triang",
+        4: "uniform"
+    }
+
+    @property
+    def inputGroups(self) -> List[int]:
+        """Indicates the kind of input flow. The codes are:
+        1=Materials/Fuels, 2=Electricity/Heat, 3=Services, 4=FromNature,
+        5=FromTechnosphere. Within the ecoinvent quality network,
+        only 4 and 5 are actively used (any material, fuel, electricity,
+        heat or service is classified as an input from technosphere)."""
+        return list(
+            map(lambda x: int(x.text), self.findall("inputGroup", self.nsmap))
+        )
+
+    @property
+    def inputGroupsStr(self) -> List[str]:
+        """String representation for inputGroups. See inputGroups for
+        explanations. 1=Materials/Fuels, 2=Electricity/Heat, 3=Services,
+        4=FromNature, 5=FromTechnosphere."""
+        return [self.inputGroupsMap[inputGroup] for inputGroup in self.inputGroups]
+
+    @property
+    def outputGroups(self) -> List[int]:
+        """Indicates the kind of output flow. The codes are: 0=ReferenceProduct,
+        1=Include avoided product system, 2=Allocated by product,
+        3=WasteToTreatment, 4=ToNature. The options 0, 2, and 4 are actively used
+        in the ecoinvent quality network. Products of multioutput processes are
+        classified as allocated by-products (2). Avoided product systems are modelled
+        with a negative input from technosphere. WasteToTreatment are modelled like
+        services (hence inputFromTechnosphere). Therefore codes '1' and '3' are not
+        required."""
+        return list(
+            map(lambda x: int(x.text), self.findall("outputGroup", self.nsmap))
+        )
+
+    @property
+    def outputGroupsStr(self) -> List[str]:
+        """String representation for outputGroups. See outputGroups for
+        explanations. 0=ReferenceProduct, 1=Include avoided product system,
+        2=Allocated by product, 3=WasteToTreatment, 4=ToNature"""
+        return [self.outputGroupsMap[outputGroup] for outputGroup in self.outputGroups]
+
+    @property
+    def number(self) -> int:
+        """ID number used as an identifier of a particular exchange
+        in a dataset."""
+        return int(self.get("number"))
+
+    @property
+    def category(self) -> str:
+        """Describes the category one particular exchange belongs to
+        (in English language). Category and subCategory are required for
+        elementary flows because they have a discriminative function."""
+        return self.get("category")
+
+    @property
+    def subCategory(self) -> str:
+        """Describes the subCategory one particular exchange belongs to
+        (in English language). Category and subCategory are required for
+        elementary flows because they have a discriminative function."""
+        return self.get("subCategory")
+
+    @property
+    def localCategory(self) -> str:
+        """Describes the category one particular exchange belongs to
+        (in German local language).See further explanations in 'category'.
+        """
+        return self.get("localCategory")
+
+    @property
+    def localSubCategory(self) -> str:
+        """Describes the subCategory one particular exchange belongs to
+        (in German local language).See further explanations in
+        'subCategory'."""
+        return self.get("localSubCategory")
+
+    @property
+    def CASNumber(self) -> str:
+        """Indicates the number according to the Chemical Abstract
+        Service (CAS). The Format of the CAS-number: 000000-00-0,
+        where the first string of digits needs not to be complete
+        (i.e. less than six digits are admitted)."""
+        return self.get("CASNumber")
+
+    @property
+    def name(self) -> str:
+        """Name of the exchange (elementary flow or intermediate
+        product flow) in English language. See 'name' in
+        'metaInformation/referenceFunction' for more explanations."""
+        return self.get("name")
+
+    @property
+    def location(self) -> str:
+        """Area information for the intermediate product/service flow.
+        Location is defined by a 7 letter code written with capital
+        letters. See 'metaInformation/referenceFunction' for more
+        explanations. Information about the geographic area for which
+        an impact assessment method is valid. Not applicable for
+        elementary flows."""
+        return self.get("location")
+
+    @property
+    def unit(self) -> str:
+        """Unit of the exchange (elementary flow or intermediate product
+        flow). See 'metaInformation/referenceFunction' for more
+        explanations. Unit of the elementary flow for which a
+        characterisation, damage or weighting factor is determined."""
+        return self.get("unit")
+
+    @property
+    def meanValue(self) -> float:
+        """Mean amount of elementary flow or intermediate product flow.
+        In case of triangular uncertainty distribution, the meanValue shall
+        be calculated from the mostLikelyValue. The field mostLikelyValue (#3797)
+        shall not be used in the ecoinvent quality network."""
+        return float(self.get("meanValue"))
+
+    @property
+    def uncertaintyType(self) -> int:
+        """Defines the kind of uncertainty distribution applied on one particular
+        exchange. Lognormal distribution is default, normal, triangular or
+        uniform distribution may be chosen if appropriate. 0=undefined,
+        1=lognormal (default), 2=normal, 3=triang, 4=uniform"""
+        return int(self.get("uncertaintyType", Defaults.uncertaintyType))
+
+    @property
+    def uncertaintyTypeStr(self) -> str:
+        """String representation for uncertaintyType. See uncertaintyType for
+        explanations. 0=undefined, 1=lognormal (default), 2=normal, 3=triang,
+        4=uniform"""
+        return self.uncertaintyTypeMap[self.uncertaintyType]
+
+    @property
+    def standardDeviation95(self) -> float:
+        """Defines the 2.5% and the 97.5% value for the uncertainty range
+        with normal and lognormal distribution. For lognormal distribution
+        the square of the geometric standard deviation (SDg^2) is entered.
+        SDg^2 is dimensionless. MeanValue times SDg^2 equals the 97.5% value
+        (=maxValue), meanvalue divided by SDg^2 equals the 2.5% value
+        (=minValue). For normal distribution the double standard deviation
+        (2*SD) is entered. 2*SD is given in the same unit like the meanValue.
+        MeanValue plus 2*SD equals 97.5% value (=maxValue), meanValue minus
+        2*SD equals 2.5% value (=minValue). This data field remains empty when
+        uniform or triangular uncertainty distribution is applied
+        (uncertaintyType = 3 and 4, respectively)."""
+        return float(self.get("standardDeviation95"))
+
+    @property
+    def formula(self) -> str:
+        """Chemical formula (e.g. sum formula) may be entered. No graphs are
+        allowed to represent chemical formulas."""
+        return self.get("formula")
+
+    @property
+    def referenceToSource(self) -> int:
+        """An ID used in the area 'sources' of the respective dataset is
+        required. It indicates the publication (of the ecoinvent quality
+        network) where the unit process raw data at issue and the
+        characterisation, damage or weighting factors of an impact category,
+        respectively, are documented."""
+        return int(self.get("referenceToSource"))
+
+    @property
+    def pageNumbers(self) -> str:
+        """The page numbers of the publication (of the ecoinvent quality
+        network) where the exchanges of the unit process at issue are
+        documented."""
+        return self.get("pageNumbers")
+
+    @property
+    def generalComment(self) -> str:
+        """A general comment can be made about each individual exchange
+        (or characterisation, damage or weighting factor) of a particular
+        unit process and impact category, respectively. It contains the
+        string of code numbers of the ecoinvent uncertainty assessment
+        (if pedigree matrix is applied) as well as further comments
+        about the uncertainty assessment. The string of numbers of the
+        uncertainty assessment describes (reliability, completeness,
+        temporal correlation, geographical correlation, further technical
+        correlation, sample size) and uses a score from 1 to 5. See
+        methodology report for further information."""
+        return self.get("generalComment")
+
+    @property
+    def localName(self) -> str:
+        """Name of the exchange (or characterisation, damage or weighting
+        factor) of a particular unit process and impact category,
+        respectively (in German local language)."""
+        return self.get("localName")
+
+    @property
+    def infrastructureProcess(self) -> bool:
+        """Describes whether the intermediate product flow from or to the
+        unit process is an infrastructure process or not. Not applicable
+        to elementary flows."""
+        return DataTypesConverter.str_to_bool(
+            self.get("infrastructureProcess")
+        )
+
+    @property
+    def minValue(self) -> float:
+        """Contains the minimum value for exchange data with a uniform or
+        triangular distribution. In case of LCI results imported into the
+        ecoinvent database, the 2.5% value is reported in this field."""
+        return float(self.get("minValue"))
+
+    @property
+    def maxValue(self) -> float:
+        """Contains the maximum value for exchange data with a uniform or
+        triangular distribution. In case of LCI results imported into the
+        ecoinvent database, the 97.5% value is reported in this field."""
+        return float(self.get("maxValue"))
+
+    @property
+    def mostLikelyValue(self) -> float:
+        """In some cases the MostLikelyValue is available for exhange data
+        with triangular distribution. However, do not use this field, but
+        calculate the mean value, (minValue + mostLikelyValue +maxValue)/3,
+        and enter it into the field "meanValue")."""
+        return float(self.get("mostLikelyValue"))
+
+
+class Allocation(etree.ElementBase):
+    """Comprises all referenceToInputOutput."""
 
     pass
 
@@ -393,8 +698,6 @@ class DataSetInformation(etree.ElementBase):
     timestamp, version and internalVersion number as well as language and localLanguage
     code."""
 
-    timestampFormat = "%Y-%m-%dT%H:%M:%S"
-
     typeMap: Dict[int, str] = {
         0: "System non-terminated",
         1: "Unit process",
@@ -449,7 +752,9 @@ class DataSetInformation(etree.ElementBase):
     @property
     def timestamp(self) -> datetime:
         """Automatically generated date when dataset is created"""
-        return datetime.strptime(self.get("timestamp"), self.timestampFormat)
+        return datetime.strptime(
+            self.get("timestamp"), DataTypesConverter.timestampFormat
+        )
 
     @property
     def version(self) -> float:

@@ -9,10 +9,11 @@ from lxml.etree import XMLSyntaxError
 from pyecospold.core import parse_file, save_file
 from pyecospold.model import (EcoSpold, Dataset, MetaInformation, FlowData,
                               ProcessInformation, ModellingAndValidation,
-                              AdministrativeInformation, ReferenceFunction,
-                              Geography, Technology, DataSetInformation,
-                              TimePeriod, Representativeness, Source,
-                              Validation, DataEntryBy, DataGeneratorAndPublication)
+                              AdministrativeInformation, Exchange,
+                              ReferenceFunction, Geography, Technology,
+                              DataSetInformation, TimePeriod, Representativeness,
+                              Source, Validation, DataEntryBy,
+                              DataGeneratorAndPublication, Person)
 
 
 @pytest.fixture
@@ -31,15 +32,36 @@ def test_parse_file_fail() -> None:
 
 
 def test_parse_file_ecoSpold(ecoSpold: EcoSpold) -> None:
+    validationId = 0
+    validationStatus = "validationStatus"
+
     assert type(ecoSpold) == EcoSpold
     assert type(ecoSpold.dataset) == Dataset
+    assert ecoSpold.validationId == validationId
+    assert ecoSpold.validationStatus == validationStatus
 
 
 def test_parse_file_dataset(ecoSpold: EcoSpold) -> None:
+    validCompanyCodes = "CompanyCodes.xml"
+    validRegionalCodes = "RegionalCodes.xml"
+    validCategories = "Categories.xml"
+    validUnits = "Units.xml"
+    number = 1
+    timestamp = datetime(2006, 10, 31, 20, 34, 59)
+    generator = "EcoAdmin 1.1.17.110"
+    internalSchemaVersion = "1.0"
     dataset = ecoSpold.dataset
 
     assert type(dataset.metaInformation) == MetaInformation
     assert type(dataset.flowData) == FlowData
+    assert dataset.validCompanyCodes == validCompanyCodes
+    assert dataset.validRegionalCodes == validRegionalCodes
+    assert dataset.validCategories == validCategories
+    assert dataset.validUnits == validUnits
+    assert dataset.number == number
+    assert dataset.timestamp == timestamp
+    assert dataset.generator == generator
+    assert dataset.internalSchemaVersion == internalSchemaVersion
 
 
 def test_parse_file_metaInformation(ecoSpold: EcoSpold) -> None:
@@ -48,6 +70,14 @@ def test_parse_file_metaInformation(ecoSpold: EcoSpold) -> None:
     assert type(metaInformation.processInformation) == ProcessInformation
     assert type(metaInformation.modellingAndValidation) == ModellingAndValidation
     assert type(metaInformation.administrativeInformation) == AdministrativeInformation
+
+
+def test_parse_file_flowData(ecoSpold: EcoSpold) -> None:
+    flowData = ecoSpold.dataset.flowData
+
+    assert type(flowData.exchanges[0]) == Exchange
+    # FIXME: add allocations in test data
+    # assert type(flowData.allocations[0]) == Allocation
 
 
 def test_parse_file_processInformation(ecoSpold: EcoSpold) -> None:
@@ -75,8 +105,59 @@ def test_parse_file_administrativeInformation(ecoSpold: EcoSpold) -> None:
     assert type(administrativeInformation.dataEntryBy) == DataEntryBy
     assert type(administrativeInformation.dataGeneratorAndPublication) == \
         DataGeneratorAndPublication
-    # FIXME: check againts List[Person]
-    # assert type(administrativeInformation.person) == List[Person]
+    assert type(administrativeInformation.persons[0]) == Person
+
+
+def test_parse_file_exchange(ecoSpold: EcoSpold) -> None:
+    number = 2156
+    category = "waste management"
+    subCategory = "recycling"
+    localCategory = "Entsorgungssysteme"
+    localSubCategory = "Recycling"
+    CASNumber = "007439-89-6"
+    name = "disposal, building, reinforcement steel, to recycling"
+    location = "CH"
+    unit = "kg"
+    uncertaintyType = 1
+    uncertaintyTypeStr = "lognormal"
+    meanValue = 21200
+    standardDeviation95 = 1.22
+    formula = "Fe"
+    generalComment = "(2,3,1,1,1,5)"
+    localName = "Entsorgung, Gebäude, Armierungseisen, ins Recycling"
+    infrastructureProcess = False
+    inputGroups = [5]
+    inputGroupsStr = ["FromTechnosphere"]
+    outputGroups = [0]
+    outputGroupsStr = ["ReferenceProduct"]
+    exchange = ecoSpold.dataset.flowData.exchanges[14]
+    output_exchange = ecoSpold.dataset.flowData.exchanges[0]
+
+    assert exchange.number == number
+    assert exchange.category == category
+    assert exchange.subCategory == subCategory
+    assert exchange.localCategory == localCategory
+    assert exchange.localSubCategory == localSubCategory
+    assert exchange.CASNumber == CASNumber
+    assert exchange.name == name
+    assert exchange.location == location
+    assert exchange.unit == unit
+    assert exchange.uncertaintyType == uncertaintyType
+    assert exchange.uncertaintyTypeStr == uncertaintyTypeStr
+    assert exchange.meanValue == meanValue
+    assert exchange.standardDeviation95 == standardDeviation95
+    assert exchange.formula == formula
+    assert exchange.generalComment == generalComment
+    assert exchange.localName == localName
+    assert exchange.infrastructureProcess == infrastructureProcess
+    assert exchange.inputGroups == inputGroups
+    assert exchange.inputGroupsStr == inputGroupsStr
+    assert output_exchange.outputGroups == outputGroups
+    assert output_exchange.outputGroupsStr == outputGroupsStr
+
+
+def test_parse_file_allocaiton(ecoSpold: EcoSpold) -> None:
+    pass
 
 
 def test_parse_file_referenceFunction(ecoSpold: EcoSpold) -> None:
@@ -100,6 +181,8 @@ def test_parse_file_referenceFunction(ecoSpold: EcoSpold) -> None:
                      "turnover of the plant over the entire lifetime of 25 years " + \
                      "amounts thus 250‘000 tons biogenic waste."
     formula = "0"
+    infrastructureIncluded = True
+    datasetRelatesToProduct = True
     synonyms = ["0"]
     processInformation = ecoSpold.dataset.metaInformation.processInformation
     referenceFunction = processInformation.referenceFunction
@@ -116,8 +199,10 @@ def test_parse_file_referenceFunction(ecoSpold: EcoSpold) -> None:
     assert referenceFunction.includedProcesses == includedProcesses
     assert referenceFunction.generalComment == generalComment
     assert referenceFunction.formula == formula
-    assert referenceFunction.infrastructureIncluded
-    assert referenceFunction.datasetRelatesToProduct
+    assert referenceFunction.infrastructureIncluded == \
+        infrastructureIncluded
+    assert referenceFunction.datasetRelatesToProduct == \
+        datasetRelatesToProduct
     assert referenceFunction.synonyms == synonyms
 
 
@@ -274,7 +359,7 @@ def test_parse_file_person(ecoSpold: EcoSpold) -> None:
     countryCode = "CH"
     metaInformation = ecoSpold.dataset.metaInformation
     administrativeInformation = metaInformation.administrativeInformation
-    person = administrativeInformation.person[0]
+    person = administrativeInformation.persons[0]
 
     assert person.number == number
     assert person.name == name

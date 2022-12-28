@@ -2,8 +2,8 @@ from lxml import etree, objectify
 
 from .model import (EcoSpold, Dataset, MetaInformation, FlowData,
                     ProcessInformation, ModellingAndValidation,
-                    AdministrativeInformation, ReferenceFunction,
-                    Geography, Technology, TimePeriod,
+                    AdministrativeInformation, Exchange, Allocation,
+                    ReferenceFunction, Geography, Technology, TimePeriod,
                     DataSetInformation, Representativeness,
                     Source, Validation, DataEntryBy,
                     DataGeneratorAndPublication, Person)
@@ -19,6 +19,8 @@ class EcospoldLookup(etree.CustomElementClassLookup):
             "processInformation" : ProcessInformation,
             "modellingAndValidation": ModellingAndValidation,
             "administrativeInformation": AdministrativeInformation,
+            "exchange": Exchange,
+            "allocation": Allocation,
             "referenceFunction" : ReferenceFunction,
             "geography": Geography,
             "technology": Technology,

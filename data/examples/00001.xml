@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ecoSpold xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://www.EcoInvent.org/EcoSpold01"
-  xsi:schemaLocation="http://www.EcoInvent.org/EcoSpold01 C:\Programme\ecoinvent\EcoSpold\EcoSpold01Dataset.xsd">
+  xsi:schemaLocation="http://www.EcoInvent.org/EcoSpold01 C:\Programme\ecoinvent\EcoSpold\EcoSpold01Dataset.xsd"
+  validationId="0" validationStatus="validationStatus">
   <dataset validCompanyCodes="CompanyCodes.xml" validRegionalCodes="RegionalCodes.xml"
     validCategories="Categories.xml" validUnits="Units.xml" number="1"
     timestamp="2006-10-31T20:34:59" generator="EcoAdmin 1.1.17.110" internalSchemaVersion="1.0">

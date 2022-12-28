@@ -4,6 +4,8 @@ from lxml import etree
 
 
 class DataTypesConverter:
+    timestampFormat = "%Y-%m-%dT%H:%M:%S"
+
     @staticmethod
     def str_to_bool(string: str) -> bool:
         return string.lower() == "true"
