@@ -6,6 +6,7 @@ from typing import Any, Dict, ClassVar
 class Defaults:
     qualityNetwork: ClassVar[str] = "1"
     uncertaintyType: ClassVar[str] = "1"
+    allocationMethod: ClassVar[str] = "-1"
 
     @classmethod
     def set_defaults(cls, defaults: Dict[str, Any]) -> None:

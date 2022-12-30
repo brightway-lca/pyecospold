@@ -469,9 +469,71 @@ class Exchange(etree.ElementBase):
 
 
 class Allocation(etree.ElementBase):
-    """Comprises all referenceToInputOutput."""
+    """Contains all information about allocation procedure, allocation
+    parameters and allocation factors applied on a multi-output process."""
 
-    pass
+    allocationMethodMap: Dict[int, str] = {
+        -1: "Undefined",
+        0: "Physical causality",
+        1: "Economic causality",
+        2: "Othermethod"
+    }
+
+    @property
+    def referenceToInputOutputs(self) -> List[int]:
+        """The data field is only required, if the reference function describes
+        a multioutput process. Lists the relation(s) to which a certain allocation
+        factor is applied. MultipleOccurrence=Yes on two levels: Firstly, the
+        reference occurs per co-product and secondly, the reference occurs per
+        input and output flows which are allocated to the co-products."""
+        return list(
+            map(
+                lambda x: int(x.text),
+                self.findall("referenceToInputOutput", self.nsmap)
+            )
+        )
+
+    @property
+    def referenceToCoProduct(self) -> int:
+        """Indicates the co-product output for which a particular allocation
+        factor is valid. Additional information is required about the exchange
+        on which the allocation factor is applied (see 'referenceToInputOutput').
+        MultipleOccurences=Yes is only valid, if referenceFunction
+        describes a multioutput process."""
+        return int(self.get("referenceToCoProduct"))
+
+    @property
+    def allocationMethod(self) -> int:
+        """Indicates the kind of allocation parameter chosen. The codes are:
+        -1=Undefined (default). 0=Physical causality. 1=Economic causality. 2=Other
+        method. 'Other method' comprises in particular physical parameters (like mass,
+        energy, exergy, etc.) and parameters other than economic. MultipleOccurences=Yes
+        only valid, if referenceFunction describes a multioutput process."""
+        return int(self.get("allocationMethod", Defaults.allocationMethod))
+
+    @property
+    def allocationMethodStr(self) -> str:
+        """String representation for allocationMethod. See allocationMethod for
+        explanations. -1=Undefined (default). 0=Physical causality. 1=Economic
+        causality. 2=Other method."""
+        return self.allocationMethodMap[self.allocationMethod]
+
+    @property
+    def fraction(self) -> float:
+        """Allocation factor, expressed as a fraction (in %), applied on one
+        particular exchange for one particular co-product. The sum of the allocation
+        factors applied on one particular exchange must add up to 100%.
+        MultipleOccurences=Yes only valid, if referenceFunction describes
+        a multioutput process."""
+        return float(self.get("fraction"))
+
+    @property
+    def explanations(self) -> str:
+        """Contains further information about the allocation procedure and
+        the allocation parameter chosen. An eventual coincidence in allocation factors
+        when comparing different allocation parameters (like physical and economic ones)
+        may be reported here as well."""
+        return self.get("explanations")
 
 
 class ReferenceFunction(etree.ElementBase):

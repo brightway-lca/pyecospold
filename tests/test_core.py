@@ -130,7 +130,7 @@ def test_parse_file_exchange(ecoSpold: EcoSpold) -> None:
     inputGroupsStr = ["FromTechnosphere"]
     outputGroups = [0]
     outputGroupsStr = ["ReferenceProduct"]
-    exchange = ecoSpold.dataset.flowData.exchanges[14]
+    exchange = ecoSpold.dataset.flowData.exchanges[1]
     output_exchange = ecoSpold.dataset.flowData.exchanges[0]
 
     assert exchange.number == number
@@ -157,7 +157,18 @@ def test_parse_file_exchange(ecoSpold: EcoSpold) -> None:
 
 
 def test_parse_file_allocaiton(ecoSpold: EcoSpold) -> None:
-    pass
+    referenceToCoProduct = 1
+    allocationMethod = -1
+    allocationMethodStr = "Undefined"
+    fraction = 97.6
+    referenceToInputOutputs = [1]
+    allocaiton = ecoSpold.dataset.flowData.allocations[0]
+
+    assert allocaiton.referenceToCoProduct == referenceToCoProduct
+    assert allocaiton.allocationMethod == allocationMethod
+    assert allocaiton.allocationMethodStr == allocationMethodStr
+    assert allocaiton.fraction == fraction
+    assert allocaiton.referenceToInputOutputs == referenceToInputOutputs
 
 
 def test_parse_file_referenceFunction(ecoSpold: EcoSpold) -> None:

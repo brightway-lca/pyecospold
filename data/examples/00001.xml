@@ -57,103 +57,6 @@
         localName="Kompostieranlage, offen" infrastructureProcess="true">
         <outputGroup>0</outputGroup>
       </exchange>
-      <exchange number="463" category="construction materials" subCategory="additives"
-        localCategory="Mineralische Baustoffe" localSubCategory="Zuschlags- Füllstoffe"
-        name="gravel, crushed, at mine" location="CH" unit="kg" uncertaintyType="1"
-        meanValue="2.16E7" standardDeviation95="1.22" generalComment="(2,3,1,1,1,5)"
-        localName="Kies gebrochen, ab Abbau" infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="478" category="construction materials" subCategory="additives"
-        localCategory="Mineralische Baustoffe" localSubCategory="Zuschlags- Füllstoffe"
-        name="sand, at mine" location="CH" unit="kg" uncertaintyType="1" meanValue="1.17E6"
-        standardDeviation95="1.22" generalComment="(2,3,1,1,1,5)" localName="Sand, ab Abbau"
-        infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="505" category="construction materials" subCategory="concrete"
-        localCategory="Mineralische Baustoffe" localSubCategory="Beton und Betonwaren"
-        name="concrete, sole plate and foundation, at plant" location="CH" unit="m3"
-        uncertaintyType="1" meanValue="367" standardDeviation95="1.22"
-        generalComment="(2,3,1,1,1,5)" localName="Beton, Bodenplatten und Fundamente, ab Werk"
-        infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="1069" category="metals" subCategory="extraction" localCategory="Metalle"
-        localSubCategory="Gewinnung" name="cast iron, at plant" location="RER" unit="kg"
-        uncertaintyType="1" meanValue="50000" standardDeviation95="1.22"
-        generalComment="(2,3,1,1,1,5)" localName="Gusseisen, ab Werk" infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="1074" category="metals" subCategory="extraction" localCategory="Metalle"
-        localSubCategory="Gewinnung" name="copper, at regional storage" location="RER" unit="kg"
-        uncertaintyType="1" meanValue="375" standardDeviation95="1.22"
-        generalComment="(2,3,1,1,1,5)" localName="Kupfer, ab Regionallager"
-        infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="1141" category="metals" subCategory="extraction" localCategory="Metalle"
-        localSubCategory="Gewinnung" name="reinforcing steel, at plant" location="RER" unit="kg"
-        uncertaintyType="1" meanValue="21200" standardDeviation95="1.22"
-        generalComment="(2,3,1,1,1,5)" localName="Armierungsstahl, ab Werk"
-        infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="1154" category="metals" subCategory="extraction" localCategory="Metalle"
-        localSubCategory="Gewinnung" name="steel, low-alloyed, at plant" location="RER" unit="kg"
-        uncertaintyType="1" meanValue="37500" standardDeviation95="1.22"
-        generalComment="(2,3,1,1,1,5)" localName="Stahl, niedriglegiert, ab Werk"
-        infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="1538" category="oil" subCategory="fuels" localCategory="Erdöl"
-        localSubCategory="Brenn- und Treibstoffe" name="bitumen, at refinery" location="CH"
-        unit="kg" uncertaintyType="1" meanValue="1.22E5" standardDeviation95="1.22"
-        generalComment="(2,3,1,1,1,5)" localName="Bitumen, ab Raffinerie"
-        infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="1942" category="transport systems" subCategory="road"
-        localCategory="Transportsysteme" localSubCategory="Strasse" name="transport, lorry 28t"
-        location="CH" unit="tkm" uncertaintyType="1" meanValue="4.84E5" standardDeviation95="2.09"
-        generalComment="(4,5,na,na,na,na)" localName="Transport, Lkw 28t"
-        infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="1984" category="transport systems" subCategory="train"
-        localCategory="Transportsysteme" localSubCategory="Schiene" name="transport, freight, rail"
-        location="CH" unit="tkm" uncertaintyType="1" meanValue="71600" standardDeviation95="2.09"
-        generalComment="(4,5,na,na,na,na)" localName="Transport, Fracht, Schiene"
-        infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="2051" category="waste management" subCategory="building demolition"
-        localCategory="Entsorgungssysteme" localSubCategory="Gebäudeentsorgung"
-        name="disposal, building, waste wood, chrome preserved, to final disposal" location="CH"
-        unit="kg" uncertaintyType="1" meanValue="1.25E5" standardDeviation95="1.22"
-        generalComment="(2,3,1,1,1,5)"
-        localName="Entsorgung, Gebäude, Altholz, chrombehandelt, in Beseitigung"
-        infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="2073" category="waste management" subCategory="inert material landfill"
-        localCategory="Entsorgungssysteme" localSubCategory="Inertstoffdeponie"
-        name="disposal, inert waste, 5% water, to inert material landfill" location="CH" unit="kg"
-        uncertaintyType="1" meanValue="2.16E7" standardDeviation95="1.22"
-        generalComment="(2,3,1,1,1,5)"
-        localName="Entsorgung, Inertstoff, 5% Wasser, in Inertstoffdeponie"
-        infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="2149" category="waste management" subCategory="recycling"
-        localCategory="Entsorgungssysteme" localSubCategory="Recycling"
-        name="disposal, building, concrete, not reinforced, to sorting plant" location="CH"
-        unit="kg" uncertaintyType="1" meanValue="8.07E5" standardDeviation95="1.22"
-        generalComment="(2,3,1,1,1,5)"
-        localName="Entsorgung, Gebäude, unbewehrter Beton, in Sortieranlage"
-        infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
       <exchange number="2156" category="waste management" subCategory="recycling"
         localCategory="Entsorgungssysteme" localSubCategory="Recycling" CASNumber="007439-89-6"
         name="disposal, building, reinforcement steel, to recycling" location="CH" unit="kg"
@@ -163,41 +66,9 @@
         infrastructureProcess="false">
         <inputGroup>5</inputGroup>
       </exchange>
-      <exchange number="2448" category="wooden materials" subCategory="extraction"
-        localCategory="Holzbaustoffe" localSubCategory="Gewinnung"
-        name="glued laminated timber, outdoor use, at plant" location="RER" unit="m3"
-        uncertaintyType="1" meanValue="278" standardDeviation95="1.22"
-        generalComment="(2,3,1,1,1,5)"
-        localName="Brettschichtholz, verleimt, Aussenanwendung, ab Werk"
-        infrastructureProcess="false">
-        <inputGroup>5</inputGroup>
-      </exchange>
-      <exchange number="3749" category="resource" subCategory="land" localCategory="Ressource"
-        localSubCategory="Fläche" name="Occupation, construction site" unit="m2a"
-        uncertaintyType="1" meanValue="750" standardDeviation95="1.57" formula="CORINE 133"
-        generalComment="(2,3,1,1,1,5)" localName="Nutzung, Baustelle" infrastructureProcess="false">
-        <inputGroup>4</inputGroup>
-      </exchange>
-      <exchange number="3761" category="resource" subCategory="land" localCategory="Ressource"
-        localSubCategory="Fläche" name="Occupation, industrial area, built up" unit="m2a"
-        uncertaintyType="1" meanValue="18800" standardDeviation95="1.57" formula="CORINE 121a"
-        generalComment="(2,3,1,1,1,5)" localName="Nutzung, Industrieareal, bebaut"
-        infrastructureProcess="false">
-        <inputGroup>4</inputGroup>
-      </exchange>
-      <exchange number="3844" category="resource" subCategory="land" localCategory="Ressource"
-        localSubCategory="Fläche" name="Transformation, from unknown" unit="m2" uncertaintyType="1"
-        meanValue="750" standardDeviation95="2.05" formula="CORINE x" generalComment="(2,3,1,1,1,5)"
-        localName="Umwandlung, von unbekannt" infrastructureProcess="false">
-        <inputGroup>4</inputGroup>
-      </exchange>
-      <exchange number="3869" category="resource" subCategory="land" localCategory="Ressource"
-        localSubCategory="Fläche" name="Transformation, to industrial area, built up" unit="m2"
-        uncertaintyType="1" meanValue="750" standardDeviation95="2.05" formula="CORINE 121a"
-        generalComment="(2,3,1,1,1,5)" localName="Umwandlung, zu Industrieareal, bebaut"
-        infrastructureProcess="false">
-        <inputGroup>4</inputGroup>
-      </exchange>
+      <allocation referenceToCoProduct="1" allocationMethod="-1" fraction="97.6">
+        <referenceToInputOutput>1</referenceToInputOutput>
+    </allocation>
     </flowData>
   </dataset>
 </ecoSpold>
