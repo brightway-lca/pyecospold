@@ -3,8 +3,7 @@ from typing import Dict, List
 
 from lxml import etree
 
-from .config import Defaults
-from .helpers import DataTypesConverter, DataValidator
+from .helpers import DataHelper
 
 
 class EcoSpold(etree.ElementBase):
@@ -17,15 +16,15 @@ class EcoSpold(etree.ElementBase):
     def dataset(self) -> "Dataset":
         """Contains information about one individual unit process (or terminated
         system). Information is divided into metaInformation and flowData."""
-        return self.find("dataset", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "dataset")
 
     @property
     def validationId(self) -> int:
-        return int(self.get("validationId"))
+        return DataHelper.get_attribute(self, "validationId", int)
 
     @property
     def validationStatus(self) -> str:
-        return self.get("validationStatus")
+        return DataHelper.get_attribute(self, "validationStatus", str)
 
 
 class Dataset(etree.ElementBase):
@@ -38,7 +37,7 @@ class Dataset(etree.ElementBase):
         classification, technology, geography, time, etc.), about modelling
         assumptions and validation details and about dataset administration
         (version number, kind of dataset, language)."""
-        return self.find("metaInformation", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "metaInformation")
 
     @property
     def flowData(self) -> "FlowData":
@@ -46,43 +45,43 @@ class Dataset(etree.ElementBase):
         as well as to and from technosphere) and information about allocation
         (flows to be allocated, co-products to be allocated to, allocation
         factors)."""
-        return self.find("flowData", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "flowData")
 
     @property
     def number(self) -> int:
         """ID number used as an identifier of the dataset."""
-        return int(self.get("number"))
+        return DataHelper.get_attribute(self, "number", int)
 
     @property
     def internalSchemaVersion(self) -> str:
-        return self.get("internalSchemaVersion")
+        return DataHelper.get_attribute(self, "internalSchemaVersion")
 
     @property
     def generator(self) -> str:
-        return self.get("generator")
+        return DataHelper.get_attribute(self, "generator")
 
     @property
     def timestamp(self) -> datetime:
         """Automatically generated date when dataset is created"""
         return datetime.strptime(
-            self.get("timestamp"), DataTypesConverter.timestampFormat
+            DataHelper.get_attribute(self, "timestamp"), DataHelper.TIMESTAMP_FORMAT
         )
 
     @property
     def validCompanyCodes(self) -> str:
-        return self.get("validCompanyCodes")
+        return DataHelper.get_attribute(self, "validCompanyCodes")
 
     @property
     def validRegionalCodes(self) -> str:
-        return self.get("validRegionalCodes")
+        return DataHelper.get_attribute(self, "validRegionalCodes")
 
     @property
     def validCategories(self) -> str:
-        return self.get("validCategories")
+        return DataHelper.get_attribute(self, "validCategories")
 
     @property
     def validUnits(self) -> str:
-        return self.get("validUnits")
+        return DataHelper.get_attribute(self, "validUnits")
 
 
 class MetaInformation(etree.ElementBase):
@@ -94,20 +93,20 @@ class MetaInformation(etree.ElementBase):
     @property
     def processInformation(self) -> "ProcessInformation":
         """Contains content-related metainformation for the unit process."""
-        return self.find("processInformation", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "processInformation")
 
     @property
     def modellingAndValidation(self) -> "ModellingAndValidation":
         """Contains metaInformation about how unit processes are modelled
         and about the review/validation of the dataset."""
-        return self.find("modellingAndValidation", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "modellingAndValidation")
 
     @property
     def administrativeInformation(self) -> "AdministrativeInformation":
         """Contains information about the person that compiled and entered
         the dataset in the database and about kind of publication and the
         accessibility of the dataset."""
-        return self.find("administrativeInformation", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "administrativeInformation")
 
 
 class FlowData(etree.ElementBase):
@@ -120,12 +119,12 @@ class FlowData(etree.ElementBase):
     def exchanges(self) -> List["Exchange"]:
         """Comprises all inputs and outputs (both elementary flows and
         intermediate product flows) registered in a unit process."""
-        return self.findall("exchange", self.nsmap)
+        return DataHelper.get_element_list(self, "exchange")
 
     @property
     def allocations(self) -> List["Allocation"]:
         """Comprises all referenceToInputOutput."""
-        return self.findall("allocation", self.nsmap)
+        return DataHelper.get_element_list(self, "allocation")
 
 
 class ProcessInformation(etree.ElementBase):
@@ -135,14 +134,14 @@ class ProcessInformation(etree.ElementBase):
     def referenceFunction(self) -> "ReferenceFunction":
         """Comprises information which identifies and characterises one particular
         dataset (=unit process or system terminated)."""
-        return self.find("referenceFunction", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "referenceFunction")
 
     @property
     def geography(self) -> "Geography":
         """Contains information about the geographic validity of the process. The region
         described with regional code and free text is the market area of the
         product / service at issue and not necessarily the place of production."""
-        return self.find("geography", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "geography")
 
     @property
     def technology(self) -> "Technology":
@@ -150,7 +149,7 @@ class ProcessInformation(etree.ElementBase):
         collected. Free text can be used. Pictures, graphs and tables are not allowed.
         The text should cover information necessary to identify the properties and
         particularities of the technology(ies) underlying the process data."""
-        return self.find("technology", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "technology")
 
     @property
     def dataSetInformation(self) -> "DataSetInformation":
@@ -158,13 +157,13 @@ class ProcessInformation(etree.ElementBase):
         dataset (unit process, elementary flow, impact category, multi-output process)
         timestamp, version and internalVersion number as well as language and
         localLanguage code."""
-        return self.find("dataSetInformation", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "dataSetInformation")
 
     @property
     def timePeriod(self) -> "TimePeriod":
         """Contains all possible date-formats applicable to describe start and end date
         of the time period for which the dataset is valid."""
-        return self.find("timePeriod", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "timePeriod")
 
 
 class ModellingAndValidation(etree.ElementBase):
@@ -177,20 +176,20 @@ class ModellingAndValidation(etree.ElementBase):
         the product/service described in the dataset. Information about market share,
         production volume (in the ecoinvent quality network: also consumption volume in
         the market area) and information about how data have been sampled."""
-        return self.find("representativeness", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "representativeness")
 
     @property
     def source(self) -> "Source":
         """Contains information about author(s), title, kind of publication,
         place of publication, name of editors (if any), etc.."""
-        return self.find("source", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "source")
 
     @property
     def validation(self) -> "Validation":
         """Contains information about who carried out the critical review
         and about the main results and conclusions of the revie and the
         recommendations made."""
-        return self.find("validation", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "validation")
 
 
 class AdministrativeInformation(etree.ElementBase):
@@ -203,21 +202,21 @@ class AdministrativeInformation(etree.ElementBase):
         """Contains information about the person that entered data in the
         database or transformed data into the format of the ecoinvent
         (or any other) quality network."""
-        return self.find("dataEntryBy", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "dataEntryBy")
 
     @property
     def dataGeneratorAndPublication(self) -> "DataGeneratorAndPublication":
         """Contains information about who compiled for and entered data into
         the database. Furthermore contains information about kind of publication
         underlying the dataset and the accessibility of the dataset."""
-        return self.find("dataGeneratorAndPublication", namespaces=self.nsmap)
+        return DataHelper.get_element(self, "dataGeneratorAndPublication")
 
     @property
     def persons(self) -> List["Person"]:
         """Used for the identification of members of the organisation institute
         co-operating within a quality network (e.g., ecoinvent) referred to in
         the areas Validation, dataEntryBy and dataGeneratorAndPublication."""
-        return self.findall("person", namespaces=self.nsmap)
+        return DataHelper.get_element_list(self, "person")
 
 
 class Exchange(etree.ElementBase):
@@ -256,9 +255,7 @@ class Exchange(etree.ElementBase):
         5=FromTechnosphere. Within the ecoinvent quality network,
         only 4 and 5 are actively used (any material, fuel, electricity,
         heat or service is classified as an input from technosphere)."""
-        return list(
-            map(lambda x: int(x.text), self.findall("inputGroup", self.nsmap))
-        )
+        return DataHelper.get_attribute_list(self, "inputGroup", int)
 
     @property
     def inputGroupsStr(self) -> List[str]:
@@ -277,9 +274,7 @@ class Exchange(etree.ElementBase):
         with a negative input from technosphere. WasteToTreatment are modelled like
         services (hence inputFromTechnosphere). Therefore codes '1' and '3' are not
         required."""
-        return list(
-            map(lambda x: int(x.text), self.findall("outputGroup", self.nsmap))
-        )
+        return DataHelper.get_attribute_list(self, "outputGroup", int)
 
     @property
     def outputGroupsStr(self) -> List[str]:
@@ -292,35 +287,35 @@ class Exchange(etree.ElementBase):
     def number(self) -> int:
         """ID number used as an identifier of a particular exchange
         in a dataset."""
-        return int(self.get("number"))
+        return DataHelper.get_attribute(self, "number", int)
 
     @property
     def category(self) -> str:
         """Describes the category one particular exchange belongs to
         (in English language). Category and subCategory are required for
         elementary flows because they have a discriminative function."""
-        return self.get("category")
+        return DataHelper.get_attribute(self, "category")
 
     @property
     def subCategory(self) -> str:
         """Describes the subCategory one particular exchange belongs to
         (in English language). Category and subCategory are required for
         elementary flows because they have a discriminative function."""
-        return self.get("subCategory")
+        return DataHelper.get_attribute(self, "subCategory")
 
     @property
     def localCategory(self) -> str:
         """Describes the category one particular exchange belongs to
         (in German local language).See further explanations in 'category'.
         """
-        return self.get("localCategory")
+        return DataHelper.get_attribute(self, "localCategory")
 
     @property
     def localSubCategory(self) -> str:
         """Describes the subCategory one particular exchange belongs to
         (in German local language).See further explanations in
         'subCategory'."""
-        return self.get("localSubCategory")
+        return DataHelper.get_attribute(self, "localSubCategory")
 
     @property
     def CASNumber(self) -> str:
@@ -328,14 +323,14 @@ class Exchange(etree.ElementBase):
         Service (CAS). The Format of the CAS-number: 000000-00-0,
         where the first string of digits needs not to be complete
         (i.e. less than six digits are admitted)."""
-        return self.get("CASNumber")
+        return DataHelper.get_attribute(self, "CASNumber")
 
     @property
     def name(self) -> str:
         """Name of the exchange (elementary flow or intermediate
         product flow) in English language. See 'name' in
         'metaInformation/referenceFunction' for more explanations."""
-        return self.get("name")
+        return DataHelper.get_attribute(self, "name")
 
     @property
     def location(self) -> str:
@@ -345,7 +340,7 @@ class Exchange(etree.ElementBase):
         explanations. Information about the geographic area for which
         an impact assessment method is valid. Not applicable for
         elementary flows."""
-        return self.get("location")
+        return DataHelper.get_attribute(self, "location")
 
     @property
     def unit(self) -> str:
@@ -353,7 +348,7 @@ class Exchange(etree.ElementBase):
         flow). See 'metaInformation/referenceFunction' for more
         explanations. Unit of the elementary flow for which a
         characterisation, damage or weighting factor is determined."""
-        return self.get("unit")
+        return DataHelper.get_attribute(self, "unit")
 
     @property
     def meanValue(self) -> float:
@@ -361,7 +356,7 @@ class Exchange(etree.ElementBase):
         In case of triangular uncertainty distribution, the meanValue shall
         be calculated from the mostLikelyValue. The field mostLikelyValue (#3797)
         shall not be used in the ecoinvent quality network."""
-        return float(self.get("meanValue"))
+        return float(DataHelper.get_attribute(self, "meanValue"))
 
     @property
     def uncertaintyType(self) -> int:
@@ -369,7 +364,7 @@ class Exchange(etree.ElementBase):
         exchange. Lognormal distribution is default, normal, triangular or
         uniform distribution may be chosen if appropriate. 0=undefined,
         1=lognormal (default), 2=normal, 3=triang, 4=uniform"""
-        return int(self.get("uncertaintyType", Defaults.uncertaintyType))
+        return DataHelper.get_attribute(self, "uncertaintyType", int)
 
     @property
     def uncertaintyTypeStr(self) -> str:
@@ -391,13 +386,13 @@ class Exchange(etree.ElementBase):
         2*SD equals 2.5% value (=minValue). This data field remains empty when
         uniform or triangular uncertainty distribution is applied
         (uncertaintyType = 3 and 4, respectively)."""
-        return float(self.get("standardDeviation95"))
+        return float(DataHelper.get_attribute(self, "standardDeviation95"))
 
     @property
     def formula(self) -> str:
         """Chemical formula (e.g. sum formula) may be entered. No graphs are
         allowed to represent chemical formulas."""
-        return self.get("formula")
+        return DataHelper.get_attribute(self, "formula")
 
     @property
     def referenceToSource(self) -> int:
@@ -406,14 +401,14 @@ class Exchange(etree.ElementBase):
         network) where the unit process raw data at issue and the
         characterisation, damage or weighting factors of an impact category,
         respectively, are documented."""
-        return int(self.get("referenceToSource"))
+        return DataHelper.get_attribute(self, "referenceToSource", int)
 
     @property
     def pageNumbers(self) -> str:
         """The page numbers of the publication (of the ecoinvent quality
         network) where the exchanges of the unit process at issue are
         documented."""
-        return self.get("pageNumbers")
+        return DataHelper.get_attribute(self, "pageNumbers")
 
     @property
     def generalComment(self) -> str:
@@ -427,22 +422,22 @@ class Exchange(etree.ElementBase):
         temporal correlation, geographical correlation, further technical
         correlation, sample size) and uses a score from 1 to 5. See
         methodology report for further information."""
-        return self.get("generalComment")
+        return DataHelper.get_attribute(self, "generalComment")
 
     @property
     def localName(self) -> str:
         """Name of the exchange (or characterisation, damage or weighting
         factor) of a particular unit process and impact category,
         respectively (in German local language)."""
-        return self.get("localName")
+        return DataHelper.get_attribute(self, "localName")
 
     @property
     def infrastructureProcess(self) -> bool:
         """Describes whether the intermediate product flow from or to the
         unit process is an infrastructure process or not. Not applicable
         to elementary flows."""
-        return DataTypesConverter.str_to_bool(
-            self.get("infrastructureProcess")
+        return DataHelper.str_to_bool(
+            DataHelper.get_attribute(self, "infrastructureProcess")
         )
 
     @property
@@ -450,14 +445,14 @@ class Exchange(etree.ElementBase):
         """Contains the minimum value for exchange data with a uniform or
         triangular distribution. In case of LCI results imported into the
         ecoinvent database, the 2.5% value is reported in this field."""
-        return float(self.get("minValue"))
+        return float(DataHelper.get_attribute(self, "minValue"))
 
     @property
     def maxValue(self) -> float:
         """Contains the maximum value for exchange data with a uniform or
         triangular distribution. In case of LCI results imported into the
         ecoinvent database, the 97.5% value is reported in this field."""
-        return float(self.get("maxValue"))
+        return float(DataHelper.get_attribute(self, "maxValue"))
 
     @property
     def mostLikelyValue(self) -> float:
@@ -465,7 +460,7 @@ class Exchange(etree.ElementBase):
         with triangular distribution. However, do not use this field, but
         calculate the mean value, (minValue + mostLikelyValue +maxValue)/3,
         and enter it into the field "meanValue")."""
-        return float(self.get("mostLikelyValue"))
+        return float(DataHelper.get_attribute(self, "mostLikelyValue"))
 
 
 class Allocation(etree.ElementBase):
@@ -486,12 +481,7 @@ class Allocation(etree.ElementBase):
         factor is applied. MultipleOccurrence=Yes on two levels: Firstly, the
         reference occurs per co-product and secondly, the reference occurs per
         input and output flows which are allocated to the co-products."""
-        return list(
-            map(
-                lambda x: int(x.text),
-                self.findall("referenceToInputOutput", self.nsmap)
-            )
-        )
+        return DataHelper.get_attribute_list(self, "referenceToInputOutput", int)
 
     @property
     def referenceToCoProduct(self) -> int:
@@ -500,7 +490,7 @@ class Allocation(etree.ElementBase):
         on which the allocation factor is applied (see 'referenceToInputOutput').
         MultipleOccurences=Yes is only valid, if referenceFunction
         describes a multioutput process."""
-        return int(self.get("referenceToCoProduct"))
+        return DataHelper.get_attribute(self, "referenceToCoProduct", int)
 
     @property
     def allocationMethod(self) -> int:
@@ -509,7 +499,7 @@ class Allocation(etree.ElementBase):
         method. 'Other method' comprises in particular physical parameters (like mass,
         energy, exergy, etc.) and parameters other than economic. MultipleOccurences=Yes
         only valid, if referenceFunction describes a multioutput process."""
-        return int(self.get("allocationMethod", Defaults.allocationMethod))
+        return DataHelper.get_attribute(self, "allocationMethod", int)
 
     @property
     def allocationMethodStr(self) -> str:
@@ -525,7 +515,7 @@ class Allocation(etree.ElementBase):
         factors applied on one particular exchange must add up to 100%.
         MultipleOccurences=Yes only valid, if referenceFunction describes
         a multioutput process."""
-        return float(self.get("fraction"))
+        return float(DataHelper.get_attribute(self, "fraction"))
 
     @property
     def explanations(self) -> str:
@@ -533,7 +523,7 @@ class Allocation(etree.ElementBase):
         the allocation parameter chosen. An eventual coincidence in allocation factors
         when comparing different allocation parameters (like physical and economic ones)
         may be reported here as well."""
-        return self.get("explanations")
+        return DataHelper.get_attribute(self, "explanations")
 
 
 class ReferenceFunction(etree.ElementBase):
@@ -547,9 +537,7 @@ class ReferenceFunction(etree.ElementBase):
         """Synonyms for the name, localName. In the Excel editor they are separated
         by two slashes ('//'). Synonyms are a subset of referenceFunction. 0..n
         entries are allowed with a max. length of 80 each."""
-        return [
-            synonym.text for synonym in self.findall("synonym", namespaces=self.nsmap)
-        ]
+        return DataHelper.get_attribute_list(self, "synonym")
 
     @property
     def datasetRelatesToProduct(self) -> bool:
@@ -557,7 +545,9 @@ class ReferenceFunction(etree.ElementBase):
         the ecoinvent quality network the value required is 'yes' for unit
         processes and multioutput processes and 'no' for elementary flows and
         impact categories."""
-        return DataTypesConverter.str_to_bool(self.get("datasetRelatesToProduct"))
+        return DataHelper.get_attribute(
+            self, "datasetRelatesToProduct", DataHelper.str_to_bool
+        )
 
     @property
     def name(self) -> str:
@@ -578,13 +568,13 @@ class ReferenceFunction(etree.ElementBase):
         The naming of impact categories takes pattern from the corresponding original
         publication. English is the default language in the ecoinvent quality network.
         """
-        return self.get("name")
+        return DataHelper.get_attribute(self, "name")
 
     @property
     def localName(self) -> str:
         """see 'name' for explanations. German is the default local language in the
         ecoinvent quality network."""
-        return self.get("localName")
+        return DataHelper.get_attribute(self, "localName")
 
     @property
     def infrastructureProcess(self) -> bool:
@@ -594,18 +584,20 @@ class ReferenceFunction(etree.ElementBase):
         a nuclear power plant, a km road, one seaport, and production machinery
         respectively. It is used as a discriminating element for the identification of
         processes. Not applicable for elementary flows and impact categories."""
-        return DataTypesConverter.str_to_bool(self.get("infrastructureProcess"))
+        return DataHelper.get_attribute(
+            self, "infrastructureProcess", DataHelper.str_to_bool
+        )
 
     @property
     def amount(self) -> float:
         """Indicates the amount of reference flow (product/service, elementary flow,
         impact category).  Within the ecoinvent quality network the amount of the
         reference flow always equals 1."""
-        return float(self.get("amount"))
+        return float(DataHelper.get_attribute(self, "amount"))
 
     @amount.setter
     def amount(self, value: str) -> bool:
-        return DataValidator.try_set(self, "amount", value)
+        return DataHelper.try_set(self, "amount", value)
 
     @property
     def unit(self) -> str:
@@ -615,7 +607,7 @@ class ReferenceFunction(etree.ElementBase):
         categories, it is the unit in which characterisation, damage or weighting
         factors are expressed. SI-units are preferred. The units are always expressed
         in English language."""
-        return self.get("unit")
+        return DataHelper.get_attribute(self, "unit")
 
     @property
     def category(self) -> str:
@@ -625,7 +617,7 @@ class ReferenceFunction(etree.ElementBase):
         But it is required for the identification of elementary flows and impact
         categories. Categories are administrated centrally. English is the default
         language in the ecoinvent quality network."""
-        return self.get("category")
+        return DataHelper.get_attribute(self, "category")
 
     @property
     def subCategory(self) -> str:
@@ -635,19 +627,19 @@ class ReferenceFunction(etree.ElementBase):
         named identically). But it is required for the identification of elementary
         flows and impact categories. SubCategories are administrated centrally. English
         is the default language in the ecoinvent quality network."""
-        return self.get("subCategory")
+        return DataHelper.get_attribute(self, "subCategory")
 
     @property
     def localCategory(self) -> str:
         """See category for explanations. German is the default local language in the
         ecoinvent quality network."""
-        return self.get("localCategory")
+        return DataHelper.get_attribute(self, "localCategory")
 
     @property
     def localSubCategory(self) -> str:
         """"See subCategory for explanations. German is the default local language in
         the ecoinvent quality network."""
-        return self.get("localSubCategory")
+        return DataHelper.get_attribute(self, "localSubCategory")
 
     @property
     def includedProcesses(self) -> str:
@@ -658,7 +650,7 @@ class ReferenceFunction(etree.ElementBase):
         confidentiality. As far as possible and feasible, data should however be
         reported on the level of detail it has been received. Not applicable for
         elementary flows and impact categories."""
-        return self.get("includedProcesses")
+        return DataHelper.get_attribute(self, "includedProcesses")
 
     @property
     def generalComment(self) -> str:
@@ -670,7 +662,7 @@ class ReferenceFunction(etree.ElementBase):
             -  modelling choices (exclusion of intermediate product flows, processes,
             allocation if done before entering into database).
         """
-        return self.get("generalComment")
+        return DataHelper.get_attribute(self, "generalComment")
 
     @property
     def infrastructureIncluded(self) -> bool:
@@ -682,7 +674,9 @@ class ReferenceFunction(etree.ElementBase):
         filled in according to the fact, whether or not infrastructure has been
         including during the calculation. Not applicable for elementary flows and impact
         categories."""
-        return DataTypesConverter.str_to_bool(self.get("infrastructureIncluded"))
+        return DataHelper.get_attribute(
+            self, "infrastructureIncluded", DataHelper.str_to_bool
+        )
 
     @property
     def CASNumber(self) -> str:
@@ -690,20 +684,20 @@ class ReferenceFunction(etree.ElementBase):
         The Format of the CAS-number: 000000-00-0, where the first string of digits
         needs not to be complete (i.e. less than six digits are admitted).
         Not applicable for impact categories."""
-        return self.get("CASNumber")
+        return DataHelper.get_attribute(self, "CASNumber")
 
     @property
     def statisticalClassification(self) -> int:
         """Contains the EU-classification system (NACE code). For the first edition
         of the ecoinvent database this data field will not be used. Not applicable
         for elementary flows and impact categories."""
-        return int(self.get("statisticalClassification"))
+        return DataHelper.get_attribute(self, "statisticalClassification", int)
 
     @property
     def formula(self) -> str:
         """Chemical formula (e.g. sum formula) may be entered. No graphs are allowed
         to represent chemical formulas. Not applicable for impact categories."""
-        return self.get("formula")
+        return DataHelper.get_attribute(self, "formula")
 
 
 class Geography(etree.ElementBase):
@@ -720,7 +714,7 @@ class Geography(etree.ElementBase):
         and impact categories, respectively. It does NOT necessarily coincide with
         the area/site of production or provenience. If supply and production area
         differ, production area is indicated in the name of the unit process."""
-        return self.get("location")
+        return DataHelper.get_attribute(self, "location")
 
     @property
     def text(self) -> str:
@@ -732,7 +726,7 @@ class Geography(etree.ElementBase):
         from another geographical area than indicated.
         Extrapolations should be reported under 'representativeness'.
         """
-        return self.get("text")
+        return DataHelper.get_attribute(self, "text")
 
 
 class Technology(etree.ElementBase):
@@ -751,7 +745,7 @@ class Technology(etree.ElementBase):
         No graphs, figures or tables are allowed in this text field. It should be
         stated if data for certain elementary flows or intermediate product flows
         are derived from different technology."""
-        return self.get("text")
+        return DataHelper.get_attribute(self, "text")
 
 
 class DataSetInformation(etree.ElementBase):
@@ -795,7 +789,7 @@ class DataSetInformation(etree.ElementBase):
         is a special kind of unit process, which delivers more than one product/service
         output.
         """
-        return int(self.get("type"))
+        return DataHelper.get_attribute(self, "type", int)
 
     @property
     def typeStr(self) -> str:
@@ -809,13 +803,15 @@ class DataSetInformation(etree.ElementBase):
         """Indicates whether or not (yes/no) the dataset contains the results of an
         impact assessment applied on unit processes (unit process raw data) or
         terminated systems (LCI results)."""
-        return DataTypesConverter.str_to_bool(self.get("impactAssessmentResult"))
+        return DataHelper.get_attribute(
+            self, "impactAssessmentResult", DataHelper.str_to_bool
+        )
 
     @property
     def timestamp(self) -> datetime:
         """Automatically generated date when dataset is created"""
         return datetime.strptime(
-            self.get("timestamp"), DataTypesConverter.timestampFormat
+            DataHelper.get_attribute(self, "timestamp"), DataHelper.TIMESTAMP_FORMAT
         )
 
     @property
@@ -826,7 +822,7 @@ class DataSetInformation(etree.ElementBase):
         (e.g., 1.01, 1.02, etc.) are used for minor updates (corrected errors)
         within the period of two major updates. The version number is placed manually.
         """
-        return float(self.get("version"))
+        return float(DataHelper.get_attribute(self, "version"))
 
     @property
     def internalVersion(self) -> float:
@@ -834,14 +830,14 @@ class DataSetInformation(etree.ElementBase):
         the working period until the dataset is entered into the database). The
         internalVersion is generated automatically with each change made in the
         dataset or related file."""
-        return float(self.get("internalVersion"))
+        return float(DataHelper.get_attribute(self, "internalVersion"))
 
     @property
     def energyValues(self) -> int:
         """Indicates the way energy values are used and applied in the dataset. The
         codes are: 0=Undefined. 1=Net values. 2=Gross values. This data field is by
         default set to 0 and not actively used in ecoinvent quality network."""
-        return int(self.get("energyValues"))
+        return DataHelper.get_attribute(self, "energyValues", int)
 
     @property
     def energyValuesStr(self) -> str:
@@ -853,13 +849,13 @@ class DataSetInformation(etree.ElementBase):
     def languageCode(self) -> str:
         """2 letter ISO language codes are used. Default language is English.
         Lower case letters are used."""
-        return self.get("languageCode")
+        return DataHelper.get_attribute(self, "languageCode")
 
     @property
     def localLanguageCode(self) -> str:
         """2 letter ISO language codes are used. Default localLanguage is German.
         Lower case letters are used."""
-        return self.get("localLanguageCode")
+        return DataHelper.get_attribute(self, "localLanguageCode")
 
 
 class TimePeriod(etree.ElementBase):
@@ -870,13 +866,13 @@ class TimePeriod(etree.ElementBase):
     def startYear(self) -> str:
         """Start date of the time period for which the dataset is valid, entered
         as year only."""
-        return self.find("startYear", namespaces=self.nsmap).text
+        return DataHelper.get_element(self, "startYear").text
 
     @property
     def startYearMonth(self) -> str:
         """Start date of the time period for which the dataset is valid, entered
         as year and month."""
-        return self.find("startYearMonth", namespaces=self.nsmap).text
+        return DataHelper.get_element(self, "startYearMonth").text
 
     @property
     def startDate(self) -> str:
@@ -885,33 +881,35 @@ class TimePeriod(etree.ElementBase):
         (0000) or year-month (0000-00) only. 2000 and 2000-01 means: from 01.01.2000.
         If it is only known that data is older than a certain data, 'startDate' is left
         blank."""
-        return self.find("startDate", namespaces=self.nsmap).text
+        return DataHelper.get_element(self, "startDate").text
 
     @property
     def endYear(self) -> str:
         """End date of the time period for which the dataset is valid, entered as year
         only."""
-        return self.find("endYear", namespaces=self.nsmap).text
+        return DataHelper.get_element(self, "endYear").text
 
     @property
     def endYearMonth(self) -> str:
         """End date of the time period for which the dataset is valid, entered as year
         and month."""
-        return self.find("endYearMonth", namespaces=self.nsmap).text
+        return DataHelper.get_element(self, "endYearMonth").text
 
     @property
     def endDate(self) -> str:
         """End date of the time period for which the dataset is valid, presented as a
         complete date (year-month-day). EndDate may as well be entered as year (0000)
         or year-month (0000-00) only. 2000 and 2000-12 means: until 31.12.2000."""
-        return self.find("endDate", namespaces=self.nsmap).text
+        return DataHelper.get_element(self, "endDate").text
 
     @property
     def dataValidForEntirePeriod(self) -> bool:
         """Indicates whether or not the process data (elementary and intermediate
         product flows reported under flow data) are valid for the entire time period
         stated. If not, explanations may be given under 'text'."""
-        return DataTypesConverter.str_to_bool(self.get("dataValidForEntirePeriod"))
+        return DataHelper.get_attribute(
+            self, "dataValidForEntirePeriod", DataHelper.str_to_bool
+        )
 
     @property
     def text(self) -> str:
@@ -926,7 +924,7 @@ class TimePeriod(etree.ElementBase):
             time period is valid.
         The fact that data are based on forecasts should be reported under
         'representativeness'."""
-        return self.get("text")
+        return DataHelper.get_attribute(self, "text")
 
 
 class Representativeness(etree.ElementBase):
@@ -942,7 +940,7 @@ class Representativeness(etree.ElementBase):
         in one country is used for another country's process, the entry should be '0'.
         The representativity for the original country is reported under
         'extrapolations'."""
-        return float(self.get("percent"))
+        return float(DataHelper.get_attribute(self, "percent"))
 
     @property
     def productionVolume(self) -> str:
@@ -951,7 +949,7 @@ class Representativeness(etree.ElementBase):
         at issue. The market volume should be given in absolute terms per year and in
         common units. It is related to the time period specified elsewhere.
         """
-        return self.get("productionVolume")
+        return DataHelper.get_attribute(self, "productionVolume")
 
     @property
     def samplingProcedure(self) -> str:
@@ -959,7 +957,7 @@ class Representativeness(etree.ElementBase):
         should be reported whether the sampling procedure for particular elementary
         and intermediate product flows differ from the general procedure. Possible
         problems in combining different sampling procedures should be mentioned."""
-        return self.get("samplingProcedure")
+        return DataHelper.get_attribute(self, "samplingProcedure")
 
     @property
     def extrapolations(self) -> str:
@@ -970,7 +968,7 @@ class Representativeness(etree.ElementBase):
         a process operated in one country is used for another country's process, its
         original representativity can be indicated here. Changes in mean values
         due to extrapolations may also be reported here."""
-        return self.get("extrapolations")
+        return DataHelper.get_attribute(self, "extrapolations")
 
     @property
     def uncertaintyAdjustments(self) -> str:
@@ -979,7 +977,7 @@ class Representativeness(etree.ElementBase):
         'maxValue'), thus raising the value in 'percent' of the dataset to 100%, this
         field also reports the original representativeness, the additional uncertainty
         and the procedure by which it was assessed or calculated."""
-        return self.get("uncertaintyAdjustments")
+        return DataHelper.get_attribute(self, "uncertaintyAdjustments")
 
 
 class Source(etree.ElementBase):
@@ -1000,7 +998,7 @@ class Source(etree.ElementBase):
     @property
     def number(self) -> int:
         """ID number to identify the source within one dataset."""
-        return int(self.get("number"))
+        return DataHelper.get_attribute(self, "number", int)
 
     @property
     def sourceType(self) -> int:
@@ -1008,7 +1006,7 @@ class Source(etree.ElementBase):
         1=Article. 2=Chapters in anthology. 3=Seperate publication.
         4=Measurement on site. 5=Oral communication. 6=Personal written communication.
         7=Questionnaries."""
-        return int(self.get("sourceType"))
+        return DataHelper.get_attribute(self, "sourceType", int)
 
     @property
     def sourceTypeStr(self) -> str:
@@ -1025,20 +1023,20 @@ class Source(etree.ElementBase):
         personal written communication and questionnaries ('sourceType'=4, 5, 6, 7)
         the name of the communicating person is mentioned here. Identifies the
         source together with 'title' and 'year'."""
-        return self.get("firstAuthor")
+        return DataHelper.get_attribute(self, "firstAuthor")
 
     @property
     def additionalAuthors(self) -> str:
         """List of additional authors (surname and abbreviated name, e.g. Newton I.),
         separated by commas. 'Et al.' may be used, if more than five additonal authors
         contributed to the cited publication."""
-        return self.get("additionalAuthors")
+        return DataHelper.get_attribute(self, "additionalAuthors")
 
     @property
     def year(self) -> int:
         """Indicates the year of publication and communication, respectively. Identifies
         the source together with 'firstAuthor' and 'title'."""
-        return int(self.get("year"))
+        return DataHelper.get_attribute(self, "year", int)
 
     @property
     def title(self) -> str:
@@ -1047,25 +1045,25 @@ class Source(etree.ElementBase):
         communication: write: "personal written communication, Mr./Mrs. XY, company Z".
         Questionnaires: write "Questionnaire, filled in by Mr./Mrs. XY, company Z".
         Identifies the source together with 'firstAuthor' and 'year'."""
-        return self.get("title")
+        return DataHelper.get_attribute(self, "title")
 
     @property
     def pageNumbers(self) -> str:
         """If an article or a chapter in an anthology, list the relevant page numbers.
         In case of separate publications the total number of pages may be entered."""
-        return self.get("pageNumbers")
+        return DataHelper.get_attribute(self, "pageNumbers")
 
     @property
     def nameOfEditors(self) -> str:
         """Contains the names of the editors (if any)."""
-        return self.get("nameOfEditors")
+        return DataHelper.get_attribute(self, "nameOfEditors")
 
     @property
     def titleOfAnthology(self) -> str:
         """If the publication is a chapter in an anthology, the title of the anthology
         is reported here. For the reports of the ecoinvent quality network 'Final report
         ecoinvent 2000' is written here."""
-        return self.get("titleOfAnthology")
+        return DataHelper.get_attribute(self, "titleOfAnthology")
 
     @property
     def placeOfPublications(self) -> str:
@@ -1074,35 +1072,35 @@ class Source(etree.ElementBase):
         location of the company which provided the information. If available via the
         web add the web-address. For the ECOINVENT final reports 'EMPA Dübendorf' is
         written."""
-        return self.get("placeOfPublications")
+        return DataHelper.get_attribute(self, "placeOfPublications")
 
     @property
     def publisher(self) -> str:
         """Lists the name of the publisher (if any). In case of the ecoinvent quality
         network it is the 'Swiss Centre for Life Cycle Inventories'."""
-        return self.get("publisher")
+        return DataHelper.get_attribute(self, "publisher")
 
     @property
     def journal(self) -> str:
         """Indicates the name of the journal an article is published in."""
-        return self.get("journal")
+        return DataHelper.get_attribute(self, "journal")
 
     @property
     def volumeNo(self) -> int:
         """Indicates the volume of the journal an article is published in."""
-        return int(self.get("volumeNo"))
+        return DataHelper.get_attribute(self, "volumeNo", int)
 
     @property
     def issueNo(self) -> str:
         """Indicates the issue number of the journal an article is published in."""
-        return self.get("issueNo")
+        return DataHelper.get_attribute(self, "issueNo")
 
     @property
     def text(self) -> str:
         """Free text for additional description of the source. It may contain a
         brief summary of the publication and the kind of medium used (e.g. CD-ROM,
         hard copy)"""
-        return self.get("text")
+        return DataHelper.get_attribute(self, "text")
 
 
 class Validation(etree.ElementBase):
@@ -1119,19 +1117,19 @@ class Validation(etree.ElementBase):
         elementary and intermediate product flows, 5. mathematical correctness.
         The review is limited to sample audits (not covering each and every figure).
         """
-        return self.get("proofReadingDetails")
+        return DataHelper.get_attribute(self, "proofReadingDetails")
 
     @property
     def proofReadingValidator(self) -> int:
         """Indicates the person who carried out the review. ID number must correspond
         to an ID number of a person listed in the respective dataset."""
-        return int(self.get("proofReadingValidator"))
+        return DataHelper.get_attribute(self, "proofReadingValidator", int)
 
     @property
     def otherDetails(self) -> str:
         """Contains further information from the review process, especially comments
         received from third parties once the dataset has been published."""
-        return self.get("otherDetails")
+        return DataHelper.get_attribute(self, "otherDetails")
 
 
 class DataEntryBy(etree.ElementBase):
@@ -1144,14 +1142,14 @@ class DataEntryBy(etree.ElementBase):
         """ID number for the person that prepared the dataset and enters the dataset
         into the database. It must correspond to an ID number of a person listed in
         the respective dataset."""
-        return int(self.get("person"))
+        return DataHelper.get_attribute(self, "person", int)
 
     @property
     def qualityNetwork(self) -> int:
         """Indicates a project team that works on the database. The information is
         used, e.g., for restricting the accessibility of dataset information to one
         particular quality network. The code used is: 1=ecoinvent"""
-        return int(self.get("qualityNetwork", Defaults.qualityNetwork))
+        return DataHelper.get_attribute(self, "qualityNetwork", int)
 
 
 class DataGeneratorAndPublication(etree.ElementBase):
@@ -1176,7 +1174,7 @@ class DataGeneratorAndPublication(etree.ElementBase):
     def person(self) -> int:
         """ID number for the person that generated the dataset. It must correspond to
         an ID number of a person listed in the respective dataset."""
-        return int(self.get("person"))
+        return DataHelper.get_attribute(self, "person", int)
 
     @property
     def dataPublishedIn(self) -> int:
@@ -1185,7 +1183,7 @@ class DataGeneratorAndPublication(etree.ElementBase):
         processes or subsystems are published. 2=Data has been published entirely in
         'referenceToPublishedSource'. Within the ecoinvent quality network all datasets
         are published in the series of ecoinvent reports."""
-        return int(self.get("dataPublishedIn"))
+        return DataHelper.get_attribute(self, "dataPublishedIn", int)
 
     @property
     def dataPublishedInStr(self) -> str:
@@ -1199,13 +1197,13 @@ class DataGeneratorAndPublication(etree.ElementBase):
     def referenceToPublishedSource(self) -> int:
         """ID number for the report in which the dataset is documented. It must
         correspond to an ID number of a source listed in the respective dataset."""
-        return int(self.get("referenceToPublishedSource"))
+        return DataHelper.get_attribute(self, "referenceToPublishedSource", int)
 
     @property
     def copyright(self) -> bool:
         """Indicates whether or not a copyright exists. '1' (Yes) or '0' (No)
         should be entered correspondingly."""
-        return DataTypesConverter.str_to_bool(self.get("copyright"))
+        return DataHelper.get_attribute(self, "copyright", DataHelper.str_to_bool)
 
     @property
     def accessRestrictedTo(self) -> int:
@@ -1220,7 +1218,7 @@ class DataGeneratorAndPublication(etree.ElementBase):
         administrator has full access to information. Via the web only LCI result
         are accessible (for ecoinvent clients and for members of the ecoinvent centre.
         """
-        return int(self.get("accessRestrictedTo"))
+        return DataHelper.get_attribute(self, "accessRestrictedTo", int)
 
     @property
     def accessRestrictedToStr(self) -> str:
@@ -1243,7 +1241,7 @@ class DataGeneratorAndPublication(etree.ElementBase):
         and identified. 'countryCode' is required additionally. Only required and
         allowed if access to the dataset is restricted to a particular institute within
         the ecoinvent quality network."""
-        return self.get("companyCode")
+        return DataHelper.get_attribute(self, "companyCode")
 
     @property
     def countryCode(self) -> str:
@@ -1252,14 +1250,14 @@ class DataGeneratorAndPublication(etree.ElementBase):
         quality networks (see also 'qualityNetwork'). Only required and allowed if
         access to the dataset is restricted to a particular institute within the
         ecoinvent quality network."""
-        return self.get("countryCode")
+        return DataHelper.get_attribute(self, "countryCode")
 
     @property
     def pageNumbers(self) -> str:
         """Indicates the page numbers in the publication where the table with the unit
         process raw data, and the characterisation, damage or weighting factors of the
         impact category, respectively are documented."""
-        return self.get("pageNumbers")
+        return DataHelper.get_attribute(self, "pageNumbers")
 
 
 class Person(etree.ElementBase):
@@ -1272,47 +1270,47 @@ class Person(etree.ElementBase):
         """ID number is attributed to each person of an organisation/institute
         co-operating in a quality network such as ecoinvent. It is used to identify
         persons cited within one dataset."""
-        return int(self.get("number"))
+        return DataHelper.get_attribute(self, "number", int)
 
     @property
     def name(self) -> str:
         """Name and surname of the person working in an organisation/institute which is
         a member of the quality network. Identifies the person together with
         'address' (#5803)."""
-        return self.get("name")
+        return DataHelper.get_attribute(self, "name")
 
     @property
     def address(self) -> str:
         """Complete address, including street, po-box (if applicable), zip-code,
         city, state (if applicable), country. Identifies the person together with
         'name' (#5802)."""
-        return self.get("address")
+        return DataHelper.get_attribute(self, "address")
 
     @property
     def telephone(self) -> str:
         """Phone number including country and regional codes."""
-        return self.get("telephone")
+        return DataHelper.get_attribute(self, "telephone")
 
     @property
     def telefax(self) -> str:
         """Fax number including country and regional codes."""
-        return self.get("telefax")
+        return DataHelper.get_attribute(self, "telefax")
 
     @property
     def email(self) -> str:
         """Complete email address."""
-        return self.get("email")
+        return DataHelper.get_attribute(self, "email")
 
     @property
     def companyCode(self) -> str:
         """7 letter company code of the organisation/institute co-operating in a
         quality network. Identifies the co-operation partner together with the
         countryCode (#5808)."""
-        return self.get("companyCode")
+        return DataHelper.get_attribute(self, "companyCode")
 
     @property
     def countryCode(self) -> str:
         """2 letter ISO-country code of the organisation/institute co-operating
         in a quality network. Identifying the co-operation partner together with
         the companyCode (#5807)."""
-        return self.get("countryCode")
+        return DataHelper.get_attribute(self, "countryCode")
