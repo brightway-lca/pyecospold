@@ -19,7 +19,7 @@ class DataHelper:
         bool: str_to_bool
     }
     TYPE_FUNC_DEFAULTS: Dict[type, Any] = {
-        int: np.nan,
+        int: np.nan_to_num(np.nan),
         float: np.nan,
         bool: False,
         str: ""
