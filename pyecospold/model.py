@@ -356,7 +356,7 @@ class Exchange(etree.ElementBase):
         In case of triangular uncertainty distribution, the meanValue shall
         be calculated from the mostLikelyValue. The field mostLikelyValue (#3797)
         shall not be used in the ecoinvent quality network."""
-        return float(DataHelper.get_attribute(self, "meanValue"))
+        return DataHelper.get_attribute(self, "meanValue", float)
 
     @property
     def uncertaintyType(self) -> int:
@@ -386,7 +386,7 @@ class Exchange(etree.ElementBase):
         2*SD equals 2.5% value (=minValue). This data field remains empty when
         uniform or triangular uncertainty distribution is applied
         (uncertaintyType = 3 and 4, respectively)."""
-        return float(DataHelper.get_attribute(self, "standardDeviation95"))
+        return DataHelper.get_attribute(self, "standardDeviation95", float)
 
     @property
     def formula(self) -> str:
@@ -436,23 +436,21 @@ class Exchange(etree.ElementBase):
         """Describes whether the intermediate product flow from or to the
         unit process is an infrastructure process or not. Not applicable
         to elementary flows."""
-        return DataHelper.str_to_bool(
-            DataHelper.get_attribute(self, "infrastructureProcess")
-        )
+        return DataHelper.get_attribute(self, "infrastructureProcess", bool)
 
     @property
     def minValue(self) -> float:
         """Contains the minimum value for exchange data with a uniform or
         triangular distribution. In case of LCI results imported into the
         ecoinvent database, the 2.5% value is reported in this field."""
-        return float(DataHelper.get_attribute(self, "minValue"))
+        return DataHelper.get_attribute(self, "minValue", float)
 
     @property
     def maxValue(self) -> float:
         """Contains the maximum value for exchange data with a uniform or
         triangular distribution. In case of LCI results imported into the
         ecoinvent database, the 97.5% value is reported in this field."""
-        return float(DataHelper.get_attribute(self, "maxValue"))
+        return DataHelper.get_attribute(self, "maxValue", float)
 
     @property
     def mostLikelyValue(self) -> float:
@@ -460,7 +458,7 @@ class Exchange(etree.ElementBase):
         with triangular distribution. However, do not use this field, but
         calculate the mean value, (minValue + mostLikelyValue +maxValue)/3,
         and enter it into the field "meanValue")."""
-        return float(DataHelper.get_attribute(self, "mostLikelyValue"))
+        return DataHelper.get_attribute(self, "mostLikelyValue", float)
 
 
 class Allocation(etree.ElementBase):
@@ -515,7 +513,7 @@ class Allocation(etree.ElementBase):
         factors applied on one particular exchange must add up to 100%.
         MultipleOccurences=Yes only valid, if referenceFunction describes
         a multioutput process."""
-        return float(DataHelper.get_attribute(self, "fraction"))
+        return DataHelper.get_attribute(self, "fraction", float)
 
     @property
     def explanations(self) -> str:
@@ -546,7 +544,7 @@ class ReferenceFunction(etree.ElementBase):
         processes and multioutput processes and 'no' for elementary flows and
         impact categories."""
         return DataHelper.get_attribute(
-            self, "datasetRelatesToProduct", DataHelper.str_to_bool
+            self, "datasetRelatesToProduct", bool
         )
 
     @property
@@ -585,7 +583,7 @@ class ReferenceFunction(etree.ElementBase):
         respectively. It is used as a discriminating element for the identification of
         processes. Not applicable for elementary flows and impact categories."""
         return DataHelper.get_attribute(
-            self, "infrastructureProcess", DataHelper.str_to_bool
+            self, "infrastructureProcess", bool
         )
 
     @property
@@ -593,7 +591,7 @@ class ReferenceFunction(etree.ElementBase):
         """Indicates the amount of reference flow (product/service, elementary flow,
         impact category).  Within the ecoinvent quality network the amount of the
         reference flow always equals 1."""
-        return float(DataHelper.get_attribute(self, "amount"))
+        return DataHelper.get_attribute(self, "amount", float)
 
     @amount.setter
     def amount(self, value: str) -> bool:
@@ -675,7 +673,7 @@ class ReferenceFunction(etree.ElementBase):
         including during the calculation. Not applicable for elementary flows and impact
         categories."""
         return DataHelper.get_attribute(
-            self, "infrastructureIncluded", DataHelper.str_to_bool
+            self, "infrastructureIncluded", bool
         )
 
     @property
@@ -804,7 +802,7 @@ class DataSetInformation(etree.ElementBase):
         impact assessment applied on unit processes (unit process raw data) or
         terminated systems (LCI results)."""
         return DataHelper.get_attribute(
-            self, "impactAssessmentResult", DataHelper.str_to_bool
+            self, "impactAssessmentResult", bool
         )
 
     @property
@@ -822,7 +820,7 @@ class DataSetInformation(etree.ElementBase):
         (e.g., 1.01, 1.02, etc.) are used for minor updates (corrected errors)
         within the period of two major updates. The version number is placed manually.
         """
-        return float(DataHelper.get_attribute(self, "version"))
+        return DataHelper.get_attribute(self, "version", float)
 
     @property
     def internalVersion(self) -> float:
@@ -830,7 +828,7 @@ class DataSetInformation(etree.ElementBase):
         the working period until the dataset is entered into the database). The
         internalVersion is generated automatically with each change made in the
         dataset or related file."""
-        return float(DataHelper.get_attribute(self, "internalVersion"))
+        return DataHelper.get_attribute(self, "internalVersion", float)
 
     @property
     def energyValues(self) -> int:
@@ -908,7 +906,7 @@ class TimePeriod(etree.ElementBase):
         product flows reported under flow data) are valid for the entire time period
         stated. If not, explanations may be given under 'text'."""
         return DataHelper.get_attribute(
-            self, "dataValidForEntirePeriod", DataHelper.str_to_bool
+            self, "dataValidForEntirePeriod", bool
         )
 
     @property
@@ -940,7 +938,7 @@ class Representativeness(etree.ElementBase):
         in one country is used for another country's process, the entry should be '0'.
         The representativity for the original country is reported under
         'extrapolations'."""
-        return float(DataHelper.get_attribute(self, "percent"))
+        return DataHelper.get_attribute(self, "percent", float)
 
     @property
     def productionVolume(self) -> str:
@@ -1203,7 +1201,7 @@ class DataGeneratorAndPublication(etree.ElementBase):
     def copyright(self) -> bool:
         """Indicates whether or not a copyright exists. '1' (Yes) or '0' (No)
         should be entered correspondingly."""
-        return DataHelper.get_attribute(self, "copyright", DataHelper.str_to_bool)
+        return DataHelper.get_attribute(self, "copyright", bool)
 
     @property
     def accessRestrictedTo(self) -> int:

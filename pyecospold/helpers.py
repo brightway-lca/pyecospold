@@ -1,18 +1,29 @@
 import logging
-from typing import Any, List
+from typing import Any, Dict, List
 
+import numpy as np
 from lxml import etree
 
 from .config import Defaults
 
 
 class DataHelper:
-    SCHEMA = etree.XMLSchema(file="data/schema/EcoSpold01Dataset.xsd")
-    TIMESTAMP_FORMAT = "%Y-%m-%dT%H:%M:%S"
+    SCHEMA: etree.XMLSchema = etree.XMLSchema(file="data/schema/EcoSpold01Dataset.xsd")
+    TIMESTAMP_FORMAT: str = "%Y-%m-%dT%H:%M:%S"
 
     @staticmethod
     def str_to_bool(string: str) -> bool:
         return string.lower() == "true"
+
+    TYPE_FUNC_MAP: Dict[type, Any] = {
+        bool: str_to_bool
+    }
+    TYPE_FUNC_DEFAULTS: Dict[type, Any] = {
+        int: np.nan,
+        float: np.nan,
+        bool: False,
+        str: ""
+    }
 
     @staticmethod
     def try_set(element: etree.ElementBase, key: str, value: str) -> bool:
@@ -42,10 +53,13 @@ class DataHelper:
     def get_attribute(
         parent: etree.ElementBase, attribute: str, attr_type: type = str
     ) -> Any:
-        return attr_type(
+        return DataHelper.TYPE_FUNC_MAP.get(attr_type, attr_type)(
             parent.get(
                 attribute,
-                getattr(Defaults, attribute, "")
+                getattr(
+                    Defaults, attribute,
+                    DataHelper.TYPE_FUNC_DEFAULTS.get(attr_type, None)
+                )
             )
         )
 
@@ -55,7 +69,8 @@ class DataHelper:
     ) -> List[Any]:
         return list(
             map(
-                lambda x: attr_type(x.text),
-                parent.findall(attribute, parent.nsmap)
+                lambda x:
+                    DataHelper.TYPE_FUNC_MAP.get(attr_type, attr_type)(x.text),
+                DataHelper.get_element_list(parent, attribute)
             )
         )
