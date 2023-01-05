@@ -7,8 +7,8 @@ def get_version_tuple() -> tuple:
     def as_integer(x: str) -> Union[int, str]:
         try:
             return int(x)
-        except ValueError:
-            return x
+        except ValueError:  # pragma: no cover
+            return x  # pragma: no cover
 
     return tuple(
         as_integer(v)
