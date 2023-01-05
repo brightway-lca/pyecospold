@@ -1,6 +1,4 @@
 """Command-line interface."""
-import configparser
-
 import click
 
 from .config import Defaults
@@ -26,10 +24,7 @@ def run() -> None:
 )
 def parse(input_file, config_file):
     """ input_file: Path to the xml input file. """
-    config = configparser.ConfigParser()
-    config.read(config_file)
-    defaults = dict(config["defaults"])
-    Defaults.set_defaults(defaults)
+    Defaults.config_defaults(config_file)
     parse_file(input_file)
 
 

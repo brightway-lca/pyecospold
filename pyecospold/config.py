@@ -1,4 +1,5 @@
 """Defaults configuration."""
+import configparser
 from dataclasses import dataclass
 from typing import Any, Dict, ClassVar
 
@@ -22,6 +23,13 @@ class Defaults:
         str: ""
     }
     SCHEMA_FILE: ClassVar[str] = "data/schema/EcoSpold01Dataset.xsd"
+
+    @classmethod
+    def config_defaults(cls, config_file: str) -> None:
+        config = configparser.ConfigParser()
+        config.read(config_file)
+        defaults = dict(config["defaults"])
+        Defaults.set_defaults(defaults)
 
     @classmethod
     def set_defaults(cls, defaults: Dict[str, Any]) -> None:
