@@ -9,15 +9,10 @@ from .config import Defaults
 class DataHelper:
     """Helper class for reading and writing Ecospold custom classes attributes."""
 
-    @staticmethod
-    def str_to_bool(string: str) -> bool:
-        """Helper method for converting str attributes to bool."""
-        return string.lower() == "true"
-
-    TYPE_FUNC_MAP: Dict[type, Any] = {
-        bool: str_to_bool
-    }
     TIMESTAMP_FORMAT: str = "%Y-%m-%dT%H:%M:%S"
+    TYPE_FUNC_MAP: Dict[type, Any] = {
+        bool: lambda string: string.lower() == "true"
+    }
 
     @staticmethod
     def try_set(element: etree.ElementBase, key: str, value: str) -> None:
