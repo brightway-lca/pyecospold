@@ -2,6 +2,7 @@ from pyecospold.core import parse_file
 from pyecospold.model import ReferenceFunction
 
 import pytest
+from lxml.etree import DocumentInvalid
 
 
 @pytest.fixture
@@ -12,11 +13,8 @@ def referenceFunction() -> ReferenceFunction:
 
 
 def test_try_set_fail(referenceFunction: ReferenceFunction) -> None:
-    amount = "abc"
-    expected_amount = 1.0
-    referenceFunction.amount = amount
-
-    assert referenceFunction.amount == expected_amount
+    with pytest.raises(DocumentInvalid):
+        referenceFunction.amount = "abc"
 
 
 def test_try_set_success(referenceFunction: ReferenceFunction) -> None:

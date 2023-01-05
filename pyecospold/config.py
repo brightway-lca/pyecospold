@@ -14,12 +14,14 @@ class Defaults:
     qualityNetwork: ClassVar[str] = "1"
     uncertaintyType: ClassVar[str] = "1"
     allocationMethod: ClassVar[str] = "-1"
+
     TYPE_DEFAULTS: ClassVar[Dict[type, Any]] = {
         int: np.nan_to_num(np.nan),
         float: np.nan,
         bool: False,
         str: ""
     }
+    SCHEMA_FILE: ClassVar[str] = "data/schema/EcoSpold01Dataset.xsd"
 
     @classmethod
     def set_defaults(cls, defaults: Dict[str, Any]) -> None:

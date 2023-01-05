@@ -1,5 +1,4 @@
 """Internal helper classes."""
-import logging
 from typing import Any, Dict, List
 
 from lxml import etree
@@ -10,9 +9,6 @@ from .config import Defaults
 class DataHelper:
     """Helper class for reading and writing Ecospold custom classes attributes."""
 
-    SCHEMA: etree.XMLSchema = etree.XMLSchema(file="data/schema/EcoSpold01Dataset.xsd")
-    TIMESTAMP_FORMAT: str = "%Y-%m-%dT%H:%M:%S"
-
     @staticmethod
     def str_to_bool(string: str) -> bool:
         """Helper method for converting str attributes to bool."""
@@ -21,22 +17,15 @@ class DataHelper:
     TYPE_FUNC_MAP: Dict[type, Any] = {
         bool: str_to_bool
     }
+    TIMESTAMP_FORMAT: str = "%Y-%m-%dT%H:%M:%S"
 
     @staticmethod
-    def try_set(element: etree.ElementBase, key: str, value: str) -> bool:
-        current_value = getattr(element, key)
+    def try_set(element: etree.ElementBase, key: str, value: str) -> None:
+        """Helper method for setting XML attributes. Raises DocumentInvalid
+        exception on inappropriate setting according to XSD schema."""
         element.set(key, str(value))
-
-        validation = DataHelper.SCHEMA.validate(element.getroottree())
-        if validation:
-            return True
-
-        element.set(key, str(current_value))
-        logging.warning(
-            f"Can't set property {element.__class__.__name__}.{key} "
-            f"of type {type(current_value)} to: {value}"
-        )
-        return False
+        schema = etree.XMLSchema(file=Defaults.SCHEMA_FILE)
+        schema.assertValid(element.getroottree())
 
     @staticmethod
     def get_element(parent: etree.ElementBase, element: str) -> Any:
