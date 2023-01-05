@@ -50,6 +50,14 @@ class DataHelper:
         return parent.findall(element, namespaces=parent.nsmap)
 
     @staticmethod
+    def get_element_text(parent: etree.ElementBase, element: str) -> str:
+        return getattr(
+            DataHelper.get_element(parent, element),
+            "text",
+            DataHelper.TYPE_FUNC_DEFAULTS[str]
+        )
+
+    @staticmethod
     def get_attribute(
         parent: etree.ElementBase, attribute: str, attr_type: type = str
     ) -> Any:

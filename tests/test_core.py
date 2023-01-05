@@ -3,13 +3,14 @@ import tempfile
 from datetime import datetime
 from io import StringIO
 
+import numpy as np
 import pytest
 from lxml.etree import XMLSyntaxError
 
 from pyecospold.core import parse_file, save_file
 from pyecospold.model import (EcoSpold, Dataset, MetaInformation, FlowData,
                               ProcessInformation, ModellingAndValidation,
-                              AdministrativeInformation, Exchange,
+                              AdministrativeInformation, Exchange, Allocation,
                               ReferenceFunction, Geography, Technology,
                               DataSetInformation, TimePeriod, Representativeness,
                               Source, Validation, DataEntryBy,
@@ -76,8 +77,7 @@ def test_parse_file_flowData(ecoSpold: EcoSpold) -> None:
     flowData = ecoSpold.dataset.flowData
 
     assert type(flowData.exchanges[0]) == Exchange
-    # FIXME: add allocations in test data
-    # assert type(flowData.allocations[0]) == Allocation
+    assert type(flowData.allocations[0]) == Allocation
 
 
 def test_parse_file_processInformation(ecoSpold: EcoSpold) -> None:
@@ -123,9 +123,14 @@ def test_parse_file_exchange(ecoSpold: EcoSpold) -> None:
     meanValue = 21200
     standardDeviation95 = 1.22
     formula = "Fe"
+    referenceToSource = 0
+    pageNumbers = ""
     generalComment = "(2,3,1,1,1,5)"
     localName = "Entsorgung, Gebäude, Armierungseisen, ins Recycling"
     infrastructureProcess = False
+    minValue = np.nan
+    maxValue = np.nan
+    mostLikelyValue = np.nan
     inputGroups = [5]
     inputGroupsStr = ["FromTechnosphere"]
     outputGroups = [0]
@@ -147,9 +152,14 @@ def test_parse_file_exchange(ecoSpold: EcoSpold) -> None:
     assert exchange.meanValue == meanValue
     assert exchange.standardDeviation95 == standardDeviation95
     assert exchange.formula == formula
+    assert exchange.referenceToSource == referenceToSource
+    assert exchange.pageNumbers == pageNumbers
     assert exchange.generalComment == generalComment
     assert exchange.localName == localName
     assert exchange.infrastructureProcess == infrastructureProcess
+    assert exchange.minValue is minValue
+    assert exchange.maxValue is maxValue
+    assert exchange.mostLikelyValue is mostLikelyValue
     assert exchange.inputGroups == inputGroups
     assert exchange.inputGroupsStr == inputGroupsStr
     assert output_exchange.outputGroups == outputGroups
@@ -162,6 +172,7 @@ def test_parse_file_allocaiton(ecoSpold: EcoSpold) -> None:
     allocationMethodStr = "Undefined"
     fraction = 97.6
     referenceToInputOutputs = [1]
+    explanations = ""
     allocaiton = ecoSpold.dataset.flowData.allocations[0]
 
     assert allocaiton.referenceToCoProduct == referenceToCoProduct
@@ -169,6 +180,7 @@ def test_parse_file_allocaiton(ecoSpold: EcoSpold) -> None:
     assert allocaiton.allocationMethodStr == allocationMethodStr
     assert allocaiton.fraction == fraction
     assert allocaiton.referenceToInputOutputs == referenceToInputOutputs
+    assert allocaiton.explanations == explanations
 
 
 def test_parse_file_referenceFunction(ecoSpold: EcoSpold) -> None:
@@ -193,6 +205,8 @@ def test_parse_file_referenceFunction(ecoSpold: EcoSpold) -> None:
                      "amounts thus 250‘000 tons biogenic waste."
     formula = "0"
     infrastructureIncluded = True
+    CASNumber = ""
+    statisticalClassification = 0
     datasetRelatesToProduct = True
     synonyms = ["0"]
     processInformation = ecoSpold.dataset.metaInformation.processInformation
@@ -212,6 +226,9 @@ def test_parse_file_referenceFunction(ecoSpold: EcoSpold) -> None:
     assert referenceFunction.formula == formula
     assert referenceFunction.infrastructureIncluded == \
         infrastructureIncluded
+    assert referenceFunction.CASNumber == CASNumber
+    assert referenceFunction.statisticalClassification == \
+        statisticalClassification
     assert referenceFunction.datasetRelatesToProduct == \
         datasetRelatesToProduct
     assert referenceFunction.synonyms == synonyms
@@ -238,14 +255,22 @@ def test_parse_file_technology(ecoSpold: EcoSpold) -> None:
 def test_parse_file_timePeriod(ecoSpold: EcoSpold) -> None:
     text = "Year when reference used for this inventory was published."
     startYear = "1999"
+    startYearMonth = ""
+    startDate = ""
     endYear = "1999"
+    endYearMonth = ""
+    endDate = ""
     processInformation = ecoSpold.dataset.metaInformation.processInformation
     timePeriod = processInformation.timePeriod
 
     assert timePeriod.dataValidForEntirePeriod
     assert timePeriod.text == text
     assert timePeriod.startYear == startYear
+    assert timePeriod.startYearMonth == startYearMonth
+    assert timePeriod.startDate == startDate
     assert timePeriod.endYear == endYear
+    assert timePeriod.endYearMonth == endYearMonth
+    assert timePeriod.endDate == endDate
 
 
 def test_parse_file_dataSetInformation(ecoSpold: EcoSpold) -> None:
@@ -274,12 +299,16 @@ def test_parse_file_dataSetInformation(ecoSpold: EcoSpold) -> None:
 
 
 def test_parse_file_representativeness(ecoSpold: EcoSpold) -> None:
+    percent = np.nan
+    productionVolume = ""
     samplingProcedure = "Data come from one compost plant in Switzerland."
     extrapolations = "none"
     uncertaintyAdjustments = "none"
     modellingAndValidation = ecoSpold.dataset.metaInformation.modellingAndValidation
     representativeness = modellingAndValidation.representativeness
 
+    assert representativeness.percent is percent
+    assert representativeness.productionVolume == productionVolume
     assert representativeness.samplingProcedure == samplingProcedure
     assert representativeness.extrapolations == extrapolations
     assert representativeness.uncertaintyAdjustments == uncertaintyAdjustments
@@ -294,10 +323,14 @@ def test_parse_file_source(ecoSpold: EcoSpold) -> None:
                         "Blaser S., Dux. D., Zimmermann A.,"
     year = 2003
     title = "Life Cycle Inventories of Agricultural Production Systems"
+    pageNumbers = ""
+    nameOfEditors = ""
     titleOfAnthology = "Final report ecoinvent 2000"
     placeOfPublications = "Dübendorf, CH"
     publisher = "Swiss Centre for LCI, FAL & FAT"
+    journal = ""
     volumeNo = 15
+    issueNo = ""
     text = "CD-ROM"
     modellingAndValidation = ecoSpold.dataset.metaInformation.modellingAndValidation
     source = modellingAndValidation.source
@@ -309,21 +342,27 @@ def test_parse_file_source(ecoSpold: EcoSpold) -> None:
     assert source.additionalAuthors == additionalAuthors
     assert source.year == year
     assert source.title == title
+    assert source.pageNumbers == pageNumbers
+    assert source.nameOfEditors == nameOfEditors
     assert source.titleOfAnthology == titleOfAnthology
     assert source.placeOfPublications == placeOfPublications
     assert source.publisher == publisher
+    assert source.journal == journal
     assert source.volumeNo == volumeNo
+    assert source.issueNo == issueNo
     assert source.text == text
 
 
 def test_parse_file_validation(ecoSpold: EcoSpold) -> None:
     proofReadingDetails = "Passed."
     proofReadingValidator = 291
+    otherDetails = ""
     modellingAndValidation = ecoSpold.dataset.metaInformation.modellingAndValidation
     validation = modellingAndValidation.validation
 
     assert validation.proofReadingDetails == proofReadingDetails
     assert validation.proofReadingValidator == proofReadingValidator
+    assert validation.otherDetails == otherDetails
 
 
 def test_parse_file_dataEntryBy(ecoSpold: EcoSpold) -> None:
@@ -344,6 +383,9 @@ def test_parse_file_dataGeneratorAndPublication(ecoSpold: EcoSpold) -> None:
     referenceToPublishedSource = 146
     accessRestrictedTo = 0
     accessRestrictedToStr = "Public"
+    companyCode = ""
+    countryCode = ""
+    pageNumbers = ""
     metaInformation = ecoSpold.dataset.metaInformation
     administrativeInformation = metaInformation.administrativeInformation
     dataGeneratorAndPublication = administrativeInformation.dataGeneratorAndPublication
@@ -357,6 +399,9 @@ def test_parse_file_dataGeneratorAndPublication(ecoSpold: EcoSpold) -> None:
     assert dataGeneratorAndPublication.copyright
     assert dataGeneratorAndPublication.accessRestrictedTo == accessRestrictedTo
     assert dataGeneratorAndPublication.accessRestrictedToStr == accessRestrictedToStr
+    assert dataGeneratorAndPublication.companyCode == companyCode
+    assert dataGeneratorAndPublication.countryCode == countryCode
+    assert dataGeneratorAndPublication.pageNumbers == pageNumbers
 
 
 def test_parse_file_person(ecoSpold: EcoSpold) -> None:

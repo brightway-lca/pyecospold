@@ -864,13 +864,13 @@ class TimePeriod(etree.ElementBase):
     def startYear(self) -> str:
         """Start date of the time period for which the dataset is valid, entered
         as year only."""
-        return DataHelper.get_element(self, "startYear").text
+        return DataHelper.get_element_text(self, "startYear")
 
     @property
     def startYearMonth(self) -> str:
         """Start date of the time period for which the dataset is valid, entered
         as year and month."""
-        return DataHelper.get_element(self, "startYearMonth").text
+        return DataHelper.get_element_text(self, "startYearMonth")
 
     @property
     def startDate(self) -> str:
@@ -879,26 +879,26 @@ class TimePeriod(etree.ElementBase):
         (0000) or year-month (0000-00) only. 2000 and 2000-01 means: from 01.01.2000.
         If it is only known that data is older than a certain data, 'startDate' is left
         blank."""
-        return DataHelper.get_element(self, "startDate").text
+        return DataHelper.get_element_text(self, "startDate")
 
     @property
     def endYear(self) -> str:
         """End date of the time period for which the dataset is valid, entered as year
         only."""
-        return DataHelper.get_element(self, "endYear").text
+        return DataHelper.get_element_text(self, "endYear")
 
     @property
     def endYearMonth(self) -> str:
         """End date of the time period for which the dataset is valid, entered as year
         and month."""
-        return DataHelper.get_element(self, "endYearMonth").text
+        return DataHelper.get_element_text(self, "endYearMonth")
 
     @property
     def endDate(self) -> str:
         """End date of the time period for which the dataset is valid, presented as a
         complete date (year-month-day). EndDate may as well be entered as year (0000)
         or year-month (0000-00) only. 2000 and 2000-12 means: until 31.12.2000."""
-        return DataHelper.get_element(self, "endDate").text
+        return DataHelper.get_element_text(self, "endDate")
 
     @property
     def dataValidForEntirePeriod(self) -> bool:
