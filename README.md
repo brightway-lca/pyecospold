@@ -27,6 +27,40 @@ You can install _pyecospold_ via [pip] from [PyPI]:
 $ pip install pyecospold
 ```
 
+## Usage
+
+```python
+from pyecospold import parse_file, save_file, Defaults
+
+# Override defaults if needed, else skip. Defaults are already set.
+Defaults.config("config.ini")  # Replace with your own config file
+
+# Parse the required XML file to EcoSpold class.
+ecoSpold = parse_file("data/examples/00001.xml")  # Replace with your own XML file
+ecoSpold
+>> <Element {http://www.EcoInvent.org/EcoSpold01}ecoSpold at 0x24a558b6020>
+
+# Change whatever attributes you need changing.
+referenceFunction = ecoSpold.dataset.metaInformation.processInformation.referenceFunction
+referenceFunction.amount = 2.0
+referenceFunction.amount
+>> 2.0
+
+# Save final EcoSpold class as an XML file, make sure root directory exists.
+save_file(ecoSpold, "out/00001_new.xml")  # Replace with your own path
+```
+
+# Config file
+
+```ini
+[defaults]
+qualityNetwork="1"
+qualityNetwork="1"
+uncertaintyType="1"
+allocationMethod="-1"
+SCHEMA_FILE="data/schema/EcoSpold01Dataset.xsd"
+```
+
 ## Contributing
 
 Contributions are very welcome.
