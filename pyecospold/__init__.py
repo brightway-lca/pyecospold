@@ -4,7 +4,9 @@ from typing import Union
 
 
 def get_version_tuple() -> tuple:
+    """Returns version as (major, minor, micro)."""
     def as_integer(x: str) -> Union[int, str]:
+        """Tries parsing version else returns as is."""
         try:
             return int(x)
         except ValueError:  # pragma: no cover
