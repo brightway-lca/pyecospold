@@ -12,7 +12,7 @@ from .core import parse_file
 def run() -> None:
     """pyecospold: convert ecospold XML formats to their Python equivalents and
     export the same data back to XML."""
-    pass
+    pass  # pragma: no cover
 
 
 @click.command("parse")
