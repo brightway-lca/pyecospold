@@ -58,6 +58,8 @@ class Dataset(etree.ElementBase):
 
     @property
     def generator(self) -> str:
+        """The person or organisation that collected, compiled or published the
+        original data."""
         return DataHelper.get_attribute(self, "generator")
 
     @property
@@ -69,18 +71,22 @@ class Dataset(etree.ElementBase):
 
     @property
     def validCompanyCodes(self) -> str:
+        """XML file for valid company codes."""
         return DataHelper.get_attribute(self, "validCompanyCodes")
 
     @property
     def validRegionalCodes(self) -> str:
+        """XML file for valid regional codes."""
         return DataHelper.get_attribute(self, "validRegionalCodes")
 
     @property
     def validCategories(self) -> str:
+        """XML file for valid categories."""
         return DataHelper.get_attribute(self, "validCategories")
 
     @property
     def validUnits(self) -> str:
+        """XML file for valid units."""
         return DataHelper.get_attribute(self, "validUnits")
 
 
