@@ -1,3 +1,4 @@
+"""Internal helper classes."""
 import logging
 from typing import Any, Dict, List
 
@@ -7,11 +8,14 @@ from .config import Defaults
 
 
 class DataHelper:
+    """Helper class for reading and writing Ecospold custom classes attributes."""
+
     SCHEMA: etree.XMLSchema = etree.XMLSchema(file="data/schema/EcoSpold01Dataset.xsd")
     TIMESTAMP_FORMAT: str = "%Y-%m-%dT%H:%M:%S"
 
     @staticmethod
     def str_to_bool(string: str) -> bool:
+        """Helper method for converting str attributes to bool."""
         return string.lower() == "true"
 
     TYPE_FUNC_MAP: Dict[type, Any] = {
@@ -36,14 +40,20 @@ class DataHelper:
 
     @staticmethod
     def get_element(parent: etree.ElementBase, element: str) -> Any:
+        """Helper wrapper method for retrieving XML elements as custom
+        Ecospold classes."""
         return parent.find(element, namespaces=parent.nsmap)
 
     @staticmethod
     def get_element_list(parent: etree.ElementBase, element: str) -> List[Any]:
+        """Helper wrapper method for retrieving XML list elements as a list
+        of custom Ecospold classes."""
         return parent.findall(element, namespaces=parent.nsmap)
 
     @staticmethod
     def get_element_text(parent: etree.ElementBase, element: str) -> str:
+        """Helper wrapper method for retrieving XML element text as a string.
+        Returns Defaults.TYPE_DEFAULTS[str] if no text exists or element is None."""
         return getattr(
             DataHelper.get_element(parent, element),
             "text",
@@ -54,6 +64,8 @@ class DataHelper:
     def get_attribute(
         parent: etree.ElementBase, attribute: str, attr_type: type = str
     ) -> Any:
+        """Helper wrapper method for retrieving XML attributes. Returns
+        Defaults.TYPE_DEFAULTS[type] if attribute doesn't exist."""
         return DataHelper.TYPE_FUNC_MAP.get(attr_type, attr_type)(
             parent.get(
                 attribute,
@@ -68,6 +80,8 @@ class DataHelper:
     def get_attribute_list(
         parent: etree.ElementBase, attribute: str, attr_type: type = str
     ) -> List[Any]:
+        """Helper wrapper method for retrieving XML list attributes.
+        Returns empty list if attributes don't exist."""
         return list(
             map(
                 lambda x:
