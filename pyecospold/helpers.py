@@ -1,7 +1,6 @@
 import logging
 from typing import Any, Dict, List
 
-import numpy as np
 from lxml import etree
 
 from .config import Defaults
@@ -17,12 +16,6 @@ class DataHelper:
 
     TYPE_FUNC_MAP: Dict[type, Any] = {
         bool: str_to_bool
-    }
-    TYPE_FUNC_DEFAULTS: Dict[type, Any] = {
-        int: np.nan_to_num(np.nan),
-        float: np.nan,
-        bool: False,
-        str: ""
     }
 
     @staticmethod
@@ -54,7 +47,7 @@ class DataHelper:
         return getattr(
             DataHelper.get_element(parent, element),
             "text",
-            DataHelper.TYPE_FUNC_DEFAULTS[str]
+            Defaults.TYPE_DEFAULTS[str]
         )
 
     @staticmethod
@@ -66,7 +59,7 @@ class DataHelper:
                 attribute,
                 getattr(
                     Defaults, attribute,
-                    DataHelper.TYPE_FUNC_DEFAULTS.get(attr_type, None)
+                    Defaults.TYPE_DEFAULTS.get(attr_type, None)
                 )
             )
         )

@@ -1,14 +1,32 @@
+"""Defaults configuration."""
 from dataclasses import dataclass
 from typing import Any, Dict, ClassVar
+
+import numpy as np
 
 
 @dataclass
 class Defaults:
+    """Stores default values for Ecospold attributes used when no value exists.
+    Defaults can be fully/ partially overridden by providing a config file through
+    cli or by using set_defaults method"""
+
     qualityNetwork: ClassVar[str] = "1"
     uncertaintyType: ClassVar[str] = "1"
     allocationMethod: ClassVar[str] = "-1"
+    TYPE_DEFAULTS: ClassVar[Dict[type, Any]] = {
+        int: np.nan_to_num(np.nan),
+        float: np.nan,
+        bool: False,
+        str: ""
+    }
 
     @classmethod
     def set_defaults(cls, defaults: Dict[str, Any]) -> None:
+        """Fully/ partially overrides defaults.
+
+        Parameters:
+        defaults: attribute-value dictionary.
+        """
         for key, value in defaults.items():
             setattr(cls, key, value)
