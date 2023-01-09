@@ -1,8 +1,8 @@
-from pyecospold.core import parse_file
-from pyecospold.model import ReferenceFunction
-
 import pytest
 from lxml.etree import DocumentInvalid
+
+from pyecospold.core import parse_file
+from pyecospold.model import ReferenceFunction
 
 
 @pytest.fixture
