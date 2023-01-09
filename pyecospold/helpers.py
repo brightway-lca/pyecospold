@@ -78,6 +78,7 @@ class DataHelper:
 
     @staticmethod
     def create_attribute(name: str, attr_type: type) -> property:
+        """Helper wrapper method for creating setters and getters for an attribute"""
         return property(
             lambda self: DataHelper.get_attribute(self, name, attr_type),
             lambda self, value: DataHelper.set_attribute(self, name, value)
