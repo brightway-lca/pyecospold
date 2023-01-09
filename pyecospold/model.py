@@ -1,6 +1,6 @@
 """Custom EcoSpold Python classes."""
 from datetime import datetime
-from typing import Dict, List
+from typing import ClassVar, Dict, List
 
 from lxml import etree
 
@@ -211,6 +211,30 @@ class Exchange(etree.ElementBase):
     intermediate product flows) recorded in a unit process and its
     related information."""
 
+    INPUT_GROUPS_MAP: ClassVar[Dict[int, str]] = {
+        1: "Materials/Fuels",
+        2: "Electricity/Heat",
+        3: "Services",
+        4: "FromNature",
+        5: "FromTechnosphere"
+    }
+
+    OUTPUT_GROUPS_MAP: ClassVar[Dict[int, str]] = {
+        0: "ReferenceProduct",
+        1: "Include avoided product system",
+        2: "Allocated by product",
+        3: "WasteToTreatment",
+        4: "ToNature"
+    }
+
+    UNCERTAINTY_TYPE_MAP: ClassVar[Dict[int, str]] = {
+        0: "undefined",
+        1: "lognormal",
+        2: "normal",
+        3: "triang",
+        4: "uniform"
+    }
+
     number = DataHelper.create_attribute("number", int)
     """int: ID number used as an identifier of a particular exchange
     in a dataset."""
@@ -339,30 +363,6 @@ class Exchange(etree.ElementBase):
     calculate the mean value, (minValue + mostLikelyValue +maxValue)/3,
     and enter it into the field "meanValue")."""
 
-    inputGroupsMap: Dict[int, str] = {
-        1: "Materials/Fuels",
-        2: "Electricity/Heat",
-        3: "Services",
-        4: "FromNature",
-        5: "FromTechnosphere"
-    }
-
-    outputGroupsMap: Dict[int, str] = {
-        0: "ReferenceProduct",
-        1: "Include avoided product system",
-        2: "Allocated by product",
-        3: "WasteToTreatment",
-        4: "ToNature"
-    }
-
-    uncertaintyTypeMap: Dict[int, str] = {
-        0: "undefined",
-        1: "lognormal",
-        2: "normal",
-        3: "triang",
-        4: "uniform"
-    }
-
     @property
     def inputGroups(self) -> List[int]:
         """Indicates the kind of input flow. The codes are:
@@ -377,7 +377,9 @@ class Exchange(etree.ElementBase):
         """String representation for inputGroups. See inputGroups for
         explanations. 1=Materials/Fuels, 2=Electricity/Heat, 3=Services,
         4=FromNature, 5=FromTechnosphere."""
-        return [self.inputGroupsMap[inputGroup] for inputGroup in self.inputGroups]
+        return [
+            Exchange.INPUT_GROUPS_MAP[inputGroup] for inputGroup in self.inputGroups
+        ]
 
     @property
     def outputGroups(self) -> List[int]:
@@ -396,19 +398,28 @@ class Exchange(etree.ElementBase):
         """String representation for outputGroups. See outputGroups for
         explanations. 0=ReferenceProduct, 1=Include avoided product system,
         2=Allocated by product, 3=WasteToTreatment, 4=ToNature"""
-        return [self.outputGroupsMap[outputGroup] for outputGroup in self.outputGroups]
+        return [
+            Exchange.OUTPUT_GROUPS_MAP[outputGroup] for outputGroup in self.outputGroups
+        ]
 
     @property
     def uncertaintyTypeStr(self) -> str:
         """String representation for uncertaintyType. See uncertaintyType for
         explanations. 0=undefined, 1=lognormal (default), 2=normal, 3=triang,
         4=uniform"""
-        return self.uncertaintyTypeMap[self.uncertaintyType]
+        return Exchange.UNCERTAINTY_TYPE_MAP[self.uncertaintyType]
 
 
 class Allocation(etree.ElementBase):
     """Contains all information about allocation procedure, allocation
     parameters and allocation factors applied on a multi-output process."""
+
+    ALLOCATION_METHOD_MAP: ClassVar[Dict[int, str]] = {
+        -1: "Undefined",
+        0: "Physical causality",
+        1: "Economic causality",
+        2: "Othermethod"
+    }
 
     referenceToCoProduct = DataHelper.create_attribute("referenceToCoProduct", int)
     """int: Indicates the co-product output for which a particular allocation
@@ -437,13 +448,6 @@ class Allocation(etree.ElementBase):
     when comparing different allocation parameters (like physical and economic ones)
     may be reported here as well."""
 
-    allocationMethodMap: Dict[int, str] = {
-        -1: "Undefined",
-        0: "Physical causality",
-        1: "Economic causality",
-        2: "Othermethod"
-    }
-
     @property
     def referenceToInputOutputs(self) -> List[int]:
         """The data field is only required, if the reference function describes
@@ -458,7 +462,7 @@ class Allocation(etree.ElementBase):
         """String representation for allocationMethod. See allocationMethod for
         explanations. -1=Undefined (default). 0=Physical causality. 1=Economic
         causality. 2=Other method."""
-        return self.allocationMethodMap[self.allocationMethod]
+        return Allocation.ALLOCATION_METHOD_MAP[self.allocationMethod]
 
 
 class ReferenceFunction(etree.ElementBase):
@@ -645,6 +649,21 @@ class DataSetInformation(etree.ElementBase):
     timestamp, version and internalVersion number as well as language and localLanguage
     code."""
 
+    TYPE_MAP: Dict[int, str] = {
+        0: "System non-terminated",
+        1: "Unit process",
+        2: "System terminated",
+        3: "Elementary Flow",
+        4: "Impact Category",
+        5: "Multioutput process"
+    }
+
+    ENERGY_VALUES_MAP: Dict[int, str] = {
+        0: "Undefined",
+        1: "Net values",
+        2: "Gross values"
+    }
+
     type = DataHelper.create_attribute("type", int)
     """int: Indicates the kind of data that is represented by this dataset. The code is:
     0=System non-terminated. 1=Unit process. 2=System terminated. 3=Elementary flow.
@@ -700,33 +719,18 @@ class DataSetInformation(etree.ElementBase):
     """str: 2 letter ISO language codes are used. Default localLanguage is German.
     Lower case letters are used."""
 
-    typeMap: Dict[int, str] = {
-        0: "System non-terminated",
-        1: "Unit process",
-        2: "System terminated",
-        3: "Elementary Flow",
-        4: "Impact Category",
-        5: "Multioutput process"
-    }
-
-    energyValuesMap: Dict[int, str] = {
-        0: "Undefined",
-        1: "Net values",
-        2: "Gross values"
-    }
-
     @property
     def typeStr(self) -> str:
         """String representation for type. See type for explanations.
         0=System non-terminated. 1=Unit process. 2=System terminated. 3=Elementary flow.
         4=Impact category.5=Multioutput process."""
-        return self.typeMap[self.type]
+        return DataSetInformation.TYPE_MAP[self.type]
 
     @property
     def energyValuesStr(self) -> str:
         """String representation for energyValues. See energyValues for explanations.
         0=Undefined. 1=Net values. 2=Gross values."""
-        return self.energyValuesMap[self.energyValues]
+        return DataSetInformation.ENERGY_VALUES_MAP[self.energyValues]
 
 
 class TimePeriod(etree.ElementBase):
@@ -841,6 +845,17 @@ class Source(etree.ElementBase):
     """Contains information about author(s), title, kind of publication, place of
     publication, name of editors (if any), etc.."""
 
+    SOURCE_TYPE_MAP: Dict[int, str] = {
+        0: "Undefined (default)",
+        1: "Article",
+        2: "Chapters in anthology",
+        3: "Seperate publication",
+        4: "Measurement on site",
+        5: "Oral communication",
+        6: "Personal written communication",
+        7: "Questionnaries"
+    }
+
     number = DataHelper.create_attribute("number", int)
     """int: ID number to identify the source within one dataset."""
 
@@ -910,24 +925,13 @@ class Source(etree.ElementBase):
     brief summary of the publication and the kind of medium used (e.g. CD-ROM,
     hard copy)"""
 
-    sourceTypeMap: Dict[int, str] = {
-        0: "Undefined (default)",
-        1: "Article",
-        2: "Chapters in anthology",
-        3: "Seperate publication",
-        4: "Measurement on site",
-        5: "Oral communication",
-        6: "Personal written communication",
-        7: "Questionnaries"
-    }
-
     @property
     def sourceTypeStr(self) -> str:
         """String representation for sourceType. See sourceType for explanations.
         0=Undefined (default). 1=Article. 2=Chapters in anthology.
         3=Seperate publication. 4=Measurement on site. 5=Oral communication.
         6=Personal written communication. 7=Questionnaries."""
-        return self.sourceTypeMap[self.sourceType]
+        return Source.SOURCE_TYPE_MAP[self.sourceType]
 
 
 class Validation(etree.ElementBase):
@@ -973,6 +977,19 @@ class DataGeneratorAndPublication(etree.ElementBase):
     """Contains information about who compiled for and entered data into the
     database. Furthermore contains information about kind of publication underlying
     the dataset and the accessibility of the dataset."""
+
+    DATA_PUBLISHED_IN_MAP: Dict[int, str] = {
+        0: "Data as such notpublished (default)",
+        1: "The data of some unit processes or subsystems are published",
+        2: "Data has been published entirely in 'referenceToPublishedSource'"
+    }
+
+    ACCESS_RESTRICTED_TO_MAP: Dict[int, str] = {
+        0: "Public",
+        1: "ETH Domain",
+        2: "ecoinvent 2000",
+        3: "Institute"
+    }
 
     person = DataHelper.create_attribute("person", int)
     """int: ID number for the person that generated the dataset. It must correspond to
@@ -1027,26 +1044,13 @@ class DataGeneratorAndPublication(etree.ElementBase):
     process raw data, and the characterisation, damage or weighting factors of the
     impact category, respectively are documented."""
 
-    dataPublishedInMap: Dict[int, str] = {
-        0: "Data as such notpublished (default)",
-        1: "The data of some unit processes or subsystems are published",
-        2: "Data has been published entirely in 'referenceToPublishedSource'"
-    }
-
-    accessRestrictedToMap: Dict[int, str] = {
-        0: "Public",
-        1: "ETH Domain",
-        2: "ecoinvent 2000",
-        3: "Institute"
-    }
-
     @property
     def dataPublishedInStr(self) -> str:
         """String representation for dataPublishedIn. See dataPublishedIn for
         explanations. 0=Data as such not published (default). 1=The data of some unit
         processes or subsystems are published. 2=Data has been published entirely in
         'referenceToPublishedSource'"""
-        return self.dataPublishedInMap[self.dataPublishedIn]
+        return DataGeneratorAndPublication.DATA_PUBLISHED_IN_MAP[self.dataPublishedIn]
 
     @property
     def accessRestrictedToStr(self) -> str:
@@ -1060,7 +1064,9 @@ class DataGeneratorAndPublication(etree.ElementBase):
         centre) have access to all information. accessRestrictedTo=3: The ecoinvent
         administrator has full access to information. Via the web only LCI results are
         accessible (for ecoinvent clients and for members of the ecoinvent centre."""
-        return self.accessRestrictedToMap[self.accessRestrictedTo]
+        return DataGeneratorAndPublication.ACCESS_RESTRICTED_TO_MAP[
+            self.accessRestrictedTo
+        ]
 
 
 class Person(etree.ElementBase):
