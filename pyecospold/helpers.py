@@ -1,4 +1,5 @@
 """Internal helper classes."""
+from datetime import datetime
 from typing import Any, Dict, List
 
 from lxml import etree
@@ -11,11 +12,12 @@ class DataHelper:
 
     TIMESTAMP_FORMAT: str = "%Y-%m-%dT%H:%M:%S"
     TYPE_FUNC_MAP: Dict[type, Any] = {
-        bool: lambda string: string.lower() == "true"
+        bool: lambda string: string.lower() == "true",
+        datetime: lambda string: datetime.strptime(string, DataHelper.TIMESTAMP_FORMAT)
     }
 
     @staticmethod
-    def try_set(element: etree.ElementBase, key: str, value: str) -> None:
+    def set_attribute(element: etree.ElementBase, key: str, value: str) -> None:
         """Helper method for setting XML attributes. Raises DocumentInvalid
         exception on inappropriate setting according to XSD schema."""
         element.set(key, str(value))
@@ -72,4 +74,11 @@ class DataHelper:
                     DataHelper.TYPE_FUNC_MAP.get(attr_type, attr_type)(x.text),
                 DataHelper.get_element_list(parent, attribute)
             )
+        )
+
+    @staticmethod
+    def create_attribute(name: str, attr_type: type) -> property:
+        return property(
+            lambda self: DataHelper.get_attribute(self, name, attr_type),
+            lambda self, value: DataHelper.set_attribute(self, name, value)
         )
