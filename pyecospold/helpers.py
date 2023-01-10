@@ -25,6 +25,27 @@ class DataHelper:
         schema.assertValid(element.getroottree())
 
     @staticmethod
+    def set_attribute_list(
+        element: etree.ElementBase, key: str, values: List[str]
+    ) -> None:
+        """Helper method for setting XML list attributes. Raises DocumentInvalid
+        exception on inappropriate setting according to XSD schema."""
+        for old_value in DataHelper.get_element_list(element, key):
+            element.remove(old_value)
+        elements = []
+        for value in values:
+            elements.append(
+                etree.SubElement(
+                    element,
+                    f"{{{element.nsmap[None]}}}{key}"
+                )
+            )
+            elements[-1].text = value
+        element.extend(elements)
+        schema = etree.XMLSchema(file=Defaults.SCHEMA_FILE)
+        schema.assertValid(element.getroottree())
+
+    @staticmethod
     def get_element(parent: etree.ElementBase, element: str) -> Any:
         """Helper wrapper method for retrieving XML elements as custom
         Ecospold classes."""
@@ -82,4 +103,13 @@ class DataHelper:
         return property(
             lambda self: DataHelper.get_attribute(self, name, attr_type),
             lambda self, value: DataHelper.set_attribute(self, name, value)
+        )
+
+    @staticmethod
+    def create_attribute_list(name: str, attr_type: type) -> property:
+        """Helper wrapper method for creating setters and getters for an attribute
+        list"""
+        return property(
+            lambda self: DataHelper.get_attribute_list(self, name, attr_type),
+            lambda self, values: DataHelper.set_attribute_list(self, name, values)
         )

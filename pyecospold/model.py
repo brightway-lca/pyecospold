@@ -235,6 +235,23 @@ class Exchange(etree.ElementBase):
         4: "uniform"
     }
 
+    inputGroups = DataHelper.create_attribute_list("inputGroup", int)
+    """List[int]: Indicates the kind of input flow. The codes are:
+    1=Materials/Fuels, 2=Electricity/Heat, 3=Services, 4=FromNature,
+    5=FromTechnosphere. Within the ecoinvent quality network,
+    only 4 and 5 are actively used (any material, fuel, electricity,
+    heat or service is classified as an input from technosphere)."""
+
+    outputGroups = DataHelper.create_attribute_list("outputGroup", int)
+    """List[int]: Indicates the kind of output flow. The codes are: 0=ReferenceProduct,
+    1=Include avoided product system, 2=Allocated by product,
+    3=WasteToTreatment, 4=ToNature. The options 0, 2, and 4 are actively used
+    in the ecoinvent quality network. Products of multioutput processes are
+    classified as allocated by-products (2). Avoided product systems are modelled
+    with a negative input from technosphere. WasteToTreatment are modelled like
+    services (hence inputFromTechnosphere). Therefore codes '1' and '3' are not
+    required."""
+
     number = DataHelper.create_attribute("number", int)
     """int: ID number used as an identifier of a particular exchange
     in a dataset."""
@@ -364,15 +381,6 @@ class Exchange(etree.ElementBase):
     and enter it into the field "meanValue")."""
 
     @property
-    def inputGroups(self) -> List[int]:
-        """Indicates the kind of input flow. The codes are:
-        1=Materials/Fuels, 2=Electricity/Heat, 3=Services, 4=FromNature,
-        5=FromTechnosphere. Within the ecoinvent quality network,
-        only 4 and 5 are actively used (any material, fuel, electricity,
-        heat or service is classified as an input from technosphere)."""
-        return DataHelper.get_attribute_list(self, "inputGroup", int)
-
-    @property
     def inputGroupsStr(self) -> List[str]:
         """String representation for inputGroups. See inputGroups for
         explanations. 1=Materials/Fuels, 2=Electricity/Heat, 3=Services,
@@ -380,18 +388,6 @@ class Exchange(etree.ElementBase):
         return [
             Exchange.INPUT_GROUPS_MAP[inputGroup] for inputGroup in self.inputGroups
         ]
-
-    @property
-    def outputGroups(self) -> List[int]:
-        """Indicates the kind of output flow. The codes are: 0=ReferenceProduct,
-        1=Include avoided product system, 2=Allocated by product,
-        3=WasteToTreatment, 4=ToNature. The options 0, 2, and 4 are actively used
-        in the ecoinvent quality network. Products of multioutput processes are
-        classified as allocated by-products (2). Avoided product systems are modelled
-        with a negative input from technosphere. WasteToTreatment are modelled like
-        services (hence inputFromTechnosphere). Therefore codes '1' and '3' are not
-        required."""
-        return DataHelper.get_attribute_list(self, "outputGroup", int)
 
     @property
     def outputGroupsStr(self) -> List[str]:
@@ -421,6 +417,15 @@ class Allocation(etree.ElementBase):
         2: "Othermethod"
     }
 
+    referenceToInputOutputs = DataHelper.create_attribute_list(
+        "referenceToInputOutput", int
+    )
+    """List[int]: The data field is only required, if the reference function describes
+    a multioutput process. Lists the relation(s) to which a certain allocation
+    factor is applied. MultipleOccurrence=Yes on two levels: Firstly, the
+    reference occurs per co-product and secondly, the reference occurs per
+    input and output flows which are allocated to the co-products."""
+
     referenceToCoProduct = DataHelper.create_attribute("referenceToCoProduct", int)
     """int: Indicates the co-product output for which a particular allocation
     factor is valid. Additional information is required about the exchange
@@ -449,15 +454,6 @@ class Allocation(etree.ElementBase):
     may be reported here as well."""
 
     @property
-    def referenceToInputOutputs(self) -> List[int]:
-        """The data field is only required, if the reference function describes
-        a multioutput process. Lists the relation(s) to which a certain allocation
-        factor is applied. MultipleOccurrence=Yes on two levels: Firstly, the
-        reference occurs per co-product and secondly, the reference occurs per
-        input and output flows which are allocated to the co-products."""
-        return DataHelper.get_attribute_list(self, "referenceToInputOutput", int)
-
-    @property
     def allocationMethodStr(self) -> str:
         """String representation for allocationMethod. See allocationMethod for
         explanations. -1=Undefined (default). 0=Physical causality. 1=Economic
@@ -470,6 +466,11 @@ class ReferenceFunction(etree.ElementBase):
     Comprises information which identifies and characterises one particular dataset
     (=unit process or system terminated).
     """
+
+    synonyms = DataHelper.create_attribute_list("synonym", str)
+    """List[str]: Synonyms for the name, localName. In the Excel editor they are
+    separated by two slashes ('//'). Synonyms are a subset of referenceFunction.
+    0..n entries are allowed with a max. length of 80 each."""
 
     datasetRelatesToProduct = DataHelper.create_attribute(
         "datasetRelatesToProduct", bool
@@ -592,13 +593,6 @@ class ReferenceFunction(etree.ElementBase):
     formula = DataHelper.create_attribute("formula", str)
     """str: Chemical formula (e.g. sum formula) may be entered. No graphs are allowed
     to represent chemical formulas. Not applicable for impact categories."""
-
-    @property
-    def synonyms(self) -> List[str]:
-        """Synonyms for the name, localName. In the Excel editor they are separated
-        by two slashes ('//'). Synonyms are a subset of referenceFunction. 0..n
-        entries are allowed with a max. length of 80 each."""
-        return DataHelper.get_attribute_list(self, "synonym")
 
 
 class Geography(etree.ElementBase):

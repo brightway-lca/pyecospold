@@ -12,14 +12,20 @@ def referenceFunction() -> ReferenceFunction:
     return processInformation.referenceFunction
 
 
-def test_try_set_fail(referenceFunction: ReferenceFunction) -> None:
+def test_set_attribute_fail(referenceFunction: ReferenceFunction) -> None:
     with pytest.raises(DocumentInvalid):
         referenceFunction.amount = "abc"
 
 
-def test_try_set_success(referenceFunction: ReferenceFunction) -> None:
+def test_set_attribute_success(referenceFunction: ReferenceFunction) -> None:
     amount = 2.0
-    expected_amount = 2.0
     referenceFunction.amount = amount
 
-    assert referenceFunction.amount == expected_amount
+    assert referenceFunction.amount == amount
+
+
+def test_set_attribute_list_success(referenceFunction: ReferenceFunction) -> None:
+    synonyms = ["0", "1", "2"]
+    referenceFunction.synonyms = synonyms
+
+    assert referenceFunction.synonyms == synonyms
