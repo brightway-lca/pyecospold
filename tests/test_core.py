@@ -1,3 +1,5 @@
+"""Test cases for the __core__ module."""
+
 import os
 import tempfile
 from datetime import datetime
@@ -8,41 +10,59 @@ import pytest
 from lxml.etree import XMLSyntaxError
 
 from pyecospold.core import parse_file, save_file
-from pyecospold.model import (EcoSpold, Dataset, MetaInformation, FlowData,
-                              ProcessInformation, ModellingAndValidation,
-                              AdministrativeInformation, Exchange, Allocation,
-                              ReferenceFunction, Geography, Technology,
-                              DataSetInformation, TimePeriod, Representativeness,
-                              Source, Validation, DataEntryBy,
-                              DataGeneratorAndPublication, Person)
+from pyecospold.model import (
+    AdministrativeInformation,
+    Allocation,
+    DataEntryBy,
+    DataGeneratorAndPublication,
+    Dataset,
+    DataSetInformation,
+    EcoSpold,
+    Exchange,
+    FlowData,
+    Geography,
+    MetaInformation,
+    ModellingAndValidation,
+    Person,
+    ProcessInformation,
+    ReferenceFunction,
+    Representativeness,
+    Source,
+    Technology,
+    TimePeriod,
+    Validation,
+)
 
 
-@pytest.fixture
-def ecoSpold() -> EcoSpold:
+@pytest.fixture(name="eco_spold")
+def _eco_spold() -> EcoSpold:
     return parse_file("data/examples/00001.xml")
 
 
 def test_parse_file_fail() -> None:
-    with open("data/examples/00001.xml") as file:
-        xml_str = file.read()
-    xml_str = xml_str.replace('amount="1"', 'amount="abc"')
-    xml_str = xml_str.replace("<?xml version='1.0' encoding='UTF-8'?>", "")
+    """It fails on schema violation."""
+    with open("data/examples/00001.xml", encoding="utf-8") as file:
+        xmlStr = file.read()
+    xmlStr = xmlStr.replace('amount="1"', 'amount="abc"')
+    xmlStr = xmlStr.replace("<?xml version='1.0' encoding='UTF-8'?>", "")
 
     with pytest.raises(XMLSyntaxError):
-        parse_file(StringIO(xml_str))
+        parse_file(StringIO(xmlStr))
 
 
-def test_parse_file_ecoSpold(ecoSpold: EcoSpold) -> None:
+def test_parse_file_eco_spold(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     validationId = 0
     validationStatus = "validationStatus"
 
-    assert type(ecoSpold) == EcoSpold
-    assert type(ecoSpold.dataset) == Dataset
-    assert ecoSpold.validationId == validationId
-    assert ecoSpold.validationStatus == validationStatus
+    assert isinstance(eco_spold, EcoSpold)
+    assert isinstance(eco_spold.dataset, Dataset)
+    assert eco_spold.validationId == validationId
+    assert eco_spold.validationStatus == validationStatus
 
 
-def test_parse_file_dataset(ecoSpold: EcoSpold) -> None:
+def test_parse_file_dataset(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     validCompanyCodes = "CompanyCodes.xml"
     validRegionalCodes = "RegionalCodes.xml"
     validCategories = "Categories.xml"
@@ -51,10 +71,10 @@ def test_parse_file_dataset(ecoSpold: EcoSpold) -> None:
     timestamp = datetime(2006, 10, 31, 20, 34, 59)
     generator = "EcoAdmin 1.1.17.110"
     internalSchemaVersion = "1.0"
-    dataset = ecoSpold.dataset
+    dataset = eco_spold.dataset
 
-    assert type(dataset.metaInformation) == MetaInformation
-    assert type(dataset.flowData) == FlowData
+    assert isinstance(dataset.metaInformation, MetaInformation)
+    assert isinstance(dataset.flowData, FlowData)
     assert dataset.validCompanyCodes == validCompanyCodes
     assert dataset.validRegionalCodes == validRegionalCodes
     assert dataset.validCategories == validCategories
@@ -65,56 +85,66 @@ def test_parse_file_dataset(ecoSpold: EcoSpold) -> None:
     assert dataset.internalSchemaVersion == internalSchemaVersion
 
 
-def test_parse_file_metaInformation(ecoSpold: EcoSpold) -> None:
-    metaInformation = ecoSpold.dataset.metaInformation
+def test_parse_file_meta_information(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    metaInformation = eco_spold.dataset.metaInformation
 
-    assert type(metaInformation.processInformation) == ProcessInformation
-    assert type(metaInformation.modellingAndValidation) == ModellingAndValidation
-    assert type(metaInformation.administrativeInformation) == AdministrativeInformation
-
-
-def test_parse_file_flowData(ecoSpold: EcoSpold) -> None:
-    flowData = ecoSpold.dataset.flowData
-
-    assert type(flowData.exchanges[0]) == Exchange
-    assert type(flowData.allocations[0]) == Allocation
+    assert isinstance(metaInformation.processInformation, ProcessInformation)
+    assert isinstance(metaInformation.modellingAndValidation, ModellingAndValidation)
+    assert isinstance(
+        metaInformation.administrativeInformation, AdministrativeInformation
+    )
 
 
-def test_parse_file_processInformation(ecoSpold: EcoSpold) -> None:
-    processInformation = ecoSpold.dataset.metaInformation.processInformation
+def test_parse_file_flow_data(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    flowData = eco_spold.dataset.flowData
 
-    assert type(processInformation.referenceFunction) == ReferenceFunction
-    assert type(processInformation.geography) == Geography
-    assert type(processInformation.technology) == Technology
-    assert type(processInformation.dataSetInformation) == DataSetInformation
-    assert type(processInformation.timePeriod) == TimePeriod
+    assert isinstance(flowData.exchanges[0], Exchange)
+    assert isinstance(flowData.allocations[0], Allocation)
 
 
-def test_parse_file_modellingAndValidation(ecoSpold: EcoSpold) -> None:
-    modellingAndValidation = ecoSpold.dataset.metaInformation.modellingAndValidation
+def test_parse_file_process_information(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    processInformation = eco_spold.dataset.metaInformation.processInformation
 
-    assert type(modellingAndValidation.representativeness) == Representativeness
-    assert type(modellingAndValidation.source) == Source
-    assert type(modellingAndValidation.validation) == Validation
+    assert isinstance(processInformation.referenceFunction, ReferenceFunction)
+    assert isinstance(processInformation.geography, Geography)
+    assert isinstance(processInformation.technology, Technology)
+    assert isinstance(processInformation.dataSetInformation, DataSetInformation)
+    assert isinstance(processInformation.timePeriod, TimePeriod)
 
 
-def test_parse_file_administrativeInformation(ecoSpold: EcoSpold) -> None:
-    metaInformation = ecoSpold.dataset.metaInformation
+def test_parse_file_modelling_and_validation(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    modellingAndValidation = eco_spold.dataset.metaInformation.modellingAndValidation
+
+    assert isinstance(modellingAndValidation.representativeness, Representativeness)
+    assert isinstance(modellingAndValidation.source, Source)
+    assert isinstance(modellingAndValidation.validation, Validation)
+
+
+def test_parse_file_administrative_information(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    metaInformation = eco_spold.dataset.metaInformation
     administrativeInformation = metaInformation.administrativeInformation
 
-    assert type(administrativeInformation.dataEntryBy) == DataEntryBy
-    assert type(administrativeInformation.dataGeneratorAndPublication) == \
-        DataGeneratorAndPublication
-    assert type(administrativeInformation.persons[0]) == Person
+    assert isinstance(administrativeInformation.dataEntryBy, DataEntryBy)
+    assert isinstance(
+        administrativeInformation.dataGeneratorAndPublication,
+        DataGeneratorAndPublication,
+    )
+    assert isinstance(administrativeInformation.persons[0], Person)
 
 
-def test_parse_file_exchange(ecoSpold: EcoSpold) -> None:
+def test_parse_file_exchange(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     number = 2156
     category = "waste management"
     subCategory = "recycling"
     localCategory = "Entsorgungssysteme"
     localSubCategory = "Recycling"
-    CASNumber = "007439-89-6"
+    casNumber = "007439-89-6"
     name = "disposal, building, reinforcement steel, to recycling"
     location = "CH"
     unit = "kg"
@@ -135,15 +165,15 @@ def test_parse_file_exchange(ecoSpold: EcoSpold) -> None:
     inputGroupsStr = ["FromTechnosphere"]
     outputGroups = [0]
     outputGroupsStr = ["ReferenceProduct"]
-    exchange = ecoSpold.dataset.flowData.exchanges[1]
-    output_exchange = ecoSpold.dataset.flowData.exchanges[0]
+    exchange = eco_spold.dataset.flowData.exchanges[1]
+    outputExchange = eco_spold.dataset.flowData.exchanges[0]
 
     assert exchange.number == number
     assert exchange.category == category
     assert exchange.subCategory == subCategory
     assert exchange.localCategory == localCategory
     assert exchange.localSubCategory == localSubCategory
-    assert exchange.CASNumber == CASNumber
+    assert exchange.CASNumber == casNumber
     assert exchange.name == name
     assert exchange.location == location
     assert exchange.unit == unit
@@ -162,18 +192,19 @@ def test_parse_file_exchange(ecoSpold: EcoSpold) -> None:
     assert exchange.mostLikelyValue is mostLikelyValue
     assert exchange.inputGroups == inputGroups
     assert exchange.inputGroupsStr == inputGroupsStr
-    assert output_exchange.outputGroups == outputGroups
-    assert output_exchange.outputGroupsStr == outputGroupsStr
+    assert outputExchange.outputGroups == outputGroups
+    assert outputExchange.outputGroupsStr == outputGroupsStr
 
 
-def test_parse_file_allocaiton(ecoSpold: EcoSpold) -> None:
+def test_parse_file_allocation(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     referenceToCoProduct = 1
     allocationMethod = -1
     allocationMethodStr = "Undefined"
     fraction = 97.6
     referenceToInputOutputs = [1]
     explanations = ""
-    allocaiton = ecoSpold.dataset.flowData.allocations[0]
+    allocaiton = eco_spold.dataset.flowData.allocations[0]
 
     assert allocaiton.referenceToCoProduct == referenceToCoProduct
     assert allocaiton.allocationMethod == allocationMethod
@@ -183,7 +214,8 @@ def test_parse_file_allocaiton(ecoSpold: EcoSpold) -> None:
     assert allocaiton.explanations == explanations
 
 
-def test_parse_file_referenceFunction(ecoSpold: EcoSpold) -> None:
+def test_parse_file_reference_function(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     name = "compost plant, open"
     localName = "Kompostieranlage, offen"
     unit = "unit"
@@ -192,24 +224,28 @@ def test_parse_file_referenceFunction(ecoSpold: EcoSpold) -> None:
     localCategory = "Landwirtschaftliche Produktionsmittel"
     localSubCategory = "Gebäude"
     amount = 1
-    includedProcesses = "Building materials required for a compost plant and its " + \
-                        "construction as well as the disposal of these materials " + \
-                        "were included. Land use during construction and use is " + \
-                        "considered. The lifetime of the plant was assumed as 25 " + \
-                        "years. Transport of the building materials to the " + \
-                        "construction site were included."
-    generalComment = "The inventory refers to a compost plant over the lifetime of " + \
-                     "25 years. The compost plant is constructed for a treating " + \
-                     "capactiy of 10‘000 tons biogenic waste per year. The total " + \
-                     "turnover of the plant over the entire lifetime of 25 years " + \
-                     "amounts thus 250‘000 tons biogenic waste."
+    includedProcesses = (
+        "Building materials required for a compost plant and its "
+        + "construction as well as the disposal of these materials "
+        + "were included. Land use during construction and use is "
+        + "considered. The lifetime of the plant was assumed as 25 "
+        + "years. Transport of the building materials to the "
+        + "construction site were included."
+    )
+    generalComment = (
+        "The inventory refers to a compost plant over the lifetime of "
+        + "25 years. The compost plant is constructed for a treating "
+        + "capactiy of 10‘000 tons biogenic waste per year. The total "
+        + "turnover of the plant over the entire lifetime of 25 years "
+        + "amounts thus 250‘000 tons biogenic waste."
+    )
     formula = "0"
     infrastructureIncluded = True
-    CASNumber = ""
+    casNumber = ""
     statisticalClassification = 0
     datasetRelatesToProduct = True
     synonyms = ["0"]
-    processInformation = ecoSpold.dataset.metaInformation.processInformation
+    processInformation = eco_spold.dataset.metaInformation.processInformation
     referenceFunction = processInformation.referenceFunction
 
     assert referenceFunction.name == name
@@ -224,35 +260,35 @@ def test_parse_file_referenceFunction(ecoSpold: EcoSpold) -> None:
     assert referenceFunction.includedProcesses == includedProcesses
     assert referenceFunction.generalComment == generalComment
     assert referenceFunction.formula == formula
-    assert referenceFunction.infrastructureIncluded == \
-        infrastructureIncluded
-    assert referenceFunction.CASNumber == CASNumber
-    assert referenceFunction.statisticalClassification == \
-        statisticalClassification
-    assert referenceFunction.datasetRelatesToProduct == \
-        datasetRelatesToProduct
+    assert referenceFunction.infrastructureIncluded == infrastructureIncluded
+    assert referenceFunction.CASNumber == casNumber
+    assert referenceFunction.statisticalClassification == statisticalClassification
+    assert referenceFunction.datasetRelatesToProduct == datasetRelatesToProduct
     assert referenceFunction.synonyms == synonyms
 
 
-def test_parse_file_geography(ecoSpold: EcoSpold) -> None:
+def test_parse_file_geography(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     location = "CH"
     text = "Values refer to the situtation in Switzerland."
-    processInformation = ecoSpold.dataset.metaInformation.processInformation
+    processInformation = eco_spold.dataset.metaInformation.processInformation
     geography = processInformation.geography
 
     assert geography.location == location
     assert geography.text == text
 
 
-def test_parse_file_technology(ecoSpold: EcoSpold) -> None:
+def test_parse_file_technology(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     text = "Refer to open plant composting."
-    processInformation = ecoSpold.dataset.metaInformation.processInformation
+    processInformation = eco_spold.dataset.metaInformation.processInformation
     technology = processInformation.technology
 
     assert technology.text == text
 
 
-def test_parse_file_timePeriod(ecoSpold: EcoSpold) -> None:
+def test_parse_file_time_period(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     text = "Year when reference used for this inventory was published."
     startYear = "1999"
     startYearMonth = ""
@@ -260,7 +296,7 @@ def test_parse_file_timePeriod(ecoSpold: EcoSpold) -> None:
     endYear = "1999"
     endYearMonth = ""
     endDate = ""
-    processInformation = ecoSpold.dataset.metaInformation.processInformation
+    processInformation = eco_spold.dataset.metaInformation.processInformation
     timePeriod = processInformation.timePeriod
 
     assert timePeriod.dataValidForEntirePeriod
@@ -273,8 +309,9 @@ def test_parse_file_timePeriod(ecoSpold: EcoSpold) -> None:
     assert timePeriod.endDate == endDate
 
 
-def test_parse_file_dataSetInformation(ecoSpold: EcoSpold) -> None:
-    type = 1
+def test_parse_file_dataset_information(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    _type = 1
     typeStr = "Unit process"
     timestamp = datetime(2003, 9, 12, 10, 14, 36)
     version = 1.3
@@ -283,10 +320,10 @@ def test_parse_file_dataSetInformation(ecoSpold: EcoSpold) -> None:
     energyValuesStr = "Undefined"
     languageCode = "en"
     localLanguageCode = "de"
-    processInformation = ecoSpold.dataset.metaInformation.processInformation
+    processInformation = eco_spold.dataset.metaInformation.processInformation
     dataSetInformation = processInformation.dataSetInformation
 
-    assert dataSetInformation.type == type
+    assert dataSetInformation.type == _type
     assert dataSetInformation.typeStr == typeStr
     assert not dataSetInformation.impactAssessmentResult
     assert dataSetInformation.timestamp == timestamp
@@ -298,13 +335,14 @@ def test_parse_file_dataSetInformation(ecoSpold: EcoSpold) -> None:
     assert dataSetInformation.localLanguageCode == localLanguageCode
 
 
-def test_parse_file_representativeness(ecoSpold: EcoSpold) -> None:
+def test_parse_file_representativeness(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     percent = np.nan
     productionVolume = ""
     samplingProcedure = "Data come from one compost plant in Switzerland."
     extrapolations = "none"
     uncertaintyAdjustments = "none"
-    modellingAndValidation = ecoSpold.dataset.metaInformation.modellingAndValidation
+    modellingAndValidation = eco_spold.dataset.metaInformation.modellingAndValidation
     representativeness = modellingAndValidation.representativeness
 
     assert representativeness.percent is percent
@@ -314,13 +352,16 @@ def test_parse_file_representativeness(ecoSpold: EcoSpold) -> None:
     assert representativeness.uncertaintyAdjustments == uncertaintyAdjustments
 
 
-def test_parse_file_source(ecoSpold: EcoSpold) -> None:
+def test_parse_file_source(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     number = 146
     sourceType = 4
     sourceTypeStr = "Measurement on site"
     firstAuthor = "Nemecek, T."
-    additionalAuthors = "Heil A., Huguenin, O., Meier, S., Erzinger S., " + \
-                        "Blaser S., Dux. D., Zimmermann A.,"
+    additionalAuthors = (
+        "Heil A., Huguenin, O., Meier, S., Erzinger S., "
+        + "Blaser S., Dux. D., Zimmermann A.,"
+    )
     year = 2003
     title = "Life Cycle Inventories of Agricultural Production Systems"
     pageNumbers = ""
@@ -332,7 +373,7 @@ def test_parse_file_source(ecoSpold: EcoSpold) -> None:
     volumeNo = 15
     issueNo = ""
     text = "CD-ROM"
-    modellingAndValidation = ecoSpold.dataset.metaInformation.modellingAndValidation
+    modellingAndValidation = eco_spold.dataset.metaInformation.modellingAndValidation
     source = modellingAndValidation.source
 
     assert source.number == number
@@ -353,11 +394,12 @@ def test_parse_file_source(ecoSpold: EcoSpold) -> None:
     assert source.text == text
 
 
-def test_parse_file_validation(ecoSpold: EcoSpold) -> None:
+def test_parse_file_validation(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     proofReadingDetails = "Passed."
     proofReadingValidator = 291
     otherDetails = ""
-    modellingAndValidation = ecoSpold.dataset.metaInformation.modellingAndValidation
+    modellingAndValidation = eco_spold.dataset.metaInformation.modellingAndValidation
     validation = modellingAndValidation.validation
 
     assert validation.proofReadingDetails == proofReadingDetails
@@ -365,37 +407,41 @@ def test_parse_file_validation(ecoSpold: EcoSpold) -> None:
     assert validation.otherDetails == otherDetails
 
 
-def test_parse_file_dataEntryBy(ecoSpold: EcoSpold) -> None:
+def test_parse_file_data_entry_by(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     person = 309
     qualityNetwork = 1
-    metaInformation = ecoSpold.dataset.metaInformation
+    metaInformation = eco_spold.dataset.metaInformation
     dataEntryBy = metaInformation.administrativeInformation.dataEntryBy
 
     assert dataEntryBy.person == person
     assert dataEntryBy.qualityNetwork == qualityNetwork
 
 
-def test_parse_file_dataGeneratorAndPublication(ecoSpold: EcoSpold) -> None:
+def test_parse_file_data_generator_and_publication(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     person = 309
     dataPublishedIn = 2
-    dataPublishedInStr = \
+    dataPublishedInStr = (
         "Data has been published entirely in 'referenceToPublishedSource'"
+    )
     referenceToPublishedSource = 146
     accessRestrictedTo = 0
     accessRestrictedToStr = "Public"
     companyCode = ""
     countryCode = ""
     pageNumbers = ""
-    metaInformation = ecoSpold.dataset.metaInformation
+    metaInformation = eco_spold.dataset.metaInformation
     administrativeInformation = metaInformation.administrativeInformation
     dataGeneratorAndPublication = administrativeInformation.dataGeneratorAndPublication
 
     assert dataGeneratorAndPublication.person == person
     assert dataGeneratorAndPublication.dataPublishedIn == dataPublishedIn
-    assert dataGeneratorAndPublication.dataPublishedInStr == \
-        dataPublishedInStr
-    assert dataGeneratorAndPublication.referenceToPublishedSource == \
-        referenceToPublishedSource
+    assert dataGeneratorAndPublication.dataPublishedInStr == dataPublishedInStr
+    assert (
+        dataGeneratorAndPublication.referenceToPublishedSource
+        == referenceToPublishedSource
+    )
     assert dataGeneratorAndPublication.copyright
     assert dataGeneratorAndPublication.accessRestrictedTo == accessRestrictedTo
     assert dataGeneratorAndPublication.accessRestrictedToStr == accessRestrictedToStr
@@ -404,7 +450,8 @@ def test_parse_file_dataGeneratorAndPublication(ecoSpold: EcoSpold) -> None:
     assert dataGeneratorAndPublication.pageNumbers == pageNumbers
 
 
-def test_parse_file_person(ecoSpold: EcoSpold) -> None:
+def test_parse_file_person(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
     number = 309
     name = "name"
     address = "address"
@@ -413,7 +460,7 @@ def test_parse_file_person(ecoSpold: EcoSpold) -> None:
     email = "email@domain.com"
     companyCode = "EMPA-SG"
     countryCode = "CH"
-    metaInformation = ecoSpold.dataset.metaInformation
+    metaInformation = eco_spold.dataset.metaInformation
     administrativeInformation = metaInformation.administrativeInformation
     person = administrativeInformation.persons[0]
 
@@ -428,13 +475,15 @@ def test_parse_file_person(ecoSpold: EcoSpold) -> None:
 
 
 def test_save_file() -> None:
-    input_path = "data/examples/00001.xml"
-    metaInformation = parse_file(input_path)
-    output_path = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
-    save_file(metaInformation, output_path)
+    """It saves read file correctly."""
+    inputPath = "data/examples/00001.xml"
+    metaInformation = parse_file(inputPath)
+    outputPath = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
+    save_file(metaInformation, outputPath)
 
-    with open(input_path) as input_file:
-        with open(output_path) as output_file:
+    with open(inputPath, encoding="utf-8") as inputFile:
+        with open(outputPath, encoding="utf-8") as outputFile:
             mapping = {ord(c): "" for c in [" ", "\t", "\n"]}
-            assert output_file.read().translate(mapping) == \
-                input_file.read().translate(mapping)
+            assert outputFile.read().translate(mapping) == inputFile.read().translate(
+                mapping
+            )

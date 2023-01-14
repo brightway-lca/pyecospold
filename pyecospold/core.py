@@ -1,31 +1,46 @@
 """Core Ecospold module containing parsing and saving functionalities."""
 from lxml import etree, objectify
 
-from .model import (EcoSpold, Dataset, MetaInformation, FlowData,
-                    ProcessInformation, ModellingAndValidation,
-                    AdministrativeInformation, Exchange, Allocation,
-                    ReferenceFunction, Geography, Technology, TimePeriod,
-                    DataSetInformation, Representativeness,
-                    Source, Validation, DataEntryBy,
-                    DataGeneratorAndPublication, Person)
+from .model import (
+    AdministrativeInformation,
+    Allocation,
+    DataEntryBy,
+    DataGeneratorAndPublication,
+    Dataset,
+    DataSetInformation,
+    EcoSpold,
+    Exchange,
+    FlowData,
+    Geography,
+    MetaInformation,
+    ModellingAndValidation,
+    Person,
+    ProcessInformation,
+    ReferenceFunction,
+    Representativeness,
+    Source,
+    Technology,
+    TimePeriod,
+    Validation,
+)
 
 
 class EcospoldLookup(etree.CustomElementClassLookup):
     """Custom XML lookup class for Ecospold files."""
 
-    def lookup(self, node_type, document, namespace, name):
+    def lookup(self, unused_node_type, unused_document, unused_namespace, name):
         """Maps Ecospold XML elements to custom Ecospold classes."""
         lookupmap = {
             "ecoSpold": EcoSpold,
             "dataset": Dataset,
             "metaInformation": MetaInformation,
             "flowData": FlowData,
-            "processInformation" : ProcessInformation,
+            "processInformation": ProcessInformation,
             "modellingAndValidation": ModellingAndValidation,
             "administrativeInformation": AdministrativeInformation,
             "exchange": Exchange,
             "allocation": Allocation,
-            "referenceFunction" : ReferenceFunction,
+            "referenceFunction": ReferenceFunction,
             "geography": Geography,
             "technology": Technology,
             "timePeriod": TimePeriod,
@@ -35,7 +50,7 @@ class EcospoldLookup(etree.CustomElementClassLookup):
             "validation": Validation,
             "dataEntryBy": DataEntryBy,
             "dataGeneratorAndPublication": DataGeneratorAndPublication,
-            "person": Person
+            "person": Person,
         }
         try:
             return lookupmap[name]

@@ -8,7 +8,7 @@ from .helpers import DataHelper
 
 
 class EcoSpold(etree.ElementBase):
-    """"The data (exchange) format of the ECOINVENT quality network. A dataset
+    """The data (exchange) format of the ECOINVENT quality network. A dataset
     describes LCI related information of a unit process or a terminated system
     comprising metaInformation (description of the process) and flowData
     (quantified inputs and outputs and allocation factors, if any)."""
@@ -216,7 +216,7 @@ class Exchange(etree.ElementBase):
         2: "Electricity/Heat",
         3: "Services",
         4: "FromNature",
-        5: "FromTechnosphere"
+        5: "FromTechnosphere",
     }
 
     OUTPUT_GROUPS_MAP: ClassVar[Dict[int, str]] = {
@@ -224,7 +224,7 @@ class Exchange(etree.ElementBase):
         1: "Include avoided product system",
         2: "Allocated by product",
         3: "WasteToTreatment",
-        4: "ToNature"
+        4: "ToNature",
     }
 
     UNCERTAINTY_TYPE_MAP: ClassVar[Dict[int, str]] = {
@@ -232,7 +232,7 @@ class Exchange(etree.ElementBase):
         1: "lognormal",
         2: "normal",
         3: "triang",
-        4: "uniform"
+        4: "uniform",
     }
 
     inputGroups = DataHelper.create_attribute_list("inputGroup", int)
@@ -414,7 +414,7 @@ class Allocation(etree.ElementBase):
         -1: "Undefined",
         0: "Physical causality",
         1: "Economic causality",
-        2: "Othermethod"
+        2: "Othermethod",
     }
 
     referenceToInputOutputs = DataHelper.create_attribute_list(
@@ -649,13 +649,13 @@ class DataSetInformation(etree.ElementBase):
         2: "System terminated",
         3: "Elementary Flow",
         4: "Impact Category",
-        5: "Multioutput process"
+        5: "Multioutput process",
     }
 
     ENERGY_VALUES_MAP: Dict[int, str] = {
         0: "Undefined",
         1: "Net values",
-        2: "Gross values"
+        2: "Gross values",
     }
 
     type = DataHelper.create_attribute("type", int)
@@ -847,7 +847,7 @@ class Source(etree.ElementBase):
         4: "Measurement on site",
         5: "Oral communication",
         6: "Personal written communication",
-        7: "Questionnaries"
+        7: "Questionnaries",
     }
 
     number = DataHelper.create_attribute("number", int)
@@ -975,14 +975,14 @@ class DataGeneratorAndPublication(etree.ElementBase):
     DATA_PUBLISHED_IN_MAP: Dict[int, str] = {
         0: "Data as such notpublished (default)",
         1: "The data of some unit processes or subsystems are published",
-        2: "Data has been published entirely in 'referenceToPublishedSource'"
+        2: "Data has been published entirely in 'referenceToPublishedSource'",
     }
 
     ACCESS_RESTRICTED_TO_MAP: Dict[int, str] = {
         0: "Public",
         1: "ETH Domain",
         2: "ecoinvent 2000",
-        3: "Institute"
+        3: "Institute",
     }
 
     person = DataHelper.create_attribute("person", int)

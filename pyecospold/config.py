@@ -1,7 +1,7 @@
 """Defaults configuration."""
 import configparser
 from dataclasses import dataclass
-from typing import Any, Dict, ClassVar
+from typing import Any, ClassVar, Dict
 
 import numpy as np
 
@@ -20,12 +20,17 @@ class Defaults:
         int: np.nan_to_num(np.nan),
         float: np.nan,
         bool: False,
-        str: ""
+        str: "",
     }
     SCHEMA_FILE: ClassVar[str] = "data/schema/EcoSpold01Dataset.xsd"
 
     @classmethod
     def config_defaults(cls, config_file: str) -> None:
+        """Fully/ partially overrides defaults.
+
+        Parameters:
+        config_file: path for config file.
+        """
         config = configparser.ConfigParser()
         config.read(config_file)
         defaults = dict(config["defaults"])

@@ -10,7 +10,6 @@ from .core import parse_file
 def run() -> None:
     """pyecospold: convert ecospold XML formats to their Python equivalents and
     export the same data back to XML."""
-    pass  # pragma: no cover
 
 
 @click.command("parse")
@@ -20,10 +19,10 @@ def run() -> None:
     "--config_file",
     default="config.ini",
     help="-cPath to the ini config file.",
-    type=click.Path()
+    type=click.Path(),
 )
 def parse(input_file, config_file):
-    """ input_file: Path to the xml input file. """
+    """input_file: Path to the xml input file."""
     Defaults.config_defaults(config_file)
     parse_file(input_file)
 
