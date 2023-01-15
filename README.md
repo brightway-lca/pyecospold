@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/pypi/l/pyecospold)][license]
 
 [![Read the documentation at https://pyecospold.readthedocs.io/](https://img.shields.io/readthedocs/pyecospold/latest.svg?label=Read%20the%20Docs)][read the docs]
-[![Tests](https://github.com/brightway-lca/pyecospold/workflows/Tests/badge.svg)][tests]
+[![Tests](https://github.com/sami-m-g/pyecospold/actions/workflows/python-test.yml/badge.svg)][tests]
 [![Codecov](https://codecov.io/gh/sami-m-g/pyecospold/branch/main/graph/badge.svg?token=ZVWBCITI4A)][codecov]
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
