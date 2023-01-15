@@ -7,7 +7,7 @@
 
 [![Read the documentation at https://pyecospold.readthedocs.io/](https://img.shields.io/readthedocs/pyecospold/latest.svg?label=Read%20the%20Docs)][read the docs]
 [![Tests](https://github.com/brightway-lca/pyecospold/workflows/Tests/badge.svg)][tests]
-[![Codecov](https://codecov.io/gh/brightway-lca/pyecospold/branch/main/graph/badge.svg)][codecov]
+[![Codecov](https://codecov.io/gh/sami-m-g/pyecospold/branch/main/graph/badge.svg?token=ZVWBCITI4A)][codecov]
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
@@ -15,7 +15,7 @@
 [pypi status]: https://pypi.org/project/pyecospold/
 [read the docs]: https://pyecospold.readthedocs.io/
 [tests]: https://github.com/sami-m-g/pyecospold/actions?workflow=Tests
-[codecov]: https://app.codecov.io/gh/sami-m-g/pyecospold
+[codecov]: https://codecov.io/gh/sami-m-g/pyecospold
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
