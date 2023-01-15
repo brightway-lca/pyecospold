@@ -14,8 +14,8 @@
 
 [pypi status]: https://pypi.org/project/pyecospold/
 [read the docs]: https://pyecospold.readthedocs.io/
-[tests]: https://github.com/brightway-lca/pyecospold/actions?workflow=Tests
-[codecov]: https://app.codecov.io/gh/brightway-lca/pyecospold
+[tests]: https://github.com/sami-m-g/pyecospold/actions?workflow=Tests
+[codecov]: https://app.codecov.io/gh/sami-m-g/pyecospold
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
@@ -80,5 +80,5 @@ please [file an issue] along with a detailed description.
 ## Credits
 
 
-[license]: https://github.com/brightway-lca/pyecospold/blob/main/LICENSE
-[contributor guide]: https://github.com/brightway-lca/pyecospold/blob/main/CONTRIBUTING.md
+[license]: https://github.com/sami-m-g/pyecospold/blob/main/LICENSE
+[contributor guide]: https://github.com/sami-m-g/pyecospold/blob/main/CONTRIBUTING.md
