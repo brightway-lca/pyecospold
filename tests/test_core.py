@@ -36,12 +36,12 @@ from pyecospold.model_v1 import (
 
 @pytest.fixture(name="eco_spold")
 def _eco_spold() -> EcoSpold:
-    return parse_file("data/00001.xml")
+    return parse_file("data/v1.xml")
 
 
 def test_parse_file_fail() -> None:
     """It fails on schema violation."""
-    with open("data/00001.xml", encoding="utf-8") as file:
+    with open("data/v1.xml", encoding="utf-8") as file:
         xmlStr = file.read()
     xmlStr = xmlStr.replace('amount="1"', 'amount="abc"')
     xmlStr = xmlStr.replace("<?xml version='1.0' encoding='UTF-8'?>", "")
@@ -476,7 +476,7 @@ def test_parse_file_person(eco_spold: EcoSpold) -> None:
 
 def test_save_file() -> None:
     """It saves read file correctly."""
-    inputPath = "data/00001.xml"
+    inputPath = "data/v1.xml"
     metaInformation = parse_file(inputPath)
     outputPath = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
     save_file(metaInformation, outputPath)
