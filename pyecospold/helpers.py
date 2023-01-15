@@ -59,7 +59,9 @@ class DataHelper:
         """Helper wrapper method for retrieving XML element text as a string.
         Returns Defaults.TYPE_DEFAULTS[str] if no text exists or element is None."""
         return getattr(
-            DataHelper.get_element(parent, element), "text", Defaults.TYPE_DEFAULTS[str]
+            DataHelper.get_element(parent, element),
+            "text",
+            str(Defaults.TYPE_DEFAULTS[str]),
         )
 
     @staticmethod
