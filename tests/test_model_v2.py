@@ -1,7 +1,5 @@
 """Test cases for the __model_v2__ module."""
 
-from types import NoneType
-
 import pytest
 
 from pyecospold.core import parse_file_v2
@@ -84,7 +82,7 @@ def test_parse_file_v2_modelling_and_validation(eco_spold: EcoSpold) -> None:
     modellingAndValidation = eco_spold.activityDataset.modellingAndValidation
 
     assert isinstance(modellingAndValidation.representativeness, Representativeness)
-    assert isinstance(modellingAndValidation.review, NoneType)
+    assert modellingAndValidation.review is None
 
 
 def test_parse_file_v2_administrative_information(eco_spold: EcoSpold) -> None:
