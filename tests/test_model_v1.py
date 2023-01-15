@@ -1,4 +1,4 @@
-"""Test cases for the __core__ module."""
+"""Test cases for the __model_v1__ module."""
 
 import os
 import tempfile
@@ -9,7 +9,7 @@ import numpy as np
 import pytest
 from lxml.etree import XMLSyntaxError
 
-from pyecospold.core import parse_file, save_file
+from pyecospold.core import parse_file_v1, save_file
 from pyecospold.model_v1 import (
     AdministrativeInformation,
     Allocation,
@@ -36,10 +36,10 @@ from pyecospold.model_v1 import (
 
 @pytest.fixture(name="eco_spold")
 def _eco_spold() -> EcoSpold:
-    return parse_file("data/v1.xml")
+    return parse_file_v1("data/v1.xml")
 
 
-def test_parse_file_fail() -> None:
+def test_parse_file_v1_fail() -> None:
     """It fails on schema violation."""
     with open("data/v1.xml", encoding="utf-8") as file:
         xmlStr = file.read()
@@ -47,10 +47,10 @@ def test_parse_file_fail() -> None:
     xmlStr = xmlStr.replace("<?xml version='1.0' encoding='UTF-8'?>", "")
 
     with pytest.raises(XMLSyntaxError):
-        parse_file(StringIO(xmlStr))
+        parse_file_v1(StringIO(xmlStr))
 
 
-def test_parse_file_eco_spold(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_eco_spold(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     validationId = 0
     validationStatus = "validationStatus"
@@ -61,7 +61,7 @@ def test_parse_file_eco_spold(eco_spold: EcoSpold) -> None:
     assert eco_spold.validationStatus == validationStatus
 
 
-def test_parse_file_dataset(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_dataset(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     validCompanyCodes = "CompanyCodes.xml"
     validRegionalCodes = "RegionalCodes.xml"
@@ -85,7 +85,7 @@ def test_parse_file_dataset(eco_spold: EcoSpold) -> None:
     assert dataset.internalSchemaVersion == internalSchemaVersion
 
 
-def test_parse_file_meta_information(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_meta_information(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     metaInformation = eco_spold.dataset.metaInformation
 
@@ -96,7 +96,7 @@ def test_parse_file_meta_information(eco_spold: EcoSpold) -> None:
     )
 
 
-def test_parse_file_flow_data(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_flow_data(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     flowData = eco_spold.dataset.flowData
 
@@ -104,7 +104,7 @@ def test_parse_file_flow_data(eco_spold: EcoSpold) -> None:
     assert isinstance(flowData.allocations[0], Allocation)
 
 
-def test_parse_file_process_information(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_process_information(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     processInformation = eco_spold.dataset.metaInformation.processInformation
 
@@ -115,7 +115,7 @@ def test_parse_file_process_information(eco_spold: EcoSpold) -> None:
     assert isinstance(processInformation.timePeriod, TimePeriod)
 
 
-def test_parse_file_modelling_and_validation(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_modelling_and_validation(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     modellingAndValidation = eco_spold.dataset.metaInformation.modellingAndValidation
 
@@ -124,7 +124,7 @@ def test_parse_file_modelling_and_validation(eco_spold: EcoSpold) -> None:
     assert isinstance(modellingAndValidation.validation, Validation)
 
 
-def test_parse_file_administrative_information(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_administrative_information(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     metaInformation = eco_spold.dataset.metaInformation
     administrativeInformation = metaInformation.administrativeInformation
@@ -137,7 +137,7 @@ def test_parse_file_administrative_information(eco_spold: EcoSpold) -> None:
     assert isinstance(administrativeInformation.persons[0], Person)
 
 
-def test_parse_file_exchange(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_exchange(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     number = 2156
     category = "waste management"
@@ -196,7 +196,7 @@ def test_parse_file_exchange(eco_spold: EcoSpold) -> None:
     assert outputExchange.outputGroupsStr == outputGroupsStr
 
 
-def test_parse_file_allocation(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_allocation(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     referenceToCoProduct = 1
     allocationMethod = -1
@@ -214,7 +214,7 @@ def test_parse_file_allocation(eco_spold: EcoSpold) -> None:
     assert allocaiton.explanations == explanations
 
 
-def test_parse_file_reference_function(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_reference_function(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     name = "compost plant, open"
     localName = "Kompostieranlage, offen"
@@ -267,7 +267,7 @@ def test_parse_file_reference_function(eco_spold: EcoSpold) -> None:
     assert referenceFunction.synonyms == synonyms
 
 
-def test_parse_file_geography(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_geography(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     location = "CH"
     text = "Values refer to the situtation in Switzerland."
@@ -278,7 +278,7 @@ def test_parse_file_geography(eco_spold: EcoSpold) -> None:
     assert geography.text == text
 
 
-def test_parse_file_technology(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_technology(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     text = "Refer to open plant composting."
     processInformation = eco_spold.dataset.metaInformation.processInformation
@@ -287,7 +287,7 @@ def test_parse_file_technology(eco_spold: EcoSpold) -> None:
     assert technology.text == text
 
 
-def test_parse_file_time_period(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_time_period(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     text = "Year when reference used for this inventory was published."
     startYear = "1999"
@@ -309,7 +309,7 @@ def test_parse_file_time_period(eco_spold: EcoSpold) -> None:
     assert timePeriod.endDate == endDate
 
 
-def test_parse_file_dataset_information(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_dataset_information(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     _type = 1
     typeStr = "Unit process"
@@ -335,7 +335,7 @@ def test_parse_file_dataset_information(eco_spold: EcoSpold) -> None:
     assert dataSetInformation.localLanguageCode == localLanguageCode
 
 
-def test_parse_file_representativeness(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_representativeness(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     percent = np.nan
     productionVolume = ""
@@ -352,7 +352,7 @@ def test_parse_file_representativeness(eco_spold: EcoSpold) -> None:
     assert representativeness.uncertaintyAdjustments == uncertaintyAdjustments
 
 
-def test_parse_file_source(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_source(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     number = 146
     sourceType = 4
@@ -394,7 +394,7 @@ def test_parse_file_source(eco_spold: EcoSpold) -> None:
     assert source.text == text
 
 
-def test_parse_file_validation(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_validation(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     proofReadingDetails = "Passed."
     proofReadingValidator = 291
@@ -407,7 +407,7 @@ def test_parse_file_validation(eco_spold: EcoSpold) -> None:
     assert validation.otherDetails == otherDetails
 
 
-def test_parse_file_data_entry_by(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_data_entry_by(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     person = 309
     qualityNetwork = 1
@@ -418,7 +418,7 @@ def test_parse_file_data_entry_by(eco_spold: EcoSpold) -> None:
     assert dataEntryBy.qualityNetwork == qualityNetwork
 
 
-def test_parse_file_data_generator_and_publication(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_data_generator_and_publication(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     person = 309
     dataPublishedIn = 2
@@ -450,7 +450,7 @@ def test_parse_file_data_generator_and_publication(eco_spold: EcoSpold) -> None:
     assert dataGeneratorAndPublication.pageNumbers == pageNumbers
 
 
-def test_parse_file_person(eco_spold: EcoSpold) -> None:
+def test_parse_file_v1_person(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     number = 309
     name = "name"
@@ -477,7 +477,7 @@ def test_parse_file_person(eco_spold: EcoSpold) -> None:
 def test_save_file() -> None:
     """It saves read file correctly."""
     inputPath = "data/v1.xml"
-    metaInformation = parse_file(inputPath)
+    metaInformation = parse_file_v1(inputPath)
     outputPath = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
     save_file(metaInformation, outputPath)
 
