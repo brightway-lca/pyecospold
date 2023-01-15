@@ -10,7 +10,7 @@ from pyecospold.model_v1 import ReferenceFunction
 @pytest.fixture(name="reference_function")
 def _reference_function() -> ReferenceFunction:
     """Fixture for getting ReferenceFunction element."""
-    ecoSpold = parse_file("data/examples/00001.xml")
+    ecoSpold = parse_file("data/00001.xml")
     processInformation = ecoSpold.dataset.metaInformation.processInformation
     return processInformation.referenceFunction
 
