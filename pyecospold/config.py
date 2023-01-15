@@ -1,9 +1,13 @@
 """Defaults configuration."""
 import configparser
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, ClassVar, Dict
 
 import numpy as np
+
+
+SCHEMA_DIR = Path(__file__).parent.resolve() / "schemas"
 
 
 @dataclass
@@ -22,7 +26,7 @@ class Defaults:
         bool: False,
         str: "",
     }
-    SCHEMA_FILE: ClassVar[str] = "data/schema/EcoSpold01Dataset.xsd"
+    SCHEMA_FILE: ClassVar[str] = str(SCHEMA_DIR / "EcoSpold01Dataset.xsd")
 
     @classmethod
     def config_defaults(cls, config_file: str) -> None:
