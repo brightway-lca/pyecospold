@@ -1,6 +1,7 @@
 """Core Ecospold module containing parsing and saving functionalities."""
 from lxml import etree, objectify
 
+from .config import Defaults
 from .model_v1 import (
     AdministrativeInformation,
     Allocation,
@@ -58,9 +59,7 @@ class EcospoldLookup(etree.CustomElementClassLookup):
             return None
 
 
-def parse_file(
-    file_path: str, schema_path: str = "data/schema/EcoSpold01Dataset.xsd"
-) -> EcoSpold:
+def parse_file(file_path: str, schema_path: str = Defaults.SCHEMA_FILE) -> EcoSpold:
     """Parses an Ecospold XML file to custom Ecospold classes.
 
     Parameters:
