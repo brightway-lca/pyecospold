@@ -9,8 +9,8 @@ import numpy as np
 @dataclass
 class Defaults:
     """Stores default values for Ecospold attributes used when no value exists.
-    Defaults can be fully/ partially overridden by providing a config file through
-    cli or by using set_defaults method"""
+    Defaults can be fully/ partially overridden by providing a config file or by
+    using set_defaults method"""
 
     qualityNetwork: ClassVar[str] = "1"
     uncertaintyType: ClassVar[str] = "1"
