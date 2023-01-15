@@ -58,7 +58,7 @@ qualityNetwork="1"
 qualityNetwork="1"
 uncertaintyType="1"
 allocationMethod="-1"
-SCHEMA_FILE="path/to/schemas/EcoSpold01Dataset.xsd"
+SCHEMA_FILE="path/to/schemas/v1/EcoSpold01Dataset.xsd"
 ```
 
 ## Contributing
