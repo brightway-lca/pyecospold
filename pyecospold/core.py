@@ -1,7 +1,7 @@
 """Core Ecospold module containing parsing and saving functionalities."""
 from lxml import etree, objectify
 
-from .model import (
+from .model_v1 import (
     AdministrativeInformation,
     Allocation,
     DataEntryBy,

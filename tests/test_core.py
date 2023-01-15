@@ -10,7 +10,7 @@ import pytest
 from lxml.etree import XMLSyntaxError
 
 from pyecospold.core import parse_file, save_file
-from pyecospold.model import (
+from pyecospold.model_v1 import (
     AdministrativeInformation,
     Allocation,
     DataEntryBy,

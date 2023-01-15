@@ -4,7 +4,7 @@ import pytest
 from lxml.etree import DocumentInvalid
 
 from pyecospold.core import parse_file
-from pyecospold.model import ReferenceFunction
+from pyecospold.model_v1 import ReferenceFunction
 
 
 @pytest.fixture(name="reference_function")
