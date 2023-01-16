@@ -1,4 +1,8 @@
 """Core Ecospold module containing parsing and saving functionalities."""
+from io import StringIO
+from pathlib import Path
+from typing import Union
+
 from lxml import etree, objectify
 
 from .config import Defaults
@@ -104,37 +108,39 @@ class EcospoldLookupV2(etree.CustomElementClassLookup):
             return None
 
 
-def parse_file_v1(file_path: str) -> EcoSpoldV1:
+def parse_file_v1(file: Union[str, Path, StringIO]) -> EcoSpoldV1:
     """Parses an Ecospold V1 XML file to custom Ecospold classes.
 
     Parameters:
-    file_path: the path to the Ecospold XML file.
+    file: the str|Path path to the Ecospold XML file or its StringIO representation.
     schema_path: the path to the Ecospold XSD schema file.
 
     Returns and EcoSpold class representing the root of the XML file.
     """
-    return parse_file(file_path, Defaults.SCHEMA_V1_FILE, EcospoldLookupV1())
+    return parse_file(file, Defaults.SCHEMA_V1_FILE, EcospoldLookupV1())
 
 
-def parse_file_v2(file_path: str) -> EcoSpoldV2:
+def parse_file_v2(file: Union[str, Path, StringIO]) -> EcoSpoldV2:
     """Parses an Ecospold V2 XML file to custom Ecospold classes.
 
     Parameters:
-    file_path: the path to the Ecospold XML file.
+    file: the str|Path path to the Ecospold XML file or its StringIO representation.
     schema_path: the path to the Ecospold XSD schema file.
 
     Returns and EcoSpold class representing the root of the XML file.
     """
-    return parse_file(file_path, Defaults.SCHEMA_V2_FILE, EcospoldLookupV2())
+    return parse_file(file, Defaults.SCHEMA_V2_FILE, EcospoldLookupV2())
 
 
 def parse_file(
-    file_path: str, schema_path: str, ecospold_lookup: etree.CustomElementClassLookup
+    file: Union[str, Path, StringIO],
+    schema_path: str,
+    ecospold_lookup: etree.CustomElementClassLookup,
 ) -> etree.ElementBase:
     """Parses an Ecospold XML file to custom Ecospold classes.
 
     Parameters:
-    file_path: the path to the Ecospold XML file.
+    file: the str|Path path to the Ecospold XML file or its StringIO representation.
     schema_path: the path to the Ecospold XSD schema file.
 
     Returns and EcoSpold class representing the root of the XML file.
@@ -142,7 +148,7 @@ def parse_file(
     schema = etree.XMLSchema(file=schema_path)
     parser = objectify.makeparser(schema=schema)
     parser.set_element_class_lookup(ecospold_lookup)
-    return objectify.parse(file_path, parser).getroot()
+    return objectify.parse(file, parser).getroot()
 
 
 def save_file(root: etree.ElementBase, path: str) -> None:
