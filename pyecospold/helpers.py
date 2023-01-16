@@ -17,16 +17,18 @@ class DataHelper:
     }
 
     @staticmethod
-    def set_attribute(element: etree.ElementBase, key: str, value: str) -> None:
+    def set_attribute(
+        element: etree.ElementBase, key: str, value: str, schema_file: str
+    ) -> None:
         """Helper method for setting XML attributes. Raises DocumentInvalid
         exception on inappropriate setting according to XSD schema."""
         element.set(key, str(value))
-        schema = etree.XMLSchema(file=Defaults.SCHEMA_FILE)
+        schema = etree.XMLSchema(file=schema_file)
         schema.assertValid(element.getroottree())
 
     @staticmethod
     def set_attribute_list(
-        element: etree.ElementBase, key: str, values: List[str]
+        element: etree.ElementBase, key: str, values: List[str], schema_file: str
     ) -> None:
         """Helper method for setting XML list attributes. Raises DocumentInvalid
         exception on inappropriate setting according to XSD schema."""
@@ -39,7 +41,7 @@ class DataHelper:
             )
             elements[-1].text = value
         element.extend(elements)
-        schema = etree.XMLSchema(file=Defaults.SCHEMA_FILE)
+        schema = etree.XMLSchema(file=schema_file)
         schema.assertValid(element.getroottree())
 
     @staticmethod
@@ -59,7 +61,9 @@ class DataHelper:
         """Helper wrapper method for retrieving XML element text as a string.
         Returns Defaults.TYPE_DEFAULTS[str] if no text exists or element is None."""
         return getattr(
-            DataHelper.get_element(parent, element), "text", Defaults.TYPE_DEFAULTS[str]
+            DataHelper.get_element(parent, element),
+            "text",
+            str(Defaults.TYPE_DEFAULTS[str]),
         )
 
     @staticmethod
@@ -91,18 +95,48 @@ class DataHelper:
         )
 
     @staticmethod
-    def create_attribute(name: str, attr_type: type) -> property:
+    def create_attribute_v1(name: str, attr_type: type) -> property:
+        """Helper wrapper method for creating setters and getters for a V1 attribute"""
+        return DataHelper.create_attribute(name, attr_type, Defaults.SCHEMA_V1_FILE)
+
+    @staticmethod
+    def create_attribute_v2(name: str, attr_type: type) -> property:
+        """Helper wrapper method for creating setters and getters for a V2 attribute"""
+        return DataHelper.create_attribute(name, attr_type, Defaults.SCHEMA_V2_FILE)
+
+    @staticmethod
+    def create_attribute(name: str, attr_type: type, schema_file: str) -> property:
         """Helper wrapper method for creating setters and getters for an attribute"""
         return property(
             fget=lambda self: DataHelper.get_attribute(self, name, attr_type),
-            fset=lambda self, value: DataHelper.set_attribute(self, name, value),
+            fset=lambda self, value: DataHelper.set_attribute(
+                self, name, value, schema_file
+            ),
         )
 
     @staticmethod
-    def create_attribute_list(name: str, attr_type: type) -> property:
-        """Helper wrapper method for creating setters and getters for an attribute
-        list"""
+    def create_attribute_list_v1(name: str, attr_type: type) -> property:
+        """Helper wrapper method for creating setters and getters for
+        a V1 attribute list"""
+        return DataHelper.create_attribute_list(
+            name, attr_type, Defaults.SCHEMA_V1_FILE
+        )
+
+    @staticmethod
+    def create_attribute_list_v2(name: str, attr_type: type) -> property:
+        """Helper wrapper method for creating setters and getters for
+        a V2 attribute list"""
+        return DataHelper.create_attribute_list(
+            name, attr_type, Defaults.SCHEMA_V2_FILE
+        )
+
+    @staticmethod
+    def create_attribute_list(name: str, attr_type: type, schema_file: str) -> property:
+        """Helper wrapper method for creating setters and getters for
+        an attribute list."""
         return property(
             fget=lambda self: DataHelper.get_attribute_list(self, name, attr_type),
-            fset=lambda self, values: DataHelper.set_attribute_list(self, name, values),
+            fset=lambda self, values: DataHelper.set_attribute_list(
+                self, name, values, schema_file
+            ),
         )

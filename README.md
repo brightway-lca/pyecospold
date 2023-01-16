@@ -6,16 +6,16 @@
 [![License](https://img.shields.io/pypi/l/pyecospold)][license]
 
 [![Read the documentation at https://pyecospold.readthedocs.io/](https://img.shields.io/readthedocs/pyecospold/latest.svg?label=Read%20the%20Docs)][read the docs]
-[![Tests](https://github.com/brightway-lca/pyecospold/workflows/Tests/badge.svg)][tests]
-[![Codecov](https://codecov.io/gh/brightway-lca/pyecospold/branch/main/graph/badge.svg)][codecov]
+[![Tests](https://github.com/sami-m-g/pyecospold/actions/workflows/python-test.yml/badge.svg)][tests]
+[![Codecov](https://codecov.io/gh/sami-m-g/pyecospold/branch/main/graph/badge.svg?token=ZVWBCITI4A)][codecov]
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
 
 [pypi status]: https://pypi.org/project/pyecospold/
 [read the docs]: https://pyecospold.readthedocs.io/
-[tests]: https://github.com/brightway-lca/pyecospold/actions?workflow=Tests
-[codecov]: https://app.codecov.io/gh/brightway-lca/pyecospold
+[tests]: https://github.com/sami-m-g/pyecospold/actions?workflow=Tests
+[codecov]: https://codecov.io/gh/sami-m-g/pyecospold
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
@@ -36,7 +36,7 @@ from pyecospold import parse_file, save_file, Defaults
 Defaults.config("config.ini")  # Replace with your own config file
 
 # Parse the required XML file to EcoSpold class.
-ecoSpold = parse_file("data/examples/00001.xml")  # Replace with your own XML file
+ecoSpold = parse_file("data/v1.xml")  # Replace with your own XML file
 ecoSpold
 >> <Element {http://www.EcoInvent.org/EcoSpold01}ecoSpold at 0x24a558b6020>
 
@@ -58,7 +58,7 @@ qualityNetwork="1"
 qualityNetwork="1"
 uncertaintyType="1"
 allocationMethod="-1"
-SCHEMA_FILE="data/schema/EcoSpold01Dataset.xsd"
+SCHEMA_FILE="path/to/schemas/v1/EcoSpold01Dataset.xsd"
 ```
 
 ## Contributing
@@ -80,5 +80,5 @@ please [file an issue] along with a detailed description.
 ## Credits
 
 
-[license]: https://github.com/brightway-lca/pyecospold/blob/main/LICENSE
-[contributor guide]: https://github.com/brightway-lca/pyecospold/blob/main/CONTRIBUTING.md
+[license]: https://github.com/sami-m-g/pyecospold/blob/main/LICENSE
+[contributor guide]: https://github.com/sami-m-g/pyecospold/blob/main/CONTRIBUTING.md

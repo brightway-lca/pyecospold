@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <activityDataset>
+    <activityDescription>
+      <activity id="2ddc5ae3-e42a-40f0-9669-19291ce85cc0" activityNameId="4077d4c8-e4a2-40d9-a6b7-921a35de5430" inheritanceDepth="0" type="2" specialActivityType="0" energyValues="0">
+        <activityName xml:lang="en">particle board production, cement bonded</activityName>
+        <includedActivitiesStart xml:lang="en">From cradle, i.e. including all upstream activities.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">Includes the inputs to the production processes. No process emission data are available. </includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="1">This dataset presents particle board production, cement bonded.</text>
+        </generalComment><originalUnitProcessReference xmlns='http://www.EcoInvent.org/EcoSpold02/OriginalUnitProcess'><originalUnitProcessReference activityIndexEntryId="f1606fcc-e241-47df-80fa-481395609342" /></originalUnitProcessReference></activity>
+      <classification classificationId="4f0398fe-506c-443d-ac87-b441d11fa122">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">1621:Manufacture of veneer sheets and wood-based panels</classificationValue>
+      </classification>
+      <classification classificationId="f5e6cbfb-eaf5-4d5f-99e4-6e60a2b9aa75">
+        <classificationSystem xml:lang="en">EcoSpold01Categories</classificationSystem>
+        <classificationValue xml:lang="en">wooden materials/extraction</classificationValue>
+      </classification>
+      <geography geographyId="7846b897-7c04-4f9f-b607-2b83fcd9a74c">
+        <shortname xml:lang="en">RoW</shortname>
+        <comment>
+          <text xml:lang="en" index="1">Data for Switzerland used for central Europe</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="1">Medium enterprise technology (2000)</text>
+        </comment>
+      </technology>
+      <timePeriod startDate="1989-01-01" endDate="2014-12-31" isDataValidForEntirePeriod="true" />
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="baf695c6-8b8d-4c53-8e1e-becfd1017a44" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" amount="1" intermediateExchangeId="f0994392-5748-4bf9-87e3-da2d5e356817" productionVolumeAmount="2781307.27021496" productionVolumeMathematicalRelation="">
+        <name xml:lang="en">particle board, cement bonded</name>
+        <unitName xml:lang="en">m3</unitName>
+        <uncertainty>
+          <lognormal meanValue="1" mu="0" variance="0.0006" varianceWithPedigreeUncertainty="0.0513" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="5" geographicalCorrelation="3" furtherTechnologyCorrelation="3" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1200" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName></property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="216.470483616465" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Export prices for the World+ according to: http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor downloaded 28 April 2009; calculated as export value divided by export volume.</comment></property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1176.77570093458" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName></property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.139276496048922" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName></property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0240147718699122" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName></property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.0197355358773776" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName></property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="23.2242990654206" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName></property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.163291267918834" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment></property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="192.157196261682" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment></property>
+        <productionVolumeComment xml:lang="en">Calculated value. The total production of "particle board" in the world in 2005 was 102707990m3/year (http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor, accessed 20121026). It is estimated that 5% of this volume is cement bonded board.</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup></intermediateExchange>
+      <elementaryExchange id="0b8c4788-fb9a-465c-a3b2-52efe3b20928" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000124-38-9" amount="92.651658" elementaryExchangeId="f9749677-9c9f-4678-ab55-c607dfdc2cb9">
+        <name xml:lang="en">Carbon dioxide, fossil</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="337f896e-9494-4296-87b2-47b4aa60b9a0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007664-41-7" amount="0.0077337602" elementaryExchangeId="9990b51b-7023-4700-bca0-1a32ef921f74">
+        <name xml:lang="en">Ammonia</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="f4748891-3e3e-4777-b37c-3fe2a3124a35" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007782-50-5" amount="0.00026558957" elementaryExchangeId="247ac273-60fa-4e21-9408-793f75fa1d37">
+        <name xml:lang="en">Chlorine</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="99d4512b-c1e6-4306-aad6-4961d8e18cc4" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007446-11-9" amount="9.8281771E-09" elementaryExchangeId="b00950bc-99cb-4ee2-bbc0-5f878ea170c3">
+        <name xml:lang="en">Sulfur trioxide</name>
+        <unitName xml:lang="en">kg</unitName>
+        <synonym xml:lang="en">sulfan, sulphuric anhydride</synonym>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="a109e396-d7d2-4923-a9c9-9a2ba6ba846b" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000108-88-3" amount="0.00063657798" elementaryExchangeId="39946c56-cdf6-4a22-9ac9-1cd333b65533">
+        <name xml:lang="en">Toluene</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="ac881770-5fd9-4766-a7c9-dc4b584fe5b8" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000074-82-8" amount="0.39220199" elementaryExchangeId="5f7aad3d-566c-4d0d-ad59-e765f971aa0f">
+        <name xml:lang="en">Methane, fossil</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="6c0e92d9-10f4-4adb-acf5-494e7a6068e7" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000079-11-8" amount="9.6388193E-09" elementaryExchangeId="ed38a7d2-ffa5-4c28-9aea-dd9df0d1898b">
+        <name xml:lang="en">Chloroacetic acid</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="e2d0322d-0b26-4e0f-b2d5-67f175a7b26f" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="001333-74-0" amount="0.0019187103" elementaryExchangeId="8e906def-6bd5-4248-ac2b-94e6eedde3c9">
+        <name xml:lang="en">Hydrogen</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="e924dda2-6f65-481e-93f9-b6eb6da34abb" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007647-01-0" amount="0.0088106662" elementaryExchangeId="afcbd980-14c2-4e1d-a0aa-5f6464e5c76b">
+        <name xml:lang="en">Hydrogen chloride</name>
+        <unitName xml:lang="en">kg</unitName>
+        <synonym />
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="21b1b00a-e705-4d32-9df6-c614a3105390" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" casNumber="007732-18-5" amount="6.3701028" elementaryExchangeId="075e433b-4be4-448e-9510-9a5029c1ce94">
+        <name xml:lang="en">Water</name>
+        <unitName xml:lang="en">m3</unitName>
+        <compartment subcompartmentId="7011f0aa-f5f9-4901-8c10-884ad8296812">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="797fe334-cdba-4cdb-b6e3-4775f370504f" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007782-50-5" amount="1.4140408E-12" elementaryExchangeId="e8641a14-fd07-4090-8daf-2cce2a557a81">
+        <name xml:lang="en">Chlorine</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e47f0a6c-3be8-4027-9eee-de251784f708">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="30ac6242-4658-46ae-9118-210b55758016" unitId="4923348e-591b-4772-b224-d19df86f04c9" amount="0.11675631" elementaryExchangeId="8b2d16fd-5147-4382-afbc-3a7ed73a4f82">
+        <name xml:lang="en">Uranium alpha</name>
+        <unitName xml:lang="en">kBq</unitName>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="f5c53c52-8b1b-4bdc-bb89-297fd5743d20" unitId="4923348e-591b-4772-b224-d19df86f04c9" amount="0.0019296541" elementaryExchangeId="34d04e86-d650-4f1e-96d5-7f09132fddcc">
+        <name xml:lang="en">Protactinium-234</name>
+        <unitName xml:lang="en">kBq</unitName>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="19dd88b7-d5f5-43e4-8d6f-0533faa430ed" unitId="4923348e-591b-4772-b224-d19df86f04c9" amount="0.0019304098" elementaryExchangeId="409f6c8a-95df-4e86-8306-5439bd0643c8">
+        <name xml:lang="en">Thorium-234</name>
+        <unitName xml:lang="en">kBq</unitName>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="aa20d15b-6295-4fe1-81f1-01c96315061f" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000141-43-5" amount="5.5897555E-09" elementaryExchangeId="071efe89-12e0-4ff8-80d1-4e6cf1e37233" formula="C2H7NO">
+        <name xml:lang="en">Monoethanolamine</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e47f0a6c-3be8-4027-9eee-de251784f708">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="e0c98aeb-fd74-407d-8c52-2eadd91f525b" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="014797-65-0" amount="5.9497769E-08" elementaryExchangeId="9f5bfac4-cbb6-4b38-afb9-cf563fc5ca15">
+        <name xml:lang="en">Nitrite</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e47f0a6c-3be8-4027-9eee-de251784f708">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="f2e2cc3a-2206-47e6-9aa9-36ebfe746972" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="5.7624011E-07" elementaryExchangeId="d493b514-f36d-482f-a978-63b5a1889bc2">
+        <name xml:lang="en">Borate</name>
+        <unitName xml:lang="en">kg</unitName>
+        <synonym xml:lang="en">borate ion</synonym>
+        <compartment subcompartmentId="e47f0a6c-3be8-4027-9eee-de251784f708">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="c4b9d0de-a1e3-46fa-9251-0f7eed7c2171" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="5.4455585E-07" elementaryExchangeId="3b8a6f65-384b-4086-a817-b0c77555b78a">
+        <name xml:lang="en">Dichromate</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e47f0a6c-3be8-4027-9eee-de251784f708">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="cfd28e32-2d17-405c-92db-b0d820e8b90a" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="312600-89-8" amount="1.5527099E-12" elementaryExchangeId="4b4530b5-89d5-4127-b8a5-96fc50972e26" formula="C12H22N4O4Cu">
+        <name xml:lang="en">Cu-HDO</name>
+        <unitName xml:lang="en">kg</unitName>
+        <synonym xml:lang="en">Bis-(N-cyclohexyldiazeniumdioxy)-copper</synonym>
+        <compartment subcompartmentId="e47f0a6c-3be8-4027-9eee-de251784f708">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="d5787f37-1124-4511-a18f-50d1088354e0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="024203-36-9" amount="9.4030566E-11" elementaryExchangeId="130bbacf-e7c7-4ffd-b109-4d576f1d02c1">
+        <name xml:lang="en">Potassium, ion</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e47f0a6c-3be8-4027-9eee-de251784f708">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="f50f9029-3bf9-4e1a-acc0-10cc89fe87b8" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="7.4530074E-10" elementaryExchangeId="017be306-b88a-4d3a-a906-b8734b72b6fb">
+        <name xml:lang="en">Carboxylic acids, unspecified</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="e47f0a6c-3be8-4027-9eee-de251784f708">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="5e236925-c77b-44d6-afc3-819c12ed3d42" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="001634-04-4" amount="1.8604401E-07" elementaryExchangeId="77fd3c56-5c3e-4070-93fa-de03fa455d47">
+        <name xml:lang="en">t-Butyl methyl ether</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="5e643f6b-d61f-4a53-9407-475efc37c752" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007782-49-2" amount="2.8753734E-07" elementaryExchangeId="62cc5e18-da24-4fb7-9f7c-1601fedba341">
+        <name xml:lang="en">Selenium</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="65f8d2a1-63ed-479c-b86c-3bcf38e86320">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">ocean</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="60233e1b-7f1e-4ce0-92c0-4a8c568ed2e2" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="022541-77-1" amount="6.0089159E-07" elementaryExchangeId="dbdc3ea8-cc2b-4dbe-82b9-e954e333281d">
+        <name xml:lang="en">Vanadium, ion</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="65f8d2a1-63ed-479c-b86c-3bcf38e86320">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">ocean</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="94cafef6-3a71-49d9-9905-bf0e9bae25e4" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007727-37-9" amount="0.0001575334" elementaryExchangeId="77c7dcf8-1d10-4725-9f8f-bcdccaed0836">
+        <name xml:lang="en">Nitrogen, organic bound</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="65f8d2a1-63ed-479c-b86c-3bcf38e86320">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">ocean</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="45589a4f-f521-45b9-9647-1be21ec86bc7" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007439-98-7" amount="1.9183526E-07" elementaryExchangeId="163926e2-b4cc-42bb-ba7d-401028140985">
+        <name xml:lang="en">Molybdenum</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="65f8d2a1-63ed-479c-b86c-3bcf38e86320">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">ocean</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <elementaryExchange id="99e3d169-1467-4d18-ac0f-54d753da2737" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="001634-04-4" amount="3.2396473E-07" elementaryExchangeId="c5b4869c-f131-4a8c-911f-f252cafb2e30">
+        <name xml:lang="en">t-Butyl methyl ether</name>
+        <unitName xml:lang="en">kg</unitName>
+        <compartment subcompartmentId="65f8d2a1-63ed-479c-b86c-3bcf38e86320">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">ocean</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup></elementaryExchange>
+      <parameter parameterId="d1efa4be-e613-43fd-9d73-e8b92b39b283" variableName="fraction_CW_to_air" mathematicalRelation="(0.5*fraction_CW_OT_to_air)+(0.5*fraction_CW_R_to_air)" isCalculatedAmount="true" amount="0.3875">
+        <name xml:lang="en">fraction, cooling water, to air</name>
+        <uncertainty>
+          <lognormal meanValue="0.3875" mu="-0.95" variance="0.04" varianceWithPedigreeUncertainty="0.092025" />
+          <pedigreeMatrix reliability="4" completeness="4" temporalCorrelation="3" geographicalCorrelation="2" furtherTechnologyCorrelation="4" />
+        </uncertainty>
+        <comment xml:lang="en">Calculated value based on literature value (see comments of the other parametres present in this dataset) and expert opinion. In the case when no industry/literature data are available about the type of cooling or directly fraction, cooling water, to air specific for the process a default assumption is applied. It is assumed that the once-through cooling system is used in 50% of all cases and recirculating system is used in another 50% of all cases. </comment></parameter>
+      <parameter parameterId="606c3625-2a78-4202-87a6-16f43eec86c3" variableName="fraction_CW_CP_to_air" amount="0.032">
+        <name xml:lang="en">fraction, cooling water, cooling pond system, to air</name>
+        <uncertainty>
+          <lognormal meanValue="0.032" mu="-3.44" variance="0.04" varianceWithPedigreeUncertainty="0.0413" />
+          <pedigreeMatrix reliability="2" completeness="3" temporalCorrelation="1" geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <comment xml:lang="en">Calculated based on literature value (Scown, C.D., 2011, Water Footprint of U.S. Transportation Fuels and supplying information of the article) (Vionnet, S., Quantis Water Database - Technical Report, 2012). </comment></parameter>
+      <parameter parameterId="e952df4c-1ca5-4710-9f53-be47be9191c1" variableName="fraction_CW_R_to_air" amount="0.771">
+        <name xml:lang="en">fraction, cooling water, recirculating system, to air</name>
+        <uncertainty>
+          <lognormal meanValue="0.771" mu="-0.26" variance="0.04" varianceWithPedigreeUncertainty="0.0413" />
+          <pedigreeMatrix reliability="2" completeness="3" temporalCorrelation="1" geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <comment xml:lang="en">Calculated based on literature value (Scown, C.D., 2011, Water Footprint of U.S. Transportation Fuels and supplying information of the article) (Vionnet, S., Quantis Water Database - Technical Report, 2012). </comment></parameter>
+      <parameter parameterId="0b267c5e-0421-434c-8209-62d70a1f2f07" variableName="fraction_CW_OT_to_air" amount="0.004">
+        <name xml:lang="en">fraction, cooling water, once-through system, to air</name>
+        <uncertainty>
+          <lognormal meanValue="0.004" mu="-5.52" variance="0.04" varianceWithPedigreeUncertainty="0.0413" />
+          <pedigreeMatrix reliability="2" completeness="3" temporalCorrelation="1" geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <comment xml:lang="en">Calculated based on literature value (Scown, C.D., 2011, Water Footprint of U.S. Transportation Fuels and supplying information of the article) (Vionnet, S., Quantis Water Database - Technical Report, 2012). </comment></parameter>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="dd7f13f5-0658-489c-a19c-f2ff8a00bdd9">
+        <systemModelName xml:lang="en">Substitution, consequential, long-term</systemModelName>
+        <samplingProcedure xml:lang="en">Literature</samplingProcedure>
+        <extrapolations xml:lang="en">see Geography and Technology This dataset has been copied from an original dataset covering the geography RER. The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="c4597934-ecac-422c-b431-382e85fdcb83" isActiveAuthor="false" personName="[System]" personEmail="support@ecoinvent.org" />
+      <dataGeneratorAndPublication personId="d8f5bd0b-dcde-41a3-a370-4fd9f721d536" personName="Hans-Jörg Althaus" personEmail="empa@ecoinvent.org" dataPublishedIn="2" publishedSourceId="e77a52e5-4bad-4eee-b53e-5af10ebf404c" publishedSourceYear="2007" publishedSourceFirstAuthor="Werner F." isCopyrightProtected="true" accessRestrictedTo="2" companyId="bbf9cfb4-e253-4419-9d84-f206a3b64de7" companyCode="ECOINV" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="89" minorRevision="0" internalSchemaVersion="2.0.10" defaultLanguage="en" creationTimestamp="2010-07-29T14:06:26" lastEditTimestamp="2013-02-25T13:56:06" fileGenerator="EcoEditor 3.2.63.9512" fileTimestamp="2013-02-25T13:56:06" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation></activityDataset></ecoSpold>
