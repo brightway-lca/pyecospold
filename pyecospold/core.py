@@ -115,7 +115,7 @@ def parse_file_v1(file: Union[str, Path, StringIO]) -> EcoSpoldV1:
     file: the str|Path path to the Ecospold XML file or its StringIO representation.
     schema_path: the path to the Ecospold XSD schema file.
 
-    Returns and EcoSpold class representing the root of the XML file.
+    Returns an EcoSpold class representing the root of the XML file.
     """
     return parse_file(file, Defaults.SCHEMA_V1_FILE, EcospoldLookupV1())
 
@@ -127,7 +127,7 @@ def parse_file_v2(file: Union[str, Path, StringIO]) -> EcoSpoldV2:
     file: the str|Path path to the Ecospold XML file or its StringIO representation.
     schema_path: the path to the Ecospold XSD schema file.
 
-    Returns and EcoSpold class representing the root of the XML file.
+    Returns an EcoSpold class representing the root of the XML file.
     """
     return parse_file(file, Defaults.SCHEMA_V2_FILE, EcospoldLookupV2())
 
@@ -142,8 +142,9 @@ def parse_file(
     Parameters:
     file: the str|Path path to the Ecospold XML file or its StringIO representation.
     schema_path: the path to the Ecospold XSD schema file.
+    ecospold_lookup: the lookup class for mapping XML elements to EcoSpold classes.
 
-    Returns and EcoSpold class representing the root of the XML file.
+    Returns an EcoSpold class representing the root of the XML file.
     """
     schema = etree.XMLSchema(file=schema_path)
     parser = objectify.makeparser(schema=schema)
