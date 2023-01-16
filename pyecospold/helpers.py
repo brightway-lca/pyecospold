@@ -1,4 +1,5 @@
 """Internal helper classes."""
+import re
 from datetime import datetime
 from typing import Any, Dict, List
 
@@ -89,7 +90,9 @@ class DataHelper:
         Returns empty list if attributes don't exist."""
         return list(
             map(
-                lambda x: DataHelper.TYPE_FUNC_MAP.get(attr_type, attr_type)(x.text),
+                lambda x: DataHelper.TYPE_FUNC_MAP.get(attr_type, attr_type)(
+                    re.sub("[ ]{2,}", "", x.text).replace("\n", " ")
+                ),
                 DataHelper.get_element_list(parent, attribute),
             )
         )

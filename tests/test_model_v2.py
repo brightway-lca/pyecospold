@@ -28,18 +28,19 @@ from pyecospold.model_v2 import (
 
 @pytest.fixture(name="eco_spold")
 def _eco_spold() -> EcoSpold:
-    return parse_file_v2("data/v2/v2_1.xml")
+    return parse_file_v2("data/v2/v2_2.spold")
 
 
 def test_parse_file_v2_eco_spold(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     assert isinstance(eco_spold, EcoSpold)
-    assert isinstance(eco_spold.activityDataset, ActivityDataset)
+    assert isinstance(eco_spold.childActivityDataset, ActivityDataset)
 
 
-def test_parse_file_v2_activity_dataset(eco_spold: EcoSpold) -> None:
+def test_parse_file_v2_activity_dataset() -> None:
     """It parses attributes correctly."""
-    activityDataset = eco_spold.activityDataset
+    ecoSpold = parse_file_v2("data/v2/v2_1.xml")
+    activityDataset = ecoSpold.activityDataset
 
     assert isinstance(activityDataset.activityDescription, ActivityDescription)
     assert isinstance(
@@ -49,9 +50,23 @@ def test_parse_file_v2_activity_dataset(eco_spold: EcoSpold) -> None:
     assert isinstance(activityDataset.modellingAndValidation, ModellingAndValidation)
 
 
+def test_parse_file_v2_child_activity_dataset(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    childActivityDataset = eco_spold.childActivityDataset
+
+    assert isinstance(childActivityDataset.activityDescription, ActivityDescription)
+    assert isinstance(
+        childActivityDataset.administrativeInformation, AdministrativeInformation
+    )
+    assert isinstance(childActivityDataset.flowData, FlowData)
+    assert isinstance(
+        childActivityDataset.modellingAndValidation, ModellingAndValidation
+    )
+
+
 def test_parse_file_v2_activity_description(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
-    activityDescription = eco_spold.activityDataset.activityDescription
+    activityDescription = eco_spold.childActivityDataset.activityDescription
 
     assert isinstance(activityDescription.activity, Activity)
     assert isinstance(activityDescription.classification, Classification)
@@ -63,10 +78,10 @@ def test_parse_file_v2_activity_description(eco_spold: EcoSpold) -> None:
 
 def test_parse_file_v2_flow_data(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
-    elementaryExchangesLen = 27
-    intermediateExchangesLen = 1
-    parametersLen = 4
-    flowData = eco_spold.activityDataset.flowData
+    elementaryExchangesLen = 11
+    intermediateExchangesLen = 41
+    parametersLen = 6
+    flowData = eco_spold.childActivityDataset.flowData
 
     assert isinstance(flowData.elementaryExchanges[0], ElementaryExchange)
     assert isinstance(flowData.intermediateExchanges[0], IntermediateExchange)
@@ -79,7 +94,7 @@ def test_parse_file_v2_flow_data(eco_spold: EcoSpold) -> None:
 
 def test_parse_file_v2_modelling_and_validation(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
-    modellingAndValidation = eco_spold.activityDataset.modellingAndValidation
+    modellingAndValidation = eco_spold.childActivityDataset.modellingAndValidation
 
     assert isinstance(modellingAndValidation.representativeness, Representativeness)
     assert modellingAndValidation.review is None
@@ -87,7 +102,7 @@ def test_parse_file_v2_modelling_and_validation(eco_spold: EcoSpold) -> None:
 
 def test_parse_file_v2_administrative_information(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
-    administrativeInformation = eco_spold.activityDataset.administrativeInformation
+    administrativeInformation = eco_spold.childActivityDataset.administrativeInformation
 
     assert isinstance(administrativeInformation.dataEntryBy, DataEntryBy)
     assert isinstance(
@@ -99,20 +114,23 @@ def test_parse_file_v2_administrative_information(eco_spold: EcoSpold) -> None:
 
 def test_parse_file_v2_activity(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
-    activityNames = ["particle board production, cement bonded"]
+    activityNames = ["formic acid production, methyl formate route"]
     allocationComments = []
     includedActivitiesEnds = [
-        "Includes the inputs to the production processes. "
-        + "No process emission data are available. "
+        "This activity ends with 1 kg of formic acid, 100% af the factory gate. "
+        "The dataset includes the input materials, energy uses, "
+        "infrastructure and emissions."
     ]
-    includedActivitiesStarts = ["From cradle, i.e. including all upstream activities."]
-    synonyms = []
-    tags = []
-    activity = eco_spold.activityDataset.activityDescription.activity
+    includedActivitiesStarts = [
+        "From the reception of methyl formate at the factory gate."
+    ]
+    synonyms = ["methanoic acid"]
+    tags = ["ConvertedDataset"]
+    activity = eco_spold.childActivityDataset.activityDescription.activity
 
     assert activity.activityNames == activityNames
     assert activity.allocationComments == allocationComments
-
+    # assert activity.generalComments == generalComments
     assert activity.includedActivitiesEnds == includedActivitiesEnds
     assert activity.includedActivitiesStarts == includedActivitiesStarts
     assert activity.synonyms == synonyms
