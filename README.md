@@ -36,7 +36,7 @@ from pyecospold import parse_file, save_file, Defaults
 Defaults.config("config.ini")  # Replace with your own config file
 
 # Parse the required XML file to EcoSpold class.
-ecoSpold = parse_file("data/v1.xml")  # Replace with your own XML file
+ecoSpold = parse_file("data/v1/v1_1.xml")  # Replace with your own XML file
 ecoSpold
 >> <Element {http://www.EcoInvent.org/EcoSpold01}ecoSpold at 0x24a558b6020>
 

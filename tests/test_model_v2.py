@@ -28,7 +28,7 @@ from pyecospold.model_v2 import (
 
 @pytest.fixture(name="eco_spold")
 def _eco_spold() -> EcoSpold:
-    return parse_file_v2("data/v2_1.xml")
+    return parse_file_v2("data/v2/v2_1.xml")
 
 
 def test_parse_file_v2_eco_spold(eco_spold: EcoSpold) -> None:

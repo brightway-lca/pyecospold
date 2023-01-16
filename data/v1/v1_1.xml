@@ -68,7 +68,7 @@
       </exchange>
       <allocation referenceToCoProduct="1" allocationMethod="-1" fraction="97.6">
         <referenceToInputOutput>1</referenceToInputOutput>
-    </allocation>
+      </allocation>
     </flowData>
   </dataset>
 </ecoSpold>

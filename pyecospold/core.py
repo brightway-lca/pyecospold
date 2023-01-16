@@ -1,7 +1,7 @@
 """Core Ecospold module containing parsing and saving functionalities."""
 from io import StringIO
 from pathlib import Path
-from typing import Union
+from typing import List, Tuple, Union
 
 from lxml import etree, objectify
 
@@ -149,6 +149,82 @@ def parse_file(
     parser = objectify.makeparser(schema=schema)
     parser.set_element_class_lookup(ecospold_lookup)
     return objectify.parse(file, parser).getroot()
+
+
+def parse_directory_v1(
+    dir_path: Union[str, Path], valid_suffixes: Union[List[str], None] = None
+) -> List[Tuple[Path, EcoSpoldV1]]:
+    """Parses a directory of Ecospold XML files to a list of custom Ecospold classes.
+
+    Parameters:
+    dir_path: the directory path, should contain files of version 1 of EcoSpold.
+    valid_suffixes: a list of valid file suffixes which will only be considered for
+    parsing. If None, defaults to [".xml", ".spold"].
+
+    Returns a list of tuples of file paths and corresponding EcoSpold classes
+    representing the root of the XML file.
+    """
+    return parse_directory(
+        dir_path=dir_path,
+        schema_path=Defaults.SCHEMA_V1_FILE,
+        ecospold_lookup=EcospoldLookupV1(),
+        valid_suffixes=valid_suffixes,
+    )
+
+
+def parse_directory_v2(
+    dir_path: Union[str, Path], valid_suffixes: Union[List[str], None] = None
+) -> List[Tuple[Path, EcoSpoldV2]]:
+    """Parses a directory of Ecospold XML files to a list of custom Ecospold classes.
+
+    Parameters:
+    dir_path: the directory path, should contain files of version 2 of EcoSpold.
+    valid_suffixes: a list of valid file suffixes which will only be considered for
+    parsing. If None, defaults to [".xml", ".spold"].
+
+    Returns a list of tuples of file paths and corresponding EcoSpold classes
+    representing the root of the XML file.
+    """
+    return parse_directory(
+        dir_path=dir_path,
+        schema_path=Defaults.SCHEMA_V2_FILE,
+        ecospold_lookup=EcospoldLookupV2(),
+        valid_suffixes=valid_suffixes,
+    )
+
+
+def parse_directory(
+    dir_path: Union[str, Path],
+    schema_path: str,
+    ecospold_lookup: etree.CustomElementClassLookup,
+    valid_suffixes: Union[List[str], None] = None,
+) -> List[Tuple[Path, etree.ElementBase]]:
+    """Parses a directory of Ecospold XML files to a list of custom Ecospold classes.
+
+    Parameters:
+    dir_path: the directory path, should contain files of only the schema_path version.
+    schema_path: the path to the Ecospold XSD schema file.
+    ecospold_lookup: the lookup class for mapping XML elements to EcoSpold classes.
+    valid_suffixes: a list of valid file suffixes which will only be considered for
+    parsing. If None, defaults to [".xml", ".spold"].
+
+    Returns a list of tuples of file paths and corresponding EcoSpold classes
+    representing the root of the XML file.
+    """
+    if valid_suffixes is None:
+        valid_suffixes = [".xml", ".spold"]
+
+    dir_path = Path(dir_path).resolve()
+    return [
+        (
+            file_path,
+            parse_file(
+                file=file_path, schema_path=schema_path, ecospold_lookup=ecospold_lookup
+            ),
+        )
+        for file_path in dir_path.iterdir()
+        if file_path.is_file() and file_path.suffix.lower() in valid_suffixes
+    ]
 
 
 def save_file(root: etree.ElementBase, path: str) -> None:
