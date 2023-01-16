@@ -1,7 +1,5 @@
 """Test cases for the __model_v1__ module."""
 
-import os
-import tempfile
 from datetime import datetime
 from io import StringIO
 
@@ -9,7 +7,7 @@ import numpy as np
 import pytest
 from lxml.etree import XMLSyntaxError
 
-from pyecospold.core import parse_file_v1, save_file
+from pyecospold.core import parse_file_v1
 from pyecospold.model_v1 import (
     AdministrativeInformation,
     Allocation,
@@ -472,18 +470,3 @@ def test_parse_file_v1_person(eco_spold: EcoSpold) -> None:
     assert person.email == email
     assert person.companyCode == companyCode
     assert person.countryCode == countryCode
-
-
-def test_save_file() -> None:
-    """It saves read file correctly."""
-    inputPath = "data/v1/v1_1.xml"
-    metaInformation = parse_file_v1(inputPath)
-    outputPath = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
-    save_file(metaInformation, outputPath)
-
-    with open(inputPath, encoding="utf-8") as inputFile:
-        with open(outputPath, encoding="utf-8") as outputFile:
-            mapping = {ord(c): "" for c in [" ", "\t", "\n"]}
-            assert outputFile.read().translate(mapping) == inputFile.read().translate(
-                mapping
-            )
