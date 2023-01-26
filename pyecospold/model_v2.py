@@ -1,5 +1,5 @@
 """Custom EcoSpold Python classes for v1 of EcoSpold schema."""
-from typing import List
+from typing import Dict, List
 
 from lxml import etree
 
@@ -168,6 +168,38 @@ class Activity(etree.ElementBase):
     """Contains the identifying information of an activity dataset including name and
     classification."""
 
+    INHERITANCE_DEPTH_MAP: Dict[int, str] = {
+        0: "not a child",
+        1: "a geography child",
+        2: "a temporal child",
+        3: "a macro-economic scenario child",
+    }
+
+    TYPE_MAP: Dict[int, str] = {
+        1: "Unit process",
+        2: "System terminated",
+    }
+
+    SPECIAL_ACTIVITY_TYPE_MAP: Dict[int, str] = {
+        0: "ordinary transforming activity (default)",
+        1: "market activity",
+        2: "IO activity",
+        3: "Residual activity",
+        4: "production mix",
+        5: "import activity",
+        6: "supply mix",
+        7: "export activity",
+        8: "re-export activity",
+        9: "correction activity",
+        10: "market group",
+    }
+
+    ENERGY_VALUES_MAP: Dict[int, str] = {
+        0: "Undefined (default)",
+        1: "Net values",
+        2: "Gross values",
+    }
+
     activityNames = DataHelper.create_attribute_list_v2("activityName", str)
     """List[str]: A name for the activity that is represented by this dataset."""
 
@@ -228,6 +260,187 @@ class Activity(etree.ElementBase):
     reference provides a list of predefined tags, but the semantic validation procedure
     should only display an information (not an error) if a tag entry cannot be found in
     the validTags master file."""
+
+    id = DataHelper.create_attribute_v2("id", str)
+    """str: Unique identifier for this activity. The datat type UUID is a 36 characters
+    string with hexadecimal characters and ensures a world-wide unique identifier.
+    A UUID for a new item must be supplied by external software. There are several UUID
+    generators on the web and implementations in most programming languages."""
+
+    activityNameId = DataHelper.create_attribute_v2("activityNameId", str)
+    """str: Reference to the activity name master data entry for this activity."""
+
+    activityNameContextId = DataHelper.create_attribute_v2("activityNameContextId", str)
+    """str: Reference to the context of the activity name. If this attribute is omitted
+    the context of the dataset itself will be used instead."""
+
+    parentActivityId = DataHelper.create_attribute_v2("parentActivityId", str)
+    """str: he parentActivityId is a UUID to the parent activity dataset. When this
+    field is filled with a UUID, all the field content from the parent activity
+    dataset is taken over by the child activity dataset (the activity that calls
+    the parent via the UUID). Child activity is derived (inherited) from its parent
+    activity and only the content changes in comparison to its parent are stored in
+    the child process. Child activity datasets cannot be validated using the EcoSpold02
+    schema, since most of the required fields will not be filled. Please refer to the
+    additional documentation regarding inheritance of datasets in the ecoinvent database
+    for further details. There are 5 ways to fill a field in a child activity dataset
+    ("http://www.EcoInvent.org/EcoSpold02Child"): Leave a field blank: In this case,
+    the value from the parent activity dataset applies. 2) Fill in content: In this
+    case, the filled in value applies, and the value from the parent activity dataset is
+    ignored. 3) In a string field, fill in content including the text {{PARENTTEXT}} in
+    which case the field content from the parent activity dataset is included at this
+    place in the filled in text in the child dataset. 4) In a field with type
+    TTextAndImage, both {{PARENTTEXT}} and {{text_variables}} are supported; the latter
+    allows to define text variables in the parent dataset and use them in the text as
+    {{variablename}}. If a parent textfield includes a variable, this variable may be
+    redefined by the child activity dataset while keeping the rest of the parent text
+    intact. This allows easy changes of text parts in child processes. 5) In an amount
+    field with corresponding mathematical relation fields, fill in content in the
+    mathematicalRelation field including the reserved variable PARENTVALUE, e.g. the
+    formula PARENTVALUE*0.5 results in halfing the value of the original amount field.
+    """
+
+    parentActivityContextId = DataHelper.create_attribute_v2(
+        "parentActivityContextId", str
+    )
+    """str: Reference to the context of the parent activity. If this attribute is
+    omitted the context of the dataset itself will be used instead."""
+
+    inheritanceDepth = DataHelper.create_attribute_v2("inheritanceDepth", int)
+    """int: The inheritance depth expresses the maximum number of parent datasets for
+    the current dataset. The following values are used in the ecoinvent context:
+    0 = not a child, 1 = a geography child, 2 = a temporal child, 3 = a macro-economic
+    scenario child."""
+
+    type = DataHelper.create_attribute_v2("type", int)
+    """int: Indicates the kind of data (1 = Unit process; 2 = System terminated) that
+    is represented by this dataset. Data are always entered by the data providers as
+    Unit process. The database-generated, attributional and consequential datasets are
+    available both at the unit process level and as aggregated (terminated) system
+    dataset (i.e. the life cycle inventory results) containing the aggregated elementary
+    exchanges and impacts of the product system related to one specific product from the
+    unit process. The terminated product systems include all upstream activity datasets,
+    as linked by the intermediate exchanges, and therefore do not themselves have any
+    intermediate exchanges, only environmental exchanges and accumulated impact
+    assessment results."""
+
+    specialActivityType = DataHelper.create_attribute_v2("specialActivityType", int)
+    """int: The special activity types are: 0 = “ordinary” transforming activities.
+    Transforming activities are human activities that transform inputs, so that the
+    output of the activity is different from the inputs, e.g. a hard coal mine that
+    transforms hard coal in ground to the marketable product hard coal. Transforming
+    activities are here understood in the widest possible sense, including extraction,
+    production, transport, consumption and waste treatment activities, i.e. any human
+    activity where the intermediate output is different from the intermediate input.
+    The concept “transforming activities” is introduced here simply to distinguish –
+    in the further modelling and linking of activities – these “ordinary” activities
+    from the market activities, production and supply mixes, import and export
+    activities, and correction datasets. 1 = market activity. Market activities do not
+    transform their inputs, but simply transfer the intermediate output from a
+    transforming activity to the transforming activities that consume this intermediate
+    output as an input, e.g. from hard coal at the supplier to hard coal at the
+    consumer. Market activities typically mix similar intermediate outputs from
+    different transforming activities. Market activities therefore supply consumption
+    mixes of the intermediate outputs. 10 = market group. Market groups are to markets
+    what markets are to transforming activities. In the undefined system model a market
+    group only contains a reference product. The linking algorithm will add supplying
+    markets as inputs which are contained in the location of the market group and have
+    the same reference product. 2 = IO activity. An IO activity represents an activity
+    dataset from a national supply-use table, i.e. typically the supply and use of one
+    specific industry. 3 = Residual activity. A residual activity is the resulting
+    activity when subtracting all available unit processes within an activity class from
+    the supply-use data (IO activity) of the same activity class, for the same year and
+    geo-graphical area. 4 = production mix. A production mix represents the
+    production-volume-weighted average of the suppliers of a specific product within a
+    geographical area.5 = import activity. An import activity represents the import of a
+    specified product to a specified geographical area, solely for use in national
+    balancing (not contributing to any auto-generated consumption mixes). Imports to
+    administratively constrained markets and from partly isolated markets are modelled
+    as ordinary transforming activities in order to be included in the relevant market
+    activities (consumption mixes).6 = supply mix. A supply mix is a production mix with
+    the addition of the import of a specified product to a specified geographical area.
+    7 = export activity. An export activity represents the export volume of a national
+    production mix that has the national area as its geographical location and does not
+    contribute to any auto-generated consumption mixes. To give the correct value of the
+    export, the same activities and data that are included with the market activities
+    are added directly to the export activity. This includes transport activities,
+    production losses, wholesaler and retailer activities, and product taxes and
+    subsidies. 8 = re-export activity. A re-export activity represents the re-export
+    volume of a geographical area and does not contribute to any auto-generated
+    consumption mixes. 9 = correction activity. A correction activity is an activity
+    that is added twice to a product system, one with a positive and once with a
+    negative flow, in order to move one or more exchanges from one part of the system
+    to another, e.g. to correct for downstream effects of an upstream activity, or to
+    correct a bias in the mass-balance introduced by an allocation. More details on
+    this is provided in the Chapters on "Downstream changes caused by differences in
+    product quality" and "Allocation corrections" in the ecoinvent Data Quality
+    Guidelines."""
+
+    energyValues = DataHelper.create_attribute_v2("energyValues", int)
+    """int: Indicates the way energy values are applied in the dataset. The codes
+    are: 0=Undefined (default). 1=Net (lower) heating value. 2=Gross (higher)
+    heating value. This data field is by default set to 0."""
+
+    masterAllocationPropertyId = DataHelper.create_attribute_v2(
+        "masterAllocationPropertyId", str
+    )
+    """str: References the default Allocation Property (via UUID) for all exchanges
+    of this dataset. The Allocation Property can be overwritten for each exchange
+    (see field 1150 specificAllocationPropertyId). The allocation factor for a
+    specific output is then the declared TProperty value for this output multiplied
+    by the amount of the output divided by the sum of the all such multiplied
+    TProperty values for all outputs."""
+
+    masterAllocationPropertyIdOverwrittenByChild = DataHelper.create_attribute_v2(
+        "masterAllocationPropertyIdOverwrittenByChild", bool
+    )
+    """bool: If a reference to a master data entity must be removed in a child
+    dataset it is required to set the corresponding xxxOverwrittenByChild attribute
+    to true. Otherwise the removed referenced will be interpreted as "Keep the
+    Parent Value"."""
+
+    masterAllocationPropertyContextId = DataHelper.create_attribute_v2(
+        "masterAllocationPropertyContextId", str
+    )
+    """str: Reference to the context of the master allocation property. If this
+    attribute is omitted the context of the dataset itself will be used instead.
+    """
+
+    datasetIcon = DataHelper.create_attribute_v2("datasetIcon", str)
+    """str: The URL of the dataset icon. A dataset icon serves a quick
+    identification of the specific dataset, and may also be used for product
+    brands and company logos. The icon is not directly part of the dataset, but
+    is stored locally or on the ecoinvent web-server, from where it is
+    retrievable via the Http protocol."""
+
+    @property
+    def inheritanceDepthStr(self) -> str:
+        """String representation for inheritanceDepth. See inheritanceDepth for
+        explanations. 0 = not a child, 1 = a geography child, 2 = a temporal child,
+        3 = a macro-economic scenario child."""
+        return Activity.INHERITANCE_DEPTH_MAP[self.inheritanceDepth]
+
+    @property
+    def typeStr(self) -> str:
+        """String representation for type. See type for explanations.
+        1 = Unit process; 2 = System terminated"""
+        return Activity.TYPE_MAP[self.type]
+
+    @property
+    def specialActivityTypeStr(self) -> str:
+        """String representation for specialActivityType. See specialActivityType
+        for explanations. 0 = ordinary transforming activity (default),
+        1 = market activity, 2 = IO activity, 3 = Residual activity,
+        4 = production mix, 5 = import activity, 6 = supply mix, 7 = export activity,
+        8 = re-export activity, 9 = correction activity, 10 = market group"""
+        return Activity.SPECIAL_ACTIVITY_TYPE_MAP[self.specialActivityType]
+
+    @property
+    def energyValuesStr(self) -> str:
+        """String representation for energyValues. See energyValues for explanations.
+        0=Undefined (default). 1=Net (lower) heating value. 2=Gross (higher) heating
+        value. This data field is by default set to 0."""
+        return Activity.ENERGY_VALUES_MAP[self.energyValues]
 
 
 class Classification(etree.ElementBase):

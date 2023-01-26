@@ -4,7 +4,7 @@
     <activityDescription>
       <activity id="ffed8e5b-8ecb-4a93-bc79-a1404afd9fcd"
         activityNameId="8b542688-aa36-45d5-b2f0-3b15ade03700"
-        parentActivityId="dca19657-6614-4b1d-98aa-0658dd2ced39" inheritanceDepth="-1" type="1"
+        parentActivityId="dca19657-6614-4b1d-98aa-0658dd2ced39" inheritanceDepth="0" type="1"
         specialActivityType="0" energyValues="0">
         <activityName xml:lang="en">formic acid production, methyl formate route</activityName>
         <synonym xml:lang="en">methanoic acid</synonym>

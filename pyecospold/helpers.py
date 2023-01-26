@@ -1,7 +1,7 @@
 """Internal helper classes."""
 import re
 from datetime import datetime
-from typing import Any, Dict, List
+from typing import Any, Callable, Dict, List
 
 from lxml import etree
 
@@ -12,7 +12,7 @@ class DataHelper:
     """Helper class for reading and writing Ecospold custom classes attributes."""
 
     TIMESTAMP_FORMAT: str = "%Y-%m-%dT%H:%M:%S"
-    TYPE_FUNC_MAP: Dict[type, Any] = {
+    TYPE_FUNC_MAP: Dict[type, Callable[[str], Any]] = {
         bool: lambda string: string.lower() == "true",
         datetime: lambda string: datetime.strptime(string, DataHelper.TIMESTAMP_FORMAT),
     }
@@ -46,13 +46,15 @@ class DataHelper:
         schema.assertValid(element.getroottree())
 
     @staticmethod
-    def get_element(parent: etree.ElementBase, element: str) -> Any:
+    def get_element(parent: etree.ElementBase, element: str) -> etree.ElementBase:
         """Helper wrapper method for retrieving XML elements as custom
         Ecospold classes."""
         return parent.find(element, namespaces=parent.nsmap)
 
     @staticmethod
-    def get_element_list(parent: etree.ElementBase, element: str) -> List[Any]:
+    def get_element_list(
+        parent: etree.ElementBase, element: str
+    ) -> List[etree.ElementBase]:
         """Helper wrapper method for retrieving XML list elements as a list
         of custom Ecospold classes."""
         return parent.findall(element, namespaces=parent.nsmap)

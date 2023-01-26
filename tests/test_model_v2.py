@@ -116,6 +116,7 @@ def test_parse_file_v2_activity(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     activityNames = ["formic acid production, methyl formate route"]
     allocationComments = []
+    # generalComments = []
     includedActivitiesEnds = [
         "This activity ends with 1 kg of formic acid, 100% af the factory gate. "
         "The dataset includes the input materials, energy uses, "
@@ -126,6 +127,21 @@ def test_parse_file_v2_activity(eco_spold: EcoSpold) -> None:
     ]
     synonyms = ["methanoic acid"]
     tags = ["ConvertedDataset"]
+    activityId = "ffed8e5b-8ecb-4a93-bc79-a1404afd9fcd"
+    activityNameId = "8b542688-aa36-45d5-b2f0-3b15ade03700"
+    parentActivityId = "dca19657-6614-4b1d-98aa-0658dd2ced39"
+    inheritanceDepth = 0
+    inheritanceDepthStr = "not a child"
+    activityType = 1
+    typeStr = "Unit process"
+    specialActivityType = 0
+    specialActivityTypeStr = "ordinary transforming activity (default)"
+    energyValues = 0
+    energyValuesStr = "Undefined (default)"
+    masterAllocationPropertyId = ""
+    masterAllocationPropertyIdOverwrittenByChild = False
+    masterAllocationPropertyContextId = ""
+    datasetIcon = ""
     activity = eco_spold.childActivityDataset.activityDescription.activity
 
     assert activity.activityNames == activityNames
@@ -135,3 +151,23 @@ def test_parse_file_v2_activity(eco_spold: EcoSpold) -> None:
     assert activity.includedActivitiesStarts == includedActivitiesStarts
     assert activity.synonyms == synonyms
     assert activity.tags == tags
+    assert activity.id == activityId
+    assert activity.activityNameId == activityNameId
+    assert activity.parentActivityId == parentActivityId
+    assert activity.inheritanceDepth == inheritanceDepth
+    assert activity.inheritanceDepthStr == inheritanceDepthStr
+    assert activity.type == activityType
+    assert activity.typeStr == typeStr
+    assert activity.specialActivityType == specialActivityType
+    assert activity.specialActivityTypeStr == specialActivityTypeStr
+    assert activity.energyValues == energyValues
+    assert activity.energyValuesStr == energyValuesStr
+    assert activity.masterAllocationPropertyId == masterAllocationPropertyId
+    assert (
+        activity.masterAllocationPropertyIdOverwrittenByChild
+        == masterAllocationPropertyIdOverwrittenByChild
+    )
+    assert (
+        activity.masterAllocationPropertyContextId == masterAllocationPropertyContextId
+    )
+    assert activity.datasetIcon == datasetIcon
