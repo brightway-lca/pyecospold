@@ -210,3 +210,20 @@ def test_parse_file_v2_classification(eco_spold: EcoSpold) -> None:
     assert classification.classificationContextId == classificationContextId
     assert classification.classificationSystem == classificationSystem
     assert classification.classificationValue == classificationValue
+
+
+def test_parse_file_v2_geography(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    geographyId = "0723d252-7e2a-11de-9820-0019e336be3a"
+    geographyContextId = ""
+    shortNames = ["RER"]
+    commentsTexts = ["The inventory is modelled for Europe."]
+    commentsImageUrls = []
+    activityDescription = eco_spold.childActivityDataset.activityDescription
+    geography = activityDescription.geography[0]
+
+    assert geography.geographyId == geographyId
+    assert geography.geographyContextId == geographyContextId
+    assert geography.shortNames == shortNames
+    assert geography.comments[0].texts == commentsTexts
+    assert geography.comments[0].imageUrls == commentsImageUrls

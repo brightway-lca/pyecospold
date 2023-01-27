@@ -480,6 +480,33 @@ class Geography(etree.ElementBase):
     """Describes the geographic location for which the dataset is supposed
     to be valid."""
 
+    geographyId = DataHelper.create_attribute_v2("geographyId", str)
+    """str: Reference to valid locations file with detailed geography information."""
+
+    geographyContextId = DataHelper.create_attribute_v2("geographyContextId", str)
+    """str: Reference to the context of the geography. If this attribute is
+    omitted the context of the dataset itself will be used instead."""
+
+    shortNames = DataHelper.create_attribute_list_v2("shortname", str)
+    """List[str]: Descriptive shortname of the location referenced by geographyId,
+    e.g. the regional codes of EcoSpold version 1."""
+
+    @property
+    def comments(self) -> List["Comment"]:
+        """Text and image field for further explanations of the geography.
+        Especially for area descriptions, the nature of the geographical
+        delimitation may be given, especially when this is not an administrative
+        area. Justifications for market boundaries may also be provided here.Text
+        and image fields are list of text, imageUri and variable elements. The text
+        and imageUri elements can used to describe the current section and they can
+        be combined in any order given by their index attribute. Text variables are
+        defined by the variable elements, which may be used in the text as
+        {{variablename}}. If a parent text field includes a variable, this variable
+        may be redefined by the child activity dataset while keeping the rest of the
+        parent text intact. This allows easy changes of text parts in child
+        processes."""
+        return DataHelper.get_element_list(self, "comment")
+
 
 class Technology(etree.ElementBase):
     """Describes the technological properties of the unit process."""

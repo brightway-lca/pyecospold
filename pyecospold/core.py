@@ -87,6 +87,7 @@ class EcospoldLookupV2(etree.CustomElementClassLookup):
             "allocationComment": Comment,
             "childActivityDataset": ActivityDataset,
             "classification": Classification,
+            "comment": Comment,
             "dataEntryBy": DataEntryByV2,
             "dataGeneratorAndPublication": DataGeneratorAndPublicationV2,
             "ecoSpold": EcoSpoldV2,
