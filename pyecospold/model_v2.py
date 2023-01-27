@@ -58,37 +58,37 @@ class ActivityDescription(etree.ElementBase):
     """Contains content-related metainformation for the activity."""
 
     @property
-    def activity(self) -> "Activity":
+    def activity(self) -> List["Activity"]:
         """Contains the identifying information of an activity dataset including name
         and classification."""
-        return DataHelper.get_element(self, "activity")
+        return DataHelper.get_element_list(self, "activity")
 
     @property
-    def classification(self) -> "Classification":
+    def classification(self) -> List["Classification"]:
         """Contains classification pairs to specify the activity.)"""
-        return DataHelper.get_element(self, "classification")
+        return DataHelper.get_element_list(self, "classification")
 
     @property
-    def geography(self) -> "Geography":
+    def geography(self) -> List["Geography"]:
         """Describes the geographic location for which the dataset is supposed to be
         valid."""
-        return DataHelper.get_element(self, "geography")
+        return DataHelper.get_element_list(self, "geography")
 
     @property
-    def technology(self) -> "Technology":
+    def technology(self) -> List["Technology"]:
         """Describes the technological properties of the unit process."""
-        return DataHelper.get_element(self, "technology")
+        return DataHelper.get_element_list(self, "technology")
 
     @property
-    def timePeriod(self) -> "TimePeriod":
+    def timePeriod(self) -> List["TimePeriod"]:
         """Characterises the temporal properties of the unit activity
         (or system terminated) at issue."""
-        return DataHelper.get_element(self, "timePeriod")
+        return DataHelper.get_element_list(self, "timePeriod")
 
     @property
-    def macroEconomicScenario(self) -> "MacroEconomicScenario":
+    def macroEconomicScenario(self) -> List["MacroEconomicScenario"]:
         """References the macro-economic scenario used in this dataset."""
-        return DataHelper.get_element(self, "macroEconomicScenario")
+        return DataHelper.get_element_list(self, "macroEconomicScenario")
 
 
 class FlowData(etree.ElementBase):
@@ -450,6 +450,30 @@ class Activity(etree.ElementBase):
 
 class Classification(etree.ElementBase):
     """Contains classification pairs to specify the activity.)"""
+
+    classificationId = DataHelper.create_attribute_v2("classificationId", str)
+    """str: Reference to the value of a classification system. Must be defined
+    in list of valid classifications (see field 5160)."""
+
+    classificationContextId = DataHelper.create_attribute_v2(
+        "classificationContextId", str
+    )
+    """str: Reference to the context of the classification. If this attribute
+    is omitted the context of the dataset itself will be used instead."""
+
+    @property
+    def classificationSystem(self) -> str:
+        """The name of the classification system used, e.g. ISIC Rev. 4.
+                This is an optional plaintext value of the referenced classification
+        system (field 320)."""
+        return DataHelper.get_element_text(self, "classificationSystem")
+
+    @property
+    def classificationValue(self) -> str:
+        """The class that the activity belongs to within the specified
+                classification system. This is an optional plaintext value of
+        the referenced classification value (field 320)."""
+        return DataHelper.get_element_text(self, "classificationValue")
 
 
 class Geography(etree.ElementBase):

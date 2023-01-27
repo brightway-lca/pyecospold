@@ -30,8 +30,8 @@ def test_parse_directory_v2() -> None:
     dirPath = os.path.join(Path(__file__).parent.parent.resolve(), "data", "v2")
     files = [os.path.join(dirPath, "v2_1.xml"), os.path.join(dirPath, "v2_2.spold")]
     ecospoldList = sorted(parse_directory_v2(dirPath))
-    activity1 = ecospoldList[0][1].activityDataset.activityDescription.activity
-    activity2 = ecospoldList[1][1].childActivityDataset.activityDescription.activity
+    activity1 = ecospoldList[0][1].activityDataset.activityDescription.activity[0]
+    activity2 = ecospoldList[1][1].childActivityDataset.activityDescription.activity[0]
 
     assert len(ecospoldList) == 2
     assert ecospoldList[0][0] == Path(files[0])

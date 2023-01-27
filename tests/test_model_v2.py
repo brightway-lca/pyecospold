@@ -69,12 +69,14 @@ def test_parse_file_v2_activity_description(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     activityDescription = eco_spold.childActivityDataset.activityDescription
 
-    assert isinstance(activityDescription.activity, Activity)
-    assert isinstance(activityDescription.classification, Classification)
-    assert isinstance(activityDescription.geography, Geography)
-    assert isinstance(activityDescription.macroEconomicScenario, MacroEconomicScenario)
-    assert isinstance(activityDescription.technology, Technology)
-    assert isinstance(activityDescription.timePeriod, TimePeriod)
+    assert isinstance(activityDescription.activity[0], Activity)
+    assert isinstance(activityDescription.classification[0], Classification)
+    assert isinstance(activityDescription.geography[0], Geography)
+    assert isinstance(
+        activityDescription.macroEconomicScenario[0], MacroEconomicScenario
+    )
+    assert isinstance(activityDescription.technology[0], Technology)
+    assert isinstance(activityDescription.timePeriod[0], TimePeriod)
 
 
 def test_parse_file_v2_flow_data(eco_spold: EcoSpold) -> None:
@@ -162,7 +164,7 @@ def test_parse_file_v2_activity(eco_spold: EcoSpold) -> None:
     masterAllocationPropertyIdOverwrittenByChild = False
     masterAllocationPropertyContextId = ""
     datasetIcon = ""
-    activity = eco_spold.childActivityDataset.activityDescription.activity
+    activity = eco_spold.childActivityDataset.activityDescription.activity[0]
 
     assert activity.allocationComment is None
     assert isinstance(activity.generalComment, Comment)
@@ -193,3 +195,18 @@ def test_parse_file_v2_activity(eco_spold: EcoSpold) -> None:
         activity.masterAllocationPropertyContextId == masterAllocationPropertyContextId
     )
     assert activity.datasetIcon == datasetIcon
+
+
+def test_parse_file_v2_classification(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    classificationId = "7ac1cbc6-1385-4a68-8647-ed7aa78db201"
+    classificationContextId = ""
+    classificationSystem = "EcoSpold01Categories"
+    classificationValue = "chemicals/organics"
+    activityDescription = eco_spold.childActivityDataset.activityDescription
+    classification = activityDescription.classification[0]
+
+    assert classification.classificationId == classificationId
+    assert classification.classificationContextId == classificationContextId
+    assert classification.classificationSystem == classificationSystem
+    assert classification.classificationValue == classificationValue
