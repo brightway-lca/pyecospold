@@ -228,32 +228,6 @@ class Activity(etree.ElementBase):
     active ingredients. The description ends by mentioning the last activity and/or
     point of delivery, e.g. “until and including loading of the product on lorries”."""
 
-    allocationComments = DataHelper.create_attribute_list_v2("allocationComment", str)
-    """List[str]: Text and image field for further information about the allocation
-    procedure and the allocation properties chosen. An eventual coincidence in
-    allocation factors when comparing different allocation parameters (like physical
-    and economic ones) may be reported here as well.Text and image fields are list of
-    text, imageUri and variable elements. The text and imageUri elements can used to
-    describe the current section and they can be combined in any order given by their
-    index attribute. Text variables are defined by the variable elements, which may be
-    used in the text as {{variablename}}. If a parent text field includes a variable,
-    this variable may be redefined by the child activity dataset while keeping the rest
-    of the parent text intact. This allows easy changes of text parts in child processes
-    """
-
-    generalComments = DataHelper.create_attribute_list_v2("generalComment", str)
-    """List[str]: Text and image field for general information about the dataset.
-    Only comments and references of more general nature that cannot be placed in any of
-    the more specific comment fields, should be placed here. In general, the information
-    in the dataset should be sufficient to judge the appropriateness of a dataset for a
-    specific application.Text and image fields are list of text, imageUri and variable
-    elements. The text and imageUri elements can used to describe the current section
-    and they can be combined in any order given by their index attribute. Text variables
-    are defined by the variable elements, which may be used in the text as
-    {{variablename}}. If a parent text field includes a variable, this variable may be
-    redefined by the child activity dataset while keeping the rest of the parent text
-    intact. This allows easy changes of text parts in child processes."""
-
     tags = DataHelper.create_attribute_list_v2("tag", str)
     """List[str]: The tag field allows an open list of keywords which describes the
     activity and can be used for filtering, grouping and searching. The validTags file
@@ -414,6 +388,37 @@ class Activity(etree.ElementBase):
     retrievable via the Http protocol."""
 
     @property
+    def allocationComment(self) -> "Comment":
+        """Text and image field for further information about the allocation
+        procedure and the allocation properties chosen. An eventual coincidence in
+        allocation factors when comparing different allocation parameters (like physical
+        and economic ones) may be reported here as well.Text and image fields are list
+        of text, imageUri and variable elements. The text and imageUri elements can used
+        to describe the current section and they can be combined in any order given by
+        their index attribute. Text variables are defined by the variable elements,
+        which may be used in the text as {{variablename}}. If a parent text field
+        includes a variable, this variable may be redefined by the child activity
+        dataset while keeping the rest of the parent text intact. This allows easy
+        changes of text parts in child processes."""
+        return DataHelper.get_element(self, "allocationComment")
+
+    @property
+    def generalComment(self) -> "Comment":
+        """Text and image field for general information about the dataset. Only comments
+        and references of more general nature that cannot be placed in any of the more
+        specific comment fields, should be placed here. In general, the information in
+        the dataset should be sufficient to judge the appropriateness of a dataset for a
+        specific application.Text and image fields are list of text, imageUri and
+        variable elements. The text and imageUri elements can used to describe the
+        current section and they can be combined in any order given by their index
+        attribute. Text variables are defined by the variable elements, which may be
+        used in the text as {{variablename}}. If a parent text field includes a
+        variable, this variable may be redefined by the child activity dataset while
+        keeping the rest of the parent text intact. This allows easy changes of text
+        parts in child processes."""
+        return DataHelper.get_element(self, "generalComment")
+
+    @property
     def inheritanceDepthStr(self) -> str:
         """String representation for inheritanceDepth. See inheritanceDepth for
         explanations. 0 = not a child, 1 = a geography child, 2 = a temporal child,
@@ -507,3 +512,17 @@ class DataGeneratorAndPublication(etree.ElementBase):
 class FileAttributes(etree.ElementBase):
     """This constraint ensures that each xml:lang attribute is only used once in this
     context. I.e. there must be only one translation of the element."""
+
+
+class Comment(etree.ElementBase):
+    """Text and image field for information."""
+
+    @property
+    def texts(self) -> List[str]:
+        """Texts."""
+        return DataHelper.get_inner_text_list(self, "text")
+
+    @property
+    def imageUrls(self) -> List[str]:
+        """Image URLs."""
+        return DataHelper.get_inner_text_list(self, "imageUrl")

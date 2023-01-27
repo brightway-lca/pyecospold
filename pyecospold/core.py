@@ -25,7 +25,7 @@ from .model_v1 import TimePeriod as TimePeriodV1
 from .model_v1 import Validation
 from .model_v2 import Activity, ActivityDataset, ActivityDescription
 from .model_v2 import AdministrativeInformation as AdministrativeInformationV2
-from .model_v2 import Classification
+from .model_v2 import Classification, Comment
 from .model_v2 import DataEntryBy as DataEntryByV2
 from .model_v2 import DataGeneratorAndPublication as DataGeneratorAndPublicationV2
 from .model_v2 import EcoSpold as EcoSpoldV2
@@ -84,6 +84,7 @@ class EcospoldLookupV2(etree.CustomElementClassLookup):
             "activityDataset": ActivityDataset,
             "activityDescription": ActivityDescription,
             "administrativeInformation": AdministrativeInformationV2,
+            "allocationComment": Comment,
             "childActivityDataset": ActivityDataset,
             "classification": Classification,
             "dataEntryBy": DataEntryByV2,
@@ -92,6 +93,7 @@ class EcospoldLookupV2(etree.CustomElementClassLookup):
             "elementaryExchange": ElementaryExchange,
             "fileAttributes": FileAttributes,
             "flowData": FlowDataV2,
+            "generalComment": Comment,
             "geography": GeographyV2,
             "impactIndicator": ImpactIndicator,
             "intermediateExchange": IntermediateExchange,

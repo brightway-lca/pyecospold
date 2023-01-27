@@ -9,6 +9,7 @@ from pyecospold.model_v2 import (
     ActivityDescription,
     AdministrativeInformation,
     Classification,
+    Comment,
     DataEntryBy,
     DataGeneratorAndPublication,
     EcoSpold,
@@ -115,8 +116,27 @@ def test_parse_file_v2_administrative_information(eco_spold: EcoSpold) -> None:
 def test_parse_file_v2_activity(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     activityNames = ["formic acid production, methyl formate route"]
-    allocationComments = []
-    # generalComments = []
+    generalCommentTexts = [
+        "This data represents the production of 1 kg of formic acid "
+        + "from methyl formate. Raw materials and energy consumptions are "
+        + "modelled with literature data. The emissions are estimated. "
+        + "Infrastructure is included with a default value.",
+        "[This dataset was already contained in the ecoinvent database version 2. "
+        + "It was not individually updated during the transfer to ecoinvent version 3. "
+        + "Life Cycle Impact Assessment results may still have changed, as they are "
+        + "affected by changes in the supply chain, i.e. in other datasets. This "
+        + "dataset was generated following the ecoinvent quality guidelines for "
+        + "version 2. It may have been subject to central changes described in the "
+        + "ecoinvent version 3 change report "
+        + "(http://www.ecoinvent.org/database/ecoinvent-version-3/reports-of-changes/),"
+        + " and the results of the central updates were reviewed extensively. The "
+        + "changes added e.g. consistent water flows and other information throughout "
+        + "the database. The documentation of this dataset can be found in the "
+        + "ecoinvent reports of version 2, which are still available via the ecoinvent "
+        + "website. The change report linked above covers all central changes that were"
+        + " made during the conversion process.]",
+    ]
+    generalCommentImageUrls = []
     includedActivitiesEnds = [
         "This activity ends with 1 kg of formic acid, 100% af the factory gate. "
         "The dataset includes the input materials, energy uses, "
@@ -144,9 +164,11 @@ def test_parse_file_v2_activity(eco_spold: EcoSpold) -> None:
     datasetIcon = ""
     activity = eco_spold.childActivityDataset.activityDescription.activity
 
+    assert activity.allocationComment is None
+    assert isinstance(activity.generalComment, Comment)
     assert activity.activityNames == activityNames
-    assert activity.allocationComments == allocationComments
-    # assert activity.generalComments == generalComments
+    assert activity.generalComment.texts == generalCommentTexts
+    assert activity.generalComment.imageUrls == generalCommentImageUrls
     assert activity.includedActivitiesEnds == includedActivitiesEnds
     assert activity.includedActivitiesStarts == includedActivitiesStarts
     assert activity.synonyms == synonyms

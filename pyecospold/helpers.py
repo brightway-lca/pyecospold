@@ -70,6 +70,16 @@ class DataHelper:
         )
 
     @staticmethod
+    def get_inner_text_list(parent: etree.ElementBase, element: str):
+        """Helper wrapper method for retrieving the list of last nodes in a chain
+        of XML elements."""
+        innerElements = DataHelper.get_element_list(parent, element)
+        return [
+            re.sub("[ ]{2,}", "", innerElement.text).replace("\n", " ")
+            for innerElement in innerElements
+        ]
+
+    @staticmethod
     def get_attribute(
         parent: etree.ElementBase, attribute: str, attr_type: type = str
     ) -> Any:
