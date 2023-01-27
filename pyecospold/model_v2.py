@@ -573,6 +573,41 @@ class TimePeriod(etree.ElementBase):
     """Characterises the temporal properties of the unit activity
     (or system terminated) at issue."""
 
+    startDate = DataHelper.create_attribute_v2("startDate", str)
+    """str: Start date of the time period for which the dataset is valid,
+    presented as a complete date (year-month-day)."""
+
+    endDate = DataHelper.create_attribute_v2("endDate", str)
+    """str: End date of the time period for which the dataset is valid,
+    presented as a complete date (year-month-day)."""
+
+    isDataValidForEntirePeriod = DataHelper.create_attribute_v2(
+        "isDataValidForEntirePeriod", bool
+    )
+    """bool: Indicates whether or not the activity data (elementary and
+    intermediate exchanges reported under flow data) are valid for the
+    entire time period stated. If not, explanations may be given under
+    'comment'."""
+
+    @property
+    def comments(self) -> List["Comment"]:
+        """Text and image field for additional explanations concerning
+        the temporal validity of the data reported. It may e.g. include
+        information about:- how strong the temporal correlation is for
+        the unit process at issue (e.g., are four year old data still
+        adequate for the activity operated today?),- why data is not
+        valid for the entire period, and for which smaller periods
+        data are then valid. Text and image fields are list of text,
+        imageUri and variable elements. The text and imageUri elements can
+        used to describe the current section and they can be combined in
+        any order given by their index attribute. Text variables are
+        defined by the variable elements, which may be used in the text as
+        {{variablename}}. If a parent text field includes a variable, this
+        variable may be redefined by the child activity dataset while
+        keeping the rest of the parent text intact. This allows easy
+        changes of text parts in child processes."""
+        return DataHelper.get_element_list(self, "comment")
+
 
 class MacroEconomicScenario(etree.ElementBase):
     """References the macro-economic scenario used in this dataset."""

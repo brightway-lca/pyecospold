@@ -253,3 +253,20 @@ def test_parse_file_v2_technology(eco_spold: EcoSpold) -> None:
     assert technology.technologyLevelStr == technologyLevelStr
     assert technology.comments[0].texts[0] == commentsTexts[0]
     assert technology.comments[0].imageUrls[0] == commentsImageUrl
+
+
+def test_parse_file_v2_time_period(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    startDate = "1984-01-01"
+    endDate = "2014-12-31"
+    isDataValidForEntirePeriod = True
+    commentsTexts = ["Time of publications"]
+    imageUrls = []
+    activityDescription = eco_spold.childActivityDataset.activityDescription
+    timePeriod = activityDescription.timePeriod[0]
+
+    assert timePeriod.startDate == startDate
+    assert timePeriod.endDate == endDate
+    assert timePeriod.isDataValidForEntirePeriod == isDataValidForEntirePeriod
+    assert timePeriod.comments[0].texts == commentsTexts
+    assert timePeriod.comments[0].imageUrls == imageUrls
