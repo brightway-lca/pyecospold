@@ -270,3 +270,21 @@ def test_parse_file_v2_time_period(eco_spold: EcoSpold) -> None:
     assert timePeriod.isDataValidForEntirePeriod == isDataValidForEntirePeriod
     assert timePeriod.comments[0].texts == commentsTexts
     assert timePeriod.comments[0].imageUrls == imageUrls
+
+
+def test_parse_file_v2_macro_economic_scenario(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    macroEconomicScenarioId = "d9f57f0a-a01f-42eb-a57b-8f18d6635801"
+    macroEconomicScenarioContextId = ""
+    names = ["Business-as-Usual"]
+    comments = []
+    activityDescription = eco_spold.childActivityDataset.activityDescription
+    macroEconomicScenario = activityDescription.macroEconomicScenario[0]
+
+    assert macroEconomicScenario.macroEconomicScenarioId == macroEconomicScenarioId
+    assert (
+        macroEconomicScenario.macroEconomicScenarioContextId
+        == macroEconomicScenarioContextId
+    )
+    assert macroEconomicScenario.names == names
+    assert macroEconomicScenario.comments == comments

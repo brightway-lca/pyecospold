@@ -612,6 +612,25 @@ class TimePeriod(etree.ElementBase):
 class MacroEconomicScenario(etree.ElementBase):
     """References the macro-economic scenario used in this dataset."""
 
+    macroEconomicScenarioId = DataHelper.create_attribute_v2(
+        "macroEconomicScenarioId", str
+    )
+    """str: A reference to a macro-economic scenario defined in the list of
+    valid scenarios (see field 3715)."""
+
+    macroEconomicScenarioContextId = DataHelper.create_attribute_v2(
+        "macroEconomicScenarioContextId", str
+    )
+    """str: Reference to the context of the macro-economic scenario. If this
+    attribute is omitted the context of the dataset itself will be used instead."""
+
+    names = DataHelper.create_attribute_list_v2("name", str)
+    """List[str]: Name of the macro-economic scenario that this dataset belongs to."""
+
+    comments = DataHelper.create_attribute_list_v2("comment", str)
+    """List[str]: Description of how a macro-economic child dataset deviates from
+    the default scenario of the parent dataset."""
+
 
 class IntermediateExchange(etree.ElementBase):
     """Comprises intermediate product and waste inputs and outputs for the activity."""
