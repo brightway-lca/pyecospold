@@ -75,7 +75,7 @@ class DataHelper:
         of XML elements."""
         innerElements = DataHelper.get_element_list(parent, element)
         return [
-            re.sub("[ ]{2,}", "", innerElement.text).replace("\n", " ")
+            re.sub("[ ]{2,}", "", str(innerElement.text)).replace("\n", " ")
             for innerElement in innerElements
         ]
 

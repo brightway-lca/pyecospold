@@ -227,3 +227,29 @@ def test_parse_file_v2_geography(eco_spold: EcoSpold) -> None:
     assert geography.shortNames == shortNames
     assert geography.comments[0].texts == commentsTexts
     assert geography.comments[0].imageUrls == commentsImageUrls
+
+
+def test_parse_file_v2_technology(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    technologyLevel = 3
+    technologyLevelStr = "Current (default)"
+    commentsTexts = [
+        "To keep undesirable reesterification as low as possible, the time of "
+        + "direct contact between methanol and formic acid must be as short as "
+        + "possible, and separation must be carried out at the lowest possible "
+        + "temperature. Introduction of methyl formate into the lower part of "
+        + "the column in which lower boiling methyl formate and methanol are "
+        + "separated from water and formic acid, has also been suggested. This "
+        + "largely prevents reesterification because of the excess methyl formate "
+        + "present in the critical region of the column."
+    ]
+    commentsImageUrl = (
+        "https://db3.ecoinvent.org/images/2ddc19c0-905f-42c3-b14c-e68332befec9"
+    )
+    activityDescription = eco_spold.childActivityDataset.activityDescription
+    technology = activityDescription.technology[0]
+
+    assert technology.technologyLevel == technologyLevel
+    assert technology.technologyLevelStr == technologyLevelStr
+    assert technology.comments[0].texts[0] == commentsTexts[0]
+    assert technology.comments[0].imageUrls[0] == commentsImageUrl

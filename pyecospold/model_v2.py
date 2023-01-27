@@ -511,6 +511,63 @@ class Geography(etree.ElementBase):
 class Technology(etree.ElementBase):
     """Describes the technological properties of the unit process."""
 
+    TECHNOLOGY_LEVEL_MAP: Dict[int, str] = {
+        0: "undefined",
+        1: "New",
+        2: "Modern",
+        3: "Current (default)",
+        4: "Old",
+        5: "Outdated",
+    }
+
+    technologyLevel = DataHelper.create_attribute_v2("technologyLevel", int)
+    """int: Label that grossly classifies the technology of the described
+    activity and can be used in modelling to select processes with a specific
+    technological level. The codes used are:0=Undefined. For market activities
+    that do not have a technology level.1=New. For a technology assumed to be
+    on some aspects technically superior to modern technology, but not yet the
+    most commonly installed when investment is based on purely economic
+    considerations.2=Modern. For a technology currently used when installing
+    new capacity, when investment is based on purely economic considerations
+    (most competitive technology). 3=Current (default). For a technology in
+    between modern and old.4=Old. For a technology that is currently taken
+    out of use, when decommissioning is based on purely economic
+    considerations (least competitive technology).5=Outdated. For a technology
+    no longer in use.The terms used does not necessarily reflect the age of
+    the technologies. A modern technology can be a century old, if it is still
+    the most competitive technology, and an old technology can be relatively young,
+    if it is one that has quickly become superseded by other more competitive ones.
+    The technology level is relative to the year for which the data are valid, as
+    given under Time Period. In a time series, the same technology can move between
+    different technology levels over time. The same technology can also be given
+    different technology levels in different geographical locations, even in the
+    same year."""
+
+    @property
+    def comments(self) -> List["Comment"]:
+        """Text and image field to describe the technology of the activity. The
+        text should cover information necessary to identify the properties and
+        particularities of the technology(ies) underlying the activity data.
+        Describes the technological properties of the unit process. If the activity
+        comprises several subactivities, the corresponding technologies should be
+        reported as well. Professional nomenclature should be used for the
+        description.Text and image fields are list of text, imageUri and variable
+        elements. The text and imageUri elements can used to describe the current
+        section and they can be combined in any order given by their index
+        attribute. Text variables are defined by the variable elements, which may
+        be used in the text as {{variablename}}. If a parent text field includes
+        a variable, this variable may be redefined by the child activity dataset
+        while keeping the rest of the parent text intact. This allows easy changes
+        of text parts in child processes."""
+        return DataHelper.get_element_list(self, "comment")
+
+    @property
+    def technologyLevelStr(self) -> str:
+        """String representation for technologyLevel. See technologyLevel for
+        explanations. 0 = undefined, 1 = New, 2 = Modern, 3 = Current (default),
+        4 = Old, 5 = Outdated"""
+        return self.TECHNOLOGY_LEVEL_MAP[self.technologyLevel]
+
 
 class TimePeriod(etree.ElementBase):
     """Characterises the temporal properties of the unit activity
