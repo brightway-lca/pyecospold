@@ -21,9 +21,11 @@ from pyecospold.model_v2 import (
     MacroEconomicScenario,
     ModellingAndValidation,
     Parameter,
+    Property,
     Representativeness,
     Technology,
     TimePeriod,
+    Uncertainty,
 )
 
 
@@ -288,3 +290,153 @@ def test_parse_file_v2_macro_economic_scenario(eco_spold: EcoSpold) -> None:
     )
     assert macroEconomicScenario.names == names
     assert macroEconomicScenario.comments == comments
+
+
+def test_parse_file_v2_intermediate_exchange(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    exchangeID = "2592e17c-df72-4446-91f5-fa1f1e0e8042"
+    unitId = "487df68b-4994-4027-8fdc-a4dc298257b7"
+    unitContextId = ""
+    variableName = "water_deionised_input"
+    casNumber = "007732-18-5"
+    amount = 0.6
+    isCalculatedAmount = False
+    mathematicalRelation = ""
+    sourceId = ""
+    sourceIdOverwrittenByChild = False
+    sourceContextId = ""
+    sourceYear = ""
+    sourceFirstAuthor = ""
+    pageNumbers = ""
+    specificAllocationPropertyId = ""
+    specificAllocationPropertyIdOverwrittenByChild = False
+    specificAllocationPropertyContextId = ""
+    names = ["water, deionised, from tap water, at user"]
+    unitNames = ["kg"]
+    comments = ["EcoSpold01Location=CH", "Literature value."]
+    synonyms = []
+    tags = []
+    # intermediateExchangeId = "360e2eb0-f81c-4e4b-ba6b-c7a690f31275"
+    # activityLinkId = "cd1f547f-577f-4e1b-bd23-fb73d53497eb"
+    uncertaintiesLen = 1
+    propertiesLen = 7
+    transferCoefficientsLen = 0
+    flowData = eco_spold.childActivityDataset.flowData
+    intermediateExchange = flowData.intermediateExchanges[0]
+
+    assert intermediateExchange.id == exchangeID
+    assert intermediateExchange.unitId == unitId
+    assert intermediateExchange.unitContextId == unitContextId
+    assert intermediateExchange.variableName == variableName
+    assert intermediateExchange.casNumber == casNumber
+    assert intermediateExchange.amount == amount
+    assert intermediateExchange.isCalculatedAmount == isCalculatedAmount
+    assert intermediateExchange.mathematicalRelation == mathematicalRelation
+    assert intermediateExchange.sourceId == sourceId
+    assert intermediateExchange.sourceIdOverwrittenByChild == sourceIdOverwrittenByChild
+    assert intermediateExchange.sourceContextId == sourceContextId
+    assert intermediateExchange.sourceYear == sourceYear
+    assert intermediateExchange.sourceFirstAuthor == sourceFirstAuthor
+    assert intermediateExchange.pageNumbers == pageNumbers
+    assert (
+        intermediateExchange.specificAllocationPropertyId
+        == specificAllocationPropertyId
+    )
+    assert (
+        intermediateExchange.specificAllocationPropertyIdOverwrittenByChild
+        == specificAllocationPropertyIdOverwrittenByChild
+    )
+    assert (
+        intermediateExchange.specificAllocationPropertyContextId
+        == specificAllocationPropertyContextId
+    )
+    # assert intermediateExchange.intermediateExchangeId == intermediateExchangeId
+    # assert intermediateExchange.activityLinkId == activityLinkId
+    assert intermediateExchange.names == names
+    assert intermediateExchange.unitNames == unitNames
+    assert intermediateExchange.comments == comments
+    assert intermediateExchange.synonyms == synonyms
+    assert intermediateExchange.tags == tags
+
+    assert isinstance(intermediateExchange.uncertainties[0], Uncertainty)
+    assert isinstance(intermediateExchange.properties[0], Property)
+    assert len(intermediateExchange.uncertainties) == uncertaintiesLen
+    assert len(intermediateExchange.properties) == propertiesLen
+    assert len(intermediateExchange.transferCoefficients) == transferCoefficientsLen
+
+
+def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    exchangeID = "719770d0-4b1e-4c44-bd9e-72c4687a6ee0"
+    unitId = "487df68b-4994-4027-8fdc-a4dc298257b7"
+    unitContextId = ""
+    variableName = ""
+    casNumber = ""
+    amount = 0.0011
+    isCalculatedAmount = False
+    mathematicalRelation = ""
+    sourceId = ""
+    sourceIdOverwrittenByChild = False
+    sourceContextId = ""
+    sourceYear = ""
+    sourceFirstAuthor = ""
+    pageNumbers = ""
+    specificAllocationPropertyId = ""
+    specificAllocationPropertyIdOverwrittenByChild = False
+    specificAllocationPropertyContextId = ""
+    # elementaryExchangeId = "70d467b6-115e-43c5-add2-441de9411348"
+    names = ["BOD5, Biological Oxygen Demand"]
+    unitNames = ["kg"]
+    comments = [
+        "Calculation. This value was calculated from the amount of methyl formate in "
+        + "the treated waste water assuming a carbon conversion of 96% for COD. "
+        + "The worst case scenario, BOD=COD, was used. "
+        + "It is assumed that the manufacturing plant is located in an "
+        + "urban/industrial area and consequently the emissions are categorised as "
+        + "emanating in a high population density area. The emissions into water are "
+        + "assumed to be emitted into rivers."
+    ]
+    synonyms = []
+    tags = []
+    flowData = eco_spold.childActivityDataset.flowData
+    uncertaintiesLen = 1
+    propertiesLen = 0
+    transferCoefficientsLen = 0
+    elementaryExchange = flowData.elementaryExchanges[0]
+
+    assert elementaryExchange.id == exchangeID
+    assert elementaryExchange.unitId == unitId
+    assert elementaryExchange.unitContextId == unitContextId
+    assert elementaryExchange.variableName == variableName
+    assert elementaryExchange.casNumber == casNumber
+    assert elementaryExchange.amount == amount
+    assert elementaryExchange.isCalculatedAmount == isCalculatedAmount
+    assert elementaryExchange.mathematicalRelation == mathematicalRelation
+    assert elementaryExchange.sourceId == sourceId
+    assert elementaryExchange.sourceIdOverwrittenByChild == sourceIdOverwrittenByChild
+    assert elementaryExchange.sourceContextId == sourceContextId
+    assert elementaryExchange.sourceYear == sourceYear
+    assert elementaryExchange.sourceFirstAuthor == sourceFirstAuthor
+    assert elementaryExchange.pageNumbers == pageNumbers
+    assert (
+        elementaryExchange.specificAllocationPropertyId == specificAllocationPropertyId
+    )
+    assert (
+        elementaryExchange.specificAllocationPropertyIdOverwrittenByChild
+        == specificAllocationPropertyIdOverwrittenByChild
+    )
+    assert (
+        elementaryExchange.specificAllocationPropertyContextId
+        == specificAllocationPropertyContextId
+    )
+    # assert elementaryExchange.elementaryExchangeId == elementaryExchangeId
+    assert elementaryExchange.names == names
+    assert elementaryExchange.unitNames == unitNames
+    assert elementaryExchange.comments == comments
+    assert elementaryExchange.synonyms == synonyms
+    assert elementaryExchange.tags == tags
+
+    assert isinstance(elementaryExchange.uncertainties[0], Uncertainty)
+    assert len(elementaryExchange.uncertainties) == uncertaintiesLen
+    assert len(elementaryExchange.properties) == propertiesLen
+    assert len(elementaryExchange.transferCoefficients) == transferCoefficientsLen

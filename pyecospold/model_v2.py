@@ -632,11 +632,158 @@ class MacroEconomicScenario(etree.ElementBase):
     the default scenario of the parent dataset."""
 
 
-class IntermediateExchange(etree.ElementBase):
+class CustomExchange(etree.ElementBase):
+    """This class contains elements used in both exchange types. Elements unique
+    to either Intermediate exchanges or Exchanges with environment are listed in
+    their own classes."""
+
+    id = DataHelper.create_attribute_v2("id", str)
+    """str: Unique identifier for this exchange. The intermediateExchangeId
+    or the elementaryExchangeId can not be used to identify an exchange because
+    one master data entry can be referenced by more than one exchange of a dataset."""
+
+    unitId = DataHelper.create_attribute_v2("unitId", str)
+    """str: Reference to the unit of the amount."""
+
+    unitContextId = DataHelper.create_attribute_v2("unitContextId", str)
+    """str: Reference to the context of the unit. If this attribute is omitted the
+    context of the dataset itself will be used instead."""
+
+    variableName = DataHelper.create_attribute_v2("variableName", str)
+    """str: The variable name is a short name for the exchange, used when refering
+    to the exchange amount in mathematical relations (formulas). Variables may
+    contain characters, numbers and underscores (_). Variable names must start
+    with a character (a-z). Variable names are not case sensitive (calorific_Value
+    equals Calorific_value)."""
+
+    casNumber = DataHelper.create_attribute_v2("casNumber", str)
+    """str: Indicates the number according to the Chemical Abstract Service
+    (CAS). The Format of the CAS-number: 000000-00-0, where the first string of
+    digits needs not to be complete (i.e. less than six digits are admitted)."""
+
+    amount = DataHelper.create_attribute_v2("amount", float)
+    """float: Amount of an elementary or intermediate exchange."""
+
+    isCalculatedAmount = DataHelper.create_attribute_v2("isCalculatedAmount", bool)
+    """bool: If true the value of the amount field is the calculated value of the
+    mathematicalRelation or the transferCoefficient."""
+
+    mathematicalRelation = DataHelper.create_attribute_v2("mathematicalRelation", str)
+    """str: Defines a mathematical formula with references to values of flows,
+    parameters or properties by variable names or REF function. The result of the
+    formula with a specific set of variable values is written into the amount field."""
+
+    sourceId = DataHelper.create_attribute_v2("sourceId", str)
+    """str: A reference to a valid source."""
+
+    sourceIdOverwrittenByChild = DataHelper.create_attribute_v2(
+        "sourceIdOverwrittenByChild", bool
+    )
+    """bool: If a reference to a master data entity must be removed in a child
+    dataset it is required to set the corresponding xxxOverwrittenByChild attribute
+    to true. Otherwise the removed referenced will be interpreted as "Keep the
+    Parent Value"."""
+
+    sourceContextId = DataHelper.create_attribute_v2("sourceContextId", str)
+    """str: Reference to the context of the source. If this attribute is omitted
+    the context of the dataset itself will be used instead."""
+
+    sourceYear = DataHelper.create_attribute_v2("sourceYear", str)
+    """str: Indicates the year of publication and communication, respectively.
+    For web-sites: last visited."""
+
+    sourceFirstAuthor = DataHelper.create_attribute_v2("sourceFirstAuthor", str)
+    """str: Indicates the first author by surname and abbreviated name (e.g.,
+    Einstein A.). In case of measurement on site, oral communication, personal
+    written communication and questionnaries ('sourceType'=4, 5, 6, 7) the name of
+    the communicating person is mentioned here."""
+
+    pageNumbers = DataHelper.create_attribute_v2("pageNumbers", str)
+    """str: The relevant page numbers if the data are sourced on specific pages in
+    an article or larger publication."""
+
+    specificAllocationPropertyId = DataHelper.create_attribute_v2(
+        "specificAllocationPropertyId", str
+    )
+    """str: Reference to the Property used by the allocation. This overrides the
+    dataset wide default defined by masterAllocationPropertyId."""
+
+    specificAllocationPropertyIdOverwrittenByChild = DataHelper.create_attribute_v2(
+        "specificAllocationPropertyIdOverwrittenByChild", bool
+    )
+    """bool: If a reference to a master data entity must be removed in a child
+    dataset it is required to set the corresponding xxxOverwrittenByChild attribute
+    to true. Otherwise the removed referenced will be interpreted as "Keep the
+    Parent Value"."""
+
+    specificAllocationPropertyContextId = DataHelper.create_attribute_v2(
+        "specificAllocationPropertyContextId", str
+    )
+    """str: Reference to the context of the property. If this attribute is omitted
+    the context of the dataset itself will be used instead."""
+
+    names = DataHelper.create_attribute_list_v2("name", str)
+    """List[str]: Name of the exchange."""
+
+    unitNames = DataHelper.create_attribute_list_v2("unitName", str)
+    """List[str]: Unit name of the amount."""
+
+    comments = DataHelper.create_attribute_list_v2("comment", str)
+    """List[str]: A general comment can be made about each individual exchange."""
+
+    synonyms = DataHelper.create_attribute_list_v2("synonym", str)
+    """List[str]: List of synonyms for the name. Contrary to normal multi
+    language strings, synonyms may contain more than one element with the same
+    xml:lang attribute value. 0..n entries are allowed with a max. length of 80 each."""
+
+    tags = DataHelper.create_attribute_list_v2("tag", str)
+    """List[str]: The tag field allows an open list of keywords which describes
+    the activity and can be used for filtering, grouping and searching. The
+    validTags file reference provides a list of predefined tags, but the
+    semantic validation procedure should only display an information (not an
+    error) if a tag entry cannot be found in the validTags master file."""
+
+    @property
+    def uncertainties(self) -> List["Uncertainty"]:
+        """Uncertainty information in the form of distribution functions and their
+        parameters and/or pedigree data. For the format definition see the complex
+        type section below."""
+        return DataHelper.get_element_list(self, "uncertainty")
+
+    @property
+    def properties(self) -> List["Property"]:
+        """Properties of the exchange, e.g. dry mass, water content, price, content of
+        specific elements or substances."""
+        return DataHelper.get_element_list(self, "property")
+
+    @property
+    def transferCoefficients(self) -> List["TransferCoefficient"]:
+        """Transfer coefficients relate specific inputs to specific outputs and record
+        the share of this specific input that contributes to this specific output."""
+        return DataHelper.get_element_list(self, "transferCoefficient")
+
+
+class Uncertainty(etree.ElementBase):
+    """Of the following uncertainty methods (lognormal, normal, ..., undefined)
+    exactly one must be selected. The TUncertainty complex type is used in several
+    places, so one dataset may contain several uncertainty elements in distinct
+    places. But each element which has uncertainty may only contain one."""
+
+
+class Property(etree.ElementBase):
+    """Format to specify properties of exchanges."""
+
+
+class TransferCoefficient(etree.ElementBase):
+    """Transfer coefficients for calculating amounts of outputs from amounts
+    of inputs."""
+
+
+class IntermediateExchange(CustomExchange):
     """Comprises intermediate product and waste inputs and outputs for the activity."""
 
 
-class ElementaryExchange(etree.ElementBase):
+class ElementaryExchange(CustomExchange):
     """Comprises elementary inputs and outputs (exchanges with the environment)
     for the activity."""
 

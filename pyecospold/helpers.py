@@ -103,7 +103,7 @@ class DataHelper:
         return list(
             map(
                 lambda x: DataHelper.TYPE_FUNC_MAP.get(attr_type, attr_type)(
-                    re.sub("[ ]{2,}", "", x.text).replace("\n", " ")
+                    re.sub("[\n]{1,}", " ", re.sub("[ ]{2,}", "", x.text))
                 ),
                 DataHelper.get_element_list(parent, attribute),
             )

@@ -34,11 +34,12 @@ from .model_v2 import FlowData as FlowDataV2
 from .model_v2 import Geography as GeographyV2
 from .model_v2 import ImpactIndicator, IntermediateExchange, MacroEconomicScenario
 from .model_v2 import ModellingAndValidation as ModellingAndValidationV2
-from .model_v2 import Parameter
+from .model_v2 import Parameter, Property
 from .model_v2 import Representativeness as RepresentativenessV2
 from .model_v2 import Review
 from .model_v2 import Technology as TechnologyV2
 from .model_v2 import TimePeriod as TimePeriodV2
+from .model_v2 import TransferCoefficient, Uncertainty
 
 
 class EcospoldLookupV1(etree.CustomElementClassLookup):
@@ -101,10 +102,13 @@ class EcospoldLookupV2(etree.CustomElementClassLookup):
             "macroEconomicScenario": MacroEconomicScenario,
             "modellingAndValidation": ModellingAndValidationV2,
             "parameter": Parameter,
+            "property": Property,
             "representativeness": RepresentativenessV2,
             "review": Review,
             "technology": TechnologyV2,
             "timePeriod": TimePeriodV2,
+            "transferCoefficient": TransferCoefficient,
+            "uncertainty": Uncertainty,
         }
         try:
             return lookupmap[name]
