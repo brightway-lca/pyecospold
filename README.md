@@ -64,21 +64,22 @@ SCHEMA_FILE="path/to/schemas/v1/EcoSpold01Dataset.xsd"
 ## Contributing
 
 Contributions are very welcome.
-To learn more, see the [Contributor Guide].
+To learn more, see the [Contributor Guide][Contributor Guide].
 
 ## License
 
-Distributed under the terms of the [BSD license license][license],
+Distributed under the terms of the [BSD license][License],
 _pyecospold_ is free and open source software.
 
 ## Issues
 
 If you encounter any problems,
-please [file an issue] along with a detailed description.
+please [file an issue][Issue Tracker] along with a detailed description.
 
 
 ## Credits
 
 
-[license]: https://github.com/sami-m-g/pyecospold/blob/main/LICENSE
-[contributor guide]: https://github.com/sami-m-g/pyecospold/blob/main/CONTRIBUTING.md
+[License]: https://github.com/sami-m-g/pyecospold/blob/main/LICENSE
+[Contributor Guide]: https://github.com/sami-m-g/pyecospold/blob/main/CONTRIBUTING.md
+[Issue Tracker]: https://github.com/sami-m-g/pyecospold/issues
