@@ -1034,7 +1034,17 @@ class DataGeneratorAndPublication(etree.ElementBase):
     of the database quality networks (see also 'qualityNetwork') are characterised
     and identified. 'countryCode' is required additionally. Only required and
     allowed if access to the dataset is restricted to a particular institute within
-    the ecoinvent quality network."""
+    the ecoinvent quality network.
+
+    Here are the codes used in ecoinvent release 2.2:
+
+        {'ART', 'B+H', 'BAUCHEM', 'CARBOTE', 'DOKA', 'ECN', 'EMPA', 'EMPA-SG', 'ENERS',
+        'EPFL', 'ESU', 'ETH S+U', 'ETH-UNS', 'HEIG-VD', 'INFRAS', 'LCS', 'OEKOSCI',
+        'PRIVAT', 'PSI', 'SBB', 'SCHLEIS', 'U+E', 'UU'}
+
+    The length 7 restriction is bizarre; just truncate and move on with your life.
+
+    """
 
     countryCode = DataHelper.create_attribute_v1("countryCode", str)
     """str: 2 letter ISO-country codes are used to indicate the country where
