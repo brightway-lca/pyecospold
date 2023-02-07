@@ -179,12 +179,12 @@ All Rights Reserved.
 				</xsd:restriction>
 			</xsd:simpleType>
 		</xsd:attribute>
-		<xsd:attribute name="name" type="TString80" use="required">
+		<xsd:attribute name="name" type="TString255" use="required">
 			<xsd:annotation>
 				<xsd:appinfo>
 					<spoldID>3702</spoldID>
 					<type>Text</type>
-					<size>80</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					Yes</multipleOccurences>
