@@ -128,7 +128,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>207</spoldID>
 					<type>Number (Decimal)</type>
-					<size>2.2</size>
+					<size>3.2</size>
 					<options></options>
 					<multipleOccurences>
 					No</multipleOccurences>
