@@ -13,7 +13,7 @@ Centre, Switzerland (Swiss Centre for Life Cycle Inventories) and ifu Hamburg Gm
 Portions created by the ecoinvent Centre and ifu Hamburg GmbH are Copyright (C) ecoinvent Centre.
 All Rights Reserved.
 -->
-<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0"
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<xsd:include schemaLocation="EcoSpold01DataTypes.xsd"></xsd:include>
 	<xsd:complexType name="TExchange">
