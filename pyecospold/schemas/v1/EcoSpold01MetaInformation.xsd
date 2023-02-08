@@ -1033,12 +1033,12 @@ All Rights Reserved.
 				(english and german), unit, classification (category, subCategory), etc..</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
-			<xsd:element name="synonym" type="TString80">
+			<xsd:element name="synonym" type="TString255">
 				<xsd:annotation>
 					<xsd:appinfo>
 						<spoldID>491</spoldID>
 						<type>Text</type>
-						<size>80</size>
+						<size>255</size>
 						<options></options>
 						<multipleOccurences>
 						Yes</multipleOccurences>
