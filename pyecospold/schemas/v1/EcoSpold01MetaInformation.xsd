@@ -457,12 +457,12 @@ All Rights Reserved.
 				</xsd:restriction>
 			</xsd:simpleType>
 		</xsd:attribute>
-		<xsd:attribute name="productionVolume" type="TString80" use="optional">
+		<xsd:attribute name="productionVolume" type="TString32000" use="optional">
 			<xsd:annotation>
 				<xsd:appinfo>
 					<spoldID>724</spoldID>
 					<type>Text</type>
-					<size>80</size>
+					<size>320000</size>
 					<options></options>
 					<multipleOccurences>
 					No</multipleOccurences>
