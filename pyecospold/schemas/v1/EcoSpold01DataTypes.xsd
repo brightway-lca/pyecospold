@@ -645,10 +645,10 @@ All Rights Reserved.
 	</xsd:simpleType>
 	<xsd:simpleType name="TCategoryName">
 		<xsd:annotation>
-			<xsd:documentation>40 letter string.</xsd:documentation>
+			<xsd:documentation>255 letter string.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:restriction base="xsd:string">
-			<xsd:maxLength value="40" fixed="false" />
+			<xsd:maxLength value="255" fixed="false" />
 			<xsd:minLength value="0" />
 		</xsd:restriction>
 	</xsd:simpleType>

@@ -100,7 +100,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>3506</spoldID>
 					<type>Text</type>
-					<size>40</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					Yes</multipleOccurences>
@@ -116,7 +116,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>3507</spoldID>
 					<type>Text</type>
-					<size>40</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					Yes</multipleOccurences>
@@ -132,7 +132,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>3509</spoldID>
 					<type>Text</type>
-					<size>40</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					Yes</multipleOccurences>
@@ -147,7 +147,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>3510</spoldID>
 					<type>Text</type>
-					<size>40</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					Yes</multipleOccurences>
