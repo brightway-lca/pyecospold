@@ -168,7 +168,7 @@ All Rights Reserved.
 				<xsd:documentation>Identifies the person together with 'name' (#5802).</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="telephone" type="TString40" use="required">
+		<xsd:attribute name="telephone" type="TString40" use="optional">
 			<xsd:annotation>
 				<xsd:appinfo>
 					<spoldID>5804</spoldID>
