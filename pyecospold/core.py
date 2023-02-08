@@ -121,7 +121,6 @@ def parse_file_v1(file: Union[str, Path, StringIO]) -> EcoSpoldV1:
 
     Parameters:
     file: the str|Path path to the Ecospold XML file or its StringIO representation.
-    schema_path: the path to the Ecospold XSD schema file.
 
     Returns an EcoSpold class representing the root of the XML file.
     """
@@ -133,7 +132,6 @@ def parse_file_v2(file: Union[str, Path, StringIO]) -> EcoSpoldV2:
 
     Parameters:
     file: the str|Path path to the Ecospold XML file or its StringIO representation.
-    schema_path: the path to the Ecospold XSD schema file.
 
     Returns an EcoSpold class representing the root of the XML file.
     """
@@ -158,6 +156,48 @@ def parse_file(
     parser = objectify.makeparser(schema=schema)
     parser.set_element_class_lookup(ecospold_lookup)
     return objectify.parse(file, parser).getroot()
+
+
+def validate_file(
+    file: Union[str, Path, StringIO],
+    schema_path: str,
+) -> Union[None, List[str]]:
+    """Validate a file against a given schema.
+
+    Needed because the default parser doesn't provide any usable error context.
+
+    Parameters:
+    file: the str|Path path to the Ecospold XML file or its StringIO representation.
+    schema_path: the path to the Ecospold XSD schema file.
+
+    Returns ``None`` if the file validates, or a list of errors as strings.
+    """
+    schema = etree.XMLSchema(file=schema_path)
+    doc = etree.parse(file)
+    if not schema.validate(doc):
+        return schema.error_log
+
+
+def validate_file_v1(file: Union[str, Path, StringIO]) -> Union[None, List[str]]:
+    """Validates an Ecospold V1 XML file to custom Ecospold classes.
+
+    Parameters:
+    file: the str|Path path to the Ecospold XML file or its StringIO representation.
+
+    Returns ``None`` if valid or a list of error strings.
+    """
+    return validate_file(file, Defaults.SCHEMA_V1_FILE)
+
+
+def validate_file_v2(file: Union[str, Path, StringIO]) -> Union[None, List[str]]:
+    """Parses an Ecospold V2 XML file to custom Ecospold classes.
+
+    Parameters:
+    file: the str|Path path to the Ecospold XML file or its StringIO representation.
+
+    Returns ``None`` if valid or a list of error strings.
+    """
+    return validate_file(file, Defaults.SCHEMA_V2_FILE)
 
 
 def parse_directory_v1(
