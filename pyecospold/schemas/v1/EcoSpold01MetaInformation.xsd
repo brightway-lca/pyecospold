@@ -13,7 +13,7 @@ Centre, Switzerland (Swiss Centre for Life Cycle Inventories) and ifu Hamburg Gm
 Portions created by the ecoinvent Centre and ifu Hamburg GmbH are Copyright (C) ecoinvent Centre.
 All Rights Reserved.
 -->
-<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0"
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<xsd:include schemaLocation="EcoSpold01DataTypes.xsd"></xsd:include>
 	<xsd:complexType name="TDataSetInformation">
@@ -457,12 +457,12 @@ All Rights Reserved.
 				</xsd:restriction>
 			</xsd:simpleType>
 		</xsd:attribute>
-		<xsd:attribute name="productionVolume" type="TString80" use="optional">
+		<xsd:attribute name="productionVolume" type="TString32000" use="optional">
 			<xsd:annotation>
 				<xsd:appinfo>
 					<spoldID>724</spoldID>
 					<type>Text</type>
-					<size>80</size>
+					<size>320000</size>
 					<options></options>
 					<multipleOccurences>
 					No</multipleOccurences>
@@ -1033,12 +1033,12 @@ All Rights Reserved.
 				(english and german), unit, classification (category, subCategory), etc..</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
-			<xsd:element name="synonym" type="TString80">
+			<xsd:element name="synonym" type="TString255">
 				<xsd:annotation>
 					<xsd:appinfo>
 						<spoldID>491</spoldID>
 						<type>Text</type>
-						<size>80</size>
+						<size>255</size>
 						<options></options>
 						<multipleOccurences>
 						Yes</multipleOccurences>
@@ -1069,12 +1069,12 @@ All Rights Reserved.
 					impact categories.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="name" type="TString80" use="required">
+		<xsd:attribute name="name" type="TString255" use="required">
 			<xsd:annotation>
 				<xsd:appinfo>
 					<spoldID>401</spoldID>
 					<type>Text</type>
-					<size>80</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					No</multipleOccurences>
@@ -1099,12 +1099,12 @@ All Rights Reserved.
 				<xsd:documentation>English is the default language in the ecoinvent quality network.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="localName" type="TString80" use="required">
+		<xsd:attribute name="localName" type="TString255" use="required">
 			<xsd:annotation>
 				<xsd:appinfo>
 					<spoldID>490</spoldID>
 					<type>Text</type>
-					<size>80</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					No</multipleOccurences>
@@ -1179,7 +1179,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>495</spoldID>
 					<type>Text</type>
-					<size>40</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					No</multipleOccurences>
@@ -1198,7 +1198,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>496</spoldID>
 					<type>Text</type>
-					<size>40</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					No</multipleOccurences>
@@ -1217,7 +1217,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>497</spoldID>
 					<type>Text</type>
-					<size>40</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					No</multipleOccurences>
@@ -1232,7 +1232,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>498</spoldID>
 					<type>Text</type>
-					<size>40</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					No</multipleOccurences>

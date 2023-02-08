@@ -27,6 +27,18 @@ You can install _pyecospold_ via [pip] from [PyPI]:
 $ pip install pyecospold
 ```
 
+## ecospold1 version 1.1
+
+This library includes a new version of the schema definitions for ecospold1. Version 1.1 includes the following changes:
+
+* Changed the length restriction on `referenceFunction.name` to 255
+* Changed the length restriction on `referenceFunction.synonym` to 255
+* Changed the length restriction on `category` and `subCategory` to 255
+* Changed the length restriction on `representativeness.productionVolume` to 32.000
+* Made `telephone` optional
+
+These changes were based on how this schema was being used by LCA software.
+
 ## Usage
 
 ```python

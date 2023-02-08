@@ -14,7 +14,7 @@ Portions created by the ecoinvent Centre and ifu Hamburg GmbH are Copyright (C) 
 All Rights Reserved.
 -->
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-	attributeFormDefault="unqualified" version="1.0">
+	attributeFormDefault="unqualified" version="1.1">
 	<xsd:simpleType name="TIndexNumber">
 		<xsd:annotation>
 			<xsd:documentation>Unique identifier. Format: Integer (32-bit) greater then zero</xsd:documentation>
@@ -168,7 +168,7 @@ All Rights Reserved.
 				<xsd:documentation>Identifies the person together with 'name' (#5802).</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="telephone" type="TString40" use="required">
+		<xsd:attribute name="telephone" type="TString40" use="optional">
 			<xsd:annotation>
 				<xsd:appinfo>
 					<spoldID>5804</spoldID>
@@ -645,10 +645,10 @@ All Rights Reserved.
 	</xsd:simpleType>
 	<xsd:simpleType name="TCategoryName">
 		<xsd:annotation>
-			<xsd:documentation>40 letter string.</xsd:documentation>
+			<xsd:documentation>255 letter string.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:restriction base="xsd:string">
-			<xsd:maxLength value="40" fixed="false" />
+			<xsd:maxLength value="255" fixed="false" />
 			<xsd:minLength value="0" />
 		</xsd:restriction>
 	</xsd:simpleType>
