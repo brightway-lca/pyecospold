@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:exslt="http://exslt.org/common"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>XML Schema Documentation</title><meta charset="UTF-8"></meta><link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"></link><style type="text/css">
+
+
+nav, section {
+  display: block; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+
+/*dl {
+  display: grid;
+  grid-template-columns: max-content auto; }
+  dl dt p, dl dd p {
+    margin-top: 0; }
+  dl dt {
+    grid-column-start: 1; }
+  dl dd {
+    grid-column-start: 2; }
+*/
+
+body {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.4em;
+  color: -internal-root-color;
+  background-color: #ffffff; }
+  body main {
+    margin: 0 3em 0 6em; }
+  body main {
+    margin: 0; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1.3; }
+
+
+body {
+  margin-left: 270px;
+  margin-right: 2em; }
+
+main {
+  padding-left: 4em;
+  padding-right: 2em; }
+
+.title-section{
+  padding-left: 4em;
+  padding-top: 2em; }
+
+
+
+
+
+h2 p {
+  display: inline; }
+
+
+
+/* Navigation*/
+#toc {
+  font-weight: 400; }
+  #toc a {
+   color: black;
+   text-decoration-color: black; }
+  #toc ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    #toc ul li a {
+      padding: 5px 10px; }
+    #toc ul a {
+      text-decoration: none;
+      display: block; }
+      #toc ul a:hover {
+        box-shadow: none;
+        color: black; }
+  #toc .h2 {
+    padding-left: 30px; }
+  #toc .h3 {
+    padding-left: 50px; }
+  #toc .toc-active, #toc li:hover {
+    background: #f7f7f7;
+    box-shadow: inset -5px 0px 10px -5px #f7f7f7 !important; }
+    #toc .toc-active a, #toc li:hover a {
+      color: black; }
+  @media print {
+    #toc .toc-active, #toc li:hover {
+      background: white;
+      box-shadow: none !important; }
+    #toc li:hover a {
+      color: black; } }
+  @media screen and (max-width: 768px) {
+    #toc {
+      padding: 0 1.5em;
+      overflow: visible; } }
+  #toc .toc-active,
+  #toc li:hover {
+    box-shadow: 0px 1px 0px 0px black !important;
+    background: none; }
+  #toc li:before {
+    content: " ";
+    display: none; }
+
+nav {
+  line-height: 1.2em; }
+  @media screen and (min-width: 768px) {
+    nav {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 270px;
+      font-size: 0.9em;
+      overflow: auto;
+      padding: 0 0 0 0px;
+      background-color: #fefefe; } }
+  @media print {
+    nav {
+      position: relative;
+      width: auto;
+      font-size: 0.9em;
+      overflow: auto;
+      padding: 0;
+      margin-right: 0;
+      background-color: white; } }
+#toggle {
+  margin-left: -4em;
+  margin-top: -2em; }
+  @media screen and (min-width: 768px) {
+    #toggle {
+      position: fixed;
+      height: 100%;
+      width: 20px;
+      font-weight: bold;
+      background-color: #d8e4ff;
+      color: black !important;
+      cursor: pointer;
+      z-index: 100; }
+      #toggle span {
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%); } }
+  @media screen and (max-width: 768px) {
+    #toggle {
+      display: none; } }
+  @media print {
+    #toggle {
+      display: none; } }
+@media screen and (min-width: 768px) {
+  .container {
+    padding-left: 360px; }
+  .rule.toc {
+    display: none; }
+  h1.toc-contents {
+    margin-top: 1em; }
+  ul#toc-list {
+    padding: 0;
+    margin: 0; } }
+
+
+ul, ol {
+  margin-left: 2em; }
+
+#toc-list ul {
+  margin-bottom: 0.25em; }
+
+#toc-list ol li {
+  list-style-type: none; }
+
+
+/* XS3P specific CSS */
+body {
+    background-color: #FFF;
+    
+}
+
+.nav > li.active {
+    background-color: #FFF;
+}
+.nav > li > a:hover {
+   
+    background-color: rgb(0,0,0, 0.05);
+}
+
+.nav-sub-item > a {
+    padding-left: 30px !important;
+}
+
+
+.nav-sub-item strong {
+      font-weight: normal; }
+
+//.nav-list-elements
+.nav {
+   //background-color: #efe;
+   background-color: #e4ecff;
+}
+
+.xs3p-sidenav {
+    //background-color: #efe;
+    background-color: #e4ecff;
+}
+
+code {
+    color: #333;
+}
+
+a.name {
+    padding-top: 65px;
+}
+
+a:not([href]) {
+   color:#1c476c;
+}
+
+a:not([href]):hover {
+  text-decoration: none;
+}
+
+
+h3.xs3p-subsection-heading {
+    margin-bottom: 30px;
+}
+
+section, #top {
+    margin-top: -65px;
+    padding-top: 65px;
+}
+
+pre {
+    padding: 5px;
+}
+
+.xs3p-in-panel-table {
+    margin-bottom: 0px;
+}
+
+.xs3p-collapse-button {
+    font-size: 8pt;
+}
+.panel-heading .xs3p-panel-title:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e114";
+    float: left;
+    color: grey;
+    margin-right: 10px;
+}
+.panel-heading .xs3p-panel-title.collapsed:after {
+    content: "\e080";
+}
+.panel-info > .panel-heading .xs3p-panel-title:after {
+    color: white;
+}
+.xs3p-panel-help {
+    color: #888888;
+    cursor: pointer;
+}
+
+.panel-group {
+    margin-bottom: 20px;
+}
+
+.btn-doc {
+    padding: 0px;
+    border: 0px none;
+    background: none repeat scroll 0% 0% transparent;
+    line-height: 1;
+    font-size: 12px;
+}
+
+.unpre {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    white-space: normal;
+    word-break: normal;
+    word-wrap: normal;
+}
+
+.popover {
+    max-width: 400px;
+}
+
+// Syntax highlighting
+.codehilite .err {color: #FFF; background-color: #D2322D; font-weight: bold;} /* Error */
+.codehilite .c   {color: #999;}
+.codehilite .cs  {color: #999; font-style: italic;}
+.codehilite .nt  {color: #2F6F9F;}
+.codehilite .nn  {color: #39B3D7;}
+.codehilite .na  {color: #47A447;}
+.codehilite .s   {color: #D2322D;}
+.codehilite a       {color: inherit !important; text-decoration: underline !important;}
+.codehilite a:hover {opacity: 0.7 !important;}
+
+dl {
+  margin-bottom: 10px;
+}
+
+dt {
+	font-weight: normal;
+
+	margin-bottom: 10px;
+}
+
+dt.header{
+	font-weight: 700;
+}
+
+.dl-horizontal dt {
+	white-space: normal;
+}
+
+dd.header{
+	font-weight: 700;
+}
+
+dd ul {
+	margin-left: 0em;
+}
+
+.bs-callout {
+   padding: 20px;
+   padding-top: 10px;
+   padding-bottom: 5px;
+   margin: 20px 0;
+   border: 1px solid #eee;
+   border-left-width: 5px;
+   border-radius: 3px;
+}
+.bs-callout-danger {
+   border-left-color: #d9534f;
+}
+.bs-callout-warning {
+   border-left-color: #f0ad4e;
+}
+.bs-callout-info {
+   border-left-color: #5bc0de;
+}
+.bs-callout h4 {
+   margin-top: 0;
+   margin-bottom: 5px;
+}
+.bs-callout-danger h4 {
+   color: #d9534f;
+}
+.bs-callout-warning h4 {
+   color: #f0ad4e;
+}
+.bs-callout-info h4 {
+   color: black;
+   font-size: 11pt;
+}
+
+
+      </style><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js">
+               //Import JQuery, required for Bootstrap
+            </script><script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js">
+               // Import Bootstrap JS code
+            </script><script src="https://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js">
+              // Import Markdown converter for comments processing
+            </script></head><body lang="en" xml:lang="en"><div class="title-section"><div id="toggle"><span>&lt;</span></div><div class="modal fade referenceFunction" id="idp105544916429032-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916429032-label">Element referenceFunction</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916429032-hidden"><div class="hidden" id="idp105544916429032-hidden-doc-raw">Comprises information which identifies and characterises one
+						particular dataset (=unit process or system terminated).</div><div class="xs3p-doc" id="idp105544916429032-hidden-doc"> </div></div></div></div><div class="modal fade geography" id="idp105544916436840-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916436840-label">Element geography</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916436840-hidden"><div class="hidden" id="idp105544916436840-hidden-doc-raw">Describes the geographic area for which the dataset is
+						supposed to be valid. It is the supply region (not the production region) of
+						the product service at issue. It helps the user to judge the geographical
+						suitability of the process (or impact category) dataset for his or her
+						application (purpose).</div><div class="xs3p-doc" id="idp105544916436840-hidden-doc"> </div></div></div></div><div class="modal fade technology" id="idp105544916433896-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916433896-label">Element technology</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916433896-hidden"><div class="hidden" id="idp105544916433896-hidden-doc-raw">Describes the technological properties of the unit process.
+						It helps the user to judge the technical suitability of the process dataset
+						for his or her application (purpose).</div><div class="xs3p-doc" id="idp105544916433896-hidden-doc"> </div></div></div></div><div class="modal fade timePeriod" id="idp105544916430696-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916430696-label">Element timePeriod</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916430696-hidden"><div class="hidden" id="idp105544916430696-hidden-doc-raw">Characterises the temporal properties of the unit process (or
+						system terminated) at issue. It helps the user to judge the temporal
+						suitability of the process dataset for his or her application (purpose).</div><div class="xs3p-doc" id="idp105544916430696-hidden-doc"> </div></div></div></div><div class="modal fade dataSetInformation" id="idp105544916427240-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916427240-label">Element dataSetInformation</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916427240-hidden"><div class="hidden" id="idp105544916427240-hidden-doc-raw">Contains administrative information about the dataset
+						(version number, language and localLanguage used).</div><div class="xs3p-doc" id="idp105544916427240-hidden-doc"> </div></div></div></div><div class="modal fade representativeness" id="idp105544916388200-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916388200-label">Element representativeness</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916388200-hidden"><div class="hidden" id="idp105544916388200-hidden-doc-raw">Contains information about the representativeness of the unit
+						process data (meta information and flow data).</div><div class="xs3p-doc" id="idp105544916388200-hidden-doc"> </div></div></div></div><div class="modal fade source" id="idp105544916384616-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916384616-label">Element source</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916384616-hidden"><div class="hidden" id="idp105544916384616-hidden-doc-raw">Lists and describes the sources where the dataset is
+						documented (final report in the ECOINVENT quality network series).</div><div class="xs3p-doc" id="idp105544916384616-hidden-doc"> </div></div></div></div><div class="modal fade validation" id="idp105544916380648-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916380648-label">Element validation</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916380648-hidden"><div class="hidden" id="idp105544916380648-hidden-doc-raw">Contains information about the reviewers' comments on the
+						dataset content.</div><div class="xs3p-doc" id="idp105544916380648-hidden-doc"> </div></div></div></div><div class="modal fade dataEntryBy" id="idp105544916400744-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916400744-label">Element dataEntryBy</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916400744-hidden"><div class="hidden" id="idp105544916400744-hidden-doc-raw">Contains information about the person and the quality network
+						the person belongs to.</div><div class="xs3p-doc" id="idp105544916400744-hidden-doc"> </div></div></div></div><div class="modal fade dataGeneratorAndPublication" id="idp105544916405480-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916405480-label">Element dataGeneratorAndPublication</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916405480-hidden"><div class="hidden" id="idp105544916405480-hidden-doc-raw">Contains information about the generator of the dataset in
+						the database, whether the dataset has been published (and how) and about
+						copyright and the accessibility of the dataset (public or restricted to ETH
+						domain, ECOINVENT, or a particular institute of ECOINVENT.</div><div class="xs3p-doc" id="idp105544916405480-hidden-doc"> </div></div></div></div><div class="modal fade person" id="idp105544916401512-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916401512-label">Element person</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916401512-hidden"><div class="hidden" id="idp105544916401512-hidden-doc-raw">Contains a list of persons with their addresses.</div><div class="xs3p-doc" id="idp105544916401512-hidden-doc"> </div></div></div></div><div class="modal fade processInformation" id="idp105544916393192-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916393192-label">Element processInformation</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916393192-hidden"><div class="hidden" id="idp105544916393192-hidden-doc-raw">Contains content-related metainformation for the unit
+						process.</div><div class="xs3p-doc" id="idp105544916393192-hidden-doc"> </div></div></div></div><div class="modal fade modellingAndValidation" id="idp105544916390760-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544916390760-label">Element modellingAndValidation</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544916390760-hidden"><div class="hidden" id="idp105544916390760-hidden-doc-raw">Contains metainformation about how unit processes are
+						modelled and about the review/validation of the dataset.</div><div class="xs3p-doc" id="idp105544916390760-hidden-doc"> </div></div></div></div><div class="modal fade administrativeInformation" id="idp105544918323304-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544918323304-label">Element administrativeInformation</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544918323304-hidden"><div class="hidden" id="idp105544918323304-hidden-doc-raw">Contains the administrative information about the dataset at
+						issue: type of dataset (unit process, elementary flow, impact category,
+						multi-output process) timestamp, version and internalVersion number as well
+						as language and localLanguage code.</div><div class="xs3p-doc" id="idp105544918323304-hidden-doc"> </div></div></div></div><div class="modal fade exchange" id="idp105544918316008-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544918316008-label">Element exchange</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544918316008-hidden"><div class="hidden" id="idp105544918316008-hidden-doc-raw">comprises all inputs and outputs (both elementary flows and
+						intermediate product flows) registered in a unit process.</div><div class="xs3p-doc" id="idp105544918316008-hidden-doc"> </div></div></div></div><div class="modal fade allocation" id="idp105544918310760-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544918310760-label">Element allocation</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544918310760-hidden"><div class="hidden" id="idp105544918310760-hidden-doc-raw">comprises all referenceToInputOutput.</div><div class="xs3p-doc" id="idp105544918310760-hidden-doc"> </div></div></div></div><div class="modal fade metaInformation" id="idp105544918336360-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544918336360-label">Element metaInformation</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544918336360-hidden"><div class="hidden" id="idp105544918336360-hidden-doc-raw">meta information contains information about the process (its
+						name, (functional) unit, classification, technology, geography, time, etc.),
+						about modelling assumptions and validation details and about dataset
+						administration (version number, kind of dataset, language).</div><div class="xs3p-doc" id="idp105544918336360-hidden-doc"> </div></div></div></div><div class="modal fade flowData" id="idp105544918331752-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544918331752-label">Element flowData</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544918331752-hidden"><div class="hidden" id="idp105544918331752-hidden-doc-raw">contains information about inputs and outputs (to and from
+						nature as well as to and from technosphere) and information about allocation
+						(flows to be allocated, co-products to be allocated to, allocation factors).</div><div class="xs3p-doc" id="idp105544918331752-hidden-doc"> </div></div></div></div><div class="modal fade dataset" id="idp105544918397416-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544918397416-label">Element dataset</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544918397416-hidden"><div class="hidden" id="idp105544918397416-hidden-doc-raw">a dataset describes LCI related information of a unit process
+						or a terminated system comprising metaInformation (description of the
+						process) and flowData (quantified inputs and outputs and allocation factors,
+						if any).</div><div class="xs3p-doc" id="idp105544918397416-hidden-doc"> </div></div></div></div><div class="modal fade ecoSpold" id="idp105544918364136-popup" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title" id="idp105544918364136-label">Element ecoSpold</h4></div><div class="modal-body"><div class="annotation documentation" id="wdoc-idp105544918364136-hidden"><div class="hidden" id="idp105544918364136-hidden-doc-raw">the data (exchange) format of the ECOINVENT quality network.</div><div class="xs3p-doc" id="idp105544918364136-hidden-doc"> </div></div></div></div><h1><a id="top">XML Schema Documentation</a></h1><section id="SectionSchemaProperties"><h2><a id="SchemaProperties">Schema Document Properties</a></h2><dl class="dl-horizontal"><dt class="header"><a title="Look up 'Target Namespace' in glossary" href="#term_TargetNS">Target Namespace</a></dt><dd class=""><span class="targetNS">http://www.EcoInvent.org/EcoSpold01</span></dd><dt class="header">Version</dt><dd class="">1.1</dd><dt class="header">Element and Attribute Namespaces</dt><dd class=""><ul><li>Global element and attribute declarations belong to this schema's target namespace.</li><li>By default, local element declarations belong to this schema's target namespace.</li><li>By default, local attribute declarations have no namespace.</li></ul></dd><dt class="header">Schema Composition</dt><dd class=""><ul><li>This schema includes components from the following schema document(s):<ul><li>EcoSpold01DataTypes.xsd</li><li>EcoSpold01MetaInformation.xsd</li><li>EcoSpold01FlowData.xsd</li></ul></li></ul></dd></dl><dl class="dl-horizontal"><dt>Documentation</dt><dd><div class="annotation appinfo"><h4>Application Data</h4>
+			<code class="test">&lt;internalSchemaVersion&gt; <div class="fakeclass3" style="margin-left: 3em">1.0</div>&lt;/internalSchemaVersion&gt;</code>
+		<br></br></div></dd></dl><h4>Declared Namespaces:</h4><dl class="dl-horizontal"><dt class="header">Prefix</dt><dd class="header">Namespace</dd><dt class=""><a id="ns_">Default namespace</a></dt><dd class=""><span class="targetNS">http://www.EcoInvent.org/EcoSpold01</span></dd><dt class=""><a id="ns_xml">xml</a></dt><dd class="">http://www.w3.org/XML/1998/namespace</dd><dt class=""><a id="ns_xsd">xsd</a></dt><dd class="">http://www.w3.org/2001/XMLSchema</dd><dt class=""><a id="ns_es">es</a></dt><dd class=""><span class="targetNS">http://www.EcoInvent.org/EcoSpold01</span></dd></dl><div class="bs-callout bs-callout-info"><h4>Schema Component Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="The Schema Component Representation table below displays the underlying XML representation of the schema component. (Annotations are not shown.)"><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:schema</span> <span class="na">targetNamespace=</span><span class="s">"http://www.EcoInvent.org/EcoSpold01"</span> <span class="na">elementFormDefault=</span><span class="s">"qualified"</span> <span class="na">attributeFormDefault=</span><span class="s">"unqualified"</span> <span class="na">version=</span><span class="s">"1.1"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:include</span> <span class="na">schemaLocation=</span><span class="s">"EcoSpold01DataTypes.xsd"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:include</span> <span class="na">schemaLocation=</span><span class="s">"EcoSpold01MetaInformation.xsd"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:include</span> <span class="na">schemaLocation=</span><span class="s">"EcoSpold01FlowData.xsd"</span><span class="nt">/&gt;</span>
+<span class="scContent">...</span>
+<span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:schema&gt;</span>
+</pre></div><div style="text-align: right; clear: both;"><a href="#top" title="Go to top of page"><span class="glyphicon glyphicon-chevron-up"> </span></a></div><hr></hr></section><section id="SectionSchemaElements"><h2><a id="SchemaElements">Elements</a></h2><h3 class="xs3p-subsection-heading">Element: <a id="element_ecoSpold"></a><strong>ecoSpold</strong></h3><object data="diagrams/ecoSpold.svg" type="image/svg+xml"></object><dl class="dl-horizontal"><dt class="header">Type</dt><dd class=""><span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TEcoSpold" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TEcoSpold&quot; type definition could not be found.');">TEcoSpold</a></span></dd></dl><dl class="dl-horizontal"><dt>Documentation</dt><dd><div class="annotation documentation" id="wdoc-idp105544918364136"><div class="hidden" id="idp105544918364136-doc-raw">the data (exchange) format of the ECOINVENT quality network.</div><div class="xs3p-doc" id="idp105544918364136-doc"> </div></div></dd></dl><div class="bs-callout bs-callout-info"><h4>XML Instance Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="right" data-html="true" data-content="The XML Instance Representation table shows the schema component's content as an XML instance.
+         &lt;ul&gt;
+         &lt;li&gt;The minimum and maximum occurrence of elements and attributes are provided in square brackets, e.g. [0..1].&lt;/li&gt;
+         &lt;li&gt;Model group information are shown in gray, e.g. Start Choice ... End Choice.&lt;/li&gt;
+         &lt;li&gt;For type derivations, the elements and attributes that have been added to or changed from the base type's content are shown in &lt;strong&gt;bold&lt;/strong&gt;&lt;/li&gt;
+         &lt;li&gt;If an element/attribute has a fixed value, the fixed value is shown in green.&lt;/li&gt;
+         &lt;li&gt;More stuff&lt;/li&gt;
+         &lt;li&gt;If a local element/attribute has documentation, it will be displayed in a window that pops up when the question mark inside the attribute or next to the element is clicked.&lt;/li&gt;
+         &lt;/ul&gt;
+      "><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;ecoSpold&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TEcoSpold" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TEcoSpold&quot; type definition could not be found.');">TEcoSpold</a></span> 
+   <span class="c">&lt;!--
+    <a title="Look up 'Uniqueness' in glossary" href="#term_Unique">Uniqueness</a> Constraint - <strong><a id="key_pkIndexNumber">pkIndexNumber</a></strong>
+    Selector - <strong>es:dataset</strong>
+    Field(s) - <strong>@number</strong>
+   --&gt;
+</span><span class="nt">&lt;/ecoSpold&gt;</span>
+</pre></div><div class="bs-callout bs-callout-info"><h4>Schema Component Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="The Schema Component Representation table below displays the underlying XML representation of the schema component. (Annotations are not shown.)"><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"ecoSpold"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TEcoSpold" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TEcoSpold&quot; type definition could not be found.');">TEcoSpold</a></span>"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:unique</span> <span class="na">name=</span><span class="s">"pkIndexNumber"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:selector</span> <span class="na">xpath=</span><span class="s">"es:dataset"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:field</span> <span class="na">xpath=</span><span class="s">"@number"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:unique&gt;</span>
+<span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element&gt;</span>
+</pre></div><div style="text-align: right; clear: both;"><a href="#top" title="Go to top of page"><span class="glyphicon glyphicon-chevron-up"> </span></a></div><hr></hr></section><section id="SectionSchemaComplexTypes"><h2><a id="SchemaComplexTypes">Complex Types</a></h2><h3 class="xs3p-subsection-heading">Complex Type: <a id="type_TAdministrativeInformation"></a><strong>TAdministrativeInformation</strong></h3><dl class="dl-horizontal"><dt>Documentation</dt><dd><div class="annotation documentation" id="wdoc-idp105544916375784"><div class="hidden" id="idp105544916375784-doc-raw">Contains information about the person that compiled and entered the
+				dataset in the database and about kind of publication and the accessibility of the
+				dataset.</div><div class="xs3p-doc" id="idp105544916375784-doc"> </div></div></dd></dl><div class="bs-callout bs-callout-info"><h4>XML Instance Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="right" data-html="true" data-content="The XML Instance Representation table shows the schema component's content as an XML instance.
+         &lt;ul&gt;
+         &lt;li&gt;The minimum and maximum occurrence of elements and attributes are provided in square brackets, e.g. [0..1].&lt;/li&gt;
+         &lt;li&gt;Model group information are shown in gray, e.g. Start Choice ... End Choice.&lt;/li&gt;
+         &lt;li&gt;For type derivations, the elements and attributes that have been added to or changed from the base type's content are shown in &lt;strong&gt;bold&lt;/strong&gt;&lt;/li&gt;
+         &lt;li&gt;If an element/attribute has a fixed value, the fixed value is shown in green.&lt;/li&gt;
+         &lt;li&gt;More stuff&lt;/li&gt;
+         &lt;li&gt;If a local element/attribute has documentation, it will be displayed in a window that pops up when the question mark inside the attribute or next to the element is clicked.&lt;/li&gt;
+         &lt;/ul&gt;
+      "><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;...</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;dataEntryBy&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TDataEntryBy" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TDataEntryBy&quot; type definition could not be found.');">TDataEntryBy</a></span> <span class="nt">&lt;/dataEntryBy&gt;</span> <span class="cs">[1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916400744-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="nt">&lt;dataGeneratorAndPublication&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TDataGeneratorAndPublication" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TDataGeneratorAndPublication&quot; type definition could not be found.');">TDataGeneratorAndPublication</a></span> <span class="nt">&lt;/dataGeneratorAndPublication&gt;</span> <span class="cs">[1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916405480-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="nt">&lt;person&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TPerson" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TPerson&quot; type definition could not be found.');">TPerson</a></span> <span class="nt">&lt;/person&gt;</span> <span class="cs">[1..*]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916401512-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="cs">Allow any elements from a namespace other than this schema's namespace (lax validation). <span class="cs">[0..*]</span></span>
+<span class="nt">&lt;/...&gt;</span>
+</pre></div><div class="bs-callout bs-callout-info"><h4>Schema Component Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="The Schema Component Representation table below displays the underlying XML representation of the schema component. (Annotations are not shown.)"><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType</span> <span class="na">name=</span><span class="s">"TAdministrativeInformation"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"dataEntryBy"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TDataEntryBy" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TDataEntryBy&quot; type definition could not be found.');">TDataEntryBy</a></span>"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"dataGeneratorAndPublication"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TDataGeneratorAndPublication" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TDataGeneratorAndPublication&quot; type definition could not be found.');">TDataGeneratorAndPublication</a></span>"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"person"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TPerson" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TPerson&quot; type definition could not be found.');">TPerson</a></span>"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:any</span> <span class="na">namespace=</span><span class="s">"##other"</span> <span class="na">processContents=</span><span class="s">"lax"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence&gt;</span>
+<span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType&gt;</span>
+</pre></div><div style="text-align: right; clear: both;"><a href="#top" title="Go to top of page"><span class="glyphicon glyphicon-chevron-up"> </span></a></div><hr></hr><h3 class="xs3p-subsection-heading">Complex Type: <a id="type_TDataset"></a><strong>TDataset</strong></h3><dl class="dl-horizontal"><dt>Documentation</dt><dd><div class="annotation documentation" id="wdoc-idp105544918339304"><div class="hidden" id="idp105544918339304-doc-raw">contains information about one individual unit process (or terminated
+				system). Information is divided into metaInformation and flowData.</div><div class="xs3p-doc" id="idp105544918339304-doc"> </div></div></dd></dl><div class="bs-callout bs-callout-info"><h4>XML Instance Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="right" data-html="true" data-content="The XML Instance Representation table shows the schema component's content as an XML instance.
+         &lt;ul&gt;
+         &lt;li&gt;The minimum and maximum occurrence of elements and attributes are provided in square brackets, e.g. [0..1].&lt;/li&gt;
+         &lt;li&gt;Model group information are shown in gray, e.g. Start Choice ... End Choice.&lt;/li&gt;
+         &lt;li&gt;For type derivations, the elements and attributes that have been added to or changed from the base type's content are shown in &lt;strong&gt;bold&lt;/strong&gt;&lt;/li&gt;
+         &lt;li&gt;If an element/attribute has a fixed value, the fixed value is shown in green.&lt;/li&gt;
+         &lt;li&gt;More stuff&lt;/li&gt;
+         &lt;li&gt;If a local element/attribute has documentation, it will be displayed in a window that pops up when the question mark inside the attribute or next to the element is clicked.&lt;/li&gt;
+         &lt;/ul&gt;
+      "><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;...</span>
+ <span class="na">number=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TIndexNumber" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TIndexNumber&quot; type definition could not be found.');">TIndexNumber</a></span>"</span> <span class="cs">[1]</span>
+ <span class="na">internalSchemaVersion=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>"</span> <span class="cs">[0..1]</span>
+ <span class="na">generator=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TString255" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TString255&quot; type definition could not be found.');">TString255</a></span>"</span> <span class="cs">[1]</span>
+ <span class="na">timestamp=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:dateTime</span>"</span> <span class="cs">[1]</span>
+ <span class="na">validCompanyCodes=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>"</span> <span class="cs">[0..1]</span>
+ <span class="na">validRegionalCodes=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>"</span> <span class="cs">[0..1]</span>
+ <span class="na">validCategories=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>"</span> <span class="cs">[0..1]</span>
+ <span class="na">validUnits=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>"</span> <span class="cs">[0..1]</span>
+<span class="nt">&gt;</span>
+   <span class="nt">&lt;metaInformation&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TMetaInformation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TMetaInformation&quot; type definition could not be found.');">TMetaInformation</a></span> <span class="nt">&lt;/metaInformation&gt;</span> <span class="cs">[1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544918336360-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="nt">&lt;flowData&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TFlowData" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TFlowData&quot; type definition could not be found.');">TFlowData</a></span> <span class="nt">&lt;/flowData&gt;</span> <span class="cs">[1..*]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544918331752-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="cs">Allow any elements from a namespace other than this schema's namespace (lax validation). <span class="cs">[0..*]</span></span>
+<span class="nt">&lt;/...&gt;</span>
+</pre></div><div class="bs-callout bs-callout-info"><h4>Schema Component Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="The Schema Component Representation table below displays the underlying XML representation of the schema component. (Annotations are not shown.)"><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType</span> <span class="na">name=</span><span class="s">"TDataset"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"metaInformation"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TMetaInformation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TMetaInformation&quot; type definition could not be found.');">TMetaInformation</a></span>"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"flowData"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TFlowData" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TFlowData&quot; type definition could not be found.');">TFlowData</a></span>"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:any</span> <span class="na">namespace=</span><span class="s">"##other"</span> <span class="na">processContents=</span><span class="s">"lax"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:attribute</span> <span class="na">name=</span><span class="s">"number"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TIndexNumber" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TIndexNumber&quot; type definition could not be found.');">TIndexNumber</a></span>"</span> <span class="na">use=</span><span class="s">"required"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:attribute</span> <span class="na">name=</span><span class="s">"internalSchemaVersion"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>"</span> <span class="na">use=</span><span class="s">"optional"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:attribute</span> <span class="na">name=</span><span class="s">"generator"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TString255" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TString255&quot; type definition could not be found.');">TString255</a></span>"</span> <span class="na">use=</span><span class="s">"required"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:attribute</span> <span class="na">name=</span><span class="s">"timestamp"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:dateTime</span>"</span> <span class="na">use=</span><span class="s">"required"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:attribute</span> <span class="na">name=</span><span class="s">"validCompanyCodes"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>"</span> <span class="na">use=</span><span class="s">"optional"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:attribute</span> <span class="na">name=</span><span class="s">"validRegionalCodes"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>"</span> <span class="na">use=</span><span class="s">"optional"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:attribute</span> <span class="na">name=</span><span class="s">"validCategories"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>"</span> <span class="na">use=</span><span class="s">"optional"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:attribute</span> <span class="na">name=</span><span class="s">"validUnits"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>"</span> <span class="na">use=</span><span class="s">"optional"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType&gt;</span>
+</pre></div><div style="text-align: right; clear: both;"><a href="#top" title="Go to top of page"><span class="glyphicon glyphicon-chevron-up"> </span></a></div><hr></hr><h3 class="xs3p-subsection-heading">Complex Type: <a id="type_TEcoSpold"></a><strong>TEcoSpold</strong></h3><dl class="dl-horizontal"><dt>Documentation</dt><dd><div class="annotation documentation" id="wdoc-idp105544918401512"><div class="hidden" id="idp105544918401512-doc-raw">the data (exchange) format of the ECOINVENT quality network.</div><div class="xs3p-doc" id="idp105544918401512-doc"> </div></div></dd></dl><div class="bs-callout bs-callout-info"><h4>XML Instance Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="right" data-html="true" data-content="The XML Instance Representation table shows the schema component's content as an XML instance.
+         &lt;ul&gt;
+         &lt;li&gt;The minimum and maximum occurrence of elements and attributes are provided in square brackets, e.g. [0..1].&lt;/li&gt;
+         &lt;li&gt;Model group information are shown in gray, e.g. Start Choice ... End Choice.&lt;/li&gt;
+         &lt;li&gt;For type derivations, the elements and attributes that have been added to or changed from the base type's content are shown in &lt;strong&gt;bold&lt;/strong&gt;&lt;/li&gt;
+         &lt;li&gt;If an element/attribute has a fixed value, the fixed value is shown in green.&lt;/li&gt;
+         &lt;li&gt;More stuff&lt;/li&gt;
+         &lt;li&gt;If a local element/attribute has documentation, it will be displayed in a window that pops up when the question mark inside the attribute or next to the element is clicked.&lt;/li&gt;
+         &lt;/ul&gt;
+      "><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;...</span>
+ <span class="na">validationId=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:integer</span>"</span> <span class="cs">[0..1]</span>
+ <span class="na">validationStatus=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>"</span> <span class="cs">[0..1]</span>
+<span class="nt">&gt;</span>
+   <span class="nt">&lt;dataset&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TDataset" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TDataset&quot; type definition could not be found.');">TDataset</a></span> 
+      <span class="c">&lt;!--
+       <a title="Look up 'Uniqueness' in glossary" href="#term_Unique">Uniqueness</a> Constraint - <strong><a id="key_pkPersonNumber">pkPersonNumber</a></strong>
+       Selector - <strong>es:metaInformation/es:administrativeInformation/es:person</strong>
+       Field(s) - <strong>@number</strong>
+      --&gt;
+</span>      <span class="c">&lt;!--
+       <a title="Look up 'Uniqueness' in glossary" href="#term_Unique">Uniqueness</a> Constraint - <strong><a id="key_pkSourceNumber">pkSourceNumber</a></strong>
+       Selector - <strong>es:metaInformation/es:modellingAndValidation/es:source</strong>
+       Field(s) - <strong>@number</strong>
+      --&gt;
+</span>      <span class="c">&lt;!--
+       <a title="Look up 'Uniqueness' in glossary" href="#term_Unique">Uniqueness</a> Constraint - <strong><a id="key_pkExchangeNumber">pkExchangeNumber</a></strong>
+       Selector - <strong>es:flowData/es:exchange</strong>
+       Field(s) - <strong>@number</strong>
+      --&gt;
+</span>      <span class="c">&lt;!--
+       <a title="Look up 'Key Reference' in glossary" href="#term_KeyRef">Key Reference</a> Constraint - <strong>fkDataEntryByPerson</strong>
+       Selector - <strong>es:metaInformation/es:administrativeInformation/es:dataEntryBy</strong>
+       Field(s) - <strong>@person</strong>
+       Refers to - <a title='Jump to "pkPersonNumber" uniqueness/key constraint definition.' href="#key_pkPersonNumber">pkPersonNumber</a>
+      --&gt;
+</span>      <span class="c">&lt;!--
+       <a title="Look up 'Key Reference' in glossary" href="#term_KeyRef">Key Reference</a> Constraint - <strong>fkDataGenerationAndPublication</strong>
+       Selector - <strong>es:metaInformation/es:administrativeInformation/es:dataGeneratorAndPublication</strong>
+       Field(s) - <strong>@person</strong>
+       Refers to - <a title='Jump to "pkPersonNumber" uniqueness/key constraint definition.' href="#key_pkPersonNumber">pkPersonNumber</a>
+      --&gt;
+</span>      <span class="c">&lt;!--
+       <a title="Look up 'Key Reference' in glossary" href="#term_KeyRef">Key Reference</a> Constraint - <strong>fkDataGenerationAndPublicationSource</strong>
+       Selector - <strong>es:metaInformation/es:administrativeInformation/es:dataGeneratorAndPublication</strong>
+       Field(s) - <strong>@referenceToPublishedSource</strong>
+       Refers to - <a title='Jump to "pkSourceNumber" uniqueness/key constraint definition.' href="#key_pkSourceNumber">pkSourceNumber</a>
+      --&gt;
+</span>      <span class="c">&lt;!--
+       <a title="Look up 'Key Reference' in glossary" href="#term_KeyRef">Key Reference</a> Constraint - <strong>fkAllocationExchange</strong>
+       Selector - <strong>es:flowData/es:allocation</strong>
+       Field(s) - <strong>@referenceToCoProduct</strong>
+       Refers to - <a title='Jump to "pkExchangeNumber" uniqueness/key constraint definition.' href="#key_pkExchangeNumber">pkExchangeNumber</a>
+      --&gt;
+</span>      <span class="c">&lt;!--
+       <a title="Look up 'Key Reference' in glossary" href="#term_KeyRef">Key Reference</a> Constraint - <strong>fkAllocationExchangeInOut</strong>
+       Selector - <strong>es:flowData/es:allocation/es:referenceToInputOutput</strong>
+       Field(s) - <strong>.</strong>
+       Refers to - <a title='Jump to "pkExchangeNumber" uniqueness/key constraint definition.' href="#key_pkExchangeNumber">pkExchangeNumber</a>
+      --&gt;
+</span>      <span class="c">&lt;!--
+       <a title="Look up 'Key Reference' in glossary" href="#term_KeyRef">Key Reference</a> Constraint - <strong>fkValidationPerson</strong>
+       Selector - <strong>es:metaInformation/es:modellingAndValidation/es:validation</strong>
+       Field(s) - <strong>@proofReadingValidator</strong>
+       Refers to - <a title='Jump to "pkPersonNumber" uniqueness/key constraint definition.' href="#key_pkPersonNumber">pkPersonNumber</a>
+      --&gt;
+</span>      <span class="c">&lt;!--
+       <a title="Look up 'Key Reference' in glossary" href="#term_KeyRef">Key Reference</a> Constraint - <strong>fkExchangeSource</strong>
+       Selector - <strong>es:flowData/es:exchange</strong>
+       Field(s) - <strong>@referenceToSource</strong>
+       Refers to - <a title='Jump to "pkSourceNumber" uniqueness/key constraint definition.' href="#key_pkSourceNumber">pkSourceNumber</a>
+      --&gt;
+</span>   <span class="nt">&lt;/dataset&gt;</span> <span class="cs">[1..*]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544918397416-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="cs">Allow any elements from a namespace other than this schema's namespace (lax validation). <span class="cs">[0..*]</span></span>
+<span class="nt">&lt;/...&gt;</span>
+</pre></div><div class="bs-callout bs-callout-info"><h4>Schema Component Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="The Schema Component Representation table below displays the underlying XML representation of the schema component. (Annotations are not shown.)"><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType</span> <span class="na">name=</span><span class="s">"TEcoSpold"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"dataset"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TDataset" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TDataset&quot; type definition could not be found.');">TDataset</a></span>"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:unique</span> <span class="na">name=</span><span class="s">"pkPersonNumber"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:selector</span> <span class="na">xpath=</span><span class="s">"es:metaInformation/es:administrativeInformation/es:person"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:field</span> <span class="na">xpath=</span><span class="s">"@number"</span><span class="nt">/&gt;</span>
+         <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:unique&gt;</span>
+         <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:unique</span> <span class="na">name=</span><span class="s">"pkSourceNumber"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:selector</span> <span class="na">xpath=</span><span class="s">"es:metaInformation/es:modellingAndValidation/es:source"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:field</span> <span class="na">xpath=</span><span class="s">"@number"</span><span class="nt">/&gt;</span>
+         <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:unique&gt;</span>
+         <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:unique</span> <span class="na">name=</span><span class="s">"pkExchangeNumber"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:selector</span> <span class="na">xpath=</span><span class="s">"es:flowData/es:exchange"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:field</span> <span class="na">xpath=</span><span class="s">"@number"</span><span class="nt">/&gt;</span>
+         <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:unique&gt;</span>
+         <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref</span> <span class="na">name=</span><span class="s">"fkDataEntryByPerson"</span> <span class="na">refer=</span><span class="s">"<a title='Jump to "pkPersonNumber" uniqueness/key constraint definition.' href="#key_pkPersonNumber">pkPersonNumber</a>"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:selector</span> <span class="na">xpath=</span><span class="s">"es:metaInformation/es:administrativeInformation/es:dataEntryBy"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:field</span> <span class="na">xpath=</span><span class="s">"@person"</span><span class="nt">/&gt;</span>
+         <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref&gt;</span>
+         <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref</span> <span class="na">name=</span><span class="s">"fkDataGenerationAndPublication"</span> <span class="na">refer=</span><span class="s">"<a title='Jump to "pkPersonNumber" uniqueness/key constraint definition.' href="#key_pkPersonNumber">pkPersonNumber</a>"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:selector</span> <span class="na">xpath=</span><span class="s">"es:metaInformation/es:administrativeInformation/es:dataGeneratorAndPublication"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:field</span> <span class="na">xpath=</span><span class="s">"@person"</span><span class="nt">/&gt;</span>
+         <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref&gt;</span>
+         <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref</span> <span class="na">name=</span><span class="s">"fkDataGenerationAndPublicationSource"</span> <span class="na">refer=</span><span class="s">"<a title='Jump to "pkSourceNumber" uniqueness/key constraint definition.' href="#key_pkSourceNumber">pkSourceNumber</a>"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:selector</span> <span class="na">xpath=</span><span class="s">"es:metaInformation/es:administrativeInformation/es:dataGeneratorAndPublication"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:field</span> <span class="na">xpath=</span><span class="s">"@referenceToPublishedSource"</span><span class="nt">/&gt;</span>
+         <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref&gt;</span>
+         <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref</span> <span class="na">name=</span><span class="s">"fkAllocationExchange"</span> <span class="na">refer=</span><span class="s">"<a title='Jump to "pkExchangeNumber" uniqueness/key constraint definition.' href="#key_pkExchangeNumber">pkExchangeNumber</a>"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:selector</span> <span class="na">xpath=</span><span class="s">"es:flowData/es:allocation"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:field</span> <span class="na">xpath=</span><span class="s">"@referenceToCoProduct"</span><span class="nt">/&gt;</span>
+         <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref&gt;</span>
+         <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref</span> <span class="na">name=</span><span class="s">"fkAllocationExchangeInOut"</span> <span class="na">refer=</span><span class="s">"<a title='Jump to "pkExchangeNumber" uniqueness/key constraint definition.' href="#key_pkExchangeNumber">pkExchangeNumber</a>"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:selector</span> <span class="na">xpath=</span><span class="s">"es:flowData/es:allocation/es:referenceToInputOutput"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:field</span> <span class="na">xpath=</span><span class="s">"."</span><span class="nt">/&gt;</span>
+         <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref&gt;</span>
+         <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref</span> <span class="na">name=</span><span class="s">"fkValidationPerson"</span> <span class="na">refer=</span><span class="s">"<a title='Jump to "pkPersonNumber" uniqueness/key constraint definition.' href="#key_pkPersonNumber">pkPersonNumber</a>"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:selector</span> <span class="na">xpath=</span><span class="s">"es:metaInformation/es:modellingAndValidation/es:validation"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:field</span> <span class="na">xpath=</span><span class="s">"@proofReadingValidator"</span><span class="nt">/&gt;</span>
+         <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref&gt;</span>
+         <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref</span> <span class="na">name=</span><span class="s">"fkExchangeSource"</span> <span class="na">refer=</span><span class="s">"<a title='Jump to "pkSourceNumber" uniqueness/key constraint definition.' href="#key_pkSourceNumber">pkSourceNumber</a>"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:selector</span> <span class="na">xpath=</span><span class="s">"es:flowData/es:exchange"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:field</span> <span class="na">xpath=</span><span class="s">"@referenceToSource"</span><span class="nt">/&gt;</span>
+         <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:keyref&gt;</span>
+      <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:any</span> <span class="na">namespace=</span><span class="s">"##other"</span> <span class="na">processContents=</span><span class="s">"lax"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:attribute</span> <span class="na">name=</span><span class="s">"validationId"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:integer</span>"</span> <span class="na">use=</span><span class="s">"optional"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:attribute</span> <span class="na">name=</span><span class="s">"validationStatus"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>"</span> <span class="na">use=</span><span class="s">"optional"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType&gt;</span>
+</pre></div><div style="text-align: right; clear: both;"><a href="#top" title="Go to top of page"><span class="glyphicon glyphicon-chevron-up"> </span></a></div><hr></hr><h3 class="xs3p-subsection-heading">Complex Type: <a id="type_TFlowData"></a><strong>TFlowData</strong></h3><dl class="dl-horizontal"><dt>Documentation</dt><dd><div class="annotation documentation" id="wdoc-idp105544918319336"><div class="hidden" id="idp105544918319336-doc-raw">Contains information about inputs and outputs (to and from nature as
+				well as to and from technosphere) and information about allocation (flows to be
+				allocated, co-products to be allocated to, allocation factors).</div><div class="xs3p-doc" id="idp105544918319336-doc"> </div></div></dd></dl><div class="bs-callout bs-callout-info"><h4>XML Instance Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="right" data-html="true" data-content="The XML Instance Representation table shows the schema component's content as an XML instance.
+         &lt;ul&gt;
+         &lt;li&gt;The minimum and maximum occurrence of elements and attributes are provided in square brackets, e.g. [0..1].&lt;/li&gt;
+         &lt;li&gt;Model group information are shown in gray, e.g. Start Choice ... End Choice.&lt;/li&gt;
+         &lt;li&gt;For type derivations, the elements and attributes that have been added to or changed from the base type's content are shown in &lt;strong&gt;bold&lt;/strong&gt;&lt;/li&gt;
+         &lt;li&gt;If an element/attribute has a fixed value, the fixed value is shown in green.&lt;/li&gt;
+         &lt;li&gt;More stuff&lt;/li&gt;
+         &lt;li&gt;If a local element/attribute has documentation, it will be displayed in a window that pops up when the question mark inside the attribute or next to the element is clicked.&lt;/li&gt;
+         &lt;/ul&gt;
+      "><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;...</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;exchange&gt;</span> <span class="type"><a title='"TExchange" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TExchange&quot; type definition could not be found.');">TExchange</a></span> <span class="nt">&lt;/exchange&gt;</span> <span class="cs">[1..*]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544918316008-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="nt">&lt;allocation&gt;</span> <span class="type"><a title='"TAllocation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TAllocation&quot; type definition could not be found.');">TAllocation</a></span> <span class="nt">&lt;/allocation&gt;</span> <span class="cs">[0..*]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544918310760-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="cs">Allow any elements from a namespace other than this schema's namespace (lax validation). <span class="cs">[0..*]</span></span>
+<span class="nt">&lt;/...&gt;</span>
+</pre></div><div class="bs-callout bs-callout-info"><h4>Schema Component Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="The Schema Component Representation table below displays the underlying XML representation of the schema component. (Annotations are not shown.)"><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType</span> <span class="na">name=</span><span class="s">"TFlowData"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"exchange"</span> <span class="na">type=</span><span class="s">"<span class="type"><a title='"TExchange" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TExchange&quot; type definition could not be found.');">TExchange</a></span>"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"allocation"</span> <span class="na">type=</span><span class="s">"<span class="type"><a title='"TAllocation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TAllocation&quot; type definition could not be found.');">TAllocation</a></span>"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:any</span> <span class="na">namespace=</span><span class="s">"##other"</span> <span class="na">processContents=</span><span class="s">"lax"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence&gt;</span>
+<span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType&gt;</span>
+</pre></div><div style="text-align: right; clear: both;"><a href="#top" title="Go to top of page"><span class="glyphicon glyphicon-chevron-up"> </span></a></div><hr></hr><h3 class="xs3p-subsection-heading">Complex Type: <a id="type_TMetaInformation"></a><strong>TMetaInformation</strong></h3><dl class="dl-horizontal"><dt>Documentation</dt><dd><div class="annotation documentation" id="wdoc-idp105544916396520"><div class="hidden" id="idp105544916396520-doc-raw">Contains information about the process (its name, (functional) unit,
+				classification, technology, geography, time, etc.), about modelling assumptions and
+				validation details and about dataset administration (version number, kind of
+				dataset, language).</div><div class="xs3p-doc" id="idp105544916396520-doc"> </div></div></dd></dl><div class="bs-callout bs-callout-info"><h4>XML Instance Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="right" data-html="true" data-content="The XML Instance Representation table shows the schema component's content as an XML instance.
+         &lt;ul&gt;
+         &lt;li&gt;The minimum and maximum occurrence of elements and attributes are provided in square brackets, e.g. [0..1].&lt;/li&gt;
+         &lt;li&gt;Model group information are shown in gray, e.g. Start Choice ... End Choice.&lt;/li&gt;
+         &lt;li&gt;For type derivations, the elements and attributes that have been added to or changed from the base type's content are shown in &lt;strong&gt;bold&lt;/strong&gt;&lt;/li&gt;
+         &lt;li&gt;If an element/attribute has a fixed value, the fixed value is shown in green.&lt;/li&gt;
+         &lt;li&gt;More stuff&lt;/li&gt;
+         &lt;li&gt;If a local element/attribute has documentation, it will be displayed in a window that pops up when the question mark inside the attribute or next to the element is clicked.&lt;/li&gt;
+         &lt;/ul&gt;
+      "><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;...</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;processInformation&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TProcessInformation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TProcessInformation&quot; type definition could not be found.');">TProcessInformation</a></span> <span class="nt">&lt;/processInformation&gt;</span> <span class="cs">[1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916393192-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="nt">&lt;modellingAndValidation&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TModellingAndValidation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TModellingAndValidation&quot; type definition could not be found.');">TModellingAndValidation</a></span> <span class="nt">&lt;/modellingAndValidation&gt;</span> <span class="cs">[1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916390760-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="nt">&lt;administrativeInformation&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TAdministrativeInformation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TAdministrativeInformation&quot; type definition could not be found.');">TAdministrativeInformation</a></span> <span class="nt">&lt;/administrativeInformation&gt;</span> <span class="cs">[1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544918323304-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="cs">Allow any elements from a namespace other than this schema's namespace (lax validation). <span class="cs">[0..*]</span></span>
+<span class="nt">&lt;/...&gt;</span>
+</pre></div><div class="bs-callout bs-callout-info"><h4>Schema Component Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="The Schema Component Representation table below displays the underlying XML representation of the schema component. (Annotations are not shown.)"><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType</span> <span class="na">name=</span><span class="s">"TMetaInformation"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"processInformation"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TProcessInformation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TProcessInformation&quot; type definition could not be found.');">TProcessInformation</a></span>"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"modellingAndValidation"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TModellingAndValidation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TModellingAndValidation&quot; type definition could not be found.');">TModellingAndValidation</a></span>"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"administrativeInformation"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TAdministrativeInformation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TAdministrativeInformation&quot; type definition could not be found.');">TAdministrativeInformation</a></span>"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:any</span> <span class="na">namespace=</span><span class="s">"##other"</span> <span class="na">processContents=</span><span class="s">"lax"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence&gt;</span>
+<span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType&gt;</span>
+</pre></div><div style="text-align: right; clear: both;"><a href="#top" title="Go to top of page"><span class="glyphicon glyphicon-chevron-up"> </span></a></div><hr></hr><h3 class="xs3p-subsection-heading">Complex Type: <a id="type_TModellingAndValidation"></a><strong>TModellingAndValidation</strong></h3><dl class="dl-horizontal"><dt>Documentation</dt><dd><div class="annotation documentation" id="wdoc-idp105544916384744"><div class="hidden" id="idp105544916384744-doc-raw">Contains metaInformation about how unit processes are modelled and
+				about the review/validation of the dataset.</div><div class="xs3p-doc" id="idp105544916384744-doc"> </div></div></dd></dl><div class="bs-callout bs-callout-info"><h4>XML Instance Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="right" data-html="true" data-content="The XML Instance Representation table shows the schema component's content as an XML instance.
+         &lt;ul&gt;
+         &lt;li&gt;The minimum and maximum occurrence of elements and attributes are provided in square brackets, e.g. [0..1].&lt;/li&gt;
+         &lt;li&gt;Model group information are shown in gray, e.g. Start Choice ... End Choice.&lt;/li&gt;
+         &lt;li&gt;For type derivations, the elements and attributes that have been added to or changed from the base type's content are shown in &lt;strong&gt;bold&lt;/strong&gt;&lt;/li&gt;
+         &lt;li&gt;If an element/attribute has a fixed value, the fixed value is shown in green.&lt;/li&gt;
+         &lt;li&gt;More stuff&lt;/li&gt;
+         &lt;li&gt;If a local element/attribute has documentation, it will be displayed in a window that pops up when the question mark inside the attribute or next to the element is clicked.&lt;/li&gt;
+         &lt;/ul&gt;
+      "><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;...</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;representativeness&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TRepresentativeness" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TRepresentativeness&quot; type definition could not be found.');">TRepresentativeness</a></span> <span class="nt">&lt;/representativeness&gt;</span> <span class="cs">[0..1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916388200-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="nt">&lt;source&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TSource" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TSource&quot; type definition could not be found.');">TSource</a></span> <span class="nt">&lt;/source&gt;</span> <span class="cs">[1..*]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916384616-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="nt">&lt;validation&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TValidation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TValidation&quot; type definition could not be found.');">TValidation</a></span> <span class="nt">&lt;/validation&gt;</span> <span class="cs">[0..1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916380648-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="cs">Allow any elements from a namespace other than this schema's namespace (lax validation). <span class="cs">[0..*]</span></span>
+<span class="nt">&lt;/...&gt;</span>
+</pre></div><div class="bs-callout bs-callout-info"><h4>Schema Component Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="The Schema Component Representation table below displays the underlying XML representation of the schema component. (Annotations are not shown.)"><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType</span> <span class="na">name=</span><span class="s">"TModellingAndValidation"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"representativeness"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TRepresentativeness" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TRepresentativeness&quot; type definition could not be found.');">TRepresentativeness</a></span>"</span> <span class="na">minOccurs=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"source"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TSource" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TSource&quot; type definition could not be found.');">TSource</a></span>"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"validation"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TValidation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TValidation&quot; type definition could not be found.');">TValidation</a></span>"</span> <span class="na">minOccurs=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:any</span> <span class="na">namespace=</span><span class="s">"##other"</span> <span class="na">processContents=</span><span class="s">"lax"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence&gt;</span>
+<span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType&gt;</span>
+</pre></div><div style="text-align: right; clear: both;"><a href="#top" title="Go to top of page"><span class="glyphicon glyphicon-chevron-up"> </span></a></div><hr></hr><h3 class="xs3p-subsection-heading">Complex Type: <a id="type_TProcessInformation"></a><strong>TProcessInformation</strong></h3><dl class="dl-horizontal"><dt>Documentation</dt><dd><div class="annotation documentation" id="wdoc-idp105544916408552"><div class="hidden" id="idp105544916408552-doc-raw">Contains content-related metainformation for the unit process.</div><div class="xs3p-doc" id="idp105544916408552-doc"> </div></div></dd></dl><div class="bs-callout bs-callout-info"><h4>XML Instance Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="right" data-html="true" data-content="The XML Instance Representation table shows the schema component's content as an XML instance.
+         &lt;ul&gt;
+         &lt;li&gt;The minimum and maximum occurrence of elements and attributes are provided in square brackets, e.g. [0..1].&lt;/li&gt;
+         &lt;li&gt;Model group information are shown in gray, e.g. Start Choice ... End Choice.&lt;/li&gt;
+         &lt;li&gt;For type derivations, the elements and attributes that have been added to or changed from the base type's content are shown in &lt;strong&gt;bold&lt;/strong&gt;&lt;/li&gt;
+         &lt;li&gt;If an element/attribute has a fixed value, the fixed value is shown in green.&lt;/li&gt;
+         &lt;li&gt;More stuff&lt;/li&gt;
+         &lt;li&gt;If a local element/attribute has documentation, it will be displayed in a window that pops up when the question mark inside the attribute or next to the element is clicked.&lt;/li&gt;
+         &lt;/ul&gt;
+      "><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;...</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;referenceFunction&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TReferenceFunction" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TReferenceFunction&quot; type definition could not be found.');">TReferenceFunction</a></span> <span class="nt">&lt;/referenceFunction&gt;</span> <span class="cs">[1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916429032-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="nt">&lt;geography&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TGeography" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TGeography&quot; type definition could not be found.');">TGeography</a></span> <span class="nt">&lt;/geography&gt;</span> <span class="cs">[1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916436840-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="nt">&lt;technology&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TTechnology" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TTechnology&quot; type definition could not be found.');">TTechnology</a></span> <span class="nt">&lt;/technology&gt;</span> <span class="cs">[1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916433896-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="nt">&lt;timePeriod&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TTimePeriod" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TTimePeriod&quot; type definition could not be found.');">TTimePeriod</a></span> <span class="nt">&lt;/timePeriod&gt;</span> <span class="cs">[1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916430696-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="nt">&lt;dataSetInformation&gt;</span> <span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TDataSetInformation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TDataSetInformation&quot; type definition could not be found.');">TDataSetInformation</a></span> <span class="nt">&lt;/dataSetInformation&gt;</span> <span class="cs">[1]</span> <button type="button" class="btn btn-link btn-doc" data-container="body" data-toggle="modal" data-target="#idp105544916427240-popup"><span class="glyphicon glyphicon-info-sign"> </span></button>
+   <span class="cs">Allow any elements from a namespace other than this schema's namespace (lax validation). <span class="cs">[0..*]</span></span>
+<span class="nt">&lt;/...&gt;</span>
+</pre></div><div class="bs-callout bs-callout-info"><h4>Schema Component Representation 
+               <span class="xs3p-panel-help"><button type="button" class="btn btn-doc" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="The Schema Component Representation table below displays the underlying XML representation of the schema component. (Annotations are not shown.)"><span class="glyphicon glyphicon-question-sign"> </span></button></span></h4><pre class="codehilite"><span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType</span> <span class="na">name=</span><span class="s">"TProcessInformation"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"referenceFunction"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TReferenceFunction" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TReferenceFunction&quot; type definition could not be found.');">TReferenceFunction</a></span>"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"geography"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TGeography" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TGeography&quot; type definition could not be found.');">TGeography</a></span>"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"technology"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TTechnology" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TTechnology&quot; type definition could not be found.');">TTechnology</a></span>"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"timePeriod"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TTimePeriod" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TTimePeriod&quot; type definition could not be found.');">TTimePeriod</a></span>"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:element</span> <span class="na">name=</span><span class="s">"dataSetInformation"</span> <span class="na">type=</span><span class="s">"<span class="type"><a href="#ns_es" title="Find out namespace of 'es' prefix">es</a>:<a title='"TDataSetInformation" type definition could not be found.' href="javascript:void(0)" onclick="alert('&quot;TDataSetInformation&quot; type definition could not be found.');">TDataSetInformation</a></span>"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:any</span> <span class="na">namespace=</span><span class="s">"##other"</span> <span class="na">processContents=</span><span class="s">"lax"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:sequence&gt;</span>
+<span class="nt">&lt;/<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:complexType&gt;</span>
+</pre></div><div style="text-align: right; clear: both;"><a href="#top" title="Go to top of page"><span class="glyphicon glyphicon-chevron-up"> </span></a></div><hr></hr></section><div id="glossary"><h2><a id="Glossary">Glossary</a></h2><p><span class="glossaryTerm"><a id="term_Abstract">Abstract</a> </span>(Applies to complex type definitions and element declarations). An abstract element or complex type cannot used to validate an element instance. If there is a reference to an abstract element, only element declarations that can substitute the abstract element can be used to validate the instance. For references to abstract type definitions, only derived types can be used.</p><p><span class="glossaryTerm"><a id="term_All">All Model Group</a> </span>Child elements can be provided <em>in any order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-all" href="http://www.w3.org/TR/xmlschema-1/#element-all">http://www.w3.org/TR/xmlschema-1/#element-all</a>.</p><p><span class="glossaryTerm"><a id="term_Choice">Choice Model Group</a> </span><em>Only one</em> from the list of child elements and model groups can be provided in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-choice" href="http://www.w3.org/TR/xmlschema-1/#element-choice">http://www.w3.org/TR/xmlschema-1/#element-choice</a>.</p><p><span class="glossaryTerm"><a id="term_CollapseWS">Collapse Whitespace Policy</a> </span>Replace tab, line feed, and carriage return characters with space character (Unicode character 32). Then, collapse contiguous sequences of space characters into single space character, and remove leading and trailing space characters.</p><p><span class="glossaryTerm"><a id="term_ElemBlock">Disallowed Substitutions</a> </span>(Applies to element declarations). If <em>substitution</em> is specified, then <a title="Look up 'substitution group' in glossary" href="#term_SubGroup">substitution group</a> members cannot be used in place of the given element declaration to validate element instances. If <em>derivation methods</em>, e.g. extension, restriction, are specified, then the given element declaration will not validate element instances that have types derived from the element declaration's type using the specified derivation methods. Normally, element instances can override their declaration's type by specifying an <code>xsi:type</code> attribute.</p><p><span class="glossaryTerm"><a id="term_Key">Key Constraint</a> </span>Like <a title="Look up 'Uniqueness Constraint' in glossary" href="#term_Unique">Uniqueness Constraint</a>, but additionally requires that the specified value(s) must be provided. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p><p><span class="glossaryTerm"><a id="term_KeyRef">Key Reference Constraint</a> </span>Ensures that the specified value(s) must match value(s) from a <a title="Look up 'Key Constraint' in glossary" href="#term_Key">Key Constraint</a> or <a title="Look up 'Uniqueness Constraint' in glossary" href="#term_Unique">Uniqueness Constraint</a>. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p><p><span class="glossaryTerm"><a id="term_ModelGroup">Model Group</a> </span>Groups together element content, specifying the order in which the element content can occur and the number of times the group of element content may be repeated. See: <a title="http://www.w3.org/TR/xmlschema-1/#Model_Groups" href="http://www.w3.org/TR/xmlschema-1/#Model_Groups">http://www.w3.org/TR/xmlschema-1/#Model_Groups</a>.</p><p><span class="glossaryTerm"><a id="term_Nillable">Nillable</a> </span>(Applies to element declarations). If an element declaration is nillable, instances can use the <code>xsi:nil</code> attribute. The <code>xsi:nil</code> attribute is the boolean attribute, <em>nil</em>, from the <em>http://www.w3.org/2001/XMLSchema-instance</em> namespace. If an element instance has an <code>xsi:nil</code> attribute set to true, it can be left empty, even though its element declaration may have required content.</p><p><span class="glossaryTerm"><a id="term_Notation">Notation</a> </span>A notation is used to identify the format of a piece of data. Values of elements and attributes that are of type, NOTATION, must come from the names of declared notations. See: <a title="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations" href="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations">http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations</a>.</p><p><span class="glossaryTerm"><a id="term_PreserveWS">Preserve Whitespace Policy</a> </span>Preserve whitespaces exactly as they appear in instances.</p><p><span class="glossaryTerm"><a id="term_TypeFinal">Prohibited Derivations</a> </span>(Applies to type definitions). Derivation methods that cannot be used to create sub-types from a given type definition.</p><p><span class="glossaryTerm"><a id="term_TypeBlock">Prohibited Substitutions</a> </span>(Applies to complex type definitions). Prevents sub-types that have been derived using the specified derivation methods from validating element instances in place of the given type definition.</p><p><span class="glossaryTerm"><a id="term_ReplaceWS">Replace Whitespace Policy</a> </span>Replace tab, line feed, and carriage return characters with space character (Unicode character 32).</p><p><span class="glossaryTerm"><a id="term_Sequence">Sequence Model Group</a> </span>Child elements and model groups must be provided <em>in the specified order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-sequence" href="http://www.w3.org/TR/xmlschema-1/#element-sequence">http://www.w3.org/TR/xmlschema-1/#element-sequence</a>.</p><p><span class="glossaryTerm"><a id="term_SubGroup">Substitution Group</a> </span>Elements that are <em>members</em> of a substitution group can be used wherever the <em>head</em> element of the substitution group is referenced.</p><p><span class="glossaryTerm"><a id="term_ElemFinal">Substitution Group Exclusions</a> </span>(Applies to element declarations). Prohibits element declarations from nominating themselves as being able to substitute a given element declaration, if they have types that are derived from the original element's type using the specified derivation methods.</p><p><span class="glossaryTerm"><a id="term_TargetNS">Target Namespace</a> </span>The target namespace identifies the namespace that components in this schema belongs to. If no target namespace is provided, then the schema components do not belong to any namespace.</p><p><span class="glossaryTerm"><a id="term_Unique">Uniqueness Constraint</a> </span>Ensures uniqueness of an element/attribute value, or a combination of values, within a specified scope. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p><div style="text-align: right; clear: both;"><a href="#top" title="Go to top of page"><span class="glyphicon glyphicon-chevron-up"> </span></a></div><hr></hr></div><p class="footer">Generated by <a href="https://github.com/Intelligent2013/xs3p">xs3p</a> (fork of <a href="http://github.com/bitfehler/xs3p">xs3p</a>)
+                  . Last Modified: <script type="text/javascript">
+<!--
+document.write(document.lastModified);
+// -->
+</script></p></div><br></br><nav><div id="toc"><ul class="nav nav-list xs3p-sidenav"><li><strong><a href="#SchemaProperties">Schema Document Properties</a></strong></li><ul class="nav nav-list nav-list-elements"><li><strong><a href="#SchemaElements">Elements </a></strong></li><li class="nav-sub-item"><a href="#element_ecoSpold"><strong>ecoSpold</strong></a></li></ul><li><strong><a href="#SchemaComplexTypes">Complex Types </a></strong></li><li class="nav-sub-item"><a href="#type_TAdministrativeInformation"><strong>TAdministrativeInformation</strong></a></li><li class="nav-sub-item"><a href="#type_TDataset"><strong>TDataset</strong></a></li><li class="nav-sub-item"><a href="#type_TEcoSpold"><strong>TEcoSpold</strong></a></li><li class="nav-sub-item"><a href="#type_TFlowData"><strong>TFlowData</strong></a></li><li class="nav-sub-item"><a href="#type_TMetaInformation"><strong>TMetaInformation</strong></a></li><li class="nav-sub-item"><a href="#type_TModellingAndValidation"><strong>TModellingAndValidation</strong></a></li><li class="nav-sub-item"><a href="#type_TProcessInformation"><strong>TProcessInformation</strong></a></li><li><strong><a href="#Glossary">Glossary</a></strong></li></ul></div></nav><script>
+               //TOC toggle animation
+               $('#toggle').on('click', function(){
+                  var duration = 400;
+                  if( $('nav').is(':visible') ) {
+                     $('nav').animate({ 'left': '-353px' }, duration, function(){
+                        $('nav').hide();
+                     });
+                     $('body').animate({ 'margin-left': '0' }, duration);
+                     $('#toggle > span').text('>');
+                  }
+                  else {
+                     $('nav').show();
+                     $('nav').animate({ 'left': '0px' }, duration);
+                     $('body').animate({ 'margin-left': '270px' }, duration);
+                     $('#toggle > span').text('<');
+                  }
+               });
+            </script><script>
+
+                  $(function () { $("[data-toggle='tooltip']").tooltip(); });
+                  $(function () { $("[data-toggle='popover']").popover({ trigger: "hover" }); });
+                  
+                  $(function () { $("[data-toggle='modal']").click(function() { return false; })});
+                  
+                  $(function () { $("[data-toggle='modal']").popover({ trigger: "hover", html: true,
+    content: function () {
+        var targetId = $(this).attr('data-target');
+        return $(targetId).html();
+    }}); });
+                  
+    
+                  
+                  var c = new Markdown.Converter();
+                  $('.xs3p-doc').each(function(i, obj) {
+                     var rawDocID = '#' + $(this).attr('id') + '-raw';
+                     var indent = $(rawDocID).html().match("^\\n[\\t ]*");
+                     if (!(indent === null)) {
+                        normalized = $(rawDocID).html().replace(new RegExp(indent[0], "gm"), "\n");
+                     } else {
+                        normalized = $(rawDocID).html();
+                     }
+                     $(this).html(c.makeHtml(normalized));
+                     $(this).find('code,pre').each(function(i, block) {
+                        $(this).html($(this).text());
+                     });
+                  });
+
+                  $(window).scroll(function() {
+                     if ($(".xs3p-sidebar").css("position") == "fixed" && $(window).height() < $(".xs3p-sidebar").height()) {
+                        var perc = $(window).scrollTop() / $("#xs3p-content").height();
+                        var overflow = $(".xs3p-sidebar").height() + 105 - $(window).height();
+                        $(".xs3p-sidebar").css("top", (65 - Math.round(overflow * perc)) + "px");
+                     }
+                  });
+                  $(window).resize(function() {
+                     if ($(".xs3p-sidebar").css("position") == "fixed") {
+                        $(".xs3p-sidebar").css("top", "65px");
+                     }
+                  });
+                  </script></body></html>
