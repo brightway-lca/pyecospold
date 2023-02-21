@@ -94,4 +94,3 @@ This will allow a chance to talk it over with the owners and validate your appro
 [pytest]: https://pytest.readthedocs.io/
 [pull request]: https://github.com/sami-m-g/pyecospold/pulls
 [code of conduct]: CODE_OF_CONDUCT.md
-
