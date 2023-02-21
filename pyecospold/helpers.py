@@ -46,6 +46,16 @@ class DataHelper:
         schema.assertValid(element.getroottree())
 
     @staticmethod
+    def set_element_text(
+        parent: etree.ElementBase, element: str, value: str, schema_file: str
+    ) -> None:
+        """Helper method for setting XML element text. Raises DocumentInvalid exception
+        on inappropriate setting according to XSD schema."""
+        DataHelper.get_element(parent, element).text = str(value)
+        schema = etree.XMLSchema(file=schema_file)
+        schema.assertValid(parent.getroottree())
+
+    @staticmethod
     def get_element(parent: etree.ElementBase, element: str) -> etree.ElementBase:
         """Helper wrapper method for retrieving XML elements as custom
         Ecospold classes."""
@@ -153,5 +163,28 @@ class DataHelper:
             fget=lambda self: DataHelper.get_attribute_list(self, name, attr_type),
             fset=lambda self, values: DataHelper.set_attribute_list(
                 self, name, values, schema_file
+            ),
+        )
+
+    @staticmethod
+    def create_element_text_v1(name: str) -> property:
+        """Helper wrapper method for creating setters and getters for
+        a V1 element text"""
+        return DataHelper.create_element_text(name, Defaults.SCHEMA_V1_FILE)
+
+    @staticmethod
+    def create_element_text_v2(name: str) -> property:
+        """Helper wrapper method for creating setters and getters for
+        a V2 element text"""
+        return DataHelper.create_element_text(name, Defaults.SCHEMA_V2_FILE)
+
+    @staticmethod
+    def create_element_text(name: str, schema_file: str) -> property:
+        """Helper wrapper method for creating setters and getters for
+        an element text."""
+        return property(
+            fget=lambda self: DataHelper.get_element_text(self, name),
+            fset=lambda self, value: DataHelper.set_element_text(
+                self, name, value, schema_file
             ),
         )
