@@ -461,19 +461,15 @@ class Classification(etree.ElementBase):
     """str: Reference to the context of the classification. If this attribute
     is omitted the context of the dataset itself will be used instead."""
 
-    @property
-    def classificationSystem(self) -> str:
-        """The name of the classification system used, e.g. ISIC Rev. 4.
-                This is an optional plaintext value of the referenced classification
-        system (field 320)."""
-        return DataHelper.get_element_text(self, "classificationSystem")
+    classificationSystem = DataHelper.create_element_text_v2("classificationSystem")
+    """str: The name of the classification system used, e.g. ISIC Rev. 4.
+    This is an optional plaintext value of the referenced classification
+    system (field 320)."""
 
-    @property
-    def classificationValue(self) -> str:
-        """The class that the activity belongs to within the specified
-                classification system. This is an optional plaintext value of
-        the referenced classification value (field 320)."""
-        return DataHelper.get_element_text(self, "classificationValue")
+    classificationValue = DataHelper.create_element_text_v2("classificationValue")
+    """str: The class that the activity belongs to within the specified
+    classification system. This is an optional plaintext value of
+    the referenced classification value (field 320)."""
 
 
 class Geography(etree.ElementBase):
