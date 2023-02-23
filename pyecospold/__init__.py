@@ -1,12 +1,30 @@
 """pyecospold."""
-__all__ = ("__version__", "parse_file", "save_file", "Defaults")
+__all__ = (
+    "__version__",
+    "parse_directory",
+    "parse_directory_v1",
+    "parse_directory_v2",
+    "parse_file",
+    "parse_file_v1",
+    "parse_file_v2",
+    "save_file",
+    "Defaults",
+)
 
 
 import importlib.metadata
 from typing import Union
 
 from .config import Defaults
-from .core import parse_file, save_file
+from .core import (
+    parse_directory,
+    parse_directory_v1,
+    parse_directory_v2,
+    parse_file,
+    parse_file_v1,
+    parse_file_v2,
+    save_file,
+)
 
 
 def get_version_tuple() -> tuple:

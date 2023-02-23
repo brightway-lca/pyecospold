@@ -27,6 +27,18 @@ You can install _pyecospold_ via [pip] from [PyPI]:
 $ pip install pyecospold
 ```
 
+## ecospold1 version 1.1
+
+This library includes a new version of the schema definitions for ecospold1. Version 1.1 includes the following changes:
+
+* Changed the length restriction on `referenceFunction.name` to 255
+* Changed the length restriction on `referenceFunction.synonym` to 255
+* Changed the length restriction on `category` and `subCategory` to 255
+* Changed the length restriction on `representativeness.productionVolume` to 32.000
+* Made `telephone` optional
+
+These changes were based on how this schema was being used by LCA software.
+
 ## Usage
 
 ```python
@@ -36,7 +48,7 @@ from pyecospold import parse_file, save_file, Defaults
 Defaults.config("config.ini")  # Replace with your own config file
 
 # Parse the required XML file to EcoSpold class.
-ecoSpold = parse_file("data/v1.xml")  # Replace with your own XML file
+ecoSpold = parse_file("data/v1/v1_1.xml")  # Replace with your own XML file
 ecoSpold
 >> <Element {http://www.EcoInvent.org/EcoSpold01}ecoSpold at 0x24a558b6020>
 
@@ -64,21 +76,22 @@ SCHEMA_FILE="path/to/schemas/v1/EcoSpold01Dataset.xsd"
 ## Contributing
 
 Contributions are very welcome.
-To learn more, see the [Contributor Guide].
+To learn more, see the [Contributor Guide][Contributor Guide].
 
 ## License
 
-Distributed under the terms of the [BSD license license][license],
+Distributed under the terms of the [BSD license][License],
 _pyecospold_ is free and open source software.
 
 ## Issues
 
 If you encounter any problems,
-please [file an issue] along with a detailed description.
+please [file an issue][Issue Tracker] along with a detailed description.
 
 
 ## Credits
 
 
-[license]: https://github.com/sami-m-g/pyecospold/blob/main/LICENSE
-[contributor guide]: https://github.com/sami-m-g/pyecospold/blob/main/CONTRIBUTING.md
+[License]: https://github.com/sami-m-g/pyecospold/blob/main/LICENSE
+[Contributor Guide]: https://github.com/sami-m-g/pyecospold/blob/main/CONTRIBUTING.md
+[Issue Tracker]: https://github.com/sami-m-g/pyecospold/issues

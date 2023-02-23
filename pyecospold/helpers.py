@@ -1,6 +1,7 @@
 """Internal helper classes."""
+import re
 from datetime import datetime
-from typing import Any, Dict, List
+from typing import Any, Callable, Dict, List
 
 from lxml import etree
 
@@ -11,7 +12,7 @@ class DataHelper:
     """Helper class for reading and writing Ecospold custom classes attributes."""
 
     TIMESTAMP_FORMAT: str = "%Y-%m-%dT%H:%M:%S"
-    TYPE_FUNC_MAP: Dict[type, Any] = {
+    TYPE_FUNC_MAP: Dict[type, Callable[[str], Any]] = {
         bool: lambda string: string.lower() == "true",
         datetime: lambda string: datetime.strptime(string, DataHelper.TIMESTAMP_FORMAT),
     }
@@ -45,13 +46,25 @@ class DataHelper:
         schema.assertValid(element.getroottree())
 
     @staticmethod
-    def get_element(parent: etree.ElementBase, element: str) -> Any:
+    def set_element_text(
+        parent: etree.ElementBase, element: str, value: str, schema_file: str
+    ) -> None:
+        """Helper method for setting XML element text. Raises DocumentInvalid exception
+        on inappropriate setting according to XSD schema."""
+        DataHelper.get_element(parent, element).text = str(value)
+        schema = etree.XMLSchema(file=schema_file)
+        schema.assertValid(parent.getroottree())
+
+    @staticmethod
+    def get_element(parent: etree.ElementBase, element: str) -> etree.ElementBase:
         """Helper wrapper method for retrieving XML elements as custom
         Ecospold classes."""
         return parent.find(element, namespaces=parent.nsmap)
 
     @staticmethod
-    def get_element_list(parent: etree.ElementBase, element: str) -> List[Any]:
+    def get_element_list(
+        parent: etree.ElementBase, element: str
+    ) -> List[etree.ElementBase]:
         """Helper wrapper method for retrieving XML list elements as a list
         of custom Ecospold classes."""
         return parent.findall(element, namespaces=parent.nsmap)
@@ -65,6 +78,16 @@ class DataHelper:
             "text",
             str(Defaults.TYPE_DEFAULTS[str]),
         )
+
+    @staticmethod
+    def get_inner_text_list(parent: etree.ElementBase, element: str):
+        """Helper wrapper method for retrieving the list of last nodes in a chain
+        of XML elements."""
+        innerElements = DataHelper.get_element_list(parent, element)
+        return [
+            re.sub("[ ]{2,}", "", str(innerElement.text)).replace("\n", " ")
+            for innerElement in innerElements
+        ]
 
     @staticmethod
     def get_attribute(
@@ -89,7 +112,9 @@ class DataHelper:
         Returns empty list if attributes don't exist."""
         return list(
             map(
-                lambda x: DataHelper.TYPE_FUNC_MAP.get(attr_type, attr_type)(x.text),
+                lambda x: DataHelper.TYPE_FUNC_MAP.get(attr_type, attr_type)(
+                    re.sub("[\n]{1,}", " ", re.sub("[ ]{2,}", "", x.text))
+                ),
                 DataHelper.get_element_list(parent, attribute),
             )
         )
@@ -138,5 +163,28 @@ class DataHelper:
             fget=lambda self: DataHelper.get_attribute_list(self, name, attr_type),
             fset=lambda self, values: DataHelper.set_attribute_list(
                 self, name, values, schema_file
+            ),
+        )
+
+    @staticmethod
+    def create_element_text_v1(name: str) -> property:
+        """Helper wrapper method for creating setters and getters for
+        a V1 element text"""
+        return DataHelper.create_element_text(name, Defaults.SCHEMA_V1_FILE)
+
+    @staticmethod
+    def create_element_text_v2(name: str) -> property:
+        """Helper wrapper method for creating setters and getters for
+        a V2 element text"""
+        return DataHelper.create_element_text(name, Defaults.SCHEMA_V2_FILE)
+
+    @staticmethod
+    def create_element_text(name: str, schema_file: str) -> property:
+        """Helper wrapper method for creating setters and getters for
+        an element text."""
+        return property(
+            fget=lambda self: DataHelper.get_element_text(self, name),
+            fset=lambda self, value: DataHelper.set_element_text(
+                self, name, value, schema_file
             ),
         )

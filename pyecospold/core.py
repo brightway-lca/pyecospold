@@ -1,4 +1,8 @@
 """Core Ecospold module containing parsing and saving functionalities."""
+from io import StringIO
+from pathlib import Path
+from typing import List, Tuple, Union
+
 from lxml import etree, objectify
 
 from .config import Defaults
@@ -21,7 +25,7 @@ from .model_v1 import TimePeriod as TimePeriodV1
 from .model_v1 import Validation
 from .model_v2 import Activity, ActivityDataset, ActivityDescription
 from .model_v2 import AdministrativeInformation as AdministrativeInformationV2
-from .model_v2 import Classification
+from .model_v2 import Classification, Comment
 from .model_v2 import DataEntryBy as DataEntryByV2
 from .model_v2 import DataGeneratorAndPublication as DataGeneratorAndPublicationV2
 from .model_v2 import EcoSpold as EcoSpoldV2
@@ -30,11 +34,12 @@ from .model_v2 import FlowData as FlowDataV2
 from .model_v2 import Geography as GeographyV2
 from .model_v2 import ImpactIndicator, IntermediateExchange, MacroEconomicScenario
 from .model_v2 import ModellingAndValidation as ModellingAndValidationV2
-from .model_v2 import Parameter
+from .model_v2 import Parameter, Property
 from .model_v2 import Representativeness as RepresentativenessV2
 from .model_v2 import Review
 from .model_v2 import Technology as TechnologyV2
 from .model_v2 import TimePeriod as TimePeriodV2
+from .model_v2 import TransferCoefficient, Uncertainty
 
 
 class EcospoldLookupV1(etree.CustomElementClassLookup):
@@ -80,23 +85,30 @@ class EcospoldLookupV2(etree.CustomElementClassLookup):
             "activityDataset": ActivityDataset,
             "activityDescription": ActivityDescription,
             "administrativeInformation": AdministrativeInformationV2,
+            "allocationComment": Comment,
+            "childActivityDataset": ActivityDataset,
             "classification": Classification,
+            "comment": Comment,
             "dataEntryBy": DataEntryByV2,
             "dataGeneratorAndPublication": DataGeneratorAndPublicationV2,
             "ecoSpold": EcoSpoldV2,
             "elementaryExchange": ElementaryExchange,
             "fileAttributes": FileAttributes,
             "flowData": FlowDataV2,
+            "generalComment": Comment,
             "geography": GeographyV2,
             "impactIndicator": ImpactIndicator,
             "intermediateExchange": IntermediateExchange,
             "macroEconomicScenario": MacroEconomicScenario,
             "modellingAndValidation": ModellingAndValidationV2,
             "parameter": Parameter,
+            "property": Property,
             "representativeness": RepresentativenessV2,
             "review": Review,
             "technology": TechnologyV2,
             "timePeriod": TimePeriodV2,
+            "transferCoefficient": TransferCoefficient,
+            "uncertainty": Uncertainty,
         }
         try:
             return lookupmap[name]
@@ -104,45 +116,124 @@ class EcospoldLookupV2(etree.CustomElementClassLookup):
             return None
 
 
-def parse_file_v1(file_path: str) -> EcoSpoldV1:
+def parse_file_v1(file: Union[str, Path, StringIO]) -> EcoSpoldV1:
     """Parses an Ecospold V1 XML file to custom Ecospold classes.
 
     Parameters:
-    file_path: the path to the Ecospold XML file.
+    file: the str|Path path to the Ecospold XML file or its StringIO representation.
     schema_path: the path to the Ecospold XSD schema file.
 
-    Returns and EcoSpold class representing the root of the XML file.
+    Returns an EcoSpold class representing the root of the XML file.
     """
-    return parse_file(file_path, Defaults.SCHEMA_V1_FILE, EcospoldLookupV1())
+    return parse_file(file, Defaults.SCHEMA_V1_FILE, EcospoldLookupV1())
 
 
-def parse_file_v2(file_path: str) -> EcoSpoldV2:
+def parse_file_v2(file: Union[str, Path, StringIO]) -> EcoSpoldV2:
     """Parses an Ecospold V2 XML file to custom Ecospold classes.
 
     Parameters:
-    file_path: the path to the Ecospold XML file.
+    file: the str|Path path to the Ecospold XML file or its StringIO representation.
     schema_path: the path to the Ecospold XSD schema file.
 
-    Returns and EcoSpold class representing the root of the XML file.
+    Returns an EcoSpold class representing the root of the XML file.
     """
-    return parse_file(file_path, Defaults.SCHEMA_V2_FILE, EcospoldLookupV2())
+    return parse_file(file, Defaults.SCHEMA_V2_FILE, EcospoldLookupV2())
 
 
 def parse_file(
-    file_path: str, schema_path: str, ecospold_lookup: etree.CustomElementClassLookup
+    file: Union[str, Path, StringIO],
+    schema_path: str,
+    ecospold_lookup: etree.CustomElementClassLookup,
 ) -> etree.ElementBase:
     """Parses an Ecospold XML file to custom Ecospold classes.
 
     Parameters:
-    file_path: the path to the Ecospold XML file.
+    file: the str|Path path to the Ecospold XML file or its StringIO representation.
     schema_path: the path to the Ecospold XSD schema file.
+    ecospold_lookup: the lookup class for mapping XML elements to EcoSpold classes.
 
-    Returns and EcoSpold class representing the root of the XML file.
+    Returns an EcoSpold class representing the root of the XML file.
     """
     schema = etree.XMLSchema(file=schema_path)
     parser = objectify.makeparser(schema=schema)
     parser.set_element_class_lookup(ecospold_lookup)
-    return objectify.parse(file_path, parser).getroot()
+    return objectify.parse(file, parser).getroot()
+
+
+def parse_directory_v1(
+    dir_path: Union[str, Path], valid_suffixes: Union[List[str], None] = None
+) -> List[Tuple[Path, EcoSpoldV1]]:
+    """Parses a directory of Ecospold XML files to a list of custom Ecospold classes.
+
+    Parameters:
+    dir_path: the directory path, should contain files of version 1 of EcoSpold.
+    valid_suffixes: a list of valid file suffixes which will only be considered for
+    parsing. If None, defaults to [".xml", ".spold"].
+
+    Returns a list of tuples of file paths and corresponding EcoSpold classes
+    representing the root of the XML file.
+    """
+    return parse_directory(
+        dir_path=dir_path,
+        schema_path=Defaults.SCHEMA_V1_FILE,
+        ecospold_lookup=EcospoldLookupV1(),
+        valid_suffixes=valid_suffixes,
+    )
+
+
+def parse_directory_v2(
+    dir_path: Union[str, Path], valid_suffixes: Union[List[str], None] = None
+) -> List[Tuple[Path, EcoSpoldV2]]:
+    """Parses a directory of Ecospold XML files to a list of custom Ecospold classes.
+
+    Parameters:
+    dir_path: the directory path, should contain files of version 2 of EcoSpold.
+    valid_suffixes: a list of valid file suffixes which will only be considered for
+    parsing. If None, defaults to [".xml", ".spold"].
+
+    Returns a list of tuples of file paths and corresponding EcoSpold classes
+    representing the root of the XML file.
+    """
+    return parse_directory(
+        dir_path=dir_path,
+        schema_path=Defaults.SCHEMA_V2_FILE,
+        ecospold_lookup=EcospoldLookupV2(),
+        valid_suffixes=valid_suffixes,
+    )
+
+
+def parse_directory(
+    dir_path: Union[str, Path],
+    schema_path: str,
+    ecospold_lookup: etree.CustomElementClassLookup,
+    valid_suffixes: Union[List[str], None] = None,
+) -> List[Tuple[Path, etree.ElementBase]]:
+    """Parses a directory of Ecospold XML files to a list of custom Ecospold classes.
+
+    Parameters:
+    dir_path: the directory path, should contain files of only the schema_path version.
+    schema_path: the path to the Ecospold XSD schema file.
+    ecospold_lookup: the lookup class for mapping XML elements to EcoSpold classes.
+    valid_suffixes: a list of valid file suffixes which will only be considered for
+    parsing. If None, defaults to [".xml", ".spold"].
+
+    Returns a list of tuples of file paths and corresponding EcoSpold classes
+    representing the root of the XML file.
+    """
+    if valid_suffixes is None:
+        valid_suffixes = [".xml", ".spold"]
+
+    dir_path = Path(dir_path).resolve()
+    return [
+        (
+            file_path,
+            parse_file(
+                file=file_path, schema_path=schema_path, ecospold_lookup=ecospold_lookup
+            ),
+        )
+        for file_path in dir_path.iterdir()
+        if file_path.is_file() and file_path.suffix.lower() in valid_suffixes
+    ]
 
 
 def save_file(root: etree.ElementBase, path: str) -> None:

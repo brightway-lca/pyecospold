@@ -21,7 +21,7 @@ class Defaults:
     TYPE_DEFAULTS: ClassVar[Dict[type, Any]] = {
         int: np.nan_to_num(np.nan),
         float: np.nan,
-        bool: False,
+        bool: "False",
         str: "",
     }
     SCHEMA_DIR: ClassVar[str] = os.path.join(Path(__file__).parent.resolve(), "schemas")

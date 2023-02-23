@@ -130,3 +130,7 @@ dmypy.json
 
 # Separate virtualenv for each user
 pyrightconfig.json
+
+# Doc generation
+schema-documentation.sh
+xs3p-master

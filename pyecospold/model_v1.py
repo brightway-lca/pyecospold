@@ -759,45 +759,33 @@ class TimePeriod(etree.ElementBase):
     The fact that data are based on forecasts should be reported under
     'representativeness'."""
 
-    @property
-    def startYear(self) -> str:
-        """Start date of the time period for which the dataset is valid, entered
-        as year only."""
-        return DataHelper.get_element_text(self, "startYear")
+    startYear = DataHelper.create_element_text_v1("startYear")
+    """str: Start date of the time period for which the dataset is valid, entered
+    as year only."""
 
-    @property
-    def startYearMonth(self) -> str:
-        """Start date of the time period for which the dataset is valid, entered
-        as year and month."""
-        return DataHelper.get_element_text(self, "startYearMonth")
+    startYearMonth = DataHelper.create_element_text_v1("startYearMonth")
+    """str: Start date of the time period for which the dataset is valid, entered
+    as year and month."""
 
-    @property
-    def startDate(self) -> str:
-        """Start date of the time period for which the dataset is valid, presented
-        as a complete date (year-month-day). StartDate may as well be entered as year
-        (0000) or year-month (0000-00) only. 2000 and 2000-01 means: from 01.01.2000.
-        If it is only known that data is older than a certain data, 'startDate' is left
-        blank."""
-        return DataHelper.get_element_text(self, "startDate")
+    startDate = DataHelper.create_element_text_v1("startDate")
+    """str: Start date of the time period for which the dataset is valid, presented
+    as a complete date (year-month-day). StartDate may as well be entered as year
+    (0000) or year-month (0000-00) only. 2000 and 2000-01 means: from 01.01.2000.
+    If it is only known that data is older than a certain data, 'startDate' is left
+    blank."""
 
-    @property
-    def endYear(self) -> str:
-        """End date of the time period for which the dataset is valid, entered as year
-        only."""
-        return DataHelper.get_element_text(self, "endYear")
+    endYear = DataHelper.create_element_text_v1("endYear")
+    """str: End date of the time period for which the dataset is valid, entered as year
+    only."""
 
-    @property
-    def endYearMonth(self) -> str:
-        """End date of the time period for which the dataset is valid, entered as year
-        and month."""
-        return DataHelper.get_element_text(self, "endYearMonth")
+    endYearMonth = DataHelper.create_element_text_v1("endYearMonth")
+    """str: End date of the time period for which the dataset is valid, entered as year
+    and month."""
 
-    @property
-    def endDate(self) -> str:
-        """End date of the time period for which the dataset is valid, presented as a
-        complete date (year-month-day). EndDate may as well be entered as year (0000)
-        or year-month (0000-00) only. 2000 and 2000-12 means: until 31.12.2000."""
-        return DataHelper.get_element_text(self, "endDate")
+    endDate = DataHelper.create_element_text_v1("endDate")
+    """str: End date of the time period for which the dataset is valid, presented as a
+    complete date (year-month-day). EndDate may as well be entered as year (0000)
+    or year-month (0000-00) only. 2000 and 2000-12 means: until 31.12.2000."""
 
 
 class Representativeness(etree.ElementBase):
@@ -1034,7 +1022,17 @@ class DataGeneratorAndPublication(etree.ElementBase):
     of the database quality networks (see also 'qualityNetwork') are characterised
     and identified. 'countryCode' is required additionally. Only required and
     allowed if access to the dataset is restricted to a particular institute within
-    the ecoinvent quality network."""
+    the ecoinvent quality network.
+
+    Here are the codes used in ecoinvent release 2.2:
+
+        {'ART', 'B+H', 'BAUCHEM', 'CARBOTE', 'DOKA', 'ECN', 'EMPA', 'EMPA-SG', 'ENERS',
+        'EPFL', 'ESU', 'ETH S+U', 'ETH-UNS', 'HEIG-VD', 'INFRAS', 'LCS', 'OEKOSCI',
+        'PRIVAT', 'PSI', 'SBB', 'SCHLEIS', 'U+E', 'UU'}
+
+    The length 7 restriction is bizarre; just truncate and move on with your life.
+
+    """
 
     countryCode = DataHelper.create_attribute_v1("countryCode", str)
     """str: 2 letter ISO-country codes are used to indicate the country where

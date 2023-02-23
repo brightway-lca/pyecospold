@@ -13,7 +13,7 @@ Centre, Switzerland (Swiss Centre for Life Cycle Inventories) and ifu Hamburg Gm
 Portions created by the ecoinvent Centre and ifu Hamburg GmbH are Copyright (C) ecoinvent Centre.
 All Rights Reserved.
 -->
-<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0"
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<xsd:include schemaLocation="EcoSpold01DataTypes.xsd"></xsd:include>
 	<xsd:complexType name="TExchange">
@@ -100,7 +100,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>3506</spoldID>
 					<type>Text</type>
-					<size>40</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					Yes</multipleOccurences>
@@ -116,7 +116,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>3507</spoldID>
 					<type>Text</type>
-					<size>40</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					Yes</multipleOccurences>
@@ -132,7 +132,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>3509</spoldID>
 					<type>Text</type>
-					<size>40</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					Yes</multipleOccurences>
@@ -147,7 +147,7 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>3510</spoldID>
 					<type>Text</type>
-					<size>40</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					Yes</multipleOccurences>
@@ -179,12 +179,12 @@ All Rights Reserved.
 				</xsd:restriction>
 			</xsd:simpleType>
 		</xsd:attribute>
-		<xsd:attribute name="name" type="TString80" use="required">
+		<xsd:attribute name="name" type="TString255" use="required">
 			<xsd:annotation>
 				<xsd:appinfo>
 					<spoldID>3702</spoldID>
 					<type>Text</type>
-					<size>80</size>
+					<size>255</size>
 					<options></options>
 					<multipleOccurences>
 					Yes</multipleOccurences>
