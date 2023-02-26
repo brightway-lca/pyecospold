@@ -6,6 +6,7 @@ from typing import List, Tuple, Union
 from lxml import etree, objectify
 
 from .config import Defaults
+from .helpers import DataHelper
 from .model_v1 import AdministrativeInformation as AdministrativeInformationV1
 from .model_v1 import Allocation
 from .model_v1 import DataEntryBy as DataEntryByV1
@@ -277,12 +278,14 @@ def parse_directory(
     ]
 
 
-def save_file(root: etree.ElementBase, path: str) -> None:
+def save_file(root: etree.ElementBase, path: str, fill_defaults: bool = False) -> None:
     """Saves an Ecospold class to an XML file.
 
     Parameters:
     root: the EcoSpold class representing the root of the XML file.
     path: the path to save the Ecospold XML file.
     """
+    if fill_defaults:
+        DataHelper.fill_in_defaults(root)
     root = etree.ElementTree(root)
     root.write(path, pretty_print=True, xml_declaration=True, encoding="UTF-8")

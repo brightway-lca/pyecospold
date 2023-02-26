@@ -102,12 +102,7 @@ class DataHelper:
         """Helper wrapper method for retrieving XML attributes. Returns
         Defaults.TYPE_DEFAULTS[type] if attribute doesn't exist."""
         return DataHelper.TYPE_FUNC_MAP.get(attr_type, attr_type)(
-            parent.get(
-                attribute,
-                getattr(
-                    Defaults, attribute, Defaults.TYPE_DEFAULTS.get(attr_type, None)
-                ),
-            )
+            parent.get(attribute, Defaults.TYPE_DEFAULTS.get(attr_type, None))
         )
 
     @staticmethod
@@ -207,3 +202,16 @@ class DataHelper:
                 self, name, value, schema_file
             ),
         )
+
+    @staticmethod
+    def fill_in_defaults(node: etree.ElementBase) -> None:
+        """Helper method for filling in defaults in all tree given any node."""
+        root = node.getroottree()
+        for child in root.iter():
+            for defaults in [Defaults.STATIC_DEFAULTS, Defaults.DYNAMIC_DEFAULTS]:
+                for key, value in defaults.get(child.__class__.__name__, {}).items():
+                    if (
+                        getattr(child, key, Defaults.TYPE_DEFAULTS[str])
+                        in Defaults.TYPE_DEFAULTS.values()
+                    ):
+                        setattr(child, key, value)

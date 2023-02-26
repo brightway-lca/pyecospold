@@ -1,6 +1,7 @@
 """Test cases for the __config__ module."""
 
 from pyecospold.config import Defaults
+from pyecospold.version import __version__
 
 
 def test_config_defaults() -> None:
@@ -8,12 +9,10 @@ def test_config_defaults() -> None:
     configFile = "config.ini"
     Defaults.config_defaults(configFile)
 
-    assert Defaults.qualityNetwork == "1"
-
-
-def test_set_defaults() -> None:
-    """It overrides defaults variables."""
-    defaults = {"qualityNetwork": "2"}
-    Defaults.set_defaults(defaults)
-
-    assert Defaults.qualityNetwork == defaults["qualityNetwork"]
+    assert Defaults.SCHEMA_V1_FILE == r"pyecospold\schemas\v1\EcoSpold01Dataset.xsd"
+    assert (
+        Defaults.STATIC_DEFAULTS["Dataset"]["validCompanyCodes"] == "CompanyCodes.xml"
+    )
+    assert (
+        Defaults.DYNAMIC_DEFAULTS["Dataset"]["generator"] == f"pyecospold.{__version__}"
+    )

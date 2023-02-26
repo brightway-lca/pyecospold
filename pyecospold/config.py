@@ -7,6 +7,8 @@ from typing import Any, ClassVar, Dict
 
 import numpy as np
 
+from .version import __version__
+
 
 @dataclass
 class Defaults:
@@ -14,21 +16,49 @@ class Defaults:
     Defaults can be fully/ partially overridden by providing a config file or by
     using set_defaults method"""
 
-    qualityNetwork: ClassVar[str] = "1"
-    uncertaintyType: ClassVar[str] = "1"
-    allocationMethod: ClassVar[str] = "-1"
-
-    TYPE_DEFAULTS: ClassVar[Dict[type, Any]] = {
-        int: np.nan_to_num(np.nan),
-        float: np.nan,
-        bool: "False",
-        str: "",
-    }
     SCHEMA_DIR: ClassVar[str] = os.path.join(Path(__file__).parent.resolve(), "schemas")
     SCHEMA_V1_FILE: ClassVar[str] = os.path.join(
         SCHEMA_DIR, "v1", "EcoSpold01Dataset.xsd"
     )
     SCHEMA_V2_FILE: ClassVar[str] = os.path.join(SCHEMA_DIR, "v2", "EcoSpold02.xsd")
+
+    TYPE_DEFAULTS: ClassVar[Dict[type, Any]] = {
+        int: np.nan_to_num(np.nan),
+        float: np.nan,
+        bool: "false",
+        str: "",
+    }
+
+    DYNAMIC_DEFAULTS: ClassVar[Dict[str, Dict[str, Any]]] = {
+        "Dataset": {
+            "generator": f"pyecospold.{__version__}",
+        },
+    }
+    STATIC_DEFAULTS: ClassVar[Dict[str, Dict[str, str]]] = {
+        "Allocation": {
+            "allocationMethod": "-1",
+        },
+        "DataEntryBy": {
+            "qualityNetwork": "1",
+        },
+        "Dataset": {
+            "validCompanyCodes": "CompanyCodes.xml",
+            "validRegionalCodes": "RegionalCodes.xml",
+            "validCategories": "Categories.xml",
+            "validUnits": "Units.xml",
+        },
+        "DataSetInformation": {
+            "impactAssessmentResult": "false",
+            "internalVersion": "1.0",
+            "version": "1.0",
+        },
+        "Exchange": {
+            "uncertaintyType": "1",
+        },
+        "ReferenceFunction": {
+            "infrastructureProcess": "true",
+        },
+    }
 
     @classmethod
     def config_defaults(cls, config_file: str) -> None:
@@ -38,16 +68,16 @@ class Defaults:
         config_file: path for config file.
         """
         config = configparser.ConfigParser()
+        config.optionxform = lambda optionstr: optionstr
         config.read(config_file)
-        defaults = dict(config["defaults"])
-        Defaults.set_defaults(defaults)
 
-    @classmethod
-    def set_defaults(cls, defaults: Dict[str, Any]) -> None:
-        """Fully/ partially overrides defaults.
+        if config.has_section("parameters"):
+            for key, value in dict(config["parameters"]).items():
+                setattr(cls, key, value)
 
-        Parameters:
-        defaults: attribute-value dictionary.
-        """
-        for key, value in defaults.items():
-            setattr(cls, key, value)
+        staticDefaults = {
+            name: dict(section)
+            for name, section in config.items()
+            if name not in ["parameters", "defaults"]
+        }
+        cls.static_defaults = staticDefaults

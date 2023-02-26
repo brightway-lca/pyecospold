@@ -75,12 +75,32 @@ save_file(ecoSpold, "out/00001_new.xml")  # Replace with your own path
 # Config file
 
 ```ini
-[defaults]
-qualityNetwork="1"
-qualityNetwork="1"
-uncertaintyType="1"
-allocationMethod="-1"
-SCHEMA_FILE="path/to/schemas/v1/EcoSpold01Dataset.xsd"
+[parameters]
+SCHEMA_V1_FILE=pyecospold\schemas\v1\EcoSpold01Dataset.xsd
+SCHEMA_V2_FILE=pyecospold\schemas\v2\EcoSpold02.xsd
+
+[Allocation]
+allocationMethod=-1
+
+[DataEntryBy]
+qualityNetwork=1
+
+[Dataset]
+validCompanyCodes=CompanyCodes.xml
+validRegionalCodes=RegionalCodes.xml
+validCategories=Categories.xml
+validUnits=Units.xml
+
+[DataSetInformation]
+impactAssessmentResult=false
+internalVersion=1.0
+version=1.0
+
+[Exchange]
+uncertaintyType=1
+
+[ReferenceFunction]
+infrastructureProcess=true
 ```
 
 ## Contributing
