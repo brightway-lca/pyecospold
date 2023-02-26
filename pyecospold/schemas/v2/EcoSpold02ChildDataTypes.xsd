@@ -303,7 +303,7 @@ All Rights Reserved.
 	<xsd:simpleType name="TCasNumber">
 		<xsd:restriction base="xsd:string">
 			<xsd:maxLength value="12" />
-			<xsd:pattern value="\d{1,7}-\d{2,2}-\d" />
+			<xsd:pattern value="\d{2,7}-\d{2,2}-\d" />
 		</xsd:restriction>
 	</xsd:simpleType>
 	<xsd:complexType name="TString20">
