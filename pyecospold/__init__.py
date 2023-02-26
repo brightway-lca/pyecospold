@@ -9,6 +9,7 @@ __all__ = (
     "parse_file_v2",
     "save_file",
     "Defaults",
+    "validate_cas",
 )
 
 
@@ -25,6 +26,7 @@ from .core import (
     parse_file_v2,
     save_file,
 )
+from .cas_validation import validate_cas
 
 
 def get_version_tuple() -> tuple:
