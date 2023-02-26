@@ -3,6 +3,7 @@ from typing import Dict, List
 
 from lxml import etree
 
+from .cas_validation import validate_cas
 from .helpers import DataHelper
 
 
@@ -652,7 +653,7 @@ class CustomExchange(etree.ElementBase):
     with a character (a-z). Variable names are not case sensitive (calorific_Value
     equals Calorific_value)."""
 
-    casNumber = DataHelper.create_attribute_v2("casNumber", str)
+    casNumber = DataHelper.create_attribute_v2("casNumber", str, validate_cas)
     """str: Indicates the number according to the Chemical Abstract Service
     (CAS). The Format of the CAS-number: 000000-00-0, where the first string of
     digits needs not to be complete (i.e. less than six digits are admitted)."""

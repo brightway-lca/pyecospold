@@ -4,6 +4,7 @@ from typing import ClassVar, Dict, List
 
 from lxml import etree
 
+from .cas_validation import validate_cas
 from .helpers import DataHelper
 
 
@@ -276,7 +277,7 @@ class Exchange(etree.ElementBase):
     (in German local language).See further explanations in
     'subCategory'."""
 
-    CASNumber = DataHelper.create_attribute_v1("CASNumber", str)
+    CASNumber = DataHelper.create_attribute_v1("CASNumber", str, validate_cas)
     """str: Indicates the number according to the Chemical Abstract
     Service (CAS). The Format of the CAS-number: 000000-00-0,
     where the first string of digits needs not to be complete
@@ -583,7 +584,7 @@ class ReferenceFunction(etree.ElementBase):
     including during the calculation. Not applicable for elementary flows and impact
     categories."""
 
-    CASNumber = DataHelper.create_attribute_v1("CASNumber", str)
+    CASNumber = DataHelper.create_attribute_v1("CASNumber", str, validate_cas)
     """str: Indicates the number according to the Chemical Abstract Service (CAS).
     The Format of the CAS-number: 000000-00-0, where the first string of digits
     needs not to be complete (i.e. less than six digits are admitted).

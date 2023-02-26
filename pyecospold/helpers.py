@@ -1,7 +1,7 @@
 """Internal helper classes."""
 import re
 from datetime import datetime
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable, Dict, List, Optional
 
 from lxml import etree
 
@@ -19,10 +19,16 @@ class DataHelper:
 
     @staticmethod
     def set_attribute(
-        element: etree.ElementBase, key: str, value: str, schema_file: str
+        element: etree.ElementBase,
+        key: str,
+        value: str,
+        schema_file: str,
+        validator: Optional[Callable],
     ) -> None:
         """Helper method for setting XML attributes. Raises DocumentInvalid
         exception on inappropriate setting according to XSD schema."""
+        if validator is not None:
+            value = validator(value)
         element.set(key, str(value))
         schema = etree.XMLSchema(file=schema_file)
         schema.assertValid(element.getroottree())
@@ -120,22 +126,35 @@ class DataHelper:
         )
 
     @staticmethod
-    def create_attribute_v1(name: str, attr_type: type) -> property:
+    def create_attribute_v1(
+        name: str, attr_type: type, validator: Optional[Callable] = None
+    ) -> property:
         """Helper wrapper method for creating setters and getters for a V1 attribute"""
-        return DataHelper.create_attribute(name, attr_type, Defaults.SCHEMA_V1_FILE)
+        return DataHelper.create_attribute(
+            name, attr_type, Defaults.SCHEMA_V1_FILE, validator
+        )
 
     @staticmethod
-    def create_attribute_v2(name: str, attr_type: type) -> property:
+    def create_attribute_v2(
+        name: str, attr_type: type, validator: Optional[Callable] = None
+    ) -> property:
         """Helper wrapper method for creating setters and getters for a V2 attribute"""
-        return DataHelper.create_attribute(name, attr_type, Defaults.SCHEMA_V2_FILE)
+        return DataHelper.create_attribute(
+            name, attr_type, Defaults.SCHEMA_V2_FILE, validator
+        )
 
     @staticmethod
-    def create_attribute(name: str, attr_type: type, schema_file: str) -> property:
+    def create_attribute(
+        name: str,
+        attr_type: type,
+        schema_file: str,
+        validator: Optional[Callable] = None,
+    ) -> property:
         """Helper wrapper method for creating setters and getters for an attribute"""
         return property(
             fget=lambda self: DataHelper.get_attribute(self, name, attr_type),
             fset=lambda self, value: DataHelper.set_attribute(
-                self, name, value, schema_file
+                self, name, value, schema_file, validator
             ),
         )
 

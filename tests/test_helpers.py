@@ -14,6 +14,15 @@ def _process_information() -> ProcessInformation:
     return ecoSpold.dataset.metaInformation.processInformation
 
 
+def test_set_attribute_validator(process_information: ProcessInformation) -> None:
+    "It sets attribute correctly."
+    casNumberInput = "    0000110-63-4\n"
+    casNumberExpected = "0000110-63-4"
+    process_information.referenceFunction.CASNumber = casNumberInput
+
+    assert process_information.referenceFunction.CASNumber == casNumberExpected
+
+
 def test_set_attribute_fail(process_information: ProcessInformation) -> None:
     "It raises DocumentInvalid error."
     with pytest.raises(DocumentInvalid):
