@@ -1,7 +1,6 @@
 """Test cases for the __config__ module."""
 
 from pyecospold.config import Defaults
-from pyecospold.version import __version__
 
 
 def test_config_defaults() -> None:
@@ -11,7 +10,4 @@ def test_config_defaults() -> None:
 
     assert (
         Defaults.STATIC_DEFAULTS["Dataset"]["validCompanyCodes"] == "CompanyCodes.xml"
-    )
-    assert (
-        Defaults.DYNAMIC_DEFAULTS["Dataset"]["generator"] == f"pyecospold.{__version__}"
     )

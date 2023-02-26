@@ -214,4 +214,7 @@ class DataHelper:
                         getattr(child, key, Defaults.TYPE_DEFAULTS[str])
                         in Defaults.TYPE_DEFAULTS.values()
                     ):
-                        setattr(child, key, value)
+                        if isinstance(value, str):
+                            setattr(child, key, value)
+                        else:
+                            setattr(child, key, value(child))

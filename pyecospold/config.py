@@ -3,9 +3,10 @@ import configparser
 import os
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, ClassVar, Dict
+from typing import Any, Callable, ClassVar, Dict
 
 import numpy as np
+from lxml import etree
 
 from .version import __version__
 
@@ -29,9 +30,11 @@ class Defaults:
         str: "",
     }
 
-    DYNAMIC_DEFAULTS: ClassVar[Dict[str, Dict[str, Any]]] = {
+    DYNAMIC_DEFAULTS: ClassVar[
+        Dict[str, Dict[str, Callable[[etree.ElementBase], str]]]
+    ] = {
         "Dataset": {
-            "generator": f"pyecospold.{__version__}",
+            "generator": lambda node: f"pyecospold.{__version__}",
         },
     }
     STATIC_DEFAULTS: ClassVar[Dict[str, Dict[str, str]]] = {
