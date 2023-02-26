@@ -1,34 +1,42 @@
-from pyecospold.cas_validation import validate_cas, check_digit, convert_numeric_cas, rehyphenate_cas, zero_pad_cas
+"""Test cases for the __cas_validation__ module."""
 import math
+
 import pytest
+
+from pyecospold.cas_validation import validate_cas
 
 
 def test_nan():
+    """It raises ValueError."""
     with pytest.raises(ValueError):
-        convert_numeric_cas(math.nan)
+        validate_cas(math.nan)
 
 
 def test_valid_int():
-    s = 110634
-    assert validate_cas(s) == "0000110-63-4"
+    """It validates int CAS."""
+    cas = 110634
+    assert validate_cas(cas) == "0000110-63-4"
 
 
 def test_valid_float():
-    s = 110634.0
-    assert validate_cas(s) == "0000110-63-4"
+    """It validates float CAS."""
+    cas = 110634.0
+    assert validate_cas(cas) == "0000110-63-4"
 
 
 def test_extra_whitespace():
-    a = "  0000110-63-4"
-    b = "0000110-63-4  "
-    c = "0000110-63-4\n"
+    """It validates CAS with extra whitespaces."""
+    casPre = "  0000110-63-4"
+    casPost = "0000110-63-4  "
+    casNewLine = "0000110-63-4\n"
 
-    assert validate_cas(a) == "0000110-63-4"
-    assert validate_cas(b) == "0000110-63-4"
-    assert validate_cas(c) == "0000110-63-4"
+    assert validate_cas(casPre) == "0000110-63-4"
+    assert validate_cas(casPost) == "0000110-63-4"
+    assert validate_cas(casNewLine) == "0000110-63-4"
 
 
 def test_invalid_characters():
+    """It validates CAS with invalid characters."""
     with pytest.raises(ValueError):
         validate_cas("0000110-63-4a")
 
@@ -37,33 +45,40 @@ def test_invalid_characters():
 
 
 def test_empty_cas():
+    """It validates empty CAS."""
     with pytest.raises(ValueError):
         validate_cas("")
 
 
 def test_hyphenation():
-    a = "0000110634"
-    b = "0-00011-063-4"
+    """It validates CAS with hyphens."""
+    casNoHyphen = "0000110634"
+    casFourHyphens = "0-00011-063-4"
     # Two hyphens but in wrong place
-    c = "0-00011063-4"
+    casTwoHyphens = "0-00011063-4"
 
-    assert validate_cas(a) == "0000110-63-4"
-    assert validate_cas(b) == "0000110-63-4"
-    assert validate_cas(c) == "0000110-63-4"
+    assert validate_cas(casNoHyphen) == "0000110-63-4"
+    assert validate_cas(casFourHyphens) == "0000110-63-4"
+    assert validate_cas(casTwoHyphens) == "0000110-63-4"
 
 
-def test_checK_digit():
-    a = "0000110634"
-    b = "0000120634"
-    c = "0000110635"
+def test_check_digit():
+    """It validates CAS digits."""
+    casValid = "0000110634"
+    casInvalid1 = "0000120634"
+    casInvalid12 = "0000110635"
 
-    assert validate_cas(a)
+    assert validate_cas(casValid)
     with pytest.raises(ValueError):
-        validate_cas(b)
+        validate_cas(casInvalid1)
     with pytest.raises(ValueError):
-        validate_cas(c)
+        validate_cas(casInvalid12)
 
 
 def test_zero_padding():
-    assert validate_cas("110-63-4") == "0000110-63-4"
-    assert validate_cas("00000000000000110-63-4") == "0000110-63-4"
+    """It validates zero padding."""
+    casNoPadding = "110-63-4"
+    casExtraPadding = "00000000000000110-63-4"
+
+    assert validate_cas(casNoPadding) == "0000110-63-4"
+    assert validate_cas(casExtraPadding) == "0000110-63-4"

@@ -16,6 +16,7 @@ __all__ = (
 import importlib.metadata
 from typing import Union
 
+from .cas_validation import validate_cas
 from .config import Defaults
 from .core import (
     parse_directory,
@@ -26,7 +27,6 @@ from .core import (
     parse_file_v2,
     save_file,
 )
-from .cas_validation import validate_cas
 
 
 def get_version_tuple() -> tuple:
