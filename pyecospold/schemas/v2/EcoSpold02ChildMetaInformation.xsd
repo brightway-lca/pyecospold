@@ -19,7 +19,7 @@ All Rights Reserved.
 	xmlns:ns1="http://www.EcoInvent.org/EcoSpold02Child"
 	xmlns:xml="http://www.w3.org/XML/1998/namespace"
 	targetNamespace="http://www.EcoInvent.org/EcoSpold02Child" elementFormDefault="qualified"
-	attributeFormDefault="unqualified" version="2.0.13">
+	attributeFormDefault="unqualified" version="2.0.14">
 	<xsd:include schemaLocation="EcoSpold02ChildDataTypes.xsd" />
 	<xsd:complexType name="TDataEntryBy">
 		<xsd:annotation>

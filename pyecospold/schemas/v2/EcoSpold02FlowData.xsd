@@ -16,7 +16,7 @@ All Rights Reserved.
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.EcoInvent.org/EcoSpold02"
 	xmlns:es="http://www.EcoInvent.org/EcoSpold02" xmlns:xml="http://www.w3.org/XML/1998/namespace"
 	targetNamespace="http://www.EcoInvent.org/EcoSpold02" elementFormDefault="qualified"
-	attributeFormDefault="unqualified" version="2.0.13">
+	attributeFormDefault="unqualified" version="2.0.14">
 	<xsd:include schemaLocation="EcoSpold02DataTypes.xsd" />
 	<xsd:complexType name="TCustomExchange">
 		<xsd:annotation>
@@ -229,8 +229,8 @@ All Rights Reserved.
 					<redundantMasterDataField />
 				</xsd:appinfo>
 				<xsd:documentation>Indicates the number according to the Chemical Abstract Service
-					(CAS). The Format of the CAS-number: 000000-00-0, where the first string of
-					digits needs not to be complete (i.e. less than six digits are admitted).</xsd:documentation>
+					(CAS). The Format of the CAS-number: 0000000-00-0, where the first string of
+					digits needs not to be complete (i.e. less than seven digits are admitted).</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute name="amount" type="TFloatNumber" use="required">
