@@ -14,7 +14,7 @@ Portions created by the ecoinvent Centre and ifu Hamburg GmbH are Copyright (C) 
 All Rights Reserved.
 -->
 <xsd:schema targetNamespace="http://www.EcoInvent.org/EcoSpold01Elementary"
-	elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1"
+	elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2"
 	xmlns:es="http://www.EcoInvent.org/EcoSpold01Elementary"
 	xmlns="http://www.EcoInvent.org/EcoSpold01Elementary"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">

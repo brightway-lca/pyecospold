@@ -13,7 +13,7 @@ Centre, Switzerland (Swiss Centre for Life Cycle Inventories) and ifu Hamburg Gm
 Portions created by the ecoinvent Centre and ifu Hamburg GmbH are Copyright (C) ecoinvent Centre.
 All Rights Reserved.
 -->
-<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1"
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<xsd:include schemaLocation="EcoSpold01DataTypes.xsd"></xsd:include>
 	<xsd:complexType name="TDataSetInformation">
@@ -1310,23 +1310,19 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>502</spoldID>
 					<type>String</type>
-					<size>11</size>
-					<options>zero fill from
-					front</options>
 					<multipleOccurences>No</multipleOccurences>
 					<valueRequiredInEcoInvent>
 					No</valueRequiredInEcoInvent>
 				</xsd:appinfo>
-				<xsd:appinfo>Zero fill from front.</xsd:appinfo>
 				<xsd:documentation>Indicates the number according to the Chemical Abstract Service
-					(CAS). The Format of the CAS-number: 000000-00-0, where the first string of
-					digits needs not to be complete (i.e. less than six digits are admitted).</xsd:documentation>
+					(CAS). The Format of the CAS-number: 0000000-00-0, where the first string of
+					digits needs not to be complete (i.e. less than seven digits are admitted).</xsd:documentation>
 				<xsd:documentation>Not applicable for impact categories.</xsd:documentation>
 			</xsd:annotation>
 			<xsd:simpleType>
 				<xsd:restriction base="xsd:string">
-					<xsd:maxLength value="11"></xsd:maxLength>
-					<xsd:pattern value="\d{1,6}-\d{2,2}-\d"></xsd:pattern>
+					<xsd:maxLength value="12"></xsd:maxLength>
+					<xsd:pattern value="\d{2,7}-\d{2,2}-\d"></xsd:pattern>
 				</xsd:restriction>
 			</xsd:simpleType>
 		</xsd:attribute>

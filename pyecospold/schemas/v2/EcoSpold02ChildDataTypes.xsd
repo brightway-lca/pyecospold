@@ -18,7 +18,7 @@ All Rights Reserved.
 	xmlns:ns1="http://www.EcoInvent.org/EcoSpold02Child"
 	xmlns:xml="http://www.w3.org/XML/1998/namespace"
 	targetNamespace="http://www.EcoInvent.org/EcoSpold02Child" elementFormDefault="qualified"
-	attributeFormDefault="unqualified" version="2.0.13">
+	attributeFormDefault="unqualified" version="2.0.14">
 	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="XmlNamespace.xsd" />
 	<xsd:simpleType name="TPercent">
 		<xsd:annotation>
@@ -302,8 +302,8 @@ All Rights Reserved.
 	</xsd:simpleType>
 	<xsd:simpleType name="TCasNumber">
 		<xsd:restriction base="xsd:string">
-			<xsd:maxLength value="11" />
-			<xsd:pattern value="\d{1,6}-\d{2,2}-\d" />
+			<xsd:maxLength value="12" />
+			<xsd:pattern value="\d{2,7}-\d{2,2}-\d" />
 		</xsd:restriction>
 	</xsd:simpleType>
 	<xsd:complexType name="TString20">

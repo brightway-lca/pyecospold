@@ -18,7 +18,7 @@ All Rights Reserved.
 	xmlns:esc="http://www.EcoInvent.org/EcoSpold02Child" xmlns="http://www.EcoInvent.org/EcoSpold02"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://www.EcoInvent.org/EcoSpold02" elementFormDefault="qualified"
-	attributeFormDefault="unqualified" version="2.0.13">
+	attributeFormDefault="unqualified" version="2.0.14">
 	<xsd:include schemaLocation="EcoSpold02Activity.xsd" />
 	<xsd:import namespace="http://www.EcoInvent.org/EcoSpold02Child"
 		schemaLocation="EcoSpold02ChildActivity.xsd" />
