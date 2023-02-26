@@ -2,6 +2,7 @@
 
 import os
 import tempfile
+from io import StringIO
 from pathlib import Path
 
 from pyecospold.core import (
@@ -9,7 +10,31 @@ from pyecospold.core import (
     parse_directory_v2,
     parse_file_v1,
     save_file,
+    validate_file_v1,
+    validate_file_v2,
 )
+
+
+def test_validate_file_v1_success() -> None:
+    """It validates file successfully."""
+    assert validate_file_v1("data/v1/v1_1.xml") is None
+
+
+def test_validate_file_v1_fail() -> None:
+    """It validates file successfully."""
+    xml = StringIO("<ecoSpold></ecoSpold>")
+    errorExpected = (
+        "<string>:1:0:ERROR:SCHEMASV:SCHEMAV_CVC_ELT_1: Element 'ecoSpold': "
+        "No matching global declaration available for the validation root."
+    )
+    errorActual = validate_file_v1(xml)
+    assert errorActual is not None
+    assert str(errorActual[0]) == errorExpected
+
+
+def test_validate_file_v2_success() -> None:
+    """It validates file successfully."""
+    assert validate_file_v2("data/v2/v2_1.xml") is None
 
 
 def test_parse_directory_v1() -> None:

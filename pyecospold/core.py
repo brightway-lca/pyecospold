@@ -176,6 +176,7 @@ def validate_file(
     doc = etree.parse(file)
     if not schema.validate(doc):
         return schema.error_log
+    return None
 
 
 def validate_file_v1(file: Union[str, Path, StringIO]) -> Union[None, List[str]]:
