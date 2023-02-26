@@ -16,7 +16,7 @@ All Rights Reserved.
 <xsd:schema targetNamespace="http://www.EcoInvent.org/Categories"
 	xmlns="http://www.EcoInvent.org/Categories" xmlns:ec="http://www.EcoInvent.org/Categories"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-	attributeFormDefault="unqualified" blockDefault="restriction" version="1.1">
+	attributeFormDefault="unqualified" blockDefault="restriction" version="1.2">
 	<xsd:include schemaLocation="EcoSpold01DataTypes.xsd" />
 
 	<xsd:complexType name="TSubCategory">

@@ -15,7 +15,7 @@ All Rights Reserved.
 -->
 <xsd:schema targetNamespace="http://www.EcoInvent.org/Units" xmlns="http://www.EcoInvent.org/Units"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-	attributeFormDefault="unqualified" version="1.1">
+	attributeFormDefault="unqualified" version="1.2">
 	<xsd:include schemaLocation="EcoSpold01DataTypes.xsd" />
 
 	<xsd:element name="units">

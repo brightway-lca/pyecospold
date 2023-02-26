@@ -27,7 +27,9 @@ You can install _pyecospold_ via [pip] from [PyPI]:
 $ pip install pyecospold
 ```
 
-## ecospold1 version 1.1
+## ecospold1 Schema Updates
+
+### 1.1
 
 This library includes a new version of the schema definitions for ecospold1. Version 1.1 includes the following changes:
 
@@ -38,6 +40,14 @@ This library includes a new version of the schema definitions for ecospold1. Ver
 * Made `telephone` optional
 
 These changes were based on how this schema was being used by LCA software.
+
+### 1.2
+
+Corrected the handling of CAS numbers based on [the official documentation](https://www.cas.org/support/documentation/chemical-substances/checkdig):
+
+* A fixed size isn't required, zero-padding is optional and in any case is not used consistently by LCA software
+* Maximum length is 12, not 11
+* The first element has a minimum size of 2 digits, not 1
 
 ## Usage
 
