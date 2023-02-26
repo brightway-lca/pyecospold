@@ -54,7 +54,7 @@ def test_parse_file_v1_eco_spold(eco_spold: EcoSpold) -> None:
     validationStatus = "validationStatus"
 
     assert isinstance(eco_spold, EcoSpold)
-    assert isinstance(eco_spold.dataset, Dataset)
+    assert isinstance(eco_spold.datasets[0], Dataset)
     assert eco_spold.validationId == validationId
     assert eco_spold.validationStatus == validationStatus
 
@@ -69,7 +69,7 @@ def test_parse_file_v1_dataset(eco_spold: EcoSpold) -> None:
     timestamp = datetime(2006, 10, 31, 20, 34, 59)
     generator = "EcoAdmin 1.1.17.110"
     internalSchemaVersion = "1.0"
-    dataset = eco_spold.dataset
+    dataset = eco_spold.datasets[0]
 
     assert isinstance(dataset.metaInformation, MetaInformation)
     assert isinstance(dataset.flowData, FlowData)
@@ -85,7 +85,7 @@ def test_parse_file_v1_dataset(eco_spold: EcoSpold) -> None:
 
 def test_parse_file_v1_meta_information(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
-    metaInformation = eco_spold.dataset.metaInformation
+    metaInformation = eco_spold.datasets[0].metaInformation
 
     assert isinstance(metaInformation.processInformation, ProcessInformation)
     assert isinstance(metaInformation.modellingAndValidation, ModellingAndValidation)
@@ -96,7 +96,7 @@ def test_parse_file_v1_meta_information(eco_spold: EcoSpold) -> None:
 
 def test_parse_file_v1_flow_data(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
-    flowData = eco_spold.dataset.flowData
+    flowData = eco_spold.datasets[0].flowData
 
     assert isinstance(flowData.exchanges[0], Exchange)
     assert isinstance(flowData.allocations[0], Allocation)
@@ -104,7 +104,7 @@ def test_parse_file_v1_flow_data(eco_spold: EcoSpold) -> None:
 
 def test_parse_file_v1_process_information(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
-    processInformation = eco_spold.dataset.metaInformation.processInformation
+    processInformation = eco_spold.datasets[0].metaInformation.processInformation
 
     assert isinstance(processInformation.referenceFunction, ReferenceFunction)
     assert isinstance(processInformation.geography, Geography)
@@ -115,7 +115,8 @@ def test_parse_file_v1_process_information(eco_spold: EcoSpold) -> None:
 
 def test_parse_file_v1_modelling_and_validation(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
-    modellingAndValidation = eco_spold.dataset.metaInformation.modellingAndValidation
+    dataset = eco_spold.datasets[0]
+    modellingAndValidation = dataset.metaInformation.modellingAndValidation
 
     assert isinstance(modellingAndValidation.representativeness, Representativeness)
     assert isinstance(modellingAndValidation.source, Source)
@@ -124,7 +125,7 @@ def test_parse_file_v1_modelling_and_validation(eco_spold: EcoSpold) -> None:
 
 def test_parse_file_v1_administrative_information(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
-    metaInformation = eco_spold.dataset.metaInformation
+    metaInformation = eco_spold.datasets[0].metaInformation
     administrativeInformation = metaInformation.administrativeInformation
 
     assert isinstance(administrativeInformation.dataEntryBy, DataEntryBy)
@@ -163,8 +164,8 @@ def test_parse_file_v1_exchange(eco_spold: EcoSpold) -> None:
     inputGroupsStr = ["FromTechnosphere"]
     outputGroups = [0]
     outputGroupsStr = ["ReferenceProduct"]
-    exchange = eco_spold.dataset.flowData.exchanges[1]
-    outputExchange = eco_spold.dataset.flowData.exchanges[0]
+    exchange = eco_spold.datasets[0].flowData.exchanges[1]
+    outputExchange = eco_spold.datasets[0].flowData.exchanges[0]
 
     assert exchange.number == number
     assert exchange.category == category
@@ -202,7 +203,7 @@ def test_parse_file_v1_allocation(eco_spold: EcoSpold) -> None:
     fraction = 97.6
     referenceToInputOutputs = [1]
     explanations = ""
-    allocaiton = eco_spold.dataset.flowData.allocations[0]
+    allocaiton = eco_spold.datasets[0].flowData.allocations[0]
 
     assert allocaiton.referenceToCoProduct == referenceToCoProduct
     assert allocaiton.allocationMethod == allocationMethod
@@ -243,7 +244,7 @@ def test_parse_file_v1_reference_function(eco_spold: EcoSpold) -> None:
     statisticalClassification = 0
     datasetRelatesToProduct = True
     synonyms = ["0"]
-    processInformation = eco_spold.dataset.metaInformation.processInformation
+    processInformation = eco_spold.datasets[0].metaInformation.processInformation
     referenceFunction = processInformation.referenceFunction
 
     assert referenceFunction.name == name
@@ -269,7 +270,7 @@ def test_parse_file_v1_geography(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     location = "CH"
     text = "Values refer to the situtation in Switzerland."
-    processInformation = eco_spold.dataset.metaInformation.processInformation
+    processInformation = eco_spold.datasets[0].metaInformation.processInformation
     geography = processInformation.geography
 
     assert geography.location == location
@@ -279,7 +280,7 @@ def test_parse_file_v1_geography(eco_spold: EcoSpold) -> None:
 def test_parse_file_v1_technology(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     text = "Refer to open plant composting."
-    processInformation = eco_spold.dataset.metaInformation.processInformation
+    processInformation = eco_spold.datasets[0].metaInformation.processInformation
     technology = processInformation.technology
 
     assert technology.text == text
@@ -294,7 +295,7 @@ def test_parse_file_v1_time_period(eco_spold: EcoSpold) -> None:
     endYear = "1999"
     endYearMonth = ""
     endDate = ""
-    processInformation = eco_spold.dataset.metaInformation.processInformation
+    processInformation = eco_spold.datasets[0].metaInformation.processInformation
     timePeriod = processInformation.timePeriod
 
     assert timePeriod.dataValidForEntirePeriod
@@ -318,7 +319,7 @@ def test_parse_file_v1_dataset_information(eco_spold: EcoSpold) -> None:
     energyValuesStr = "Undefined"
     languageCode = "en"
     localLanguageCode = "de"
-    processInformation = eco_spold.dataset.metaInformation.processInformation
+    processInformation = eco_spold.datasets[0].metaInformation.processInformation
     dataSetInformation = processInformation.dataSetInformation
 
     assert dataSetInformation.type == _type
@@ -340,7 +341,9 @@ def test_parse_file_v1_representativeness(eco_spold: EcoSpold) -> None:
     samplingProcedure = "Data come from one compost plant in Switzerland."
     extrapolations = "none"
     uncertaintyAdjustments = "none"
-    modellingAndValidation = eco_spold.dataset.metaInformation.modellingAndValidation
+    modellingAndValidation = eco_spold.datasets[
+        0
+    ].metaInformation.modellingAndValidation
     representativeness = modellingAndValidation.representativeness
 
     assert representativeness.percent is percent
@@ -371,7 +374,9 @@ def test_parse_file_v1_source(eco_spold: EcoSpold) -> None:
     volumeNo = 15
     issueNo = ""
     text = "CD-ROM"
-    modellingAndValidation = eco_spold.dataset.metaInformation.modellingAndValidation
+    modellingAndValidation = eco_spold.datasets[
+        0
+    ].metaInformation.modellingAndValidation
     source = modellingAndValidation.source
 
     assert source.number == number
@@ -397,7 +402,9 @@ def test_parse_file_v1_validation(eco_spold: EcoSpold) -> None:
     proofReadingDetails = "Passed."
     proofReadingValidator = 291
     otherDetails = ""
-    modellingAndValidation = eco_spold.dataset.metaInformation.modellingAndValidation
+    modellingAndValidation = eco_spold.datasets[
+        0
+    ].metaInformation.modellingAndValidation
     validation = modellingAndValidation.validation
 
     assert validation.proofReadingDetails == proofReadingDetails
@@ -409,7 +416,7 @@ def test_parse_file_v1_data_entry_by(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     person = 309
     qualityNetwork = 1
-    metaInformation = eco_spold.dataset.metaInformation
+    metaInformation = eco_spold.datasets[0].metaInformation
     dataEntryBy = metaInformation.administrativeInformation.dataEntryBy
 
     assert dataEntryBy.person == person
@@ -429,7 +436,7 @@ def test_parse_file_v1_data_generator_and_publication(eco_spold: EcoSpold) -> No
     companyCode = ""
     countryCode = ""
     pageNumbers = ""
-    metaInformation = eco_spold.dataset.metaInformation
+    metaInformation = eco_spold.datasets[0].metaInformation
     administrativeInformation = metaInformation.administrativeInformation
     dataGeneratorAndPublication = administrativeInformation.dataGeneratorAndPublication
 
@@ -458,7 +465,7 @@ def test_parse_file_v1_person(eco_spold: EcoSpold) -> None:
     email = "email@domain.com"
     companyCode = "EMPA-SG"
     countryCode = "CH"
-    metaInformation = eco_spold.dataset.metaInformation
+    metaInformation = eco_spold.datasets[0].metaInformation
     administrativeInformation = metaInformation.administrativeInformation
     person = administrativeInformation.persons[0]
 

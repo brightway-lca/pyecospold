@@ -46,8 +46,8 @@ def test_parse_directory_v1() -> None:
     assert len(ecospoldList) == 2
     assert ecospoldList[0][0] == Path(files[0])
     assert ecospoldList[1][0] == Path(files[1])
-    assert ecospoldList[0][1].dataset.generator == "EcoAdmin 1.1.17.110"
-    assert ecospoldList[1][1].dataset.generator == "EcoAdmin 1.1.17.110"
+    assert ecospoldList[0][1].datasets[0].generator == "EcoAdmin 1.1.17.110"
+    assert ecospoldList[1][1].datasets[0].generator == "EcoAdmin 1.1.17.110"
 
 
 def test_parse_directory_v2() -> None:

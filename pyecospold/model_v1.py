@@ -21,10 +21,10 @@ class EcoSpold(etree.ElementBase):
     """str:"""
 
     @property
-    def dataset(self) -> "Dataset":
+    def datasets(self) -> List["Dataset"]:
         """Contains information about one individual unit process (or terminated
         system). Information is divided into metaInformation and flowData."""
-        return DataHelper.get_element(self, "dataset")
+        return DataHelper.get_element_list(self, "dataset")
 
 
 class Dataset(etree.ElementBase):

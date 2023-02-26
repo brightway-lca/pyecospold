@@ -14,7 +14,7 @@ from pyecospold.version import __version__
 def _process_information() -> ProcessInformation:
     """Fixture for getting ReferenceFunction element."""
     ecoSpold = parse_file_v1("data/v1/v1_1.xml")
-    return ecoSpold.dataset.metaInformation.processInformation
+    return ecoSpold.datasets[0].metaInformation.processInformation
 
 
 def test_set_attribute_validator(process_information: ProcessInformation) -> None:
