@@ -76,8 +76,8 @@ save_file(ecoSpold, "out/00001_new.xml")  # Replace with your own path
 
 ```ini
 [parameters]
-SCHEMA_V1_FILE=pyecospold\schemas\v1\EcoSpold01Dataset.xsd
-SCHEMA_V2_FILE=pyecospold\schemas\v2\EcoSpold02.xsd
+SCHEMA_V1_FILE=path/to/schemas/v1/EcoSpold01Dataset.xsd
+SCHEMA_V2_FILE=path/to/schemas/v2/EcoSpold02.xsd
 
 [Allocation]
 allocationMethod=-1

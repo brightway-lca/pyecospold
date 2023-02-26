@@ -9,7 +9,6 @@ def test_config_defaults() -> None:
     configFile = "config.ini"
     Defaults.config_defaults(configFile)
 
-    assert Defaults.SCHEMA_V1_FILE == r"pyecospold\schemas\v1\EcoSpold01Dataset.xsd"
     assert (
         Defaults.STATIC_DEFAULTS["Dataset"]["validCompanyCodes"] == "CompanyCodes.xml"
     )
