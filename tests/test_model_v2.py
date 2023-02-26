@@ -398,10 +398,10 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
     ]
     synonyms = []
     tags = []
-    flowData = eco_spold.childActivityDataset.flowData
     uncertaintiesLen = 1
     propertiesLen = 0
     transferCoefficientsLen = 0
+    flowData = eco_spold.childActivityDataset.flowData
     elementaryExchange = flowData.elementaryExchanges[0]
 
     assert elementaryExchange.id == exchangeID
@@ -440,3 +440,19 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
     assert len(elementaryExchange.uncertainties) == uncertaintiesLen
     assert len(elementaryExchange.properties) == propertiesLen
     assert len(elementaryExchange.transferCoefficients) == transferCoefficientsLen
+
+
+def test_parse_file_v2_lognromal(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    meanValue = 0.6
+    _mu = -0.51
+    variance = 0.03
+    varianceWithPedigreeUncertainty = 0.0707
+    flowData = eco_spold.childActivityDataset.flowData
+    uncertainty = flowData.intermediateExchanges[0].uncertainties[0]
+    lognormal = uncertainty.lognormal
+
+    assert lognormal.meanValue == meanValue
+    assert lognormal.mu == _mu
+    assert lognormal.variance == variance
+    assert lognormal.varianceWithPedigreeUncertainty == varianceWithPedigreeUncertainty

@@ -766,6 +766,190 @@ class Uncertainty(etree.ElementBase):
     places, so one dataset may contain several uncertainty elements in distinct
     places. But each element which has uncertainty may only contain one."""
 
+    @property
+    def lognormal(self) -> "Lognormal":
+        """The Lognormal-distribution with average value μ (Mu parameter) and
+        variance σ (Variance parameter) is a Normal-distribution, shaping the
+        natural logarithm of the characteristic values ln(x) instead of x-values"""
+        return DataHelper.get_element(self, "lognormal")
+
+    @property
+    def normal(self) -> "Normal":
+        """Normal (also known as "Gaussian") distribution. It is a family of
+        distributions of the same general form, differing in thei location and
+        scale parameters: the mean ("MeanValue") and standard deviation
+        ("Deviation"), respectively."""
+        return DataHelper.get_element(self, "normal")
+
+    @property
+    def triangular(self) -> "Triangular":
+        """Parameter are minValue, mostLikelyValue, maxValue. In case of triangular
+        uncertainty distribution, the meanValue shall be calculated from the
+        mostLikelyValue. The field mostLikelyValue (#3797) must not be used in the
+        ecoinvent context."""
+        return DataHelper.get_element(self, "triangular")
+
+    @property
+    def uniform(self) -> "Uniform":
+        """Uniform distribution of values between the minValue and the maxValue
+        parameter. If the maxValue parameter is smaller than the minValue parameter
+        their values will be swapped."""
+        return DataHelper.get_element(self, "uniform")
+
+    @property
+    def beta(self) -> "Beta":
+        """Beta distribution using minValue (a), maxValue (b) and
+        mostFrequentValue (m) parameters to calculate the two shape parameters
+        of the underlying Gamma distributions. The parameters must follow this
+        condition: ((a <= m) and (m <= b)) or (a = b). The shape values
+        will be calculated by these formulas: Shape1 = 1 + 4 * ((m-a) / (b-a)).
+        Shape2 = 6 - Shape1."""
+        return DataHelper.get_element(self, "beta")
+
+    @property
+    def gamma(self) -> "Gamma":
+        """Gamma distribution using scale and shape parameter. Absolute values
+        of the values entered here will be used. The value of the minimum
+        parameter will be added to all samples."""
+        return DataHelper.get_element(self, "gamma")
+
+    @property
+    def binomial(self) -> "Binomial":
+        """Binomial distribution using n and p parameter."""
+        return DataHelper.get_element(self, "binomial")
+
+    @property
+    def undefined(self) -> "Undefined":
+        """This "distribution" can be used to hold legacy data of
+        the EcoSpold01 format which reused the minValue, maxValue and
+        standardDeviation95 fields to store undefined distribution data."""
+        return DataHelper.get_element(self, "undefined")
+
+
+class Lognormal(etree.ElementBase):
+    """The Lognormal-distribution with average value μ (Mu parameter) and variance
+    σ (Variance parameter) is a Normal-distribution, shaping the natural logarithm
+    of the characteristic values ln(x) instead of x-values"""
+
+    meanValue = DataHelper.create_attribute_v2("meanValue", float)
+    """float: Geometric mean"""
+
+    mu = DataHelper.create_attribute_v2("mu", float)
+    """float: Arithmetic mean of the underlying normal distribution"""
+
+    variance = DataHelper.create_attribute_v2("variance", float)
+    """float: Unbiased variance of the underlying normal distribution"""
+
+    varianceWithPedigreeUncertainty = DataHelper.create_attribute_v2(
+        "varianceWithPedigreeUncertainty", float
+    )
+    """float: Unbiased variance of the underlying normal distribution, basic
+    uncertainty with pedigree uncertainty"""
+
+
+class Normal(etree.ElementBase):
+    """Normal (also known as "Gaussian") distribution. It is a family of distributions
+    of the same general form, differing in thei location and scale parameters: the mean
+    ("MeanValue") and standard deviation ("Deviation"), respectively."""
+
+    meanValue = DataHelper.create_attribute_v2("meanValue", float)
+    """float: Arithmetic mean"""
+
+    variance = DataHelper.create_attribute_v2("variance", float)
+    """float: Unbiased variance"""
+
+    varianceWithPedigreeUncertainty = DataHelper.create_attribute_v2(
+        "varianceWithPedigreeUncertainty", float
+    )
+    """float: Unbiased variance, basic uncertainty with pedigree uncertainty"""
+
+
+class Triangular(etree.ElementBase):
+    """Parameter are minValue, mostLikelyValue, maxValue. In case of triangular
+    uncertainty distribution, the meanValue shall be calculated from the
+    mostLikelyValue. The field mostLikelyValue (#3797) must not be used in the
+    ecoinvent context."""
+
+    minValue = DataHelper.create_attribute_v2("minValue", float)
+    """float: Minimum value"""
+
+    mostLikelyValue = DataHelper.create_attribute_v2("mostLikelyValue", float)
+    """float: Mode"""
+
+    maxValue = DataHelper.create_attribute_v2("maxValue", float)
+    """float: Maximum value"""
+
+
+class Uniform(etree.ElementBase):
+    """Uniform distribution of values between the minValue and the maxValue
+    parameter. If the maxValue parameter is smaller than the minValue parameter
+    their values will be swapped."""
+
+    minValue = DataHelper.create_attribute_v2("minValue", float)
+    """float: Minimum value"""
+
+    maxValue = DataHelper.create_attribute_v2("maxValue", float)
+    """float: Maximum value"""
+
+
+class Beta(etree.ElementBase):
+    """Beta distribution using minValue (a), maxValue (b) and
+    mostFrequentValue (m) parameters to calculate the two shape parameters
+    of the underlying Gamma distributions. The parameters must follow this
+    condition: ((a <= m) and (m <= b)) or (a = b). The shape values
+    will be calculated by these formulas: Shape1 = 1 + 4 * ((m-a) / (b-a)).
+    Shape2 = 6 - Shape1."""
+
+    minValue = DataHelper.create_attribute_v2("minValue", float)
+    """float: Minimum value (a)"""
+
+    mostFrequentValue = DataHelper.create_attribute_v2("mostFrequentValue", float)
+    """float; Most Frequent value (m)"""
+
+    maxValue = DataHelper.create_attribute_v2("maxValue", float)
+    """float: Maximum value (b)"""
+
+
+class Gamma(etree.ElementBase):
+    """Gamma distribution using scale and shape parameter. Absolute values
+    of the values entered here will be used. The value of the minimum
+    parameter will be added to all samples."""
+
+    shape = DataHelper.create_attribute_v2("shape", float)
+    """float: Shape parameter"""
+
+    scale = DataHelper.create_attribute_v2("scale", float)
+    """float: Scale parameter"""
+
+    minValue = DataHelper.create_attribute_v2("minValue", float)
+    """float: Minimum value (location parameter)"""
+
+
+class Binomial(etree.ElementBase):
+    """Binomial distribution using n and p parameter."""
+
+    n = DataHelper.create_attribute_v2("n", int)
+    """int: Number of independant trials."""
+
+    p = DataHelper.create_attribute_v2("p", float)
+    """float: Probability of success in each trial."""
+
+
+class Undefined(etree.ElementBase):
+    """This "distribution" can be used to hold legacy data of
+    the EcoSpold01 format which reused the minValue, maxValue and
+    standardDeviation95 fields to store undefined distribution data."""
+
+    minValue = DataHelper.create_attribute_v2("minValue", float)
+    """float: Minimum value."""
+
+    maxValue = DataHelper.create_attribute_v2("maxValue", float)
+    """float: Maximum value."""
+
+    standardDeviation95 = DataHelper.create_attribute_v2("standardDeviation95", float)
+    """float: The value, extended from both sides of the mean, that would be
+    necessary to cover 95% of the population."""
+
 
 class Property(etree.ElementBase):
     """Format to specify properties of exchanges."""
