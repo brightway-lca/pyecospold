@@ -7,6 +7,9 @@ __all__ = (
     "parse_file",
     "parse_file_v1",
     "parse_file_v2",
+    "validate_file",
+    "validate_file_v1",
+    "validate_file_v2",
     "save_file",
     "Defaults",
     "validate_cas",
@@ -25,6 +28,9 @@ from .core import (
     parse_file,
     parse_file_v1,
     parse_file_v2,
+    validate_file,
+    validate_file_v1,
+    validate_file_v2,
     save_file,
 )
 
