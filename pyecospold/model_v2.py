@@ -1,4 +1,5 @@
 """Custom EcoSpold Python classes for v1 of EcoSpold schema."""
+from datetime import datetime
 from typing import Dict, List
 
 from lxml import etree
@@ -265,7 +266,7 @@ class Activity(etree.ElementBase):
     ignored. 3) In a string field, fill in content including the text {{PARENTTEXT}} in
     which case the field content from the parent activity dataset is included at this
     place in the filled in text in the child dataset. 4) In a field with type
-    TTextAndImage, both {{PARENTTEXT}} and {{text_variables}} are supported; the latter
+    TextAndImage, both {{PARENTTEXT}} and {{text_variables}} are supported; the latter
     allows to define text variables in the parent dataset and use them in the text as
     {{variablename}}. If a parent textfield includes a variable, this variable may be
     redefined by the child activity dataset while keeping the rest of the parent text
@@ -389,7 +390,7 @@ class Activity(etree.ElementBase):
     retrievable via the Http protocol."""
 
     @property
-    def allocationComment(self) -> "Comment":
+    def allocationComment(self) -> "TextAndImage":
         """Text and image field for further information about the allocation
         procedure and the allocation properties chosen. An eventual coincidence in
         allocation factors when comparing different allocation parameters (like physical
@@ -404,7 +405,7 @@ class Activity(etree.ElementBase):
         return DataHelper.get_element(self, "allocationComment")
 
     @property
-    def generalComment(self) -> "Comment":
+    def generalComment(self) -> "TextAndImage":
         """Text and image field for general information about the dataset. Only comments
         and references of more general nature that cannot be placed in any of the more
         specific comment fields, should be placed here. In general, the information in
@@ -491,7 +492,7 @@ class Geography(etree.ElementBase):
     e.g. the regional codes of EcoSpold version 1."""
 
     @property
-    def comments(self) -> List["Comment"]:
+    def comments(self) -> List["TextAndImage"]:
         """Text and image field for further explanations of the geography.
         Especially for area descriptions, the nature of the geographical
         delimitation may be given, especially when this is not an administrative
@@ -543,7 +544,7 @@ class Technology(etree.ElementBase):
     same year."""
 
     @property
-    def comments(self) -> List["Comment"]:
+    def comments(self) -> List["TextAndImage"]:
         """Text and image field to describe the technology of the activity. The
         text should cover information necessary to identify the properties and
         particularities of the technology(ies) underlying the activity data.
@@ -589,7 +590,7 @@ class TimePeriod(etree.ElementBase):
     'comment'."""
 
     @property
-    def comments(self) -> List["Comment"]:
+    def comments(self) -> List["TextAndImage"]:
         """Text and image field for additional explanations concerning
         the temporal validity of the data reported. It may e.g. include
         information about:- how strong the temporal correlation is for
@@ -1397,6 +1398,38 @@ class Representativeness(etree.ElementBase):
 class Review(etree.ElementBase):
     """Contains information about the reviewers' comments on the dataset content."""
 
+    otherDetails = DataHelper.create_attribute_list_v2("otherDetails", str)
+    """list[str]: Contains further information from the review process, e.g. on
+    smaller corrections added after the first publication of the dataset."""
+
+    reviewerId = DataHelper.create_attribute_v2("reviewerId", str)
+    """str: Indicates the person who carried out the review."""
+
+    reviewerContextId = DataHelper.create_attribute_v2("reviewerContextId", str)
+    """str: Reference to the context of the reviewer. If this attribute is
+    omitted the context of the dataset itself will be used instead."""
+
+    reviewerName = DataHelper.create_attribute_v2("reviewerName", str)
+    """str: Name and surname of the person."""
+
+    reviewerEmail = DataHelper.create_attribute_v2("reviewerEmail", str)
+    """str: Complete email address of the person."""
+
+    reviewDate = DataHelper.create_attribute_v2("reviewDate", datetime)
+    """datetime: Date of validation or review."""
+
+    reviewedMajorRelease = DataHelper.create_attribute_v2("reviewedMajorRelease", int)
+    """int: The dataset version validated or reviewed. Refers to 3800."""
+
+    reviewedMinorRelease = DataHelper.create_attribute_v2("reviewedMinorRelease", int)
+    """int: The dataset version validated or reviewed. Refers to 3805."""
+
+    reviewedMajorRevision = DataHelper.create_attribute_v2("reviewedMajorRevision", int)
+    """int: The dataset version validated or reviewed. Refers to 3810."""
+
+    reviewedMinorRevision = DataHelper.create_attribute_v2("reviewedMinorRevision", int)
+    """int: The dataset version validated or reviewed. Refers to 3815."""
+
 
 class DataEntryBy(etree.ElementBase):
     """Contains information about the author of the dataset, i.e. the person that
@@ -1416,8 +1449,13 @@ class FileAttributes(etree.ElementBase):
     context. I.e. there must be only one translation of the element."""
 
 
-class Comment(etree.ElementBase):
+class TextAndImage(etree.ElementBase):
     """Text and image field for information."""
+
+    variables = DataHelper.create_attribute_list_v2("variable", str)
+    """list[str]: Defines a varible name and its value used in a text element
+    in this section. These can be overriden by derived datasets to change the
+    value of variables."""
 
     @property
     def texts(self) -> List[str]:

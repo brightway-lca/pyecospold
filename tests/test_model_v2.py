@@ -9,7 +9,6 @@ from pyecospold.model_v2 import (
     ActivityDescription,
     AdministrativeInformation,
     Classification,
-    Comment,
     DataEntryBy,
     DataGeneratorAndPublication,
     EcoSpold,
@@ -24,6 +23,7 @@ from pyecospold.model_v2 import (
     Property,
     Representativeness,
     Technology,
+    TextAndImage,
     TimePeriod,
     Uncertainty,
 )
@@ -169,7 +169,7 @@ def test_parse_file_v2_activity(eco_spold: EcoSpold) -> None:
     activity = eco_spold.childActivityDataset.activityDescription.activity[0]
 
     assert activity.allocationComment is None
-    assert isinstance(activity.generalComment, Comment)
+    assert isinstance(activity.generalComment, TextAndImage)
     assert activity.activityNames == activityNames
     assert activity.generalComment.texts == generalCommentTexts
     assert activity.generalComment.imageUrls == generalCommentImageUrls
