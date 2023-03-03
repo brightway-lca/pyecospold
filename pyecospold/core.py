@@ -43,7 +43,7 @@ from .model_v2 import (
 from .model_v2 import ModellingAndValidation as ModellingAndValidationV2
 from .model_v2 import Normal, Parameter, PedigreeMatrix, Property
 from .model_v2 import Representativeness as RepresentativenessV2
-from .model_v2 import Review
+from .model_v2 import RequiredContextReference, Review
 from .model_v2 import Technology as TechnologyV2
 from .model_v2 import TextAndImage
 from .model_v2 import TimePeriod as TimePeriodV2
@@ -118,6 +118,7 @@ class EcospoldLookupV2(etree.CustomElementClassLookup):
             "pedigreeMatrix": PedigreeMatrix,
             "property": Property,
             "representativeness": RepresentativenessV2,
+            "requiredContexts": RequiredContextReference,
             "review": Review,
             "technology": TechnologyV2,
             "timePeriod": TimePeriodV2,

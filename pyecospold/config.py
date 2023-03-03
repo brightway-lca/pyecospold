@@ -61,6 +61,9 @@ class Defaults:
         "Exchange": {
             "uncertaintyType": "1",
         },
+        "FileAttributes": {
+            "defaultLanguage": "en",
+        },
         "PedigreeMatrix": {
             "reliability": "5",
         },

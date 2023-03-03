@@ -1588,6 +1588,77 @@ class FileAttributes(etree.ElementBase):
     """This constraint ensures that each xml:lang attribute is only used once in this
     context. I.e. there must be only one translation of the element."""
 
+    contextNames = DataHelper.create_attribute_list_v2("contextName", str)
+    """list[str]: The name of the context referenced by field 3880. The context
+    replaces the ecoSpold01 quality network (field id 304). The context id for the
+    ecoinvent quality network can be found in the Context.xml master data file."""
+
+    majorRelease = DataHelper.create_attribute_v2("majorRelease", int)
+    """int: The major release number is increased by one with each major update
+    (e.g. every second year)."""
+
+    minorRelease = DataHelper.create_attribute_v2("minorRelease", int)
+    """int: The minor release number is increased by one for each release within
+    the period of two major updates."""
+
+    majorRevision = DataHelper.create_attribute_v2("majorRevision", int)
+    """int: The revision number is specific to each dataset and is
+    independent of the overall database release version and is used to discern
+    different versions of the dataset within the database major/minor release
+    versions. The major revision number reflects the amount of accepted changes to
+    the dataset. It will only increase over time and must not be changed manually.
+    In the ecoinvent context the major revision is increased each time changes to an
+    activity are added to the database (i.e. after they passed the review process).
+    This also resets the minor revision to 1."""
+
+    minorRevision = DataHelper.create_attribute_v2("minorRevision", int)
+    """int: The minor revision number describes versions of the dataset
+    during the editing process before it is submitted for review. In th eecoinvent
+    context it is increased automatically every time the data provider saves changes
+    made to the dataset either locally or as a draft on the ecoinvent server. The
+    minor revision number is reset to “1” each time the major revision number is
+    increased (when changes to a dataset are accepted by a reviewer)."""
+
+    internalSchemaVersion = DataHelper.create_attribute_v2("internalSchemaVersion", str)
+    """str: Dataset is generated based on this internal schema version."""
+
+    defaultLanguage = DataHelper.create_attribute_v2("defaultLanguage", str)
+    """str: Default language for all multi language fields of this dataset.
+    Any multi language field should contain a value at least for the default
+    language. If no defaultLanguage is given, the default value ("en") will be used."""
+
+    creationTimestamp = DataHelper.create_attribute_v2("creationTimestamp", datetime)
+    """datetime: Automatically generated date when dataset is created."""
+
+    lastEditTimestamp = DataHelper.create_attribute_v2("lastEditTimestamp", datetime)
+    """datetime: Automatically generated date when dataset is saved."""
+
+    fileGenerator = DataHelper.create_attribute_v2("fileGenerator", str)
+    """str: Description of the program which created this file. Preferably
+    including version."""
+
+    fileTimestamp = DataHelper.create_attribute_v2("fileTimestamp", datetime)
+    """datetime: Time and date this file was created."""
+
+    contextId = DataHelper.create_attribute_v2("contextId", str)
+    """str: Indicates the context for which this dataset is designed. The
+    information is used, e.g. for restricting the accessibility of dataset
+    information to one particular context and to determine which master data files
+    are needed to access it. If this attribute is omitted the dataset is assumed to
+    be a standalone dataset and masterdata references can not be dereferenced.
+    The context replaces the ecoSpold01 quality network (field id 304). The context
+    id for the ecoinvent quality network can be found in the Context.xml master data
+    file."""
+
+    @property
+    def requiredContexts(self) -> List["RequiredContextReference"]:
+        """This type allows to specify which context(s) must be known if a dataset
+        is to be read using the master data referenced by it. It can be used signal
+        that master data entries from different contexts are needed to read this
+        dataset. The software reading the dataset must be aware of those contexts
+        and must know where to find the actual master data files of each context."""
+        return DataHelper.get_element_list(self, "requiredContext")
+
 
 class TextAndImage(etree.ElementBase):
     """Text and image field for information."""
@@ -1793,3 +1864,41 @@ class PedigreeMatrix(etree.ElementBase):
         return PedigreeMatrix.FURTHER_TECHNOLOGY_CORRELATION_MAP[
             self.furtherTechnologyCorrelation
         ]
+
+
+class RequiredContextReference(etree.ElementBase):
+    """This type allows to specify which context(s) must be known if a dataset
+    is to be read using the master data referenced by it. It can be used signal
+    that master data entries from different contexts are needed to read this
+    dataset. The software reading the dataset must be aware of those contexts
+    and must know where to find the actual master data files of each context."""
+
+    requiredContextNames = DataHelper.create_attribute_v2("requiredContextName", int)
+    """list[str]: The name of the context referenced by field 7850."""
+
+    majorRelease = DataHelper.create_attribute_v2("majorRelease", int)
+    """int: This version number can be used to make sure that the necessary
+    master data entries are present for an activity."""
+
+    minorRelease = DataHelper.create_attribute_v2("minorRelease", int)
+    """int: This version number can be used to make sure that the necessary
+    master data entries are present for an activity."""
+
+    majorRevision = DataHelper.create_attribute_v2("majorRevision", int)
+    """int: This version number can be used to make sure that the necessary
+    master data entries are present for an activity."""
+
+    minorRevision = DataHelper.create_attribute_v2("minorRevision", int)
+    """int: This version number can be used to make sure that the necessary
+    master data entries are present for an activity."""
+
+    requiredContextId = DataHelper.create_attribute_v2("requiredContextId", str)
+    """str: Reference to the context of the master data file. If this
+    attribute is omitted the context of the dataset itself should be
+    used instead."""
+
+    requiredContextFileLocation = DataHelper.create_attribute_v2(
+        "requiredContextFileLocation", str
+    )
+    """str: Optional URI reference to the directory containing the master
+    data files of this context."""

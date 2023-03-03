@@ -1,5 +1,7 @@
 """Test cases for the __model_v2__ module."""
 
+from datetime import datetime
+
 import pytest
 
 from pyecospold.core import parse_file_v2
@@ -590,6 +592,37 @@ def test_parse_file_v2_data_generator_and_publication(eco_spold: EcoSpold) -> No
     assert dataGeneratorAndPublication.pageNumbers == pageNumbers
     assert dataGeneratorAndPublication.accessRestrictedTo == accessRestrictedTo
     assert dataGeneratorAndPublication.accessRestrictedToStr == accessRestrictedToStr
+
+
+def test_parse_file_v2_file_attributes(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    majorRelease = 3
+    minorRelease = 0
+    majorRevision = 37
+    minorRevision = 0
+    internalSchemaVersion = "2.0.10"
+    defaultLanguage = "en"
+    creationTimestamp = datetime(2010, 7, 28, 18, 41, 6)
+    lastEditTimestamp = datetime(2011, 9, 22, 18, 30, 49)
+    fileGenerator = "EcoEditor 2.0.43.6348"
+    fileTimestamp = datetime(2011, 9, 22, 18, 30, 49)
+    contextId = "de659012-50c4-4e96-b54a-fc781bf987ab"
+    contextNames = ["ecoinvent"]
+    administrativeInformation = eco_spold.childActivityDataset.administrativeInformation
+    fileAttributes = administrativeInformation.fileAttributes
+
+    assert fileAttributes.majorRelease == majorRelease
+    assert fileAttributes.minorRelease == minorRelease
+    assert fileAttributes.majorRevision == majorRevision
+    assert fileAttributes.minorRevision == minorRevision
+    assert fileAttributes.internalSchemaVersion == internalSchemaVersion
+    assert fileAttributes.defaultLanguage == defaultLanguage
+    assert fileAttributes.creationTimestamp == creationTimestamp
+    assert fileAttributes.lastEditTimestamp == lastEditTimestamp
+    assert fileAttributes.fileGenerator == fileGenerator
+    assert fileAttributes.fileTimestamp == fileTimestamp
+    assert fileAttributes.contextId == contextId
+    assert fileAttributes.contextNames == contextNames
 
 
 def test_parse_file_v2_pedigree_matrix(eco_spold: EcoSpold) -> None:
