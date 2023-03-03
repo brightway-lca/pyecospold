@@ -954,6 +954,84 @@ class Undefined(etree.ElementBase):
 class Property(etree.ElementBase):
     """Format to specify properties of exchanges."""
 
+    names = DataHelper.create_attribute_list_v2("name", str)
+    """str: Descriptive name of the property."""
+
+    unitNames = DataHelper.create_attribute_list_v2("unitName", str)
+    """str: Unit name of the property amount."""
+
+    comments = DataHelper.create_attribute_list_v2("comment", str)
+    """A general comment can be made about each individual property of a
+    particular exchange."""
+
+    propertyId = DataHelper.create_attribute_v2("propertyId", str)
+    """str: Reference to the master data entry for this property."""
+
+    propertyContextId = DataHelper.create_attribute_v2("propertyContextId", str)
+    """str: Reference to the context of the property. If this attribute
+    is omitted the context of the dataset itself will be used instead."""
+
+    variableName = DataHelper.create_attribute_v2("variableName", str)
+    """str: Defines a variable name for referencing the property amount in a
+    mathematical relation. Variable names must start with a character (a-z)
+    and may contain characters, numbers and underscores (_). Variable names
+    are not case sensitive (calorific_Value equals Calorific_value)."""
+
+    amount = DataHelper.create_attribute_v2("amount", float)
+    """float: The value of the property."""
+
+    isDefiningValue = DataHelper.create_attribute_v2("isDefiningValue", bool)
+    """bool: If this field is true, the value of this property is a part of
+    the definition of the exchange and therefore has a fixed relation to the
+    amount of the exchange that cannot be changed for individual instances of
+    the exchange in different datasets."""
+
+    mathematicalRelation = DataHelper.create_attribute_v2("mathematicalRelation", str)
+    """str: Defines a mathematical formula with references to values of flows
+    parameters or properties by variable names or REF function. The result of the
+    formula with a specific set of variable values is written into the amount field."""
+
+    isCalculatedAmount = DataHelper.create_attribute_v2("isCalculatedAmount", bool)
+    """bool: If true the value of the amount field is the calculated value of the
+    mathematicalRelation."""
+
+    unitId = DataHelper.create_attribute_v2("unitId", str)
+    """str: Reference to the unit of the amount."""
+
+    unitContextId = DataHelper.create_attribute_v2("unitContextId", str)
+    """str: Reference to the context of the unit. If this attribute is omitted the
+    context of the dataset itself will be used instead."""
+
+    sourceId = DataHelper.create_attribute_v2("sourceId", str)
+    """str: A reference to a valid source. It indicates the publication where the
+    property is documented."""
+
+    sourceIdOverwrittenByChild = DataHelper.create_attribute_v2(
+        "sourceIdOverwrittenByChild", bool
+    )
+    """bool: If a reference to a master data entity must be removed in a child dataset
+    it is required to set the corresponding xxxOverwrittenByChild attribute to true.
+    Otherwise the removed referenced will be interpreted as "Keep the Parent Value"."""
+
+    sourceContextId = DataHelper.create_attribute_v2("sourceContextId", str)
+    """str: Reference to the context of the source. If this attribute is omitted the
+    context of the dataset itself will be used instead."""
+
+    sourceYear = DataHelper.create_attribute_v2("sourceYear", str)
+    """str: Indicates the year of publication and communication, respectively
+    For web-sites: last visited."""
+
+    sourceFirstAuthor = DataHelper.create_attribute_v2("sourceFirstAuthor", str)
+    """str: Indicates the first author by surname and abbreviated name (e.g.,
+    Einstein A.). In case of measurement on site, oral communication, personal
+    written communication and questionnaries ('sourceType'=4, 5, 6, 7) the name of
+    the communicating person is mentioned here."""
+
+    @property
+    def uncertainties(self) -> List["Uncertainty"]:
+        """Uncertainty of the property value."""
+        return DataHelper.get_element_list(self, "uncertainty")
+
 
 class TransferCoefficient(etree.ElementBase):
     """Transfer coefficients for calculating amounts of outputs from amounts

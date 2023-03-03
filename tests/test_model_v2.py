@@ -456,3 +456,24 @@ def test_parse_file_v2_lognromal(eco_spold: EcoSpold) -> None:
     assert lognormal.mu == _mu
     assert lognormal.variance == variance
     assert lognormal.varianceWithPedigreeUncertainty == varianceWithPedigreeUncertainty
+
+
+def test_parse_file_v2_property(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    propertyId = "c74c3729-e577-4081-b572-a283d2561a75"
+    amount = 0.4
+    isDefiningValue = True
+    unitId = "577e242a-461f-44a7-922c-d8e1c3d2bf45"
+    names = ["carbon content, fossil"]
+    unitNames = ["dimensionless"]
+    comments = ["CH2O"]
+    flowData = eco_spold.childActivityDataset.flowData
+    prop = flowData.intermediateExchanges[6].properties[0]
+
+    assert prop.propertyId == propertyId
+    assert prop.amount == amount
+    assert prop.isDefiningValue == isDefiningValue
+    assert prop.unitId == unitId
+    assert prop.names == names
+    assert prop.unitNames == unitNames
+    assert prop.comments == comments
