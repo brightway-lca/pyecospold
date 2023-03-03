@@ -541,6 +541,21 @@ def test_parse_file_v2_representativeness(eco_spold: EcoSpold) -> None:
     assert representativeness.extrapolations == extrapolations
 
 
+def test_parse_file_v2_data_entry_by(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    personId = "4e412379-4901-477d-bbc1-3e2797ab9350"
+    isActiveAuthor = False
+    personName = "personName"
+    personEmail = "personEmail@domain.com"
+    administrativeInformation = eco_spold.childActivityDataset.administrativeInformation
+    dataEntryBy = administrativeInformation.dataEntryBy
+
+    assert dataEntryBy.personId == personId
+    assert dataEntryBy.isActiveAuthor == isActiveAuthor
+    assert dataEntryBy.personName == personName
+    assert dataEntryBy.personEmail == personEmail
+
+
 def test_parse_file_v2_pedigree_matrix(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     reliability = 2

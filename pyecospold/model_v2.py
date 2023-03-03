@@ -1436,6 +1436,25 @@ class DataEntryBy(etree.ElementBase):
     entered the dataset into the database format and thereby is the person
     responsible for the data."""
 
+    personId = DataHelper.create_attribute_v2("personId", str)
+    """str: ID number for the person that prepared the dataset and enters the
+    dataset into the database."""
+
+    personContextId = DataHelper.create_attribute_v2("personContextId", str)
+    """str: Reference to the context of the person. If this attribute is
+    omitted the context of the dataset itself will be used instead."""
+
+    isActiveAuthor = DataHelper.create_attribute_v2("isActiveAuthor", bool)
+    """bool: This field defines if the person specified by field 3400 is the
+    active author for this dataset. The active author will be consulted in case of
+    future changes to the dataset by different data providers."""
+
+    personName = DataHelper.create_attribute_v2("personName", str)
+    """str: Name and surname of the person."""
+
+    personEmail = DataHelper.create_attribute_v2("personEmail", str)
+    """str: Complete email address of the person."""
+
 
 class DataGeneratorAndPublication(etree.ElementBase):
     """Contains information about who collected, compiled or published the original
