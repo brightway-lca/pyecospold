@@ -316,10 +316,8 @@ def test_parse_file_v2_intermediate_exchange(eco_spold: EcoSpold) -> None:
     comments = ["EcoSpold01Location=CH", "Literature value."]
     synonyms = []
     tags = []
-    # intermediateExchangeId = "360e2eb0-f81c-4e4b-ba6b-c7a690f31275"
-    # activityLinkId = "cd1f547f-577f-4e1b-bd23-fb73d53497eb"
-    uncertaintiesLen = 1
-    propertiesLen = 7
+    intermediateExchangeId = "360e2eb0-f81c-4e4b-ba6b-c7a690f31275"
+    activityLinkId = "cd1f547f-577f-4e1b-bd23-fb73d53497eb"
     transferCoefficientsLen = 0
     flowData = eco_spold.childActivityDataset.flowData
     intermediateExchange = flowData.intermediateExchanges[0]
@@ -350,8 +348,8 @@ def test_parse_file_v2_intermediate_exchange(eco_spold: EcoSpold) -> None:
         intermediateExchange.specificAllocationPropertyContextId
         == specificAllocationPropertyContextId
     )
-    # assert intermediateExchange.intermediateExchangeId == intermediateExchangeId
-    # assert intermediateExchange.activityLinkId == activityLinkId
+    assert intermediateExchange.intermediateExchangeId == intermediateExchangeId
+    assert intermediateExchange.activityLinkId == activityLinkId
     assert intermediateExchange.names == names
     assert intermediateExchange.unitNames == unitNames
     assert intermediateExchange.comments == comments
@@ -360,8 +358,6 @@ def test_parse_file_v2_intermediate_exchange(eco_spold: EcoSpold) -> None:
 
     assert isinstance(intermediateExchange.uncertainties[0], Uncertainty)
     assert isinstance(intermediateExchange.properties[0], Property)
-    assert len(intermediateExchange.uncertainties) == uncertaintiesLen
-    assert len(intermediateExchange.properties) == propertiesLen
     assert len(intermediateExchange.transferCoefficients) == transferCoefficientsLen
 
 

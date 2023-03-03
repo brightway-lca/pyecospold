@@ -1091,6 +1091,103 @@ class TransferCoefficient(etree.ElementBase):
 class IntermediateExchange(CustomExchange):
     """Comprises intermediate product and waste inputs and outputs for the activity."""
 
+    productionVolumeComments = DataHelper.create_attribute_list_v2(
+        "productionVolumeComments", str
+    )
+    """lits[str]: A general comment can be made on the data source, assumptions and
+    calculations for the production volume data."""
+
+    intermediateExchangeId = DataHelper.create_attribute_v2(
+        "intermediateExchangeId", str
+    )
+    """str: Reference to the master data entry for this intermediate exchange"""
+
+    intermediateExchangeContextId = DataHelper.create_attribute_v2(
+        "intermediateExchangeContextId", str
+    )
+    """str: Reference to the context of the intermediate exchange. If this attribute is
+    omitted the context of the dataset itself will be used instead."""
+
+    activityLinkId = DataHelper.create_attribute_v2("activityLinkId", str)
+    """str: Explicit reference to the activity which supplies the intermediate product.
+    If this field is empty the activity will determined by a linking rule, which uses
+    geographical and temporal information of this activity."""
+
+    activityLinkIdOverwrittenByChild = DataHelper.create_attribute_v2(
+        "activityLinkIdOverwrittenByChild", bool
+    )
+    """bool: If a reference to a master data entity must be removed in a child dataset
+    it is required to set the corresponding xxxOverwrittenByChild attribute to true.
+    Otherwise the removed referenced will be interpreted as "Keep the Parent Value"."""
+
+    activityLinkContextId = DataHelper.create_attribute_v2("activityLinkContextId", str)
+    """str: Reference to the context of the activity link. If this attribute is omitted
+    the context of the dataset itself will be used instead."""
+
+    productionVolumeAmount = DataHelper.create_attribute_v2(
+        "productionVolumeAmount", float
+    )
+    """float: The product volume expressed per year in the same unit as the exchange"""
+
+    productionVolumeVariableName = DataHelper.create_attribute_v2(
+        "productionVolumeVariableName", str
+    )
+    """str: The variable name is a short name for the production volume of the exchange,
+    used when refering to the production volume amount in mathematical relations
+    (formulas). Variables may contain characters, numbers and underscores (_). Variable
+    names must start with a character (a-z). Variable names are not case sensitive
+    (calorific_Value equals Calorific_value)."""
+
+    productionVolumeMathematicalRelation = DataHelper.create_attribute_v2(
+        "productionVolumeMathematicalRelation", str
+    )
+    """str: Defines a mathematical formula which references to values of flows,
+    parameters or properties by variable names or REF function. The result of the
+    formula with a specific set of variable values is written into the amount field."""
+
+    productionVolumeSourceId = DataHelper.create_attribute_v2(
+        "productionVolumeSourceId", str
+    )
+    """str: A reference to a valid source."""
+
+    productionVolumeSourceIdOverwrittenByChild = DataHelper.create_attribute_v2(
+        "productionVolumeSourceIdOverwrittenByChild", bool
+    )
+    """bool: If a reference to a master data entity must be removed in a child dataset
+    it is required to set the corresponding xxxOverwrittenByChild attribute to true.
+    Otherwise the removed referenced will be interpreted as "Keep the Parent Value"."""
+
+    productionVolumeSourceContextId = DataHelper.create_attribute_v2(
+        "productionVolumeSourceContextId", str
+    )
+    """str: Reference to the context of the source. If this attribute is omitted the
+    context of the dataset itself will be used instead."""
+
+    productionVolumeSourceYear = DataHelper.create_attribute_v2(
+        "productionVolumeSourceYear", str
+    )
+    """str: Indicates the year of publication and communication, respectively.
+    For web-sites: last visited."""
+
+    productionVolumeSourceFirstAuthor = DataHelper.create_attribute_v2(
+        "productionVolumeSourceFirstAuthor", str
+    )
+    """str: Indicates the first author by surname and abbreviated name
+    (e.g., Einstein A.). In case of measurement on site, oral communication, personal
+    written communication and questionnaries ('sourceType'=4, 5, 6, 7) the name of the
+    communicating person is"""
+
+    @property
+    def productionVolumeUncertainties(self) -> List["Uncertainty"]:
+        """Uncertainty information in the form of distribution functions and their
+        parameters and/or pedigree data."""
+        return DataHelper.get_element_list(self, "productionVolumeUncertainty")
+
+    @property
+    def classifications(self) -> List["Classification"]:
+        """Contains classification pairs to specify the product."""
+        return DataHelper.get_element_list(self, "classification")
+
 
 class ElementaryExchange(CustomExchange):
     """Comprises elementary inputs and outputs (exchanges with the environment)
