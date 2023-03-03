@@ -70,9 +70,25 @@ def test_save_file() -> None:
     inputPath = "data/v1/v1_1.xml"
     metaInformation = parse_file_v1(inputPath)
     outputPath = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
-    save_file(metaInformation, outputPath)
+    save_file(metaInformation, outputPath, fill_defaults=False)
 
     with open(inputPath, encoding="utf-8") as inputFile:
+        with open(outputPath, encoding="utf-8") as outputFile:
+            mapping = {ord(c): "" for c in [" ", "\t", "\n"]}
+            translatedOutput = outputFile.read().translate(mapping)
+            translatedInput = inputFile.read().translate(mapping)
+            assert translatedOutput == translatedInput
+
+
+def test_save_file_defaults() -> None:
+    """It saves read file correctly."""
+    inputPath = "data/v1/v1_1.xml"
+    expectedOutputPath = "data/tests/v1_1_defaults.xml"
+    metaInformation = parse_file_v1(inputPath)
+    outputPath = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
+    save_file(metaInformation, outputPath, fill_defaults=True)
+
+    with open(expectedOutputPath, encoding="utf-8") as inputFile:
         with open(outputPath, encoding="utf-8") as outputFile:
             mapping = {ord(c): "" for c in [" ", "\t", "\n"]}
             translatedOutput = outputFile.read().translate(mapping)
