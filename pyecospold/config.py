@@ -58,6 +58,9 @@ class Defaults:
         "Exchange": {
             "uncertaintyType": "1",
         },
+        "PedigreeMatrix": {
+            "reliability": "5",
+        },
         "ReferenceFunction": {
             "infrastructureProcess": "true",
         },

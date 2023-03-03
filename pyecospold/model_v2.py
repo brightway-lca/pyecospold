@@ -827,6 +827,15 @@ class Uncertainty(etree.ElementBase):
         standardDeviation95 fields to store undefined distribution data."""
         return DataHelper.get_element(self, "undefined")
 
+    @property
+    def pedigreeMatrices(self) -> List["PedigreeMatrix"]:
+        """The data quality indicators provides a qualitative assessment of
+        data quality. This can be converted to a quantitative additional
+        uncertainty, which can be added to the basic uncertainty. The
+        pedigreeMatrix element groups the 5 data quality indicators and
+        contains no data itself."""
+        return DataHelper.get_element_list(self, "pedigreeMatrix")
+
 
 class Lognormal(etree.ElementBase):
     """The Lognormal-distribution with average value μ (Mu parameter) and variance
@@ -1244,6 +1253,55 @@ class ElementaryExchange(CustomExchange):
 class Parameter(etree.ElementBase):
     """Comprises all parameters of the activity."""
 
+    names = DataHelper.create_attribute_list_v2("name", str)
+    """list[str]: Descriptive name of the parameter."""
+
+    unitNames = DataHelper.create_attribute_list_v2("unitName", str)
+    """list[str]: Unit name of the parameter amount."""
+
+    comments = DataHelper.create_attribute_list_v2("comment", str)
+    """list[str]: A general comment can be made about each individual
+    parameter."""
+
+    parameterId = DataHelper.create_attribute_v2("parameterId", str)
+    """str: A reference to a valid master data parameter."""
+
+    parameterContextId = DataHelper.create_attribute_v2("parameterContextId", str)
+    """str: Reference to the context of the parameter. If this attribute
+    is omitted the context of the dataset itself will be used instead."""
+
+    variableName = DataHelper.create_attribute_v2("variableName", str)
+    """str: The variable name is a short name for the exchange, used when
+    refering to the exchange amount in mathematical relations (formulas).
+    Variables may contain characters, numbers and underscores (_). Variable
+    names must start with a character (a-z). Variable names are not case
+    sensitive (calorific_Value equals Calorific_value)."""
+
+    mathematicalRelation = DataHelper.create_attribute_v2("mathematicalRelation", str)
+    """str: Defines a mathematical formula with references to values of
+    flows, parameters or properties by variable names or REF function. The
+    result of the formula with a specific set of variable values is written
+    into the amount field."""
+
+    isCalculatedAmount = DataHelper.create_attribute_v2("isCalculatedAmount", bool)
+    """bool: If true the value of the amount field is the calculated value of
+    the mathematicalRelation."""
+
+    amount = DataHelper.create_attribute_v2("amount", float)
+    """float: The current value of the parameter."""
+
+    unitId = DataHelper.create_attribute_v2("unitId", str)
+    """str: Reference to the unit of the parameter amount."""
+
+    unitContextId = DataHelper.create_attribute_v2("unitContextId", str)
+    """str: Reference to the context of the unit. If this attribute is
+    omitted the context of the dataset itself will be used instead."""
+
+    @property
+    def uncertainties(self) -> List["Uncertainty"]:
+        """Uncertainty of the parameter amount."""
+        return DataHelper.get_element_list(self, "uncertainty")
+
 
 class ImpactIndicator(etree.ElementBase):
     """Calculated impact indicators"""
@@ -1310,3 +1368,168 @@ class Compartment(etree.ElementBase):
     )
     """str: Reference to the context of the subcompartment If this attribute
     is omitted the context of the dataset itself will be used instead."""
+
+
+class PedigreeMatrix(etree.ElementBase):
+    """The data quality indicators provides a qualitative assessment of data quality.
+    This can be converted to a quantitative additional uncertainty, which can be added
+    to the basic uncertainty. The pedigreeMatrix element groups the 5 data quality
+    indicators and contains no data itself."""
+
+    RELIABILITY_MAP: Dict[int, str] = {
+        1: "Verified data based on measurements",
+        2: "Verified data partly based on assumptions OR nonverified data based on "
+        + "measurements",
+        3: "Non-verified data partly based on qualified estimates",
+        4: "Qualified estimate (e.g. by industrial expert)",
+        5: "Non-qualified estimate (default)",
+    }
+
+    COMPLETENESS_MAP: Dict[int, str] = {
+        1: "Representative data from all sites relevant for the market considered "
+        + "over an adequate period to even out normal fluctuations",
+        2: "Representative data from >50% of the sites relevant for the market "
+        + "considered over an adequate period to even out normal fluctuations",
+        3: "Representative data from only some sites (<<50%) relevant for the market "
+        + "considered OR >50% of sites but from shorter periods",
+        4: "Representative data from only one site relevant for the market considered "
+        + "OR some sites but from shorter periods",
+        5: "Representativeness unknown or data from a small number of sites AND from "
+        + "shorter periods",
+    }
+
+    TEMPORAL_CORRELATION_MAP: Dict[int, str] = {
+        1: "Less than 3 years of difference to the time period of the dataset "
+        + "(fields 600-610)",
+        2: "Less than 6 years of difference to the time period of the dataset "
+        + "(fields 600-610)",
+        3: "Less than 10 years of difference to the time period of the dataset "
+        + "(fields 600-610)",
+        4: "Less than 15 years of difference to the time period of the dataset "
+        + "(fields 600-610)",
+        5: "Age of data unknown or more than 15 years of difference to the time "
+        + "period of the dataset (fields 600-610)",
+    }
+
+    GEOGRAPHICAL_CORRELATION_MAP: Dict[int, str] = {
+        1: "Data from area under study",
+        2: "Average data from larger area in which the area under study is included",
+        3: "Data from area with similar production conditions",
+        4: "Data from are with slightly similar production conditions",
+        5: "Data from unknown OR distinctly different area (north america instead of "
+        + "middle east, OECD-Europe instead of Russia)",
+    }
+
+    FURTHER_TECHNOLOGY_CORRELATION_MAP: Dict[int, str] = {
+        1: "Data from enterprises, processes and materials under study",
+        2: "Data from processes and materials under study (i.e. identical technology) "
+        + "but from different enterprises",
+        3: "Data from processes and materials under study but from different "
+        + "technology",
+        4: "Data on related processes or materials",
+        5: "Data on related processes on laboratory scale or from different technology",
+    }
+
+    reliability = DataHelper.create_attribute_v2("reliability", int)
+    """int: 1=Verified data based on measurements 2=Verified data partly based on
+    assumptions OR nonverified data based on measurements 3=Non-verified data partly
+    based on qualified estimates 4=Qualified estimate (e.g. by industrial expert)
+    5=Non-qualified estimate (default)"""
+
+    completeness = DataHelper.create_attribute_v2("completeness", int)
+    """int: 1=Representative data from all sites relevant for the market considered
+    over an adequate period to even out normal fluctuations 2=Representative data
+    from >50% of the sites relevant for the market considered over an adequate
+    period to even out normal fluctuations 3=Representative data from only some sites
+    (<<50%) relevant for the market considered OR >50% of sites but from
+    shorter periods 4=Representative data from only one site relevant for the market
+    considered OR some sites but from shorter periods 5=Representativeness unknown
+    or data from a small number of sites AND from shorter periods"""
+
+    temporalCorrelation = DataHelper.create_attribute_v2("temporalCorrelation", int)
+    """int: 1=Less than 3 years of difference to the time period of the dataset
+    (fields 600-610) 2=Less than 6 years of difference to the time period of the
+    dataset (fields 600-610) 3=Less than 10 years of difference to the time period
+    of the dataset (fields 600-610) 4=Less than 15 years of difference to the time
+    period of the dataset (fields 600-610) 5=Age of data unknown or more than 15
+    years of difference to the time period of the dataset (fields 600-610)"""
+
+    geographicalCorrelation = DataHelper.create_attribute_v2(
+        "geographicalCorrelation", int
+    )
+    """int: 1=Data from area under study 2=Average data from larger area in which
+    the area under study is included 3=Data from area with similar production
+    conditions 4=Data from are with slightly similar production conditions 5=Data
+    from unknown OR distinctly different area (north america instead of middle east,
+    OECD-Europe instead of Russia)"""
+
+    furtherTechnologyCorrelation = DataHelper.create_attribute_v2(
+        "furtherTechnologyCorrelation", int
+    )
+    """int: 1=Data from enterprises, processes and materials under study 2=Data
+    from processes and materials under study (i.e. identical technology) but from
+    different enterprises 3=Data from processes and materials under study but from
+    different technology 4=Data on related processes or materials 5=Data on related
+    processes on laboratory scale or from different technology"""
+
+    comments = DataHelper.create_attribute_list_v2("comment", str)
+    """list[str]: A general comment can be made about each uncertainty
+    information"""
+
+    @property
+    def reliabilityStr(self) -> str:
+        """String representation for reliability. See reliability for explanations.
+        1=Verified data based on measurements 2=Verified data partly based on
+        assumptions OR nonverified data based on measurements 3=Non-verified data partly
+        based on qualified estimates 4=Qualified estimate (e.g. by industrial expert)
+        5=Non-qualified estimate (default)"""
+        return PedigreeMatrix.RELIABILITY_MAP[self.reliability]
+
+    @property
+    def completenessStr(self) -> str:
+        """String representation for completeness. See completeness for explanations.
+        1=Representative data from all sites relevant for the market considered
+        over an adequate period to even out normal fluctuations 2=Representative data
+        from >50% of the sites relevant for the market considered over an adequate
+        period to even out normal fluctuations 3=Representative data from only some
+        sites (<<50%) relevant for the market considered OR >50% of sites but from
+        shorter periods 4=Representative data from only one site relevant for the
+        market considered OR some sites but from shorter periods 5=Representativeness
+        unknown or data from a small number of sites AND from shorter periods)"""
+        return PedigreeMatrix.COMPLETENESS_MAP[self.completeness]
+
+    @property
+    def temporalCorrelationStr(self) -> str:
+        """String representation for temporalCorrelation. See temporalCorrelation for
+        explanations. 1=Less than 3 years of difference to the time period of the
+        dataset (fields 600-610) 2=Less than 6 years of difference to the time period
+        of the dataset (fields 600-610) 3=Less than 10 years of difference to the time
+        period of the dataset (fields 600-610) 4=Less than 15 years of difference to
+        the time period of the dataset (fields 600-610) 5=Age of data unknown or more
+        than 15 years of difference to the time period of the dataset
+        (fields 600-610)"""
+        return PedigreeMatrix.TEMPORAL_CORRELATION_MAP[self.temporalCorrelation]
+
+    @property
+    def geographicalCorrelationStr(self) -> str:
+        """String representation for geographicalCorrelation. See
+        geographicalCorrelation for explanations. 1=Data from area under study
+        2=Average data from larger area in which the area under study is included
+        3=Data from area with similar production conditions 4=Data from are with
+        slightly similar production conditions 5=Data from unknown OR distinctly
+        different area (north america instead of middle east, OECD-Europe instead of
+        Russia)"""
+        return PedigreeMatrix.GEOGRAPHICAL_CORRELATION_MAP[self.geographicalCorrelation]
+
+    @property
+    def furtherTechnologyCorrelationStr(self) -> str:
+        """String furtherTechnologyCorrelation for completeness. See
+        furtherTechnologyCorrelation for explanations. 1=Data from enterprises,
+        processes and materials under study 2=Data from processes and materials under
+        study (i.e. identical technology) but from different enterprises 3=Data from
+        processes and materials under study but from different technology 4=Data on
+        related processes or materials 5=Data on related processes on laboratory
+        scale or from different technology"""
+        return PedigreeMatrix.FURTHER_TECHNOLOGY_CORRELATION_MAP[
+            self.furtherTechnologyCorrelation
+        ]

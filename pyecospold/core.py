@@ -41,7 +41,7 @@ from .model_v2 import (
     MacroEconomicScenario,
 )
 from .model_v2 import ModellingAndValidation as ModellingAndValidationV2
-from .model_v2 import Normal, Parameter, Property
+from .model_v2 import Normal, Parameter, PedigreeMatrix, Property
 from .model_v2 import Representativeness as RepresentativenessV2
 from .model_v2 import Review
 from .model_v2 import Technology as TechnologyV2
@@ -114,6 +114,7 @@ class EcospoldLookupV2(etree.CustomElementClassLookup):
             "modellingAndValidation": ModellingAndValidationV2,
             "normal": Normal,
             "parameter": Parameter,
+            "pedigreeMatrix": PedigreeMatrix,
             "property": Property,
             "representativeness": RepresentativenessV2,
             "review": Review,

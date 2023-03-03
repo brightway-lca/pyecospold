@@ -488,3 +488,76 @@ def test_parse_file_v2_compartment(eco_spold: EcoSpold) -> None:
     assert compartment.subCompartmentId == subCompartmentId
     assert compartment.compartments == compartments
     assert compartment.subCompartments == subCompartments
+
+
+def test_parse_file_v2_parameter(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    parameterId = "e952df4c-1ca5-4710-9f53-be47be9191c1"
+    variableName = "fraction_CW_R_to_air"
+    amount = 0.771
+    names = ["fraction, cooling water, recirculating system, to air"]
+    comments = [
+        "Calculated based on literature value (Scown, C.D., 2011, Water Footprint "
+        + "of U.S. Transportation Fuels and supplying information of the article) "
+        + "(Vionnet, S., Quantis Water Database - Technical Report, 2012). "
+    ]
+    meanValue = 0.771
+    _mu = -0.26
+    variance = 0.04
+    varianceWithPedigreeUncertainty = 0.0413
+    flowData = eco_spold.childActivityDataset.flowData
+    parameter = flowData.parameters[0]
+    lognormal = parameter.uncertainties[0].lognormal
+
+    assert parameter.parameterId == parameterId
+    assert parameter.variableName == variableName
+    assert parameter.amount == amount
+    assert parameter.names == names
+    assert parameter.comments == comments
+
+    assert lognormal.meanValue == meanValue
+    assert lognormal.mu == _mu
+    assert lognormal.variance == variance
+    assert lognormal.varianceWithPedigreeUncertainty == varianceWithPedigreeUncertainty
+
+
+def test_parse_file_v2_pedigree_matrix(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    reliability = 2
+    reliabilityStr = (
+        "Verified data partly based on assumptions OR nonverified data based on "
+        "measurements"
+    )
+    completeness = 3
+    completenessStr = (
+        "Representative data from only some sites (<<50%) relevant for the market "
+        "considered OR >50% of sites but from shorter periods"
+    )
+    temporalCorrelation = 1
+    temporalCorrelationStr = (
+        "Less than 3 years of difference to the time period of the dataset "
+        "(fields 600-610)"
+    )
+    geographicalCorrelation = 3
+    geographicalCorrelationStr = "Data from area with similar production conditions"
+    furtherTechnologyCorrelation = 1
+    furtherTechnologyCorrelationStr = (
+        "Data from enterprises, processes and materials under study"
+    )
+    flowData = eco_spold.childActivityDataset.flowData
+    parameter = flowData.parameters[0]
+    pedigreeMatrix = parameter.uncertainties[0].pedigreeMatrices[0]
+
+    assert pedigreeMatrix.reliability == reliability
+    assert pedigreeMatrix.reliabilityStr == reliabilityStr
+    assert pedigreeMatrix.completeness == completeness
+    assert pedigreeMatrix.completenessStr == completenessStr
+    assert pedigreeMatrix.temporalCorrelation == temporalCorrelation
+    assert pedigreeMatrix.temporalCorrelationStr == temporalCorrelationStr
+    assert pedigreeMatrix.geographicalCorrelation == geographicalCorrelation
+    assert pedigreeMatrix.geographicalCorrelationStr == geographicalCorrelationStr
+    assert pedigreeMatrix.furtherTechnologyCorrelation == furtherTechnologyCorrelation
+    assert (
+        pedigreeMatrix.furtherTechnologyCorrelationStr
+        == furtherTechnologyCorrelationStr
+    )
