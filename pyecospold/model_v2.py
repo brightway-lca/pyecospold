@@ -957,13 +957,13 @@ class Property(etree.ElementBase):
     """Format to specify properties of exchanges."""
 
     names = DataHelper.create_attribute_list_v2("name", str)
-    """str: Descriptive name of the property."""
+    """list[str]: Descriptive name of the property."""
 
     unitNames = DataHelper.create_attribute_list_v2("unitName", str)
-    """str: Unit name of the property amount."""
+    """list[str]: Unit name of the property amount."""
 
     comments = DataHelper.create_attribute_list_v2("comment", str)
-    """A general comment can be made about each individual property of a
+    """list[str]: A general comment can be made about each individual property of a
     particular exchange."""
 
     propertyId = DataHelper.create_attribute_v2("propertyId", str)
@@ -1040,7 +1040,8 @@ class TransferCoefficient(etree.ElementBase):
     of inputs."""
 
     comments = DataHelper.create_attribute_list_v2("comment", str)
-    """A general comment can be made about each individual transfer coefficient."""
+    """list[str]: A general comment can be made about each individual transfer
+    coefficient."""
 
     exchangeId = DataHelper.create_attribute_v2("exchangeId", str)
     """str: Reference to the UUID of an exchange."""
