@@ -44,6 +44,9 @@ class Defaults:
         "DataEntryBy": {
             "qualityNetwork": "1",
         },
+        "DataGeneratorAndPublication": {
+            "dataPublishedIn": "0",
+        },
         "Dataset": {
             "validCompanyCodes": "CompanyCodes.xml",
             "validRegionalCodes": "RegionalCodes.xml",

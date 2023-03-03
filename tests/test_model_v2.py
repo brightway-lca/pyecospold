@@ -556,6 +556,42 @@ def test_parse_file_v2_data_entry_by(eco_spold: EcoSpold) -> None:
     assert dataEntryBy.personEmail == personEmail
 
 
+def test_parse_file_v2_data_generator_and_publication(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    personId = "4e412379-4901-477d-bbc1-3e2797ab9350"
+    personName = "personName"
+    personEmail = "personEmail@domain.com"
+    dataPublishedIn = 2
+    dataPublishedInStr = (
+        "Data has been published entirely in 'referenceToPublishedSource'."
+    )
+    publishedSourceId = "71272329-1b17-415b-9f9b-299ebfbce109"
+    publishedSourceYear = "2007"
+    publishedSourceFirstAuthor = "Sutter, J."
+    isCopyrightProtected = True
+    pageNumbers = "solvents"
+    accessRestrictedTo = 1
+    accessRestrictedToStr = "Licensees"
+    administrativeInformation = eco_spold.childActivityDataset.administrativeInformation
+    dataGeneratorAndPublication = administrativeInformation.dataGeneratorAndPublication
+
+    assert dataGeneratorAndPublication.personId == personId
+    assert dataGeneratorAndPublication.personName == personName
+    assert dataGeneratorAndPublication.personEmail == personEmail
+    assert dataGeneratorAndPublication.dataPublishedIn == dataPublishedIn
+    assert dataGeneratorAndPublication.dataPublishedInStr == dataPublishedInStr
+    assert dataGeneratorAndPublication.publishedSourceId == publishedSourceId
+    assert dataGeneratorAndPublication.publishedSourceYear == publishedSourceYear
+    assert (
+        dataGeneratorAndPublication.publishedSourceFirstAuthor
+        == publishedSourceFirstAuthor
+    )
+    assert dataGeneratorAndPublication.isCopyrightProtected == isCopyrightProtected
+    assert dataGeneratorAndPublication.pageNumbers == pageNumbers
+    assert dataGeneratorAndPublication.accessRestrictedTo == accessRestrictedTo
+    assert dataGeneratorAndPublication.accessRestrictedToStr == accessRestrictedToStr
+
+
 def test_parse_file_v2_pedigree_matrix(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     reliability = 2

@@ -1462,6 +1462,127 @@ class DataGeneratorAndPublication(etree.ElementBase):
     contains information about kind of publication underlying the dataset and the
     accessibility of the dataset."""
 
+    DATA_PUBLISHED_IN_MAP: Dict[int, str] = {
+        0: "Data as such not published (default).",
+        1: "The data of some unit processes or subsystems are published.",
+        2: "Data has been published entirely in 'referenceToPublishedSource'.",
+    }
+
+    ACCESS_RESTRICTED_TO_MAP: Dict[int, str] = {
+        0: "Public",
+        1: "Licensees",
+        2: "Results only",
+        3: "Restricted",
+    }
+
+    personId = DataHelper.create_attribute_v2("personId", str)
+    """str: ID number for the person that generated the dataset. It must
+    correspond to an ID number of a person listed in the respective dataset."""
+
+    personContextId = DataHelper.create_attribute_v2("personContextId", str)
+    """str: Reference to the context of the person. If this attribute is omitted
+    the context of the dataset itself will be used instead."""
+
+    personName = DataHelper.create_attribute_v2("personName", str)
+    """str: Name and surname of the person."""
+
+    personEmail = DataHelper.create_attribute_v2("personEmail", str)
+    """str: Complete email address of the person."""
+
+    dataPublishedIn = DataHelper.create_attribute_v2("dataPublishedIn", int)
+    """int: The codes are: 0=Data as such not published (default). 1=The data
+    of some unit processes or subsystems are published. 2=Data has been published
+    entirely in 'referenceToPublishedSource'."""
+
+    publishedSourceId = DataHelper.create_attribute_v2("publishedSourceId", str)
+    """str: ID number for the report in which the dataset is documented."""
+
+    publishedSourceIdOverwrittenByChild = DataHelper.create_attribute_v2(
+        "publishedSourceIdOverwrittenByChild", bool
+    )
+    """bool: If a reference to a master data entity must be removed in a child
+    dataset it is required to set the corresponding xxxOverwrittenByChild attribute
+    to true. Otherwise the removed referenced will be interpreted as "Keep the
+    Parent Value"."""
+
+    publishedSourceContextId = DataHelper.create_attribute_v2(
+        "publishedSourceContextId", str
+    )
+    """str: Reference to the context of the published source. If this attribute is
+    omitted the context of the dataset itself will be used instead."""
+
+    publishedSourceYear = DataHelper.create_attribute_v2("publishedSourceYear", str)
+    """str: Indicates the year of publication and communication, respectively.
+    For web-sites: last visited."""
+
+    publishedSourceFirstAuthor = DataHelper.create_attribute_v2(
+        "publishedSourceFirstAuthor", str
+    )
+    """str: Indicates the first author by surname and abbreviated name (e.g.,
+    Einstein A.). In case of measurement on site, oral communication, personal
+    written communication and questionnaries ('sourceType'=4, 5, 6, 7) the name
+    of the communicating person is mentioned here."""
+
+    isCopyrightProtected = DataHelper.create_attribute_v2("isCopyrightProtected", bool)
+    """bool: Indicates whether or not a copyright exists. '1' (Yes) or '0' (No)
+    should be entered correspondingly."""
+
+    pageNumbers = DataHelper.create_attribute_v2("pageNumbers", str)
+    """str: The relevant page numbers if the data are sourced on specific
+    pages in an article or larger publication."""
+
+    accessRestrictedTo = DataHelper.create_attribute_v2("accessRestrictedTo", int)
+    """int: The codes used are: 0=Public, 1=Licensees, 2=Results only,
+    3=Restricted accessRestrictedTo=0: No access restrictions. accessRestrictedTo=1:
+    only license holders (as defined by context) have access. accessRestrictedTo=2:
+    license holders (as defined by context) have access to LCI results but not to
+    unit process raw data. Database administrator have full access.
+    accessRestrictedTo=3: only the organisation specified by 'companyCode' and the
+    database administrator have access."""
+
+    companyId = DataHelper.create_attribute_v2("companyId", str)
+    """str: Reference to an organisation/institute that the use of this
+    dataset is restricted to."""
+
+    companyIdOverwrittenByChild = DataHelper.create_attribute_v2(
+        "companyIdOverwrittenByChild", bool
+    )
+    """bool: If a reference to a master data entity must be removed in a child
+    dataset it is required to set the corresponding xxxOverwrittenByChild
+    attribute to true. Otherwise the removed referenced will be interpreted as
+    "Keep the Parent Value"."""
+
+    companyContextId = DataHelper.create_attribute_v2("companyContextId", str)
+    """str: Reference to the context of the company. If this attribute is
+    omitted the context of the dataset itself will be used instead."""
+
+    companyCode = DataHelper.create_attribute_v2("companyCode", str)
+    """str: Optional 7 letter code plaintext of the referenced company
+    (field 3560)"""
+
+    @property
+    def dataPublishedInStr(self) -> str:
+        """String representation for dataPublishedIn. See dataPublishedIn
+        for explanations. 0=Data as such not published (default). 1=The data
+        of some unit processes or subsystems are published. 2=Data has been
+        published entirely in 'referenceToPublishedSource'"""
+        return DataGeneratorAndPublication.DATA_PUBLISHED_IN_MAP[self.dataPublishedIn]
+
+    @property
+    def accessRestrictedToStr(self) -> str:
+        """String representation for accessRestrictedTo. See accessRestrictedTo
+        for explanations.0=Public, 1=Licensees, 2=Results only, 3=Restricted
+        accessRestrictedTo=0: No access restrictions. accessRestrictedTo=1:
+        only license holders (as defined by context) have access.
+        accessRestrictedTo=2: license holders (as defined by context) have
+        access to LCI results but not to unit process raw data. Database
+        administrator have full access. accessRestrictedTo=3: only the
+        organisation specified by 'companyCode' and the database administrator
+        have access."""
+        return DataGeneratorAndPublication.ACCESS_RESTRICTED_TO_MAP[
+            self.accessRestrictedTo
+        ]
+
 
 class FileAttributes(etree.ElementBase):
     """This constraint ensures that each xml:lang attribute is only used once in this
