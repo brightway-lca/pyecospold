@@ -88,6 +88,7 @@ def test_parse_file_v2_flow_data(eco_spold: EcoSpold) -> None:
     elementaryExchangesLen = 11
     intermediateExchangesLen = 41
     parametersLen = 6
+    impactIndicatorsLen = 0
     flowData = eco_spold.childActivityDataset.flowData
 
     assert isinstance(flowData.elementaryExchanges[0], ElementaryExchange)
@@ -97,6 +98,7 @@ def test_parse_file_v2_flow_data(eco_spold: EcoSpold) -> None:
     assert len(flowData.elementaryExchanges) == elementaryExchangesLen
     assert len(flowData.intermediateExchanges) == intermediateExchangesLen
     assert len(flowData.parameters) == parametersLen
+    assert len(flowData.impactIndicators) == impactIndicatorsLen
 
 
 def test_parse_file_v2_modelling_and_validation(eco_spold: EcoSpold) -> None:
@@ -321,8 +323,11 @@ def test_parse_file_v2_intermediate_exchange(eco_spold: EcoSpold) -> None:
     intermediateExchangeId = "360e2eb0-f81c-4e4b-ba6b-c7a690f31275"
     activityLinkId = "cd1f547f-577f-4e1b-bd23-fb73d53497eb"
     transferCoefficientsLen = 0
-    flowData = eco_spold.childActivityDataset.flowData
-    intermediateExchange = flowData.intermediateExchanges[0]
+    classificationsLen = 1
+    productionVolumeUncertaintiesLen = 0
+    intermediateExchange = (
+        eco_spold.childActivityDataset.flowData.intermediateExchanges[0]
+    )
 
     assert intermediateExchange.id == exchangeID
     assert intermediateExchange.unitId == unitId
@@ -361,6 +366,11 @@ def test_parse_file_v2_intermediate_exchange(eco_spold: EcoSpold) -> None:
     assert isinstance(intermediateExchange.uncertainties[0], Uncertainty)
     assert isinstance(intermediateExchange.properties[0], Property)
     assert len(intermediateExchange.transferCoefficients) == transferCoefficientsLen
+    assert len(intermediateExchange.classifications) == classificationsLen
+    assert (
+        len(intermediateExchange.productionVolumeUncertainties)
+        == productionVolumeUncertaintiesLen
+    )
 
 
 def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
@@ -396,12 +406,12 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
     ]
     outputGroup = 4
     outputGroupStr = "ToEnvironment"
+    inputGroupStr = "FromEnvironment"
     synonyms = []
     tags = []
     propertiesLen = 0
     transferCoefficientsLen = 0
-    flowData = eco_spold.childActivityDataset.flowData
-    elementaryExchange = flowData.elementaryExchanges[0]
+    elementaryExchange = eco_spold.childActivityDataset.flowData.elementaryExchanges[0]
 
     assert elementaryExchange.id == exchangeID
     assert elementaryExchange.unitId == unitId
@@ -434,6 +444,7 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
     assert elementaryExchange.comments == comments
     assert elementaryExchange.outputGroup == outputGroup
     assert elementaryExchange.outputGroupStr == outputGroupStr
+    assert elementaryExchange.inputGroupStr == inputGroupStr
     assert elementaryExchange.synonyms == synonyms
     assert elementaryExchange.tags == tags
 
@@ -442,7 +453,34 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
     assert len(elementaryExchange.transferCoefficients) == transferCoefficientsLen
 
 
-def test_parse_file_v2_lognromal(eco_spold: EcoSpold) -> None:
+def test_parse_file_v2_uncertainty(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    flowData = eco_spold.childActivityDataset.flowData
+    uncertainty = flowData.intermediateExchanges[1].uncertainties[0]
+
+    assert uncertainty.triangular is None
+    assert uncertainty.uniform is None
+    assert uncertainty.beta is None
+    assert uncertainty.gamma is None
+    assert uncertainty.binomial is None
+    assert uncertainty.undefined is None
+
+
+def test_parse_file_v2_normal(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    meanValue = 0
+    variance = 0
+    varianceWithPedigreeUncertainty = 0
+    flowData = eco_spold.childActivityDataset.flowData
+    uncertainty = flowData.intermediateExchanges[1].uncertainties[0]
+    normal = uncertainty.normal
+
+    assert normal.meanValue == meanValue
+    assert normal.variance == variance
+    assert normal.varianceWithPedigreeUncertainty == varianceWithPedigreeUncertainty
+
+
+def test_parse_file_v2_lognormal(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     meanValue = 0.6
     _mu = -0.51
@@ -467,6 +505,7 @@ def test_parse_file_v2_property(eco_spold: EcoSpold) -> None:
     names = ["carbon content, fossil"]
     unitNames = ["dimensionless"]
     comments = ["CH2O"]
+    uncertaintiesLen = 0
     flowData = eco_spold.childActivityDataset.flowData
     prop = flowData.intermediateExchanges[6].properties[0]
 
@@ -477,6 +516,7 @@ def test_parse_file_v2_property(eco_spold: EcoSpold) -> None:
     assert prop.names == names
     assert prop.unitNames == unitNames
     assert prop.comments == comments
+    assert len(prop.uncertainties) == uncertaintiesLen
 
 
 def test_parse_file_v2_compartment(eco_spold: EcoSpold) -> None:
@@ -608,6 +648,7 @@ def test_parse_file_v2_file_attributes(eco_spold: EcoSpold) -> None:
     fileTimestamp = datetime(2011, 9, 22, 18, 30, 49)
     contextId = "de659012-50c4-4e96-b54a-fc781bf987ab"
     contextNames = ["ecoinvent"]
+    requiredContextsLen = 0
     administrativeInformation = eco_spold.childActivityDataset.administrativeInformation
     fileAttributes = administrativeInformation.fileAttributes
 
@@ -623,6 +664,7 @@ def test_parse_file_v2_file_attributes(eco_spold: EcoSpold) -> None:
     assert fileAttributes.fileTimestamp == fileTimestamp
     assert fileAttributes.contextId == contextId
     assert fileAttributes.contextNames == contextNames
+    assert len(fileAttributes.requiredContexts) == requiredContextsLen
 
 
 def test_parse_file_v2_pedigree_matrix(eco_spold: EcoSpold) -> None:
