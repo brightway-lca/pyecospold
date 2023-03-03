@@ -134,3 +134,6 @@ pyrightconfig.json
 # Doc generation
 schema-documentation.sh
 xs3p-master
+
+# Output directory
+out

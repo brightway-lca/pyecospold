@@ -90,6 +90,6 @@ class Defaults:
         staticDefaults = {
             name: dict(section)
             for name, section in config.items()
-            if name not in ["parameters", "defaults"]
+            if name not in ["parameters"]
         }
         cls.static_defaults = staticDefaults
