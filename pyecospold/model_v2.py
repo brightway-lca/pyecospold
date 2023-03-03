@@ -1351,6 +1351,48 @@ class Representativeness(etree.ElementBase):
     """Contains information about the representativeness of the unit process data
     (meta information and flow data)."""
 
+    systemModelNames = DataHelper.create_attribute_list_v2("systemModelName", str)
+    """list[str]: This is the plaintext value of the referenced system model
+    (field 3000)."""
+
+    samplingProcedures = DataHelper.create_attribute_list_v2("samplingProcedure", str)
+    """list[str]: Text describing the sampling and calculation procedures
+    applied for quantifying the exchanges. Reports whether the sampling
+    procedure for particular elementary and intermediate exchanges differ from
+    the general procedure. Mentions possible problems in combining different
+    sampling procedures.Text and image fields are list of text, imageUri and
+    variable elements. The text and imageUri elements can used to describe the
+    current section and they can be combined in any order given by their index
+    attribute. Text variables are defined by the variable elements, which may be
+    used in the text as {{variablename}}. If a parent text field includes a
+    variable, this variable may be redefined by the child activity dataset while
+    keeping the rest of the parent text intact. This allows easy changes of text
+    parts in child processes."""
+
+    extrapolations = DataHelper.create_attribute_list_v2("extrapolations", str)
+    """list[str]: Describes extrapolations of data from another time period,
+    another geographical area or another technology and the way these
+    extrapolations have been carried out. It should be reported whether
+    different extrapolations have been done on the level of individual exchanges.
+    If data representative for a activity operated in one country is used for
+    another country's activity, its original representativity can be indicated here.
+    Changes in mean values due to extrapolations may also be reported here."""
+
+    percent = DataHelper.create_attribute_v2("percent", float)
+    """float: Percent of data sampled out of the total that the activity is
+    intended to represent (as given by the fields under Geography, Technology and
+    Time Period)."""
+
+    systemModelId = DataHelper.create_attribute_v2("systemModelId", str)
+    """str: The system model describes how activity datasets are linked to
+    form product systems. Some options in the ecoinvent network are 'undefined',
+    'attributional, average current suppliers, revenue allocation', 'consequential,
+    small-scale, long-term decisions'."""
+
+    systemModelContextId = DataHelper.create_attribute_v2("systemModelContextId", str)
+    """str: Reference to the context of the system model. If this attribute i
+    omitted the context of the dataset itself will be used instead."""
+
 
 class Review(etree.ElementBase):
     """Contains information about the reviewers' comments on the dataset content."""

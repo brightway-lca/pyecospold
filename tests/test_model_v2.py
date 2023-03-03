@@ -521,6 +521,26 @@ def test_parse_file_v2_parameter(eco_spold: EcoSpold) -> None:
     assert lognormal.varianceWithPedigreeUncertainty == varianceWithPedigreeUncertainty
 
 
+def test_parse_file_v2_representativeness(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    percent = 100
+    systemModelId = "06590a66-662a-4885-8494-ad0cf410f956"
+    systemModelNames = ["Allocation, ecoinvent default"]
+    samplingProcedures = ["Literature data"]
+    extrapolations = [
+        "This dataset has been extrapolated from year 2006 to the year of the "
+        "calculation (2014). The uncertainty has been adjusted accordingly."
+    ]
+    modellingAndValidation = eco_spold.childActivityDataset.modellingAndValidation
+    representativeness = modellingAndValidation.representativeness
+
+    assert representativeness.percent == percent
+    assert representativeness.systemModelId == systemModelId
+    assert representativeness.systemModelNames == systemModelNames
+    assert representativeness.samplingProcedures == samplingProcedures
+    assert representativeness.extrapolations == extrapolations
+
+
 def test_parse_file_v2_pedigree_matrix(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     reliability = 2
