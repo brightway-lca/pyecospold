@@ -1037,6 +1037,56 @@ class TransferCoefficient(etree.ElementBase):
     """Transfer coefficients for calculating amounts of outputs from amounts
     of inputs."""
 
+    comments = DataHelper.create_attribute_list_v2("comment", str)
+    """A general comment can be made about each individual transfer coefficient."""
+
+    exchangeId = DataHelper.create_attribute_v2("exchangeId", str)
+    """str: Reference to the UUID of an exchange."""
+
+    amount = DataHelper.create_attribute_v2("amount", float)
+    """float: The amount of the transfer coefficient is to be multiplied with the
+    amount of this referenced exchange."""
+
+    mathematicalRelation = DataHelper.create_attribute_v2("mathematicalRelation", str)
+    """str: defines a mathematical formula with references to values of flows,
+    parameters or properties by variable names or REF function the result of the
+    formula with a specific set of variable values is written into the amount
+    field"""
+
+    isCalculatedAmount = DataHelper.create_attribute_v2("isCalculatedAmount", bool)
+    """bool: If true the value of the amount field is the calculated value of
+    the mathematicalRelation."""
+
+    sourceId = DataHelper.create_attribute_v2("sourceId", str)
+    """str: A reference to a valid source."""
+
+    sourceIdOverwrittenByChild = DataHelper.create_attribute_v2(
+        "sourceIdOverwrittenByChild", bool
+    )
+    """bool: If a reference to a master data entity must be removed in a child
+    dataset it is required to set the corresponding xxxOverwrittenByChild attribute
+    to true. Otherwise the removed referenced will be interpreted as "Keep the
+    Parent Value"."""
+
+    sourceContextId = DataHelper.create_attribute_v2("sourceContextId", str)
+    """str: Reference to the context of the source. If this attribute is omitted
+    the context of the dataset itself will be used instead."""
+
+    sourceYear = DataHelper.create_attribute_v2("sourceYear", str)
+    """str: Indicates the year of publication and communication, respectively.
+    For web-sites: last visited."""
+
+    sourceFirstAuthor = DataHelper.create_attribute_v2("sourceFirstAuthor", str)
+    """str: Indicates the first author by surname and abbreviated name (e.g.,
+    Einstein A.). In case of measurement on site, oral communication, personal
+    written communication and questionnaries ('sourceType'=4, 5, 6, 7) the name of
+    the communicating person is mentioned here."""
+
+    @property
+    def uncertainties(self) -> List["Uncertainty"]:
+        """Uncertainty of the transfer coefficient amount."""
+        return DataHelper.get_element_list(self, "uncertainty")
+
 
 class IntermediateExchange(CustomExchange):
     """Comprises intermediate product and waste inputs and outputs for the activity."""
