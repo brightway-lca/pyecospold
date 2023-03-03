@@ -1306,6 +1306,46 @@ class Parameter(etree.ElementBase):
 class ImpactIndicator(etree.ElementBase):
     """Calculated impact indicators"""
 
+    impactMethodNames = DataHelper.create_attribute_list_v2("impactMethodName", str)
+    """list[str]: Name of the impact method."""
+
+    impactCategoryNames = DataHelper.create_attribute_list_v2("impactCategoryName", str)
+    """list[str]: Name of the impact category."""
+
+    names = DataHelper.create_attribute_list_v2("names", str)
+    """list[str]: Name of the impact indicator."""
+
+    unitNames = DataHelper.create_attribute_list_v2("unitName", str)
+    """list[str]: Unit name of the impact indicator amount."""
+
+    impactIndicatorId = DataHelper.create_attribute_v2("impactIndicatorId", str)
+    """str: Reference to the impact indicator."""
+
+    impactIndicatorContextId = DataHelper.create_attribute_v2(
+        "impactIndicatorContextId", str
+    )
+    """str: Reference to the context of the impact indicator. If this attribute
+    is omitted the context of the dataset itself will be used instead."""
+
+    impactMethodId = DataHelper.create_attribute_v2("impactMethodId", str)
+    """str: Reference to the method of the impact indicator."""
+
+    impactMethodContextId = DataHelper.create_attribute_v2("impactMethodContextId", str)
+    """str: Reference to the context of the impact method. If this attribute
+    is omitted the context of the dataset itself will be used instead."""
+
+    impactCategoryId = DataHelper.create_attribute_v2("impactCategoryId", str)
+    """str: Reference to the method of the impact category."""
+
+    impactCategoryContextId = DataHelper.create_attribute_v2(
+        "impactCategoryContextId", str
+    )
+    """str: Reference to the context of the impact category. If this attribute
+    is omitted the context of the dataset itself will be used instead."""
+
+    amount = DataHelper.create_attribute_v2("amount", float)
+    """float: The value of the impact indicator."""
+
 
 class Representativeness(etree.ElementBase):
     """Contains information about the representativeness of the unit process data
