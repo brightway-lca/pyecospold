@@ -76,13 +76,17 @@ class DataHelper:
         return parent.findall(element, namespaces=parent.nsmap)
 
     @staticmethod
-    def get_element_text(parent: etree.ElementBase, element: str) -> str:
+    def get_element_text(
+        parent: etree.ElementBase, element: str, element_type: type = str
+    ) -> str:
         """Helper wrapper method for retrieving XML element text as a string.
         Returns Defaults.TYPE_DEFAULTS[str] if no text exists or element is None."""
-        return getattr(
-            DataHelper.get_element(parent, element),
-            "text",
-            str(Defaults.TYPE_DEFAULTS[str]),
+        return DataHelper.TYPE_FUNC_MAP.get(element_type, element_type)(
+            getattr(
+                DataHelper.get_element(parent, element),
+                "text",
+                str(Defaults.TYPE_DEFAULTS[str]),
+            )
         )
 
     @staticmethod
@@ -181,23 +185,29 @@ class DataHelper:
         )
 
     @staticmethod
-    def create_element_text_v1(name: str) -> property:
+    def create_element_text_v1(name: str, element_type: type) -> property:
         """Helper wrapper method for creating setters and getters for
         a V1 element text"""
-        return DataHelper.create_element_text(name, Defaults.SCHEMA_V1_FILE)
+        return DataHelper.create_element_text(
+            name, element_type, Defaults.SCHEMA_V1_FILE
+        )
 
     @staticmethod
-    def create_element_text_v2(name: str) -> property:
+    def create_element_text_v2(name: str, element_type: type) -> property:
         """Helper wrapper method for creating setters and getters for
         a V2 element text"""
-        return DataHelper.create_element_text(name, Defaults.SCHEMA_V2_FILE)
+        return DataHelper.create_element_text(
+            name, element_type, Defaults.SCHEMA_V2_FILE
+        )
 
     @staticmethod
-    def create_element_text(name: str, schema_file: str) -> property:
+    def create_element_text(
+        name: str, element_type: type, schema_file: str
+    ) -> property:
         """Helper wrapper method for creating setters and getters for
         an element text."""
         return property(
-            fget=lambda self: DataHelper.get_element_text(self, name),
+            fget=lambda self: DataHelper.get_element_text(self, name, element_type),
             fset=lambda self, value: DataHelper.set_element_text(
                 self, name, value, schema_file
             ),

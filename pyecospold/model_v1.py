@@ -760,30 +760,30 @@ class TimePeriod(etree.ElementBase):
     The fact that data are based on forecasts should be reported under
     'representativeness'."""
 
-    startYear = DataHelper.create_element_text_v1("startYear")
+    startYear = DataHelper.create_element_text_v1("startYear", str)
     """str: Start date of the time period for which the dataset is valid, entered
     as year only."""
 
-    startYearMonth = DataHelper.create_element_text_v1("startYearMonth")
+    startYearMonth = DataHelper.create_element_text_v1("startYearMonth", str)
     """str: Start date of the time period for which the dataset is valid, entered
     as year and month."""
 
-    startDate = DataHelper.create_element_text_v1("startDate")
+    startDate = DataHelper.create_element_text_v1("startDate", str)
     """str: Start date of the time period for which the dataset is valid, presented
     as a complete date (year-month-day). StartDate may as well be entered as year
     (0000) or year-month (0000-00) only. 2000 and 2000-01 means: from 01.01.2000.
     If it is only known that data is older than a certain data, 'startDate' is left
     blank."""
 
-    endYear = DataHelper.create_element_text_v1("endYear")
+    endYear = DataHelper.create_element_text_v1("endYear", str)
     """str: End date of the time period for which the dataset is valid, entered as year
     only."""
 
-    endYearMonth = DataHelper.create_element_text_v1("endYearMonth")
+    endYearMonth = DataHelper.create_element_text_v1("endYearMonth", str)
     """str: End date of the time period for which the dataset is valid, entered as year
     and month."""
 
-    endDate = DataHelper.create_element_text_v1("endDate")
+    endDate = DataHelper.create_element_text_v1("endDate", str)
     """str: End date of the time period for which the dataset is valid, presented as a
     complete date (year-month-day). EndDate may as well be entered as year (0000)
     or year-month (0000-00) only. 2000 and 2000-12 means: until 31.12.2000."""

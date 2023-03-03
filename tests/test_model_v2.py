@@ -380,7 +380,7 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
     specificAllocationPropertyId = ""
     specificAllocationPropertyIdOverwrittenByChild = False
     specificAllocationPropertyContextId = ""
-    # elementaryExchangeId = "70d467b6-115e-43c5-add2-441de9411348"
+    elementaryExchangeId = "70d467b6-115e-43c5-add2-441de9411348"
     names = ["BOD5, Biological Oxygen Demand"]
     unitNames = ["kg"]
     comments = [
@@ -392,9 +392,10 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
         + "emanating in a high population density area. The emissions into water are "
         + "assumed to be emitted into rivers."
     ]
+    outputGroup = 4
+    outputGroupStr = "ToEnvironment"
     synonyms = []
     tags = []
-    uncertaintiesLen = 1
     propertiesLen = 0
     transferCoefficientsLen = 0
     flowData = eco_spold.childActivityDataset.flowData
@@ -425,15 +426,16 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
         elementaryExchange.specificAllocationPropertyContextId
         == specificAllocationPropertyContextId
     )
-    # assert elementaryExchange.elementaryExchangeId == elementaryExchangeId
+    assert elementaryExchange.elementaryExchangeId == elementaryExchangeId
     assert elementaryExchange.names == names
     assert elementaryExchange.unitNames == unitNames
     assert elementaryExchange.comments == comments
+    assert elementaryExchange.outputGroup == outputGroup
+    assert elementaryExchange.outputGroupStr == outputGroupStr
     assert elementaryExchange.synonyms == synonyms
     assert elementaryExchange.tags == tags
 
     assert isinstance(elementaryExchange.uncertainties[0], Uncertainty)
-    assert len(elementaryExchange.uncertainties) == uncertaintiesLen
     assert len(elementaryExchange.properties) == propertiesLen
     assert len(elementaryExchange.transferCoefficients) == transferCoefficientsLen
 
@@ -473,3 +475,16 @@ def test_parse_file_v2_property(eco_spold: EcoSpold) -> None:
     assert prop.names == names
     assert prop.unitNames == unitNames
     assert prop.comments == comments
+
+
+def test_parse_file_v2_compartment(eco_spold: EcoSpold) -> None:
+    """It parses attributes correctly."""
+    subCompartmentId = "963f8022-3e2e-4be9-ad4d-b3b7a2282099"
+    compartments = ["water"]
+    subCompartments = ["surface water"]
+    flowData = eco_spold.childActivityDataset.flowData
+    compartment = flowData.elementaryExchanges[0].compartment
+
+    assert compartment.subCompartmentId == subCompartmentId
+    assert compartment.compartments == compartments
+    assert compartment.subCompartments == subCompartments

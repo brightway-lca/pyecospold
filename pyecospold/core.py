@@ -26,7 +26,7 @@ from .model_v1 import TimePeriod as TimePeriodV1
 from .model_v1 import Validation
 from .model_v2 import Activity, ActivityDataset, ActivityDescription
 from .model_v2 import AdministrativeInformation as AdministrativeInformationV2
-from .model_v2 import Beta, Classification, Comment
+from .model_v2 import Beta, Classification, Comment, Compartment
 from .model_v2 import DataEntryBy as DataEntryByV2
 from .model_v2 import DataGeneratorAndPublication as DataGeneratorAndPublicationV2
 from .model_v2 import EcoSpold as EcoSpoldV2
@@ -97,6 +97,7 @@ class EcospoldLookupV2(etree.CustomElementClassLookup):
             "beta": Beta,
             "classification": Classification,
             "comment": Comment,
+            "compartment": Compartment,
             "dataEntryBy": DataEntryByV2,
             "dataGeneratorAndPublication": DataGeneratorAndPublicationV2,
             "ecoSpold": EcoSpoldV2,

@@ -462,12 +462,14 @@ class Classification(etree.ElementBase):
     """str: Reference to the context of the classification. If this attribute
     is omitted the context of the dataset itself will be used instead."""
 
-    classificationSystem = DataHelper.create_element_text_v2("classificationSystem")
+    classificationSystem = DataHelper.create_element_text_v2(
+        "classificationSystem", str
+    )
     """str: The name of the classification system used, e.g. ISIC Rev. 4.
     This is an optional plaintext value of the referenced classification
     system (field 320)."""
 
-    classificationValue = DataHelper.create_element_text_v2("classificationValue")
+    classificationValue = DataHelper.create_element_text_v2("classificationValue", str)
     """str: The class that the activity belongs to within the specified
     classification system. This is an optional plaintext value of
     the referenced classification value (field 320)."""
@@ -1193,6 +1195,50 @@ class ElementaryExchange(CustomExchange):
     """Comprises elementary inputs and outputs (exchanges with the environment)
     for the activity."""
 
+    inputGroup = DataHelper.create_element_text_v2("inputGroup", int)
+    """int: Indicates the kind of input flow. The codes are: 4=From Environment
+    For each exchange only an inputGroup or outputGroup shall exist. This
+    indicates the direction of the flow. This field is the equivalent of field
+    1500 with a different set of valid values."""
+
+    outputGroup = DataHelper.create_element_text_v2("outputGroup", int)
+    """int: Indicates the kind of output flow. The codes are: 4=ToEnvironment
+    For each exchange only an inputGroup or outputGroup shall exist. This
+    indicates the direction of the flow. This field is the equivalent of field
+    1510 with a different set of valid values."""
+
+    elementaryExchangeId = DataHelper.create_attribute_v2("elementaryExchangeId", str)
+    """str: Reference to the master data entry for this elementary exchange"""
+
+    elementaryExchangeContextId = DataHelper.create_attribute_v2(
+        "elementaryExchangeContextId", str
+    )
+    """str: Reference to the context of the elementary exchange. If this
+    attribute is omitted the context of the dataset itself will be used
+    instead."""
+
+    formula = DataHelper.create_attribute_v2("formula", str)
+    """str: Chemical formula (e.g. sum formula) may be entered."""
+
+    @property
+    def compartment(self) -> "Compartment":
+        """Name of the compartment and subcompartment of the exchange.
+        The xml document referenced by validCompartments contains definitions
+        of valid compartment/subcompartment pairs for a given language."""
+        return DataHelper.get_element(self, "compartment")
+
+    @property
+    def inputGroupStr(self) -> str:
+        """String representation for inputGroup. See inputGroup for
+        explanations. 4=FromEnvironment"""
+        return "FromEnvironment"
+
+    @property
+    def outputGroupStr(self) -> str:
+        """String representation for outputGroup. See outputGroup for
+        explanations. 4=ToEnvironment"""
+        return "ToEnvironment"
+
 
 class Parameter(etree.ElementBase):
     """Comprises all parameters of the activity."""
@@ -1241,3 +1287,25 @@ class Comment(etree.ElementBase):
     def imageUrls(self) -> List[str]:
         """Image URLs."""
         return DataHelper.get_inner_text_list(self, "imageUrl")
+
+
+class Compartment(etree.ElementBase):
+    """Contains compartment pairs to specify an exchange."""
+
+    compartments = DataHelper.create_attribute_list_v2("compartment", str)
+    """list[str]: The name of the compartment.This is the plaintext value of
+    the referenced compartment (field 5315)."""
+
+    subCompartments = DataHelper.create_attribute_list_v2("subcompartment", str)
+    """list[str]: The name of the subcompartment.This is the plaintext value of
+    the referenced subcompartment (field 5325)."""
+
+    subCompartmentId = DataHelper.create_attribute_v2("subcompartmentId", str)
+    """str: Reference to the compartment/subcompartment pair. Must be defined
+    in list of valid compartments (see field 5330)."""
+
+    subCompartmentContextId = DataHelper.create_attribute_v2(
+        "subcompartmentContextId", str
+    )
+    """str: Reference to the context of the subcompartment If this attribute
+    is omitted the context of the dataset itself will be used instead."""
