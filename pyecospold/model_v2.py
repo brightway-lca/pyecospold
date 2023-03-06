@@ -15,12 +15,18 @@ class EcoSpold(etree.ElementBase):
     def activityDataset(self) -> "ActivityDataset":
         """Contains information about one individual activity. Information is divided
         into metaInformation and flowData."""
+        return (
+            self._activityDataset
+            if self._activityDataset is not None
+            else self._childActivityDataset
+        )
+
+    @property
+    def _activityDataset(self) -> "ActivityDataset":
         return DataHelper.get_element(self, "activityDataset")
 
     @property
-    def childActivityDataset(self) -> "ActivityDataset":
-        """Contains information about one individual activity. Information is divided
-        into metaInformation and flowData."""
+    def _childActivityDataset(self) -> "ActivityDataset":
         return DataHelper.get_element(self, "childActivityDataset")
 
 
