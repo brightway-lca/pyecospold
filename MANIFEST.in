@@ -1,1 +1,2 @@
 include pyecospold/VERSION
+include pyecospold/schemas/*/*.xsd
