@@ -236,14 +236,14 @@ class Exchange(etree.ElementBase):
         4: "uniform",
     }
 
-    inputGroups = DataHelper.create_attribute_list_v1("inputGroup", int)
+    _inputGroups = DataHelper.create_attribute_list_v1("inputGroup", int)
     """List[int]: Indicates the kind of input flow. The codes are:
     1=Materials/Fuels, 2=Electricity/Heat, 3=Services, 4=FromNature,
     5=FromTechnosphere. Within the ecoinvent quality network,
     only 4 and 5 are actively used (any material, fuel, electricity,
     heat or service is classified as an input from technosphere)."""
 
-    outputGroups = DataHelper.create_attribute_list_v1("outputGroup", int)
+    _outputGroups = DataHelper.create_attribute_list_v1("outputGroup", int)
     """List[int]: Indicates the kind of output flow. The codes are: 0=ReferenceProduct,
     1=Include avoided product system, 2=Allocated by product,
     3=WasteToTreatment, 4=ToNature. The options 0, 2, and 4 are actively used
@@ -384,21 +384,36 @@ class Exchange(etree.ElementBase):
     and enter it into the field "meanValue")."""
 
     @property
-    def inputGroupsStr(self) -> List[str]:
+    def groups(self) -> List[int]:
+        """Choice between _inputGroups and _outputGroups. Check their documentation
+        for more information."""
+        return self._inputGroups if self._inputGroups != [] else self._outputGroups
+
+    @property
+    def groupsStr(self) -> List[str]:
+        """Choice between _inputGroupsStr and _outputGroupsStr. Check their
+        documentation for more information."""
+        return (
+            self._inputGroupsStr if self._inputGroups != [] else self._outputGroupsStr
+        )
+
+    @property
+    def _inputGroupsStr(self) -> List[str]:
         """String representation for inputGroups. See inputGroups for
         explanations. 1=Materials/Fuels, 2=Electricity/Heat, 3=Services,
         4=FromNature, 5=FromTechnosphere."""
         return [
-            Exchange.INPUT_GROUPS_MAP[inputGroup] for inputGroup in self.inputGroups
+            Exchange.INPUT_GROUPS_MAP[inputGroup] for inputGroup in self._inputGroups
         ]
 
     @property
-    def outputGroupsStr(self) -> List[str]:
+    def _outputGroupsStr(self) -> List[str]:
         """String representation for outputGroups. See outputGroups for
         explanations. 0=ReferenceProduct, 1=Include avoided product system,
         2=Allocated by product, 3=WasteToTreatment, 4=ToNature"""
         return [
-            Exchange.OUTPUT_GROUPS_MAP[outputGroup] for outputGroup in self.outputGroups
+            Exchange.OUTPUT_GROUPS_MAP[outputGroup]
+            for outputGroup in self._outputGroups
         ]
 
     @property

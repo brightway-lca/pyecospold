@@ -189,10 +189,10 @@ def test_parse_file_v1_exchange(eco_spold: EcoSpold) -> None:
     assert exchange.minValue is minValue
     assert exchange.maxValue is maxValue
     assert exchange.mostLikelyValue is mostLikelyValue
-    assert exchange.inputGroups == inputGroups
-    assert exchange.inputGroupsStr == inputGroupsStr
-    assert outputExchange.outputGroups == outputGroups
-    assert outputExchange.outputGroupsStr == outputGroupsStr
+    assert exchange.groups == inputGroups
+    assert exchange.groupsStr == inputGroupsStr
+    assert outputExchange.groups == outputGroups
+    assert outputExchange.groupsStr == outputGroupsStr
 
 
 def test_parse_file_v1_allocation(eco_spold: EcoSpold) -> None:
