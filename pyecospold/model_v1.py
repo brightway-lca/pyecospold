@@ -775,33 +775,106 @@ class TimePeriod(etree.ElementBase):
     The fact that data are based on forecasts should be reported under
     'representativeness'."""
 
-    startYear = DataHelper.create_element_text_v1("startYear", str)
+    _startYear = DataHelper.create_element_text_v1("startYear", str)
     """str: Start date of the time period for which the dataset is valid, entered
     as year only."""
 
-    startYearMonth = DataHelper.create_element_text_v1("startYearMonth", str)
+    _startYearMonth = DataHelper.create_element_text_v1("startYearMonth", str)
     """str: Start date of the time period for which the dataset is valid, entered
     as year and month."""
 
-    startDate = DataHelper.create_element_text_v1("startDate", str)
+    _startDate = DataHelper.create_element_text_v1("startDate", str)
     """str: Start date of the time period for which the dataset is valid, presented
     as a complete date (year-month-day). StartDate may as well be entered as year
     (0000) or year-month (0000-00) only. 2000 and 2000-01 means: from 01.01.2000.
     If it is only known that data is older than a certain data, 'startDate' is left
     blank."""
 
-    endYear = DataHelper.create_element_text_v1("endYear", str)
+    _endYear = DataHelper.create_element_text_v1("endYear", str)
     """str: End date of the time period for which the dataset is valid, entered as year
     only."""
 
-    endYearMonth = DataHelper.create_element_text_v1("endYearMonth", str)
+    _endYearMonth = DataHelper.create_element_text_v1("endYearMonth", str)
     """str: End date of the time period for which the dataset is valid, entered as year
     and month."""
 
-    endDate = DataHelper.create_element_text_v1("endDate", str)
+    _endDate = DataHelper.create_element_text_v1("endDate", str)
     """str: End date of the time period for which the dataset is valid, presented as a
     complete date (year-month-day). EndDate may as well be entered as year (0000)
     or year-month (0000-00) only. 2000 and 2000-12 means: until 31.12.2000."""
+
+    @property
+    def startDate(self) -> datetime:
+        """Start date of the time period for which the dataset is valid. If it is only
+        known that data is older than a certain data, 'startDate' is left blank."""
+        return self._parse_date(self._startDate)
+
+    @startDate.setter
+    def startDate(self, date: datetime) -> None:
+        self._write_date(date, "start")
+
+    @property
+    def endDate(self) -> datetime:
+        """End date of the time period for which the dataset is valid."""
+        return self._parse_date(self._endDate)
+
+    @endDate.setter
+    def endDate(self, date: datetime) -> None:
+        self._write_date(date, "end")
+
+    def _parse_date(
+        self,
+        date: str,
+        default_month: int = 1,
+        default_day: int = 1,
+    ) -> datetime:
+        if len(date) == 10:
+            return datetime(
+                int(date[:4]),
+                int(date[5:7]),
+                int(date[8:]),
+            )
+        if len(date) == 7:
+            return datetime(int(date[:4]), int(date[5:]), default_day)
+        return datetime(int(date), default_month, default_day)
+
+    def _write_date(self, date: datetime, prefix: str) -> None:
+        month = "0" * (date.month < 10) + str(date.month)
+        day = "0" * (date.day < 10) + str(date.day)
+        setattr(self, f"_{prefix}Date", f"{date.year}-{month}-{day}")
+
+    def _init(self):
+        # 1. Check for fooDate is present, because _init is called multiple times
+        # 2. Get Value from either fooYearMonth or fooYear
+        # 3. Write the value to fooDate and delete the other 2
+        if len(self._startDate) > 0:
+            return
+
+        defaultMonth = 1
+        defaultDay = 1
+        dateElements = []
+        for prefix in ["start", "end"]:  # Must be in this order
+            yearMonth = getattr(self, f"_{prefix}YearMonth")
+            year = getattr(self, f"_{prefix}Year")
+
+            month = defaultMonth
+            day = defaultDay
+            # fooYearMonth is present
+            if len(yearMonth) != 0:
+                yearInt = int(yearMonth[:4])
+                month = int(yearMonth[5:])
+            # fooYear is present
+            elif len(year) != 0:
+                yearInt = int(year)
+
+            dateElements.append(
+                etree.SubElement(self, f"{{{dict(self.nsmap)[None]}}}{prefix}Date")
+            )
+            dateElements[-1].text = f"{yearInt}-0{month}-0{day}"
+            for elementName in [f"{prefix}YearMonth", f"{prefix}Year"]:
+                element = DataHelper.get_element(self, elementName)
+                if element is not None:
+                    self.remove(element)
 
 
 class Representativeness(etree.ElementBase):
