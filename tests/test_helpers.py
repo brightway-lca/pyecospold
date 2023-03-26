@@ -5,11 +5,8 @@ from datetime import datetime
 import pytest
 from lxml.etree import DocumentInvalid
 
-from pyecospold.config import Defaults
 from pyecospold.core import parse_file_v1
-from pyecospold.helpers import DataHelper
 from pyecospold.model_v1 import ProcessInformation
-from pyecospold.version import __version__
 
 
 @pytest.fixture(name="process_information")
@@ -56,12 +53,3 @@ def test_set_element_text_success(process_information: ProcessInformation) -> No
     process_information.timePeriod.startDate = startDate
 
     assert process_information.timePeriod.startDate == startDate
-
-
-def test_fill_in_defaults(process_information: ProcessInformation) -> None:
-    "It fills in defaults correctly."
-    generator = f"pyecospold.{__version__}"
-    process_information.getparent().getparent().generator = Defaults.TYPE_DEFAULTS[str]
-    DataHelper.fill_in_defaults(process_information)
-
-    assert process_information.getparent().getparent().generator == generator

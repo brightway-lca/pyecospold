@@ -4,9 +4,9 @@ from pathlib import Path
 from typing import List, Tuple, Union
 
 from lxml import etree, objectify
+from lxmlh import fill_in_defaults
 
 from .config import Defaults
-from .helpers import DataHelper
 from .model_v1 import AdministrativeInformation as AdministrativeInformationV1
 from .model_v1 import Allocation
 from .model_v1 import DataEntryBy as DataEntryByV1
@@ -302,6 +302,6 @@ def save_file(root: etree.ElementBase, path: str, fill_defaults: bool = False) -
     path: the path to save the Ecospold XML file.
     """
     if fill_defaults:
-        DataHelper.fill_in_defaults(root)
+        fill_in_defaults(root, Defaults.STATIC_DEFAULTS, Defaults.DYNAMIC_DEFAULTS)
     root = etree.ElementTree(root)
     root.write(path, pretty_print=True, xml_declaration=True, encoding="UTF-8")

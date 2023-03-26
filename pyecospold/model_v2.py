@@ -3,9 +3,14 @@ from datetime import datetime
 from typing import Dict, List
 
 from lxml import etree
+from lxmlh import get_element, get_element_list, get_inner_text_list
 from pycasreg.validation import validate_cas
 
-from .helpers import DataHelper
+from .helpers import (
+    create_attribute_list_v2,
+    create_attribute_v2,
+    create_element_text_v2,
+)
 
 
 class EcoSpold(etree.ElementBase):
@@ -23,11 +28,11 @@ class EcoSpold(etree.ElementBase):
 
     @property
     def _activityDataset(self) -> "ActivityDataset":
-        return DataHelper.get_element(self, "activityDataset")
+        return get_element(self, "activityDataset")
 
     @property
     def _childActivityDataset(self) -> "ActivityDataset":
-        return DataHelper.get_element(self, "childActivityDataset")
+        return get_element(self, "childActivityDataset")
 
 
 class ActivityDataset(etree.ElementBase):
@@ -37,7 +42,7 @@ class ActivityDataset(etree.ElementBase):
     @property
     def activityDescription(self) -> "ActivityDescription":
         """Contains content-related metainformation for the activity."""
-        return DataHelper.get_element(self, "activityDescription")
+        return get_element(self, "activityDescription")
 
     @property
     def flowData(self) -> "FlowData":
@@ -45,13 +50,13 @@ class ActivityDataset(etree.ElementBase):
         (exchanges with environment as well as intermediate exchanges) as well
         as their properties, allocations, transfer coefficients, uncertainties
         and parameters for the use in mathematical formulas."""
-        return DataHelper.get_element(self, "flowData")
+        return get_element(self, "flowData")
 
     @property
     def modellingAndValidation(self) -> "ModellingAndValidation":
         """Contains metainformation about how unit processes are modelled and about the
         review/validation of the dataset."""
-        return DataHelper.get_element(self, "modellingAndValidation")
+        return get_element(self, "modellingAndValidation")
 
     @property
     def administrativeInformation(self) -> "AdministrativeInformation":
@@ -59,7 +64,7 @@ class ActivityDataset(etree.ElementBase):
         persons that compiled and entered the dataset in the database and about kind
         of publication and the accessibility of the dataset, timestamp, version and
         internalVersion number as well as language and localLanguage code."""
-        return DataHelper.get_element(self, "administrativeInformation")
+        return get_element(self, "administrativeInformation")
 
 
 class ActivityDescription(etree.ElementBase):
@@ -69,34 +74,34 @@ class ActivityDescription(etree.ElementBase):
     def activity(self) -> List["Activity"]:
         """Contains the identifying information of an activity dataset including name
         and classification."""
-        return DataHelper.get_element_list(self, "activity")
+        return get_element_list(self, "activity")
 
     @property
     def classification(self) -> List["Classification"]:
         """Contains classification pairs to specify the activity.)"""
-        return DataHelper.get_element_list(self, "classification")
+        return get_element_list(self, "classification")
 
     @property
     def geography(self) -> List["Geography"]:
         """Describes the geographic location for which the dataset is supposed to be
         valid."""
-        return DataHelper.get_element_list(self, "geography")
+        return get_element_list(self, "geography")
 
     @property
     def technology(self) -> List["Technology"]:
         """Describes the technological properties of the unit process."""
-        return DataHelper.get_element_list(self, "technology")
+        return get_element_list(self, "technology")
 
     @property
     def timePeriod(self) -> List["TimePeriod"]:
         """Characterises the temporal properties of the unit activity
         (or system terminated) at issue."""
-        return DataHelper.get_element_list(self, "timePeriod")
+        return get_element_list(self, "timePeriod")
 
     @property
     def macroEconomicScenario(self) -> List["MacroEconomicScenario"]:
         """References the macro-economic scenario used in this dataset."""
-        return DataHelper.get_element_list(self, "macroEconomicScenario")
+        return get_element_list(self, "macroEconomicScenario")
 
 
 class FlowData(etree.ElementBase):
@@ -109,23 +114,23 @@ class FlowData(etree.ElementBase):
     def intermediateExchanges(self) -> List["IntermediateExchange"]:
         """Comprises intermediate product and waste inputs and outputs for the
         activity."""
-        return DataHelper.get_element_list(self, "intermediateExchange")
+        return get_element_list(self, "intermediateExchange")
 
     @property
     def elementaryExchanges(self) -> List["ElementaryExchange"]:
         """Comprises elementary inputs and outputs (exchanges with the environment)
         for the activity."""
-        return DataHelper.get_element_list(self, "elementaryExchange")
+        return get_element_list(self, "elementaryExchange")
 
     @property
     def parameters(self) -> List["Parameter"]:
         """Comprises all parameters of the activity."""
-        return DataHelper.get_element_list(self, "parameter")
+        return get_element_list(self, "parameter")
 
     @property
     def impactIndicators(self) -> List["ImpactIndicator"]:
         """Calculated impact indicators"""
-        return DataHelper.get_element_list(self, "impactIndicator")
+        return get_element_list(self, "impactIndicator")
 
 
 class ModellingAndValidation(etree.ElementBase):
@@ -136,12 +141,12 @@ class ModellingAndValidation(etree.ElementBase):
     def representativeness(self) -> "Representativeness":
         """Contains information about the representativeness of the unit process data
         (meta information and flow data)."""
-        return DataHelper.get_element(self, "representativeness")
+        return get_element(self, "representativeness")
 
     @property
     def review(self) -> "Review":
         """Contains information about the reviewers' comments on the dataset content."""
-        return DataHelper.get_element(self, "review")
+        return get_element(self, "review")
 
 
 class AdministrativeInformation(etree.ElementBase):
@@ -155,7 +160,7 @@ class AdministrativeInformation(etree.ElementBase):
         """Contains information about the author of the dataset, i.e. the person
         that entered the dataset into the database format and thereby is the
         person responsible for the data."""
-        return DataHelper.get_element(self, "dataEntryBy")
+        return get_element(self, "dataEntryBy")
 
     @property
     def dataGeneratorAndPublication(self) -> "DataGeneratorAndPublication":
@@ -163,13 +168,13 @@ class AdministrativeInformation(etree.ElementBase):
         the original data. This may or may not be the same person as under
         'DataEntryBy'. Furthermore contains information about kind of
         publication underlying the dataset and the accessibility of the dataset."""
-        return DataHelper.get_element(self, "dataGeneratorAndPublication")
+        return get_element(self, "dataGeneratorAndPublication")
 
     @property
     def fileAttributes(self) -> "FileAttributes":
         """This constraint ensures that each xml:lang attribute is only used once
         in this context. I.e. there must be only one translation of the element."""
-        return DataHelper.get_element(self, "fileAttributes")
+        return get_element(self, "fileAttributes")
 
 
 class Activity(etree.ElementBase):
@@ -208,17 +213,15 @@ class Activity(etree.ElementBase):
         2: "Gross values",
     }
 
-    activityNames = DataHelper.create_attribute_list_v2("activityName", str)
+    activityNames = create_attribute_list_v2("activityName", str)
     """List[str]: A name for the activity that is represented by this dataset."""
 
-    synonyms = DataHelper.create_attribute_list_v2("synonym", str)
+    synonyms = create_attribute_list_v2("synonym", str)
     """List[str]: List of synonyms for the name. Contrary to normal multi language
     strings, synonyms may contain more than one element with the same xml:lang
     attribute value. 0..n entries are allowed with a max. length of 80 each."""
 
-    includedActivitiesStarts = DataHelper.create_attribute_list_v2(
-        "includedActivitiesStart", str
-    )
+    includedActivitiesStarts = create_attribute_list_v2("includedActivitiesStart", str)
     """List[str]: Describes the starting point of the activity. For "system
     terminated" the starting point is always "From cradle, i.e. including all
     upstream activities". For unit processes, the starting point may be described
@@ -226,9 +229,7 @@ class Activity(etree.ElementBase):
     [e.g. raw material X]..." or "Service starting with the input of
     [e.g. labour and energy]."""
 
-    includedActivitiesEnds = DataHelper.create_attribute_list_v2(
-        "includedActivitiesEnd", str
-    )
+    includedActivitiesEnds = create_attribute_list_v2("includedActivitiesEnd", str)
     """List[str]: Describes the included activities to the extent that this is not
     self-explanatory from the activity name, as well as activities or inputs that are
     intentionally excluded, e.g. if the activity “application of pesticides” as a
@@ -236,27 +237,27 @@ class Activity(etree.ElementBase):
     active ingredients. The description ends by mentioning the last activity and/or
     point of delivery, e.g. “until and including loading of the product on lorries”."""
 
-    tags = DataHelper.create_attribute_list_v2("tag", str)
+    tags = create_attribute_list_v2("tag", str)
     """List[str]: The tag field allows an open list of keywords which describes the
     activity and can be used for filtering, grouping and searching. The validTags file
     reference provides a list of predefined tags, but the semantic validation procedure
     should only display an information (not an error) if a tag entry cannot be found in
     the validTags master file."""
 
-    id = DataHelper.create_attribute_v2("id", str)
+    id = create_attribute_v2("id", str)
     """str: Unique identifier for this activity. The datat type UUID is a 36 characters
     string with hexadecimal characters and ensures a world-wide unique identifier.
     A UUID for a new item must be supplied by external software. There are several UUID
     generators on the web and implementations in most programming languages."""
 
-    activityNameId = DataHelper.create_attribute_v2("activityNameId", str)
+    activityNameId = create_attribute_v2("activityNameId", str)
     """str: Reference to the activity name master data entry for this activity."""
 
-    activityNameContextId = DataHelper.create_attribute_v2("activityNameContextId", str)
+    activityNameContextId = create_attribute_v2("activityNameContextId", str)
     """str: Reference to the context of the activity name. If this attribute is omitted
     the context of the dataset itself will be used instead."""
 
-    parentActivityId = DataHelper.create_attribute_v2("parentActivityId", str)
+    parentActivityId = create_attribute_v2("parentActivityId", str)
     """str: he parentActivityId is a UUID to the parent activity dataset. When this
     field is filled with a UUID, all the field content from the parent activity
     dataset is taken over by the child activity dataset (the activity that calls
@@ -282,19 +283,17 @@ class Activity(etree.ElementBase):
     formula PARENTVALUE*0.5 results in halfing the value of the original amount field.
     """
 
-    parentActivityContextId = DataHelper.create_attribute_v2(
-        "parentActivityContextId", str
-    )
+    parentActivityContextId = create_attribute_v2("parentActivityContextId", str)
     """str: Reference to the context of the parent activity. If this attribute is
     omitted the context of the dataset itself will be used instead."""
 
-    inheritanceDepth = DataHelper.create_attribute_v2("inheritanceDepth", int)
+    inheritanceDepth = create_attribute_v2("inheritanceDepth", int)
     """int: The inheritance depth expresses the maximum number of parent datasets for
     the current dataset. The following values are used in the ecoinvent context:
     0 = not a child, 1 = a geography child, 2 = a temporal child, 3 = a macro-economic
     scenario child."""
 
-    type = DataHelper.create_attribute_v2("type", int)
+    type = create_attribute_v2("type", int)
     """int: Indicates the kind of data (1 = Unit process; 2 = System terminated) that
     is represented by this dataset. Data are always entered by the data providers as
     Unit process. The database-generated, attributional and consequential datasets are
@@ -306,7 +305,7 @@ class Activity(etree.ElementBase):
     intermediate exchanges, only environmental exchanges and accumulated impact
     assessment results."""
 
-    specialActivityType = DataHelper.create_attribute_v2("specialActivityType", int)
+    specialActivityType = create_attribute_v2("specialActivityType", int)
     """int: The special activity types are: 0 = “ordinary” transforming activities.
     Transforming activities are human activities that transform inputs, so that the
     output of the activity is different from the inputs, e.g. a hard coal mine that
@@ -358,14 +357,12 @@ class Activity(etree.ElementBase):
     product quality" and "Allocation corrections" in the ecoinvent Data Quality
     Guidelines."""
 
-    energyValues = DataHelper.create_attribute_v2("energyValues", int)
+    energyValues = create_attribute_v2("energyValues", int)
     """int: Indicates the way energy values are applied in the dataset. The codes
     are: 0=Undefined (default). 1=Net (lower) heating value. 2=Gross (higher)
     heating value. This data field is by default set to 0."""
 
-    masterAllocationPropertyId = DataHelper.create_attribute_v2(
-        "masterAllocationPropertyId", str
-    )
+    masterAllocationPropertyId = create_attribute_v2("masterAllocationPropertyId", str)
     """str: References the default Allocation Property (via UUID) for all exchanges
     of this dataset. The Allocation Property can be overwritten for each exchange
     (see field 1150 specificAllocationPropertyId). The allocation factor for a
@@ -373,7 +370,7 @@ class Activity(etree.ElementBase):
     by the amount of the output divided by the sum of the all such multiplied
     TProperty values for all outputs."""
 
-    masterAllocationPropertyIdOverwrittenByChild = DataHelper.create_attribute_v2(
+    masterAllocationPropertyIdOverwrittenByChild = create_attribute_v2(
         "masterAllocationPropertyIdOverwrittenByChild", bool
     )
     """bool: If a reference to a master data entity must be removed in a child
@@ -381,14 +378,14 @@ class Activity(etree.ElementBase):
     to true. Otherwise the removed referenced will be interpreted as "Keep the
     Parent Value"."""
 
-    masterAllocationPropertyContextId = DataHelper.create_attribute_v2(
+    masterAllocationPropertyContextId = create_attribute_v2(
         "masterAllocationPropertyContextId", str
     )
     """str: Reference to the context of the master allocation property. If this
     attribute is omitted the context of the dataset itself will be used instead.
     """
 
-    datasetIcon = DataHelper.create_attribute_v2("datasetIcon", str)
+    datasetIcon = create_attribute_v2("datasetIcon", str)
     """str: The URL of the dataset icon. A dataset icon serves a quick
     identification of the specific dataset, and may also be used for product
     brands and company logos. The icon is not directly part of the dataset, but
@@ -408,7 +405,7 @@ class Activity(etree.ElementBase):
         includes a variable, this variable may be redefined by the child activity
         dataset while keeping the rest of the parent text intact. This allows easy
         changes of text parts in child processes."""
-        return DataHelper.get_element(self, "allocationComment")
+        return get_element(self, "allocationComment")
 
     @property
     def generalComment(self) -> "TextAndImage":
@@ -424,7 +421,7 @@ class Activity(etree.ElementBase):
         variable, this variable may be redefined by the child activity dataset while
         keeping the rest of the parent text intact. This allows easy changes of text
         parts in child processes."""
-        return DataHelper.get_element(self, "generalComment")
+        return get_element(self, "generalComment")
 
     @property
     def inheritanceDepthStr(self) -> str:
@@ -459,24 +456,20 @@ class Activity(etree.ElementBase):
 class Classification(etree.ElementBase):
     """Contains classification pairs to specify the activity.)"""
 
-    classificationId = DataHelper.create_attribute_v2("classificationId", str)
+    classificationId = create_attribute_v2("classificationId", str)
     """str: Reference to the value of a classification system. Must be defined
     in list of valid classifications (see field 5160)."""
 
-    classificationContextId = DataHelper.create_attribute_v2(
-        "classificationContextId", str
-    )
+    classificationContextId = create_attribute_v2("classificationContextId", str)
     """str: Reference to the context of the classification. If this attribute
     is omitted the context of the dataset itself will be used instead."""
 
-    classificationSystem = DataHelper.create_element_text_v2(
-        "classificationSystem", str
-    )
+    classificationSystem = create_element_text_v2("classificationSystem", str)
     """str: The name of the classification system used, e.g. ISIC Rev. 4.
     This is an optional plaintext value of the referenced classification
     system (field 320)."""
 
-    classificationValue = DataHelper.create_element_text_v2("classificationValue", str)
+    classificationValue = create_element_text_v2("classificationValue", str)
     """str: The class that the activity belongs to within the specified
     classification system. This is an optional plaintext value of
     the referenced classification value (field 320)."""
@@ -486,14 +479,14 @@ class Geography(etree.ElementBase):
     """Describes the geographic location for which the dataset is supposed
     to be valid."""
 
-    geographyId = DataHelper.create_attribute_v2("geographyId", str)
+    geographyId = create_attribute_v2("geographyId", str)
     """str: Reference to valid locations file with detailed geography information."""
 
-    geographyContextId = DataHelper.create_attribute_v2("geographyContextId", str)
+    geographyContextId = create_attribute_v2("geographyContextId", str)
     """str: Reference to the context of the geography. If this attribute is
     omitted the context of the dataset itself will be used instead."""
 
-    shortNames = DataHelper.create_attribute_list_v2("shortname", str)
+    shortNames = create_attribute_list_v2("shortname", str)
     """List[str]: Descriptive shortname of the location referenced by geographyId,
     e.g. the regional codes of EcoSpold version 1."""
 
@@ -511,7 +504,7 @@ class Geography(etree.ElementBase):
         may be redefined by the child activity dataset while keeping the rest of the
         parent text intact. This allows easy changes of text parts in child
         processes."""
-        return DataHelper.get_element_list(self, "comment")
+        return get_element_list(self, "comment")
 
 
 class Technology(etree.ElementBase):
@@ -526,7 +519,7 @@ class Technology(etree.ElementBase):
         5: "Outdated",
     }
 
-    technologyLevel = DataHelper.create_attribute_v2("technologyLevel", int)
+    technologyLevel = create_attribute_v2("technologyLevel", int)
     """int: Label that grossly classifies the technology of the described
     activity and can be used in modelling to select processes with a specific
     technological level. The codes used are:0=Undefined. For market activities
@@ -565,7 +558,7 @@ class Technology(etree.ElementBase):
         a variable, this variable may be redefined by the child activity dataset
         while keeping the rest of the parent text intact. This allows easy changes
         of text parts in child processes."""
-        return DataHelper.get_element_list(self, "comment")
+        return get_element_list(self, "comment")
 
     @property
     def technologyLevelStr(self) -> str:
@@ -579,17 +572,15 @@ class TimePeriod(etree.ElementBase):
     """Characterises the temporal properties of the unit activity
     (or system terminated) at issue."""
 
-    startDate = DataHelper.create_attribute_v2("startDate", str)
+    startDate = create_attribute_v2("startDate", str)
     """str: Start date of the time period for which the dataset is valid,
     presented as a complete date (year-month-day)."""
 
-    endDate = DataHelper.create_attribute_v2("endDate", str)
+    endDate = create_attribute_v2("endDate", str)
     """str: End date of the time period for which the dataset is valid,
     presented as a complete date (year-month-day)."""
 
-    isDataValidForEntirePeriod = DataHelper.create_attribute_v2(
-        "isDataValidForEntirePeriod", bool
-    )
+    isDataValidForEntirePeriod = create_attribute_v2("isDataValidForEntirePeriod", bool)
     """bool: Indicates whether or not the activity data (elementary and
     intermediate exchanges reported under flow data) are valid for the
     entire time period stated. If not, explanations may be given under
@@ -612,28 +603,26 @@ class TimePeriod(etree.ElementBase):
         variable may be redefined by the child activity dataset while
         keeping the rest of the parent text intact. This allows easy
         changes of text parts in child processes."""
-        return DataHelper.get_element_list(self, "comment")
+        return get_element_list(self, "comment")
 
 
 class MacroEconomicScenario(etree.ElementBase):
     """References the macro-economic scenario used in this dataset."""
 
-    macroEconomicScenarioId = DataHelper.create_attribute_v2(
-        "macroEconomicScenarioId", str
-    )
+    macroEconomicScenarioId = create_attribute_v2("macroEconomicScenarioId", str)
     """str: A reference to a macro-economic scenario defined in the list of
     valid scenarios (see field 3715)."""
 
-    macroEconomicScenarioContextId = DataHelper.create_attribute_v2(
+    macroEconomicScenarioContextId = create_attribute_v2(
         "macroEconomicScenarioContextId", str
     )
     """str: Reference to the context of the macro-economic scenario. If this
     attribute is omitted the context of the dataset itself will be used instead."""
 
-    names = DataHelper.create_attribute_list_v2("name", str)
+    names = create_attribute_list_v2("name", str)
     """List[str]: Name of the macro-economic scenario that this dataset belongs to."""
 
-    comments = DataHelper.create_attribute_list_v2("comment", str)
+    comments = create_attribute_list_v2("comment", str)
     """List[str]: Description of how a macro-economic child dataset deviates from
     the default scenario of the parent dataset."""
 
@@ -643,78 +632,76 @@ class CustomExchange(etree.ElementBase):
     to either Intermediate exchanges or Exchanges with environment are listed in
     their own classes."""
 
-    id = DataHelper.create_attribute_v2("id", str)
+    id = create_attribute_v2("id", str)
     """str: Unique identifier for this exchange. The intermediateExchangeId
     or the elementaryExchangeId can not be used to identify an exchange because
     one master data entry can be referenced by more than one exchange of a dataset."""
 
-    unitId = DataHelper.create_attribute_v2("unitId", str)
+    unitId = create_attribute_v2("unitId", str)
     """str: Reference to the unit of the amount."""
 
-    unitContextId = DataHelper.create_attribute_v2("unitContextId", str)
+    unitContextId = create_attribute_v2("unitContextId", str)
     """str: Reference to the context of the unit. If this attribute is omitted the
     context of the dataset itself will be used instead."""
 
-    variableName = DataHelper.create_attribute_v2("variableName", str)
+    variableName = create_attribute_v2("variableName", str)
     """str: The variable name is a short name for the exchange, used when refering
     to the exchange amount in mathematical relations (formulas). Variables may
     contain characters, numbers and underscores (_). Variable names must start
     with a character (a-z). Variable names are not case sensitive (calorific_Value
     equals Calorific_value)."""
 
-    casNumber = DataHelper.create_attribute_v2("casNumber", str, validate_cas)
+    casNumber = create_attribute_v2("casNumber", str, validate_cas)
     """str: Indicates the number according to the Chemical Abstract Service
     (CAS). The Format of the CAS-number: 000000-00-0, where the first string of
     digits needs not to be complete (i.e. less than six digits are admitted)."""
 
-    amount = DataHelper.create_attribute_v2("amount", float)
+    amount = create_attribute_v2("amount", float)
     """float: Amount of an elementary or intermediate exchange."""
 
-    isCalculatedAmount = DataHelper.create_attribute_v2("isCalculatedAmount", bool)
+    isCalculatedAmount = create_attribute_v2("isCalculatedAmount", bool)
     """bool: If true the value of the amount field is the calculated value of the
     mathematicalRelation or the transferCoefficient."""
 
-    mathematicalRelation = DataHelper.create_attribute_v2("mathematicalRelation", str)
+    mathematicalRelation = create_attribute_v2("mathematicalRelation", str)
     """str: Defines a mathematical formula with references to values of flows,
     parameters or properties by variable names or REF function. The result of the
     formula with a specific set of variable values is written into the amount field."""
 
-    sourceId = DataHelper.create_attribute_v2("sourceId", str)
+    sourceId = create_attribute_v2("sourceId", str)
     """str: A reference to a valid source."""
 
-    sourceIdOverwrittenByChild = DataHelper.create_attribute_v2(
-        "sourceIdOverwrittenByChild", bool
-    )
+    sourceIdOverwrittenByChild = create_attribute_v2("sourceIdOverwrittenByChild", bool)
     """bool: If a reference to a master data entity must be removed in a child
     dataset it is required to set the corresponding xxxOverwrittenByChild attribute
     to true. Otherwise the removed referenced will be interpreted as "Keep the
     Parent Value"."""
 
-    sourceContextId = DataHelper.create_attribute_v2("sourceContextId", str)
+    sourceContextId = create_attribute_v2("sourceContextId", str)
     """str: Reference to the context of the source. If this attribute is omitted
     the context of the dataset itself will be used instead."""
 
-    sourceYear = DataHelper.create_attribute_v2("sourceYear", str)
+    sourceYear = create_attribute_v2("sourceYear", str)
     """str: Indicates the year of publication and communication, respectively.
     For web-sites: last visited."""
 
-    sourceFirstAuthor = DataHelper.create_attribute_v2("sourceFirstAuthor", str)
+    sourceFirstAuthor = create_attribute_v2("sourceFirstAuthor", str)
     """str: Indicates the first author by surname and abbreviated name (e.g.,
     Einstein A.). In case of measurement on site, oral communication, personal
     written communication and questionnaries ('sourceType'=4, 5, 6, 7) the name of
     the communicating person is mentioned here."""
 
-    pageNumbers = DataHelper.create_attribute_v2("pageNumbers", str)
+    pageNumbers = create_attribute_v2("pageNumbers", str)
     """str: The relevant page numbers if the data are sourced on specific pages in
     an article or larger publication."""
 
-    specificAllocationPropertyId = DataHelper.create_attribute_v2(
+    specificAllocationPropertyId = create_attribute_v2(
         "specificAllocationPropertyId", str
     )
     """str: Reference to the Property used by the allocation. This overrides the
     dataset wide default defined by masterAllocationPropertyId."""
 
-    specificAllocationPropertyIdOverwrittenByChild = DataHelper.create_attribute_v2(
+    specificAllocationPropertyIdOverwrittenByChild = create_attribute_v2(
         "specificAllocationPropertyIdOverwrittenByChild", bool
     )
     """bool: If a reference to a master data entity must be removed in a child
@@ -722,27 +709,27 @@ class CustomExchange(etree.ElementBase):
     to true. Otherwise the removed referenced will be interpreted as "Keep the
     Parent Value"."""
 
-    specificAllocationPropertyContextId = DataHelper.create_attribute_v2(
+    specificAllocationPropertyContextId = create_attribute_v2(
         "specificAllocationPropertyContextId", str
     )
     """str: Reference to the context of the property. If this attribute is omitted
     the context of the dataset itself will be used instead."""
 
-    names = DataHelper.create_attribute_list_v2("name", str)
+    names = create_attribute_list_v2("name", str)
     """List[str]: Name of the exchange."""
 
-    unitNames = DataHelper.create_attribute_list_v2("unitName", str)
+    unitNames = create_attribute_list_v2("unitName", str)
     """List[str]: Unit name of the amount."""
 
-    comments = DataHelper.create_attribute_list_v2("comment", str)
+    comments = create_attribute_list_v2("comment", str)
     """List[str]: A general comment can be made about each individual exchange."""
 
-    synonyms = DataHelper.create_attribute_list_v2("synonym", str)
+    synonyms = create_attribute_list_v2("synonym", str)
     """List[str]: List of synonyms for the name. Contrary to normal multi
     language strings, synonyms may contain more than one element with the same
     xml:lang attribute value. 0..n entries are allowed with a max. length of 80 each."""
 
-    tags = DataHelper.create_attribute_list_v2("tag", str)
+    tags = create_attribute_list_v2("tag", str)
     """List[str]: The tag field allows an open list of keywords which describes
     the activity and can be used for filtering, grouping and searching. The
     validTags file reference provides a list of predefined tags, but the
@@ -754,19 +741,19 @@ class CustomExchange(etree.ElementBase):
         """Uncertainty information in the form of distribution functions and their
         parameters and/or pedigree data. For the format definition see the complex
         type section below."""
-        return DataHelper.get_element_list(self, "uncertainty")
+        return get_element_list(self, "uncertainty")
 
     @property
     def properties(self) -> List["Property"]:
         """Properties of the exchange, e.g. dry mass, water content, price, content of
         specific elements or substances."""
-        return DataHelper.get_element_list(self, "property")
+        return get_element_list(self, "property")
 
     @property
     def transferCoefficients(self) -> List["TransferCoefficient"]:
         """Transfer coefficients relate specific inputs to specific outputs and record
         the share of this specific input that contributes to this specific output."""
-        return DataHelper.get_element_list(self, "transferCoefficient")
+        return get_element_list(self, "transferCoefficient")
 
 
 class Uncertainty(etree.ElementBase):
@@ -780,7 +767,7 @@ class Uncertainty(etree.ElementBase):
         """The Lognormal-distribution with average value μ (Mu parameter) and
         variance σ (Variance parameter) is a Normal-distribution, shaping the
         natural logarithm of the characteristic values ln(x) instead of x-values"""
-        return DataHelper.get_element(self, "lognormal")
+        return get_element(self, "lognormal")
 
     @property
     def normal(self) -> "Normal":
@@ -788,7 +775,7 @@ class Uncertainty(etree.ElementBase):
         distributions of the same general form, differing in thei location and
         scale parameters: the mean ("MeanValue") and standard deviation
         ("Deviation"), respectively."""
-        return DataHelper.get_element(self, "normal")
+        return get_element(self, "normal")
 
     @property
     def triangular(self) -> "Triangular":
@@ -796,14 +783,14 @@ class Uncertainty(etree.ElementBase):
         uncertainty distribution, the meanValue shall be calculated from the
         mostLikelyValue. The field mostLikelyValue (#3797) must not be used in the
         ecoinvent context."""
-        return DataHelper.get_element(self, "triangular")
+        return get_element(self, "triangular")
 
     @property
     def uniform(self) -> "Uniform":
         """Uniform distribution of values between the minValue and the maxValue
         parameter. If the maxValue parameter is smaller than the minValue parameter
         their values will be swapped."""
-        return DataHelper.get_element(self, "uniform")
+        return get_element(self, "uniform")
 
     @property
     def beta(self) -> "Beta":
@@ -813,26 +800,26 @@ class Uncertainty(etree.ElementBase):
         condition: ((a <= m) and (m <= b)) or (a = b). The shape values
         will be calculated by these formulas: Shape1 = 1 + 4 * ((m-a) / (b-a)).
         Shape2 = 6 - Shape1."""
-        return DataHelper.get_element(self, "beta")
+        return get_element(self, "beta")
 
     @property
     def gamma(self) -> "Gamma":
         """Gamma distribution using scale and shape parameter. Absolute values
         of the values entered here will be used. The value of the minimum
         parameter will be added to all samples."""
-        return DataHelper.get_element(self, "gamma")
+        return get_element(self, "gamma")
 
     @property
     def binomial(self) -> "Binomial":
         """Binomial distribution using n and p parameter."""
-        return DataHelper.get_element(self, "binomial")
+        return get_element(self, "binomial")
 
     @property
     def undefined(self) -> "Undefined":
         """This "distribution" can be used to hold legacy data of
         the EcoSpold01 format which reused the minValue, maxValue and
         standardDeviation95 fields to store undefined distribution data."""
-        return DataHelper.get_element(self, "undefined")
+        return get_element(self, "undefined")
 
     @property
     def pedigreeMatrices(self) -> List["PedigreeMatrix"]:
@@ -841,7 +828,7 @@ class Uncertainty(etree.ElementBase):
         uncertainty, which can be added to the basic uncertainty. The
         pedigreeMatrix element groups the 5 data quality indicators and
         contains no data itself."""
-        return DataHelper.get_element_list(self, "pedigreeMatrix")
+        return get_element_list(self, "pedigreeMatrix")
 
 
 class Lognormal(etree.ElementBase):
@@ -849,16 +836,16 @@ class Lognormal(etree.ElementBase):
     σ (Variance parameter) is a Normal-distribution, shaping the natural logarithm
     of the characteristic values ln(x) instead of x-values"""
 
-    meanValue = DataHelper.create_attribute_v2("meanValue", float)
+    meanValue = create_attribute_v2("meanValue", float)
     """float: Geometric mean"""
 
-    mu = DataHelper.create_attribute_v2("mu", float)
+    mu = create_attribute_v2("mu", float)
     """float: Arithmetic mean of the underlying normal distribution"""
 
-    variance = DataHelper.create_attribute_v2("variance", float)
+    variance = create_attribute_v2("variance", float)
     """float: Unbiased variance of the underlying normal distribution"""
 
-    varianceWithPedigreeUncertainty = DataHelper.create_attribute_v2(
+    varianceWithPedigreeUncertainty = create_attribute_v2(
         "varianceWithPedigreeUncertainty", float
     )
     """float: Unbiased variance of the underlying normal distribution, basic
@@ -870,13 +857,13 @@ class Normal(etree.ElementBase):
     of the same general form, differing in thei location and scale parameters: the mean
     ("MeanValue") and standard deviation ("Deviation"), respectively."""
 
-    meanValue = DataHelper.create_attribute_v2("meanValue", float)
+    meanValue = create_attribute_v2("meanValue", float)
     """float: Arithmetic mean"""
 
-    variance = DataHelper.create_attribute_v2("variance", float)
+    variance = create_attribute_v2("variance", float)
     """float: Unbiased variance"""
 
-    varianceWithPedigreeUncertainty = DataHelper.create_attribute_v2(
+    varianceWithPedigreeUncertainty = create_attribute_v2(
         "varianceWithPedigreeUncertainty", float
     )
     """float: Unbiased variance, basic uncertainty with pedigree uncertainty"""
@@ -888,13 +875,13 @@ class Triangular(etree.ElementBase):
     mostLikelyValue. The field mostLikelyValue (#3797) must not be used in the
     ecoinvent context."""
 
-    minValue = DataHelper.create_attribute_v2("minValue", float)
+    minValue = create_attribute_v2("minValue", float)
     """float: Minimum value"""
 
-    mostLikelyValue = DataHelper.create_attribute_v2("mostLikelyValue", float)
+    mostLikelyValue = create_attribute_v2("mostLikelyValue", float)
     """float: Mode"""
 
-    maxValue = DataHelper.create_attribute_v2("maxValue", float)
+    maxValue = create_attribute_v2("maxValue", float)
     """float: Maximum value"""
 
 
@@ -903,10 +890,10 @@ class Uniform(etree.ElementBase):
     parameter. If the maxValue parameter is smaller than the minValue parameter
     their values will be swapped."""
 
-    minValue = DataHelper.create_attribute_v2("minValue", float)
+    minValue = create_attribute_v2("minValue", float)
     """float: Minimum value"""
 
-    maxValue = DataHelper.create_attribute_v2("maxValue", float)
+    maxValue = create_attribute_v2("maxValue", float)
     """float: Maximum value"""
 
 
@@ -918,13 +905,13 @@ class Beta(etree.ElementBase):
     will be calculated by these formulas: Shape1 = 1 + 4 * ((m-a) / (b-a)).
     Shape2 = 6 - Shape1."""
 
-    minValue = DataHelper.create_attribute_v2("minValue", float)
+    minValue = create_attribute_v2("minValue", float)
     """float: Minimum value (a)"""
 
-    mostFrequentValue = DataHelper.create_attribute_v2("mostFrequentValue", float)
+    mostFrequentValue = create_attribute_v2("mostFrequentValue", float)
     """float; Most Frequent value (m)"""
 
-    maxValue = DataHelper.create_attribute_v2("maxValue", float)
+    maxValue = create_attribute_v2("maxValue", float)
     """float: Maximum value (b)"""
 
 
@@ -933,23 +920,23 @@ class Gamma(etree.ElementBase):
     of the values entered here will be used. The value of the minimum
     parameter will be added to all samples."""
 
-    shape = DataHelper.create_attribute_v2("shape", float)
+    shape = create_attribute_v2("shape", float)
     """float: Shape parameter"""
 
-    scale = DataHelper.create_attribute_v2("scale", float)
+    scale = create_attribute_v2("scale", float)
     """float: Scale parameter"""
 
-    minValue = DataHelper.create_attribute_v2("minValue", float)
+    minValue = create_attribute_v2("minValue", float)
     """float: Minimum value (location parameter)"""
 
 
 class Binomial(etree.ElementBase):
     """Binomial distribution using n and p parameter."""
 
-    n = DataHelper.create_attribute_v2("n", int)
+    n = create_attribute_v2("n", int)
     """int: Number of independant trials."""
 
-    p = DataHelper.create_attribute_v2("p", float)
+    p = create_attribute_v2("p", float)
     """float: Probability of success in each trial."""
 
 
@@ -958,13 +945,13 @@ class Undefined(etree.ElementBase):
     the EcoSpold01 format which reused the minValue, maxValue and
     standardDeviation95 fields to store undefined distribution data."""
 
-    minValue = DataHelper.create_attribute_v2("minValue", float)
+    minValue = create_attribute_v2("minValue", float)
     """float: Minimum value."""
 
-    maxValue = DataHelper.create_attribute_v2("maxValue", float)
+    maxValue = create_attribute_v2("maxValue", float)
     """float: Maximum value."""
 
-    standardDeviation95 = DataHelper.create_attribute_v2("standardDeviation95", float)
+    standardDeviation95 = create_attribute_v2("standardDeviation95", float)
     """float: The value, extended from both sides of the mean, that would be
     necessary to cover 95% of the population."""
 
@@ -972,74 +959,72 @@ class Undefined(etree.ElementBase):
 class Property(etree.ElementBase):
     """Format to specify properties of exchanges."""
 
-    names = DataHelper.create_attribute_list_v2("name", str)
+    names = create_attribute_list_v2("name", str)
     """list[str]: Descriptive name of the property."""
 
-    unitNames = DataHelper.create_attribute_list_v2("unitName", str)
+    unitNames = create_attribute_list_v2("unitName", str)
     """list[str]: Unit name of the property amount."""
 
-    comments = DataHelper.create_attribute_list_v2("comment", str)
+    comments = create_attribute_list_v2("comment", str)
     """list[str]: A general comment can be made about each individual property of a
     particular exchange."""
 
-    propertyId = DataHelper.create_attribute_v2("propertyId", str)
+    propertyId = create_attribute_v2("propertyId", str)
     """str: Reference to the master data entry for this property."""
 
-    propertyContextId = DataHelper.create_attribute_v2("propertyContextId", str)
+    propertyContextId = create_attribute_v2("propertyContextId", str)
     """str: Reference to the context of the property. If this attribute
     is omitted the context of the dataset itself will be used instead."""
 
-    variableName = DataHelper.create_attribute_v2("variableName", str)
+    variableName = create_attribute_v2("variableName", str)
     """str: Defines a variable name for referencing the property amount in a
     mathematical relation. Variable names must start with a character (a-z)
     and may contain characters, numbers and underscores (_). Variable names
     are not case sensitive (calorific_Value equals Calorific_value)."""
 
-    amount = DataHelper.create_attribute_v2("amount", float)
+    amount = create_attribute_v2("amount", float)
     """float: The value of the property."""
 
-    isDefiningValue = DataHelper.create_attribute_v2("isDefiningValue", bool)
+    isDefiningValue = create_attribute_v2("isDefiningValue", bool)
     """bool: If this field is true, the value of this property is a part of
     the definition of the exchange and therefore has a fixed relation to the
     amount of the exchange that cannot be changed for individual instances of
     the exchange in different datasets."""
 
-    mathematicalRelation = DataHelper.create_attribute_v2("mathematicalRelation", str)
+    mathematicalRelation = create_attribute_v2("mathematicalRelation", str)
     """str: Defines a mathematical formula with references to values of flows
     parameters or properties by variable names or REF function. The result of the
     formula with a specific set of variable values is written into the amount field."""
 
-    isCalculatedAmount = DataHelper.create_attribute_v2("isCalculatedAmount", bool)
+    isCalculatedAmount = create_attribute_v2("isCalculatedAmount", bool)
     """bool: If true the value of the amount field is the calculated value of the
     mathematicalRelation."""
 
-    unitId = DataHelper.create_attribute_v2("unitId", str)
+    unitId = create_attribute_v2("unitId", str)
     """str: Reference to the unit of the amount."""
 
-    unitContextId = DataHelper.create_attribute_v2("unitContextId", str)
+    unitContextId = create_attribute_v2("unitContextId", str)
     """str: Reference to the context of the unit. If this attribute is omitted the
     context of the dataset itself will be used instead."""
 
-    sourceId = DataHelper.create_attribute_v2("sourceId", str)
+    sourceId = create_attribute_v2("sourceId", str)
     """str: A reference to a valid source. It indicates the publication where the
     property is documented."""
 
-    sourceIdOverwrittenByChild = DataHelper.create_attribute_v2(
-        "sourceIdOverwrittenByChild", bool
-    )
+    sourceIdOverwrittenByChild = create_attribute_v2("sourceIdOverwrittenByChild", bool)
     """bool: If a reference to a master data entity must be removed in a child dataset
     it is required to set the corresponding xxxOverwrittenByChild attribute to true.
     Otherwise the removed referenced will be interpreted as "Keep the Parent Value"."""
 
-    sourceContextId = DataHelper.create_attribute_v2("sourceContextId", str)
+    sourceContextId = create_attribute_v2("sourceContextId", str)
     """str: Reference to the context of the source. If this attribute is omitted the
     context of the dataset itself will be used instead."""
 
-    sourceYear = DataHelper.create_attribute_v2("sourceYear", str)
+    sourceYear = create_attribute_v2("sourceYear", str)
     """str: Indicates the year of publication and communication, respectively
     For web-sites: last visited."""
 
-    sourceFirstAuthor = DataHelper.create_attribute_v2("sourceFirstAuthor", str)
+    sourceFirstAuthor = create_attribute_v2("sourceFirstAuthor", str)
     """str: Indicates the first author by surname and abbreviated name (e.g.,
     Einstein A.). In case of measurement on site, oral communication, personal
     written communication and questionnaries ('sourceType'=4, 5, 6, 7) the name of
@@ -1048,54 +1033,52 @@ class Property(etree.ElementBase):
     @property
     def uncertainties(self) -> List["Uncertainty"]:
         """Uncertainty of the property value."""
-        return DataHelper.get_element_list(self, "uncertainty")
+        return get_element_list(self, "uncertainty")
 
 
 class TransferCoefficient(etree.ElementBase):
     """Transfer coefficients for calculating amounts of outputs from amounts
     of inputs."""
 
-    comments = DataHelper.create_attribute_list_v2("comment", str)
+    comments = create_attribute_list_v2("comment", str)
     """list[str]: A general comment can be made about each individual transfer
     coefficient."""
 
-    exchangeId = DataHelper.create_attribute_v2("exchangeId", str)
+    exchangeId = create_attribute_v2("exchangeId", str)
     """str: Reference to the UUID of an exchange."""
 
-    amount = DataHelper.create_attribute_v2("amount", float)
+    amount = create_attribute_v2("amount", float)
     """float: The amount of the transfer coefficient is to be multiplied with the
     amount of this referenced exchange."""
 
-    mathematicalRelation = DataHelper.create_attribute_v2("mathematicalRelation", str)
+    mathematicalRelation = create_attribute_v2("mathematicalRelation", str)
     """str: defines a mathematical formula with references to values of flows,
     parameters or properties by variable names or REF function the result of the
     formula with a specific set of variable values is written into the amount
     field"""
 
-    isCalculatedAmount = DataHelper.create_attribute_v2("isCalculatedAmount", bool)
+    isCalculatedAmount = create_attribute_v2("isCalculatedAmount", bool)
     """bool: If true the value of the amount field is the calculated value of
     the mathematicalRelation."""
 
-    sourceId = DataHelper.create_attribute_v2("sourceId", str)
+    sourceId = create_attribute_v2("sourceId", str)
     """str: A reference to a valid source."""
 
-    sourceIdOverwrittenByChild = DataHelper.create_attribute_v2(
-        "sourceIdOverwrittenByChild", bool
-    )
+    sourceIdOverwrittenByChild = create_attribute_v2("sourceIdOverwrittenByChild", bool)
     """bool: If a reference to a master data entity must be removed in a child
     dataset it is required to set the corresponding xxxOverwrittenByChild attribute
     to true. Otherwise the removed referenced will be interpreted as "Keep the
     Parent Value"."""
 
-    sourceContextId = DataHelper.create_attribute_v2("sourceContextId", str)
+    sourceContextId = create_attribute_v2("sourceContextId", str)
     """str: Reference to the context of the source. If this attribute is omitted
     the context of the dataset itself will be used instead."""
 
-    sourceYear = DataHelper.create_attribute_v2("sourceYear", str)
+    sourceYear = create_attribute_v2("sourceYear", str)
     """str: Indicates the year of publication and communication, respectively.
     For web-sites: last visited."""
 
-    sourceFirstAuthor = DataHelper.create_attribute_v2("sourceFirstAuthor", str)
+    sourceFirstAuthor = create_attribute_v2("sourceFirstAuthor", str)
     """str: Indicates the first author by surname and abbreviated name (e.g.,
     Einstein A.). In case of measurement on site, oral communication, personal
     written communication and questionnaries ('sourceType'=4, 5, 6, 7) the name of
@@ -1104,51 +1087,45 @@ class TransferCoefficient(etree.ElementBase):
     @property
     def uncertainties(self) -> List["Uncertainty"]:
         """Uncertainty of the transfer coefficient amount."""
-        return DataHelper.get_element_list(self, "uncertainty")
+        return get_element_list(self, "uncertainty")
 
 
 class IntermediateExchange(CustomExchange):
     """Comprises intermediate product and waste inputs and outputs for the activity."""
 
-    productionVolumeComments = DataHelper.create_attribute_list_v2(
-        "productionVolumeComments", str
-    )
+    productionVolumeComments = create_attribute_list_v2("productionVolumeComments", str)
     """lits[str]: A general comment can be made on the data source, assumptions and
     calculations for the production volume data."""
 
-    intermediateExchangeId = DataHelper.create_attribute_v2(
-        "intermediateExchangeId", str
-    )
+    intermediateExchangeId = create_attribute_v2("intermediateExchangeId", str)
     """str: Reference to the master data entry for this intermediate exchange"""
 
-    intermediateExchangeContextId = DataHelper.create_attribute_v2(
+    intermediateExchangeContextId = create_attribute_v2(
         "intermediateExchangeContextId", str
     )
     """str: Reference to the context of the intermediate exchange. If this attribute is
     omitted the context of the dataset itself will be used instead."""
 
-    activityLinkId = DataHelper.create_attribute_v2("activityLinkId", str)
+    activityLinkId = create_attribute_v2("activityLinkId", str)
     """str: Explicit reference to the activity which supplies the intermediate product.
     If this field is empty the activity will determined by a linking rule, which uses
     geographical and temporal information of this activity."""
 
-    activityLinkIdOverwrittenByChild = DataHelper.create_attribute_v2(
+    activityLinkIdOverwrittenByChild = create_attribute_v2(
         "activityLinkIdOverwrittenByChild", bool
     )
     """bool: If a reference to a master data entity must be removed in a child dataset
     it is required to set the corresponding xxxOverwrittenByChild attribute to true.
     Otherwise the removed referenced will be interpreted as "Keep the Parent Value"."""
 
-    activityLinkContextId = DataHelper.create_attribute_v2("activityLinkContextId", str)
+    activityLinkContextId = create_attribute_v2("activityLinkContextId", str)
     """str: Reference to the context of the activity link. If this attribute is omitted
     the context of the dataset itself will be used instead."""
 
-    productionVolumeAmount = DataHelper.create_attribute_v2(
-        "productionVolumeAmount", float
-    )
+    productionVolumeAmount = create_attribute_v2("productionVolumeAmount", float)
     """float: The product volume expressed per year in the same unit as the exchange"""
 
-    productionVolumeVariableName = DataHelper.create_attribute_v2(
+    productionVolumeVariableName = create_attribute_v2(
         "productionVolumeVariableName", str
     )
     """str: The variable name is a short name for the production volume of the exchange,
@@ -1157,38 +1134,34 @@ class IntermediateExchange(CustomExchange):
     names must start with a character (a-z). Variable names are not case sensitive
     (calorific_Value equals Calorific_value)."""
 
-    productionVolumeMathematicalRelation = DataHelper.create_attribute_v2(
+    productionVolumeMathematicalRelation = create_attribute_v2(
         "productionVolumeMathematicalRelation", str
     )
     """str: Defines a mathematical formula which references to values of flows,
     parameters or properties by variable names or REF function. The result of the
     formula with a specific set of variable values is written into the amount field."""
 
-    productionVolumeSourceId = DataHelper.create_attribute_v2(
-        "productionVolumeSourceId", str
-    )
+    productionVolumeSourceId = create_attribute_v2("productionVolumeSourceId", str)
     """str: A reference to a valid source."""
 
-    productionVolumeSourceIdOverwrittenByChild = DataHelper.create_attribute_v2(
+    productionVolumeSourceIdOverwrittenByChild = create_attribute_v2(
         "productionVolumeSourceIdOverwrittenByChild", bool
     )
     """bool: If a reference to a master data entity must be removed in a child dataset
     it is required to set the corresponding xxxOverwrittenByChild attribute to true.
     Otherwise the removed referenced will be interpreted as "Keep the Parent Value"."""
 
-    productionVolumeSourceContextId = DataHelper.create_attribute_v2(
+    productionVolumeSourceContextId = create_attribute_v2(
         "productionVolumeSourceContextId", str
     )
     """str: Reference to the context of the source. If this attribute is omitted the
     context of the dataset itself will be used instead."""
 
-    productionVolumeSourceYear = DataHelper.create_attribute_v2(
-        "productionVolumeSourceYear", str
-    )
+    productionVolumeSourceYear = create_attribute_v2("productionVolumeSourceYear", str)
     """str: Indicates the year of publication and communication, respectively.
     For web-sites: last visited."""
 
-    productionVolumeSourceFirstAuthor = DataHelper.create_attribute_v2(
+    productionVolumeSourceFirstAuthor = create_attribute_v2(
         "productionVolumeSourceFirstAuthor", str
     )
     """str: Indicates the first author by surname and abbreviated name
@@ -1200,41 +1173,41 @@ class IntermediateExchange(CustomExchange):
     def productionVolumeUncertainties(self) -> List["Uncertainty"]:
         """Uncertainty information in the form of distribution functions and their
         parameters and/or pedigree data."""
-        return DataHelper.get_element_list(self, "productionVolumeUncertainty")
+        return get_element_list(self, "productionVolumeUncertainty")
 
     @property
     def classifications(self) -> List["Classification"]:
         """Contains classification pairs to specify the product."""
-        return DataHelper.get_element_list(self, "classification")
+        return get_element_list(self, "classification")
 
 
 class ElementaryExchange(CustomExchange):
     """Comprises elementary inputs and outputs (exchanges with the environment)
     for the activity."""
 
-    inputGroup = DataHelper.create_element_text_v2("inputGroup", int)
+    inputGroup = create_element_text_v2("inputGroup", int)
     """int: Indicates the kind of input flow. The codes are: 4=From Environment
     For each exchange only an inputGroup or outputGroup shall exist. This
     indicates the direction of the flow. This field is the equivalent of field
     1500 with a different set of valid values."""
 
-    outputGroup = DataHelper.create_element_text_v2("outputGroup", int)
+    outputGroup = create_element_text_v2("outputGroup", int)
     """int: Indicates the kind of output flow. The codes are: 4=ToEnvironment
     For each exchange only an inputGroup or outputGroup shall exist. This
     indicates the direction of the flow. This field is the equivalent of field
     1510 with a different set of valid values."""
 
-    elementaryExchangeId = DataHelper.create_attribute_v2("elementaryExchangeId", str)
+    elementaryExchangeId = create_attribute_v2("elementaryExchangeId", str)
     """str: Reference to the master data entry for this elementary exchange"""
 
-    elementaryExchangeContextId = DataHelper.create_attribute_v2(
+    elementaryExchangeContextId = create_attribute_v2(
         "elementaryExchangeContextId", str
     )
     """str: Reference to the context of the elementary exchange. If this
     attribute is omitted the context of the dataset itself will be used
     instead."""
 
-    formula = DataHelper.create_attribute_v2("formula", str)
+    formula = create_attribute_v2("formula", str)
     """str: Chemical formula (e.g. sum formula) may be entered."""
 
     @property
@@ -1242,7 +1215,7 @@ class ElementaryExchange(CustomExchange):
         """Name of the compartment and subcompartment of the exchange.
         The xml document referenced by validCompartments contains definitions
         of valid compartment/subcompartment pairs for a given language."""
-        return DataHelper.get_element(self, "compartment")
+        return get_element(self, "compartment")
 
     @property
     def inputGroupStr(self) -> str:
@@ -1260,97 +1233,93 @@ class ElementaryExchange(CustomExchange):
 class Parameter(etree.ElementBase):
     """Comprises all parameters of the activity."""
 
-    names = DataHelper.create_attribute_list_v2("name", str)
+    names = create_attribute_list_v2("name", str)
     """list[str]: Descriptive name of the parameter."""
 
-    unitNames = DataHelper.create_attribute_list_v2("unitName", str)
+    unitNames = create_attribute_list_v2("unitName", str)
     """list[str]: Unit name of the parameter amount."""
 
-    comments = DataHelper.create_attribute_list_v2("comment", str)
+    comments = create_attribute_list_v2("comment", str)
     """list[str]: A general comment can be made about each individual
     parameter."""
 
-    parameterId = DataHelper.create_attribute_v2("parameterId", str)
+    parameterId = create_attribute_v2("parameterId", str)
     """str: A reference to a valid master data parameter."""
 
-    parameterContextId = DataHelper.create_attribute_v2("parameterContextId", str)
+    parameterContextId = create_attribute_v2("parameterContextId", str)
     """str: Reference to the context of the parameter. If this attribute
     is omitted the context of the dataset itself will be used instead."""
 
-    variableName = DataHelper.create_attribute_v2("variableName", str)
+    variableName = create_attribute_v2("variableName", str)
     """str: The variable name is a short name for the exchange, used when
     refering to the exchange amount in mathematical relations (formulas).
     Variables may contain characters, numbers and underscores (_). Variable
     names must start with a character (a-z). Variable names are not case
     sensitive (calorific_Value equals Calorific_value)."""
 
-    mathematicalRelation = DataHelper.create_attribute_v2("mathematicalRelation", str)
+    mathematicalRelation = create_attribute_v2("mathematicalRelation", str)
     """str: Defines a mathematical formula with references to values of
     flows, parameters or properties by variable names or REF function. The
     result of the formula with a specific set of variable values is written
     into the amount field."""
 
-    isCalculatedAmount = DataHelper.create_attribute_v2("isCalculatedAmount", bool)
+    isCalculatedAmount = create_attribute_v2("isCalculatedAmount", bool)
     """bool: If true the value of the amount field is the calculated value of
     the mathematicalRelation."""
 
-    amount = DataHelper.create_attribute_v2("amount", float)
+    amount = create_attribute_v2("amount", float)
     """float: The current value of the parameter."""
 
-    unitId = DataHelper.create_attribute_v2("unitId", str)
+    unitId = create_attribute_v2("unitId", str)
     """str: Reference to the unit of the parameter amount."""
 
-    unitContextId = DataHelper.create_attribute_v2("unitContextId", str)
+    unitContextId = create_attribute_v2("unitContextId", str)
     """str: Reference to the context of the unit. If this attribute is
     omitted the context of the dataset itself will be used instead."""
 
     @property
     def uncertainties(self) -> List["Uncertainty"]:
         """Uncertainty of the parameter amount."""
-        return DataHelper.get_element_list(self, "uncertainty")
+        return get_element_list(self, "uncertainty")
 
 
 class ImpactIndicator(etree.ElementBase):
     """Calculated impact indicators"""
 
-    impactMethodNames = DataHelper.create_attribute_list_v2("impactMethodName", str)
+    impactMethodNames = create_attribute_list_v2("impactMethodName", str)
     """list[str]: Name of the impact method."""
 
-    impactCategoryNames = DataHelper.create_attribute_list_v2("impactCategoryName", str)
+    impactCategoryNames = create_attribute_list_v2("impactCategoryName", str)
     """list[str]: Name of the impact category."""
 
-    names = DataHelper.create_attribute_list_v2("names", str)
+    names = create_attribute_list_v2("names", str)
     """list[str]: Name of the impact indicator."""
 
-    unitNames = DataHelper.create_attribute_list_v2("unitName", str)
+    unitNames = create_attribute_list_v2("unitName", str)
     """list[str]: Unit name of the impact indicator amount."""
 
-    impactIndicatorId = DataHelper.create_attribute_v2("impactIndicatorId", str)
+    impactIndicatorId = create_attribute_v2("impactIndicatorId", str)
     """str: Reference to the impact indicator."""
 
-    impactIndicatorContextId = DataHelper.create_attribute_v2(
-        "impactIndicatorContextId", str
-    )
+    impactIndicatorContextId = create_attribute_v2("impactIndicatorContextId", str)
     """str: Reference to the context of the impact indicator. If this attribute
     is omitted the context of the dataset itself will be used instead."""
 
-    impactMethodId = DataHelper.create_attribute_v2("impactMethodId", str)
+    impactMethodId = create_attribute_v2("impactMethodId", str)
     """str: Reference to the method of the impact indicator."""
 
-    impactMethodContextId = DataHelper.create_attribute_v2("impactMethodContextId", str)
+    impactMethodContextId = create_attribute_v2("impactMethodContextId", str)
     """str: Reference to the context of the impact method. If this attribute
     is omitted the context of the dataset itself will be used instead."""
 
-    impactCategoryId = DataHelper.create_attribute_v2("impactCategoryId", str)
+    impactCategoryId = create_attribute_v2("impactCategoryId", str)
     """str: Reference to the method of the impact category."""
 
-    impactCategoryContextId = DataHelper.create_attribute_v2(
-        "impactCategoryContextId", str
-    )
+    impactCategoryContextId = create_attribute_v2("impactCategoryContextId", str)
     """str: Reference to the context of the impact category. If this attribute
     is omitted the context of the dataset itself will be used instead."""
 
-    amount = DataHelper.create_attribute_v2("amount", float)
+    amount = create_attribute_v2("amount", float)
     """float: The value of the impact indicator."""
 
 
@@ -1358,11 +1327,11 @@ class Representativeness(etree.ElementBase):
     """Contains information about the representativeness of the unit process data
     (meta information and flow data)."""
 
-    systemModelNames = DataHelper.create_attribute_list_v2("systemModelName", str)
+    systemModelNames = create_attribute_list_v2("systemModelName", str)
     """list[str]: This is the plaintext value of the referenced system model
     (field 3000)."""
 
-    samplingProcedures = DataHelper.create_attribute_list_v2("samplingProcedure", str)
+    samplingProcedures = create_attribute_list_v2("samplingProcedure", str)
     """list[str]: Text describing the sampling and calculation procedures
     applied for quantifying the exchanges. Reports whether the sampling
     procedure for particular elementary and intermediate exchanges differ from
@@ -1376,7 +1345,7 @@ class Representativeness(etree.ElementBase):
     keeping the rest of the parent text intact. This allows easy changes of text
     parts in child processes."""
 
-    extrapolations = DataHelper.create_attribute_list_v2("extrapolations", str)
+    extrapolations = create_attribute_list_v2("extrapolations", str)
     """list[str]: Describes extrapolations of data from another time period,
     another geographical area or another technology and the way these
     extrapolations have been carried out. It should be reported whether
@@ -1385,18 +1354,18 @@ class Representativeness(etree.ElementBase):
     another country's activity, its original representativity can be indicated here.
     Changes in mean values due to extrapolations may also be reported here."""
 
-    percent = DataHelper.create_attribute_v2("percent", float)
+    percent = create_attribute_v2("percent", float)
     """float: Percent of data sampled out of the total that the activity is
     intended to represent (as given by the fields under Geography, Technology and
     Time Period)."""
 
-    systemModelId = DataHelper.create_attribute_v2("systemModelId", str)
+    systemModelId = create_attribute_v2("systemModelId", str)
     """str: The system model describes how activity datasets are linked to
     form product systems. Some options in the ecoinvent network are 'undefined',
     'attributional, average current suppliers, revenue allocation', 'consequential,
     small-scale, long-term decisions'."""
 
-    systemModelContextId = DataHelper.create_attribute_v2("systemModelContextId", str)
+    systemModelContextId = create_attribute_v2("systemModelContextId", str)
     """str: Reference to the context of the system model. If this attribute i
     omitted the context of the dataset itself will be used instead."""
 
@@ -1404,36 +1373,36 @@ class Representativeness(etree.ElementBase):
 class Review(etree.ElementBase):
     """Contains information about the reviewers' comments on the dataset content."""
 
-    otherDetails = DataHelper.create_attribute_list_v2("otherDetails", str)
+    otherDetails = create_attribute_list_v2("otherDetails", str)
     """list[str]: Contains further information from the review process, e.g. on
     smaller corrections added after the first publication of the dataset."""
 
-    reviewerId = DataHelper.create_attribute_v2("reviewerId", str)
+    reviewerId = create_attribute_v2("reviewerId", str)
     """str: Indicates the person who carried out the review."""
 
-    reviewerContextId = DataHelper.create_attribute_v2("reviewerContextId", str)
+    reviewerContextId = create_attribute_v2("reviewerContextId", str)
     """str: Reference to the context of the reviewer. If this attribute is
     omitted the context of the dataset itself will be used instead."""
 
-    reviewerName = DataHelper.create_attribute_v2("reviewerName", str)
+    reviewerName = create_attribute_v2("reviewerName", str)
     """str: Name and surname of the person."""
 
-    reviewerEmail = DataHelper.create_attribute_v2("reviewerEmail", str)
+    reviewerEmail = create_attribute_v2("reviewerEmail", str)
     """str: Complete email address of the person."""
 
-    reviewDate = DataHelper.create_attribute_v2("reviewDate", datetime)
+    reviewDate = create_attribute_v2("reviewDate", datetime)
     """datetime: Date of validation or review."""
 
-    reviewedMajorRelease = DataHelper.create_attribute_v2("reviewedMajorRelease", int)
+    reviewedMajorRelease = create_attribute_v2("reviewedMajorRelease", int)
     """int: The dataset version validated or reviewed. Refers to 3800."""
 
-    reviewedMinorRelease = DataHelper.create_attribute_v2("reviewedMinorRelease", int)
+    reviewedMinorRelease = create_attribute_v2("reviewedMinorRelease", int)
     """int: The dataset version validated or reviewed. Refers to 3805."""
 
-    reviewedMajorRevision = DataHelper.create_attribute_v2("reviewedMajorRevision", int)
+    reviewedMajorRevision = create_attribute_v2("reviewedMajorRevision", int)
     """int: The dataset version validated or reviewed. Refers to 3810."""
 
-    reviewedMinorRevision = DataHelper.create_attribute_v2("reviewedMinorRevision", int)
+    reviewedMinorRevision = create_attribute_v2("reviewedMinorRevision", int)
     """int: The dataset version validated or reviewed. Refers to 3815."""
 
 
@@ -1442,23 +1411,23 @@ class DataEntryBy(etree.ElementBase):
     entered the dataset into the database format and thereby is the person
     responsible for the data."""
 
-    personId = DataHelper.create_attribute_v2("personId", str)
+    personId = create_attribute_v2("personId", str)
     """str: ID number for the person that prepared the dataset and enters the
     dataset into the database."""
 
-    personContextId = DataHelper.create_attribute_v2("personContextId", str)
+    personContextId = create_attribute_v2("personContextId", str)
     """str: Reference to the context of the person. If this attribute is
     omitted the context of the dataset itself will be used instead."""
 
-    isActiveAuthor = DataHelper.create_attribute_v2("isActiveAuthor", bool)
+    isActiveAuthor = create_attribute_v2("isActiveAuthor", bool)
     """bool: This field defines if the person specified by field 3400 is the
     active author for this dataset. The active author will be consulted in case of
     future changes to the dataset by different data providers."""
 
-    personName = DataHelper.create_attribute_v2("personName", str)
+    personName = create_attribute_v2("personName", str)
     """str: Name and surname of the person."""
 
-    personEmail = DataHelper.create_attribute_v2("personEmail", str)
+    personEmail = create_attribute_v2("personEmail", str)
     """str: Complete email address of the person."""
 
 
@@ -1481,29 +1450,29 @@ class DataGeneratorAndPublication(etree.ElementBase):
         3: "Restricted",
     }
 
-    personId = DataHelper.create_attribute_v2("personId", str)
+    personId = create_attribute_v2("personId", str)
     """str: ID number for the person that generated the dataset. It must
     correspond to an ID number of a person listed in the respective dataset."""
 
-    personContextId = DataHelper.create_attribute_v2("personContextId", str)
+    personContextId = create_attribute_v2("personContextId", str)
     """str: Reference to the context of the person. If this attribute is omitted
     the context of the dataset itself will be used instead."""
 
-    personName = DataHelper.create_attribute_v2("personName", str)
+    personName = create_attribute_v2("personName", str)
     """str: Name and surname of the person."""
 
-    personEmail = DataHelper.create_attribute_v2("personEmail", str)
+    personEmail = create_attribute_v2("personEmail", str)
     """str: Complete email address of the person."""
 
-    dataPublishedIn = DataHelper.create_attribute_v2("dataPublishedIn", int)
+    dataPublishedIn = create_attribute_v2("dataPublishedIn", int)
     """int: The codes are: 0=Data as such not published (default). 1=The data
     of some unit processes or subsystems are published. 2=Data has been published
     entirely in 'referenceToPublishedSource'."""
 
-    publishedSourceId = DataHelper.create_attribute_v2("publishedSourceId", str)
+    publishedSourceId = create_attribute_v2("publishedSourceId", str)
     """str: ID number for the report in which the dataset is documented."""
 
-    publishedSourceIdOverwrittenByChild = DataHelper.create_attribute_v2(
+    publishedSourceIdOverwrittenByChild = create_attribute_v2(
         "publishedSourceIdOverwrittenByChild", bool
     )
     """bool: If a reference to a master data entity must be removed in a child
@@ -1511,33 +1480,29 @@ class DataGeneratorAndPublication(etree.ElementBase):
     to true. Otherwise the removed referenced will be interpreted as "Keep the
     Parent Value"."""
 
-    publishedSourceContextId = DataHelper.create_attribute_v2(
-        "publishedSourceContextId", str
-    )
+    publishedSourceContextId = create_attribute_v2("publishedSourceContextId", str)
     """str: Reference to the context of the published source. If this attribute is
     omitted the context of the dataset itself will be used instead."""
 
-    publishedSourceYear = DataHelper.create_attribute_v2("publishedSourceYear", str)
+    publishedSourceYear = create_attribute_v2("publishedSourceYear", str)
     """str: Indicates the year of publication and communication, respectively.
     For web-sites: last visited."""
 
-    publishedSourceFirstAuthor = DataHelper.create_attribute_v2(
-        "publishedSourceFirstAuthor", str
-    )
+    publishedSourceFirstAuthor = create_attribute_v2("publishedSourceFirstAuthor", str)
     """str: Indicates the first author by surname and abbreviated name (e.g.,
     Einstein A.). In case of measurement on site, oral communication, personal
     written communication and questionnaries ('sourceType'=4, 5, 6, 7) the name
     of the communicating person is mentioned here."""
 
-    isCopyrightProtected = DataHelper.create_attribute_v2("isCopyrightProtected", bool)
+    isCopyrightProtected = create_attribute_v2("isCopyrightProtected", bool)
     """bool: Indicates whether or not a copyright exists. '1' (Yes) or '0' (No)
     should be entered correspondingly."""
 
-    pageNumbers = DataHelper.create_attribute_v2("pageNumbers", str)
+    pageNumbers = create_attribute_v2("pageNumbers", str)
     """str: The relevant page numbers if the data are sourced on specific
     pages in an article or larger publication."""
 
-    accessRestrictedTo = DataHelper.create_attribute_v2("accessRestrictedTo", int)
+    accessRestrictedTo = create_attribute_v2("accessRestrictedTo", int)
     """int: The codes used are: 0=Public, 1=Licensees, 2=Results only,
     3=Restricted accessRestrictedTo=0: No access restrictions. accessRestrictedTo=1:
     only license holders (as defined by context) have access. accessRestrictedTo=2:
@@ -1546,11 +1511,11 @@ class DataGeneratorAndPublication(etree.ElementBase):
     accessRestrictedTo=3: only the organisation specified by 'companyCode' and the
     database administrator have access."""
 
-    companyId = DataHelper.create_attribute_v2("companyId", str)
+    companyId = create_attribute_v2("companyId", str)
     """str: Reference to an organisation/institute that the use of this
     dataset is restricted to."""
 
-    companyIdOverwrittenByChild = DataHelper.create_attribute_v2(
+    companyIdOverwrittenByChild = create_attribute_v2(
         "companyIdOverwrittenByChild", bool
     )
     """bool: If a reference to a master data entity must be removed in a child
@@ -1558,11 +1523,11 @@ class DataGeneratorAndPublication(etree.ElementBase):
     attribute to true. Otherwise the removed referenced will be interpreted as
     "Keep the Parent Value"."""
 
-    companyContextId = DataHelper.create_attribute_v2("companyContextId", str)
+    companyContextId = create_attribute_v2("companyContextId", str)
     """str: Reference to the context of the company. If this attribute is
     omitted the context of the dataset itself will be used instead."""
 
-    companyCode = DataHelper.create_attribute_v2("companyCode", str)
+    companyCode = create_attribute_v2("companyCode", str)
     """str: Optional 7 letter code plaintext of the referenced company
     (field 3560)"""
 
@@ -1594,20 +1559,20 @@ class FileAttributes(etree.ElementBase):
     """This constraint ensures that each xml:lang attribute is only used once in this
     context. I.e. there must be only one translation of the element."""
 
-    contextNames = DataHelper.create_attribute_list_v2("contextName", str)
+    contextNames = create_attribute_list_v2("contextName", str)
     """list[str]: The name of the context referenced by field 3880. The context
     replaces the ecoSpold01 quality network (field id 304). The context id for the
     ecoinvent quality network can be found in the Context.xml master data file."""
 
-    majorRelease = DataHelper.create_attribute_v2("majorRelease", int)
+    majorRelease = create_attribute_v2("majorRelease", int)
     """int: The major release number is increased by one with each major update
     (e.g. every second year)."""
 
-    minorRelease = DataHelper.create_attribute_v2("minorRelease", int)
+    minorRelease = create_attribute_v2("minorRelease", int)
     """int: The minor release number is increased by one for each release within
     the period of two major updates."""
 
-    majorRevision = DataHelper.create_attribute_v2("majorRevision", int)
+    majorRevision = create_attribute_v2("majorRevision", int)
     """int: The revision number is specific to each dataset and is
     independent of the overall database release version and is used to discern
     different versions of the dataset within the database major/minor release
@@ -1617,7 +1582,7 @@ class FileAttributes(etree.ElementBase):
     activity are added to the database (i.e. after they passed the review process).
     This also resets the minor revision to 1."""
 
-    minorRevision = DataHelper.create_attribute_v2("minorRevision", int)
+    minorRevision = create_attribute_v2("minorRevision", int)
     """int: The minor revision number describes versions of the dataset
     during the editing process before it is submitted for review. In th eecoinvent
     context it is increased automatically every time the data provider saves changes
@@ -1625,28 +1590,28 @@ class FileAttributes(etree.ElementBase):
     minor revision number is reset to “1” each time the major revision number is
     increased (when changes to a dataset are accepted by a reviewer)."""
 
-    internalSchemaVersion = DataHelper.create_attribute_v2("internalSchemaVersion", str)
+    internalSchemaVersion = create_attribute_v2("internalSchemaVersion", str)
     """str: Dataset is generated based on this internal schema version."""
 
-    defaultLanguage = DataHelper.create_attribute_v2("defaultLanguage", str)
+    defaultLanguage = create_attribute_v2("defaultLanguage", str)
     """str: Default language for all multi language fields of this dataset.
     Any multi language field should contain a value at least for the default
     language. If no defaultLanguage is given, the default value ("en") will be used."""
 
-    creationTimestamp = DataHelper.create_attribute_v2("creationTimestamp", datetime)
+    creationTimestamp = create_attribute_v2("creationTimestamp", datetime)
     """datetime: Automatically generated date when dataset is created."""
 
-    lastEditTimestamp = DataHelper.create_attribute_v2("lastEditTimestamp", datetime)
+    lastEditTimestamp = create_attribute_v2("lastEditTimestamp", datetime)
     """datetime: Automatically generated date when dataset is saved."""
 
-    fileGenerator = DataHelper.create_attribute_v2("fileGenerator", str)
+    fileGenerator = create_attribute_v2("fileGenerator", str)
     """str: Description of the program which created this file. Preferably
     including version."""
 
-    fileTimestamp = DataHelper.create_attribute_v2("fileTimestamp", datetime)
+    fileTimestamp = create_attribute_v2("fileTimestamp", datetime)
     """datetime: Time and date this file was created."""
 
-    contextId = DataHelper.create_attribute_v2("contextId", str)
+    contextId = create_attribute_v2("contextId", str)
     """str: Indicates the context for which this dataset is designed. The
     information is used, e.g. for restricting the accessibility of dataset
     information to one particular context and to determine which master data files
@@ -1663,13 +1628,13 @@ class FileAttributes(etree.ElementBase):
         that master data entries from different contexts are needed to read this
         dataset. The software reading the dataset must be aware of those contexts
         and must know where to find the actual master data files of each context."""
-        return DataHelper.get_element_list(self, "requiredContext")
+        return get_element_list(self, "requiredContext")
 
 
 class TextAndImage(etree.ElementBase):
     """Text and image field for information."""
 
-    variables = DataHelper.create_attribute_list_v2("variable", str)
+    variables = create_attribute_list_v2("variable", str)
     """list[str]: Defines a varible name and its value used in a text element
     in this section. These can be overriden by derived datasets to change the
     value of variables."""
@@ -1677,32 +1642,30 @@ class TextAndImage(etree.ElementBase):
     @property
     def texts(self) -> List[str]:
         """Texts."""
-        return DataHelper.get_inner_text_list(self, "text")
+        return get_inner_text_list(self, "text")
 
     @property
     def imageUrls(self) -> List[str]:
         """Image URLs."""
-        return DataHelper.get_inner_text_list(self, "imageUrl")
+        return get_inner_text_list(self, "imageUrl")
 
 
 class Compartment(etree.ElementBase):
     """Contains compartment pairs to specify an exchange."""
 
-    compartments = DataHelper.create_attribute_list_v2("compartment", str)
+    compartments = create_attribute_list_v2("compartment", str)
     """list[str]: The name of the compartment.This is the plaintext value of
     the referenced compartment (field 5315)."""
 
-    subCompartments = DataHelper.create_attribute_list_v2("subcompartment", str)
+    subCompartments = create_attribute_list_v2("subcompartment", str)
     """list[str]: The name of the subcompartment.This is the plaintext value of
     the referenced subcompartment (field 5325)."""
 
-    subCompartmentId = DataHelper.create_attribute_v2("subcompartmentId", str)
+    subCompartmentId = create_attribute_v2("subcompartmentId", str)
     """str: Reference to the compartment/subcompartment pair. Must be defined
     in list of valid compartments (see field 5330)."""
 
-    subCompartmentContextId = DataHelper.create_attribute_v2(
-        "subcompartmentContextId", str
-    )
+    subCompartmentContextId = create_attribute_v2("subcompartmentContextId", str)
     """str: Reference to the context of the subcompartment If this attribute
     is omitted the context of the dataset itself will be used instead."""
 
@@ -1767,13 +1730,13 @@ class PedigreeMatrix(etree.ElementBase):
         5: "Data on related processes on laboratory scale or from different technology",
     }
 
-    reliability = DataHelper.create_attribute_v2("reliability", int)
+    reliability = create_attribute_v2("reliability", int)
     """int: 1=Verified data based on measurements 2=Verified data partly based on
     assumptions OR nonverified data based on measurements 3=Non-verified data partly
     based on qualified estimates 4=Qualified estimate (e.g. by industrial expert)
     5=Non-qualified estimate (default)"""
 
-    completeness = DataHelper.create_attribute_v2("completeness", int)
+    completeness = create_attribute_v2("completeness", int)
     """int: 1=Representative data from all sites relevant for the market considered
     over an adequate period to even out normal fluctuations 2=Representative data
     from >50% of the sites relevant for the market considered over an adequate
@@ -1783,7 +1746,7 @@ class PedigreeMatrix(etree.ElementBase):
     considered OR some sites but from shorter periods 5=Representativeness unknown
     or data from a small number of sites AND from shorter periods"""
 
-    temporalCorrelation = DataHelper.create_attribute_v2("temporalCorrelation", int)
+    temporalCorrelation = create_attribute_v2("temporalCorrelation", int)
     """int: 1=Less than 3 years of difference to the time period of the dataset
     (fields 600-610) 2=Less than 6 years of difference to the time period of the
     dataset (fields 600-610) 3=Less than 10 years of difference to the time period
@@ -1791,16 +1754,14 @@ class PedigreeMatrix(etree.ElementBase):
     period of the dataset (fields 600-610) 5=Age of data unknown or more than 15
     years of difference to the time period of the dataset (fields 600-610)"""
 
-    geographicalCorrelation = DataHelper.create_attribute_v2(
-        "geographicalCorrelation", int
-    )
+    geographicalCorrelation = create_attribute_v2("geographicalCorrelation", int)
     """int: 1=Data from area under study 2=Average data from larger area in which
     the area under study is included 3=Data from area with similar production
     conditions 4=Data from are with slightly similar production conditions 5=Data
     from unknown OR distinctly different area (north america instead of middle east,
     OECD-Europe instead of Russia)"""
 
-    furtherTechnologyCorrelation = DataHelper.create_attribute_v2(
+    furtherTechnologyCorrelation = create_attribute_v2(
         "furtherTechnologyCorrelation", int
     )
     """int: 1=Data from enterprises, processes and materials under study 2=Data
@@ -1809,7 +1770,7 @@ class PedigreeMatrix(etree.ElementBase):
     different technology 4=Data on related processes or materials 5=Data on related
     processes on laboratory scale or from different technology"""
 
-    comments = DataHelper.create_attribute_list_v2("comment", str)
+    comments = create_attribute_list_v2("comment", str)
     """list[str]: A general comment can be made about each uncertainty
     information"""
 
@@ -1879,31 +1840,31 @@ class RequiredContextReference(etree.ElementBase):
     dataset. The software reading the dataset must be aware of those contexts
     and must know where to find the actual master data files of each context."""
 
-    requiredContextNames = DataHelper.create_attribute_v2("requiredContextName", int)
+    requiredContextNames = create_attribute_v2("requiredContextName", int)
     """list[str]: The name of the context referenced by field 7850."""
 
-    majorRelease = DataHelper.create_attribute_v2("majorRelease", int)
+    majorRelease = create_attribute_v2("majorRelease", int)
     """int: This version number can be used to make sure that the necessary
     master data entries are present for an activity."""
 
-    minorRelease = DataHelper.create_attribute_v2("minorRelease", int)
+    minorRelease = create_attribute_v2("minorRelease", int)
     """int: This version number can be used to make sure that the necessary
     master data entries are present for an activity."""
 
-    majorRevision = DataHelper.create_attribute_v2("majorRevision", int)
+    majorRevision = create_attribute_v2("majorRevision", int)
     """int: This version number can be used to make sure that the necessary
     master data entries are present for an activity."""
 
-    minorRevision = DataHelper.create_attribute_v2("minorRevision", int)
+    minorRevision = create_attribute_v2("minorRevision", int)
     """int: This version number can be used to make sure that the necessary
     master data entries are present for an activity."""
 
-    requiredContextId = DataHelper.create_attribute_v2("requiredContextId", str)
+    requiredContextId = create_attribute_v2("requiredContextId", str)
     """str: Reference to the context of the master data file. If this
     attribute is omitted the context of the dataset itself should be
     used instead."""
 
-    requiredContextFileLocation = DataHelper.create_attribute_v2(
+    requiredContextFileLocation = create_attribute_v2(
         "requiredContextFileLocation", str
     )
     """str: Optional URI reference to the directory containing the master
