@@ -12,11 +12,9 @@ __all__ = (
     "validate_file_v2",
     "save_file",
     "Defaults",
-    "validate_cas",
 )
 
 
-from .cas_validation import validate_cas
 from .config import Defaults
 from .core import (
     parse_directory,

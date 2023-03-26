@@ -3,8 +3,8 @@ from datetime import datetime
 from typing import ClassVar, Dict, List
 
 from lxml import etree
+from pycasreg.validation import validate_cas
 
-from .cas_validation import validate_cas
 from .helpers import DataHelper
 
 
