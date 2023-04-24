@@ -1093,6 +1093,32 @@ class TransferCoefficient(etree.ElementBase):
 class IntermediateExchange(CustomExchange):
     """Comprises intermediate product and waste inputs and outputs for the activity."""
 
+    INPUT_GROUP_MAP: Dict[int, str] = {
+        1: "Materials/Fuels",
+        2: "Electricity/Heat",
+        3: "Services",
+        5: "From Technosphere (unspecified)",
+    }
+
+    OUTPUT_GROUP_MAP: Dict[int, str] = {
+        0: "ReferenceProduct",
+        2: "By-product",
+        3: "MaterialForTreatment",
+        5: "Stock Additions",
+    }
+
+    inputGroup = create_element_text_v2("inputGroup", int)
+    """int: Indicates the kind of input flow. The codes are: 1=Materials/Fuels,
+    2=Electricity/Heat, 3=Services, 5=From Technosphere (unspecified). For each
+    exchange only an inputGroup or outputGroup shall exist. This indicates the
+    direction of the flow."""
+
+    outputGroup = create_element_text_v2("outputGroup", int)
+    """int: Indicates the kind of output flow. The codes are: 0=ReferenceProduct,
+    2=By-product, 3=MaterialForTreatment, 5=Stock Additions. For each exchange only
+    an inputGroup or outputGroup shall exist. This indicates the direction of the
+    flow."""
+
     productionVolumeComments = create_attribute_list_v2("productionVolumeComments", str)
     """lits[str]: A general comment can be made on the data source, assumptions and
     calculations for the production volume data."""
@@ -1168,6 +1194,19 @@ class IntermediateExchange(CustomExchange):
     (e.g., Einstein A.). In case of measurement on site, oral communication, personal
     written communication and questionnaries ('sourceType'=4, 5, 6, 7) the name of the
     communicating person is"""
+
+    @property
+    def inputGroupStr(self) -> str:
+        """String representation for inputGroup. See inputGroup for explanations.
+        1=Materials/Fuels, 2=Electricity/Heat, 3=Services, 5=From Technosphere
+        (unspecified)."""
+        return self.INPUT_GROUP_MAP[self.inputGroup]
+
+    @property
+    def outputGroupStr(self) -> str:
+        """String representation for outputGroup. See outputGroup for explanations.
+        0=ReferenceProduct, 2=By-product, 3=MaterialForTreatment, 5=Stock Additions."""
+        return self.OUTPUT_GROUP_MAP[self.outputGroup]
 
     @property
     def productionVolumeUncertainties(self) -> List["Uncertainty"]:
