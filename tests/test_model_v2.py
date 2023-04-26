@@ -22,7 +22,6 @@ from pyecospold.model_v2 import (
     MacroEconomicScenario,
     ModellingAndValidation,
     Parameter,
-    Property,
     Representativeness,
     Technology,
     TextAndImage,
@@ -296,72 +295,39 @@ def test_parse_file_v2_macro_economic_scenario(eco_spold: EcoSpold) -> None:
 
 def test_parse_file_v2_intermediate_exchange(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
-    exchangeID = "2592e17c-df72-4446-91f5-fa1f1e0e8042"
-    unitId = "487df68b-4994-4027-8fdc-a4dc298257b7"
-    unitContextId = ""
-    variableName = "water_deionised_input"
-    casNumber = "007732-18-5"
-    amount = 0.6
-    isCalculatedAmount = False
-    mathematicalRelation = ""
-    sourceId = ""
-    sourceIdOverwrittenByChild = False
-    sourceContextId = ""
-    sourceYear = ""
-    sourceFirstAuthor = ""
-    pageNumbers = ""
-    specificAllocationPropertyId = ""
-    specificAllocationPropertyIdOverwrittenByChild = False
-    specificAllocationPropertyContextId = ""
-    names = ["water, deionised, from tap water, at user"]
-    unitNames = ["kg"]
-    comments = ["EcoSpold01Location=CH", "Literature value."]
-    synonyms = []
-    tags = []
-    intermediateExchangeId = "360e2eb0-f81c-4e4b-ba6b-c7a690f31275"
-    activityLinkId = "cd1f547f-577f-4e1b-bd23-fb73d53497eb"
-    transferCoefficientsLen = 0
+    exchangeID = "336dd4ef-cece-4c49-b412-5fe565ec8b8f"
+    unitId = "980b811e-3905-4797-82a5-173f5568bc7e"
+    amount = 0
+    productionVolumeAmount = 0
+    names = ["heat, district or industrial, natural gas"]
+    unitNames = ["MJ"]
+    comments = ["Literature value."]
+    intermediateExchangeId = "1125e767-7b5d-442e-81d6-9b0d3e1919ac"
+    group = 5
+    groupStr = "From Technosphere (unspecified)"
+    outGroup = 0
+    outGroupStr = "ReferenceProduct"
     classificationsLen = 1
     productionVolumeUncertaintiesLen = 0
-    intermediateExchange = eco_spold.activityDataset.flowData.intermediateExchanges[0]
+    intermediateExchanges = eco_spold.activityDataset.flowData.intermediateExchanges
+    intermediateExchange = intermediateExchanges[1]
+    intermediateExchangeOut = intermediateExchanges[6]
 
     assert intermediateExchange.id == exchangeID
     assert intermediateExchange.unitId == unitId
-    assert intermediateExchange.unitContextId == unitContextId
-    assert intermediateExchange.variableName == variableName
-    assert intermediateExchange.casNumber == casNumber
     assert intermediateExchange.amount == amount
-    assert intermediateExchange.isCalculatedAmount == isCalculatedAmount
-    assert intermediateExchange.mathematicalRelation == mathematicalRelation
-    assert intermediateExchange.sourceId == sourceId
-    assert intermediateExchange.sourceIdOverwrittenByChild == sourceIdOverwrittenByChild
-    assert intermediateExchange.sourceContextId == sourceContextId
-    assert intermediateExchange.sourceYear == sourceYear
-    assert intermediateExchange.sourceFirstAuthor == sourceFirstAuthor
-    assert intermediateExchange.pageNumbers == pageNumbers
-    assert (
-        intermediateExchange.specificAllocationPropertyId
-        == specificAllocationPropertyId
-    )
-    assert (
-        intermediateExchange.specificAllocationPropertyIdOverwrittenByChild
-        == specificAllocationPropertyIdOverwrittenByChild
-    )
-    assert (
-        intermediateExchange.specificAllocationPropertyContextId
-        == specificAllocationPropertyContextId
-    )
+    assert intermediateExchange.productionVolumeAmount == productionVolumeAmount
     assert intermediateExchange.intermediateExchangeId == intermediateExchangeId
-    assert intermediateExchange.activityLinkId == activityLinkId
+    assert intermediateExchange.group == group
+    assert intermediateExchange.groupStr == groupStr
     assert intermediateExchange.names == names
     assert intermediateExchange.unitNames == unitNames
     assert intermediateExchange.comments == comments
-    assert intermediateExchange.synonyms == synonyms
-    assert intermediateExchange.tags == tags
+
+    assert intermediateExchangeOut.group == outGroup
+    assert intermediateExchangeOut.groupStr == outGroupStr
 
     assert isinstance(intermediateExchange.uncertainties[0], Uncertainty)
-    assert isinstance(intermediateExchange.properties[0], Property)
-    assert len(intermediateExchange.transferCoefficients) == transferCoefficientsLen
     assert len(intermediateExchange.classifications) == classificationsLen
     assert (
         len(intermediateExchange.productionVolumeUncertainties)
@@ -373,18 +339,9 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     exchangeID = "719770d0-4b1e-4c44-bd9e-72c4687a6ee0"
     unitId = "487df68b-4994-4027-8fdc-a4dc298257b7"
-    unitContextId = ""
-    variableName = ""
-    casNumber = ""
     amount = 0.0011
     isCalculatedAmount = False
-    mathematicalRelation = ""
-    sourceId = ""
     sourceIdOverwrittenByChild = False
-    sourceContextId = ""
-    sourceYear = ""
-    sourceFirstAuthor = ""
-    pageNumbers = ""
     specificAllocationPropertyId = ""
     specificAllocationPropertyIdOverwrittenByChild = False
     specificAllocationPropertyContextId = ""
@@ -400,29 +357,23 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
         + "emanating in a high population density area. The emissions into water are "
         + "assumed to be emitted into rivers."
     ]
-    outputGroup = 4
-    outputGroupStr = "ToEnvironment"
-    inputGroupStr = "FromEnvironment"
+    group = 4
+    groupStr = "ToEnvironment"
+    inGroup = 4
+    inGroupStr = "FromEnvironment"
     synonyms = []
     tags = []
     propertiesLen = 0
     transferCoefficientsLen = 0
-    elementaryExchange = eco_spold.activityDataset.flowData.elementaryExchanges[0]
+    elementaryExchanges = eco_spold.activityDataset.flowData.elementaryExchanges
+    elementaryExchange = elementaryExchanges[0]
+    elementaryExchangeIn = elementaryExchanges[1]
 
     assert elementaryExchange.id == exchangeID
     assert elementaryExchange.unitId == unitId
-    assert elementaryExchange.unitContextId == unitContextId
-    assert elementaryExchange.variableName == variableName
-    assert elementaryExchange.casNumber == casNumber
     assert elementaryExchange.amount == amount
     assert elementaryExchange.isCalculatedAmount == isCalculatedAmount
-    assert elementaryExchange.mathematicalRelation == mathematicalRelation
-    assert elementaryExchange.sourceId == sourceId
     assert elementaryExchange.sourceIdOverwrittenByChild == sourceIdOverwrittenByChild
-    assert elementaryExchange.sourceContextId == sourceContextId
-    assert elementaryExchange.sourceYear == sourceYear
-    assert elementaryExchange.sourceFirstAuthor == sourceFirstAuthor
-    assert elementaryExchange.pageNumbers == pageNumbers
     assert (
         elementaryExchange.specificAllocationPropertyId == specificAllocationPropertyId
     )
@@ -438,11 +389,13 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
     assert elementaryExchange.names == names
     assert elementaryExchange.unitNames == unitNames
     assert elementaryExchange.comments == comments
-    assert elementaryExchange.outputGroup == outputGroup
-    assert elementaryExchange.outputGroupStr == outputGroupStr
-    assert elementaryExchange.inputGroupStr == inputGroupStr
+    assert elementaryExchange.group == group
+    assert elementaryExchange.groupStr == groupStr
     assert elementaryExchange.synonyms == synonyms
     assert elementaryExchange.tags == tags
+
+    assert elementaryExchangeIn.group == inGroup
+    assert elementaryExchangeIn.groupStr == inGroupStr
 
     assert isinstance(elementaryExchange.uncertainties[0], Uncertainty)
     assert len(elementaryExchange.properties) == propertiesLen

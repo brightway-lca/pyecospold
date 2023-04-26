@@ -1107,13 +1107,13 @@ class IntermediateExchange(CustomExchange):
         5: "Stock Additions",
     }
 
-    inputGroup = create_element_text_v2("inputGroup", int)
+    _inputGroup = create_element_text_v2("inputGroup", int)
     """int: Indicates the kind of input flow. The codes are: 1=Materials/Fuels,
     2=Electricity/Heat, 3=Services, 5=From Technosphere (unspecified). For each
     exchange only an inputGroup or outputGroup shall exist. This indicates the
     direction of the flow."""
 
-    outputGroup = create_element_text_v2("outputGroup", int)
+    _outputGroup = create_element_text_v2("outputGroup", int)
     """int: Indicates the kind of output flow. The codes are: 0=ReferenceProduct,
     2=By-product, 3=MaterialForTreatment, 5=Stock Additions. For each exchange only
     an inputGroup or outputGroup shall exist. This indicates the direction of the
@@ -1196,17 +1196,37 @@ class IntermediateExchange(CustomExchange):
     communicating person is"""
 
     @property
-    def inputGroupStr(self) -> str:
-        """String representation for inputGroup. See inputGroup for explanations.
+    def _inputGroupStr(self) -> str:
+        """String representation for _inputGroup. See _inputGroup for explanations.
         1=Materials/Fuels, 2=Electricity/Heat, 3=Services, 5=From Technosphere
         (unspecified)."""
-        return self.INPUT_GROUP_MAP[self.inputGroup]
+        return self.INPUT_GROUP_MAP[self._inputGroup]
 
     @property
-    def outputGroupStr(self) -> str:
-        """String representation for outputGroup. See outputGroup for explanations.
+    def _outputGroupStr(self) -> str:
+        """String representation for _outputGroup. See _outputGroup for explanations.
         0=ReferenceProduct, 2=By-product, 3=MaterialForTreatment, 5=Stock Additions."""
-        return self.OUTPUT_GROUP_MAP[self.outputGroup]
+        return self.OUTPUT_GROUP_MAP[self._outputGroup]
+
+    @property
+    def group(self) -> List[int]:
+        """Choice between _inputGroup and _outputGroup. Check their documentation
+        for more information."""
+        return (
+            self._inputGroup
+            if self.find("inputGroup", self.nsmap) is not None
+            else self._outputGroup
+        )
+
+    @property
+    def groupStr(self) -> List[str]:
+        """Choice between _inputGroupStr and _outputGroupStr. Check their
+        documentation for more information."""
+        return (
+            self._inputGroupStr
+            if self.find("inputGroup", self.nsmap) is not None
+            else self._outputGroupStr
+        )
 
     @property
     def productionVolumeUncertainties(self) -> List["Uncertainty"]:
@@ -1224,13 +1244,13 @@ class ElementaryExchange(CustomExchange):
     """Comprises elementary inputs and outputs (exchanges with the environment)
     for the activity."""
 
-    inputGroup = create_element_text_v2("inputGroup", int)
+    _inputGroup = create_element_text_v2("inputGroup", int)
     """int: Indicates the kind of input flow. The codes are: 4=From Environment
     For each exchange only an inputGroup or outputGroup shall exist. This
     indicates the direction of the flow. This field is the equivalent of field
     1500 with a different set of valid values."""
 
-    outputGroup = create_element_text_v2("outputGroup", int)
+    _outputGroup = create_element_text_v2("outputGroup", int)
     """int: Indicates the kind of output flow. The codes are: 4=ToEnvironment
     For each exchange only an inputGroup or outputGroup shall exist. This
     indicates the direction of the flow. This field is the equivalent of field
@@ -1257,16 +1277,36 @@ class ElementaryExchange(CustomExchange):
         return get_element(self, "compartment")
 
     @property
-    def inputGroupStr(self) -> str:
-        """String representation for inputGroup. See inputGroup for
+    def _inputGroupStr(self) -> str:
+        """String representation for _inputGroup. See _inputGroup for
         explanations. 4=FromEnvironment"""
         return "FromEnvironment"
 
     @property
-    def outputGroupStr(self) -> str:
-        """String representation for outputGroup. See outputGroup for
+    def _outputGroupStr(self) -> str:
+        """String representation for _outputGroup. See _outputGroup for
         explanations. 4=ToEnvironment"""
         return "ToEnvironment"
+
+    @property
+    def group(self) -> List[int]:
+        """Choice between _inputGroup and _outputGroup. Check their documentation
+        for more information."""
+        return (
+            self._inputGroup
+            if self.find("inputGroup", self.nsmap) is not None
+            else self._outputGroup
+        )
+
+    @property
+    def groupStr(self) -> List[str]:
+        """Choice between _inputGroupStr and _outputGroupStr. Check their
+        documentation for more information."""
+        return (
+            self._inputGroupStr
+            if self.find("inputGroup", self.nsmap) is not None
+            else self._outputGroupStr
+        )
 
 
 class Parameter(etree.ElementBase):
