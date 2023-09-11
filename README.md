@@ -52,24 +52,26 @@ Corrected the handling of CAS numbers based on [the official documentation](http
 ## Usage
 
 ```python
-from pyecospold import parse_file, save_file, Defaults
+from pyecospold import parse_file_v1, save_ecopsold_file, Defaults
 
 # Override defaults if needed, else skip. Defaults are already set.
-Defaults.config("config.ini")  # Replace with your own config file
+Defaults.config_defaults("config.ini")  # Replace with your own config file
 
 # Parse the required XML file to EcoSpold class.
-ecoSpold = parse_file("data/v1/v1_1.xml")  # Replace with your own XML file
+ecoSpold = parse_file_v1("data/v1/v1_1.xml")  # Replace with your own XML file
 ecoSpold
->> <Element {http://www.EcoInvent.org/EcoSpold01}ecoSpold at 0x24a558b6020>
+>> <Element {http://www.EcoInvent.org/EcoSpold01}ecoSpold at 0x1e667f7dae0>
 
 # Change whatever attributes you need changing.
-referenceFunction = ecoSpold.dataset.metaInformation.processInformation.referenceFunction
+referenceFunction = ecoSpold.datasets[0].metaInformation.processInformation.referenceFunction
+referenceFunction.amount
+>> 1.0
 referenceFunction.amount = 2.0
 referenceFunction.amount
 >> 2.0
 
 # Save final EcoSpold class as an XML file, make sure root directory exists.
-save_file(ecoSpold, "out/00001_new.xml")  # Replace with your own path
+save_ecopsold_file(ecoSpold, "out/00001_new.xml")  # Replace with your own path
 ```
 
 # Config file
