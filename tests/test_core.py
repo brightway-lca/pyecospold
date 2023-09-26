@@ -1,18 +1,28 @@
 """Test cases for the __core__ module."""
-
 import os
-import tempfile
+import zipfile
 from io import StringIO
 from pathlib import Path
+from typing import Callable, List, Tuple, Union
 
-from pyecospold.core import (
+from lxml import etree
+
+from pyecospold import (
     parse_directory_v1,
     parse_directory_v2,
     parse_file_v1,
+    parse_zip_file_v1,
+    parse_zip_file_v2,
     save_ecopsold_file,
+    validate_directory_v1,
+    validate_directory_v2,
     validate_file_v1,
     validate_file_v2,
+    validate_zip_file_v1,
+    validate_zip_file_v2,
 )
+from pyecospold.model_v1 import EcoSpold as EcoSpoldV1
+from pyecospold.model_v2 import EcoSpold as EcoSpoldV2
 
 
 def test_validate_file_v1_success() -> None:
@@ -41,9 +51,7 @@ def test_parse_directory_v1() -> None:
     """It reads all files successfully."""
     dirPath = os.path.join(Path(__file__).parent.parent.resolve(), "data", "v1")
     files = [os.path.join(dirPath, "v1_1.xml"), os.path.join(dirPath, "v1_2.spold")]
-    ecospoldList = sorted(
-        parse_directory_v1(dirPath, valid_suffixes=[".xml", ".spold"])
-    )
+    ecospoldList = sorted(parse_directory_v1(dirPath))
 
     assert len(ecospoldList) == 2
     assert ecospoldList[0][0] == Path(files[0])
@@ -56,9 +64,7 @@ def test_parse_directory_v2() -> None:
     """It reads all files successfully."""
     dirPath = os.path.join(Path(__file__).parent.parent.resolve(), "data", "v2")
     files = [os.path.join(dirPath, "v2_1.xml"), os.path.join(dirPath, "v2_2.spold")]
-    ecospoldList = sorted(
-        parse_directory_v2(dirPath, valid_suffixes=[".xml", ".spold"])
-    )
+    ecospoldList = sorted(parse_directory_v2(dirPath))
     activity1 = ecospoldList[0][1].activityDataset.activityDescription.activity[0]
     activity2 = ecospoldList[1][1].activityDataset.activityDescription.activity[0]
 
@@ -69,11 +75,11 @@ def test_parse_directory_v2() -> None:
     assert activity2.inheritanceDepth == 0
 
 
-def test_save_file() -> None:
+def test_save_file(tmpdir) -> None:
     """It saves read file correctly."""
     inputPath = "data/v1/v1_1.xml"
     metaInformation = parse_file_v1(inputPath)
-    outputPath = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
+    outputPath = os.path.join(tmpdir, os.urandom(24).hex())
     save_ecopsold_file(metaInformation, outputPath, fill_defaults=False)
 
     with open(inputPath, encoding="utf-8") as inputFile:
@@ -84,12 +90,12 @@ def test_save_file() -> None:
             assert translatedOutput == translatedInput
 
 
-def test_save_file_defaults() -> None:
+def test_save_file_defaults(tmpdir) -> None:
     """It saves read file correctly."""
     inputPath = "data/v1/v1_1.xml"
     expectedOutputPath = "data/tests/v1_1_defaults.xml"
     metaInformation = parse_file_v1(inputPath)
-    outputPath = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
+    outputPath = os.path.join(tmpdir, os.urandom(24).hex())
     save_ecopsold_file(metaInformation, outputPath, fill_defaults=True)
 
     with open(expectedOutputPath, encoding="utf-8") as inputFile:
@@ -98,3 +104,82 @@ def test_save_file_defaults() -> None:
             translatedOutput = outputFile.read().translate(mapping)
             translatedInput = inputFile.read().translate(mapping)
             assert translatedOutput == translatedInput
+
+
+def _validate_directory(
+    dataset_version: int,
+    validator: Callable[
+        [Union[str, Path], Union[List[str], None]], List[Tuple[Path, etree.ElementBase]]
+    ],
+) -> None:
+    """It reads all files successfully."""
+    dirPath = os.path.join(Path(__file__).parents[1], "data", f"v{dataset_version}")
+    files = [
+        os.path.join(dirPath, f"v{dataset_version}_1.xml"),
+        os.path.join(dirPath, f"v{dataset_version}_2.spold"),
+    ]
+    result = validator(dirPath)
+
+    assert len(result) == len(files)
+    for i in range(2):
+        assert result[i][0] == Path(files[i])
+        assert result[i][1] is None
+
+
+def test_validate_directory_v1() -> None:
+    """It validates directory successfully."""
+    _validate_directory(1, validate_directory_v1)
+
+
+def test_validate_directory_v2() -> None:
+    """It validates directory successfully."""
+    _validate_directory(2, validate_directory_v2)
+
+
+def __zip_data(tmpdir, data_dir: str, file_name: str = "data.zip") -> str:
+    zipFilePath = os.path.join(tmpdir, file_name)
+    with zipfile.ZipFile(zipFilePath, "w", zipfile.ZIP_DEFLATED) as zipFile:
+        for root, _, files in os.walk(data_dir):
+            for file in files:
+                zipFile.write(os.path.join(root, file), file)
+    return zipFilePath
+
+
+def _parse_zip_file(
+    file_path: str,
+    parser: Callable[
+        [Union[str, Path], Union[List[str], None]], List[Tuple[Path, etree.ElementBase]]
+    ],
+    root_class: etree.ElementBase,
+) -> None:
+    """It reads zip file successfully."""
+    results = parser(file_path)
+
+    for result in results:
+        assert isinstance(result[1], root_class)
+
+
+def test_parse_zip_file_v1(tmpdir) -> None:
+    """It reads zip file successfully."""
+    zipFilePath = __zip_data(tmpdir, os.path.join("data", "v1"))
+    _parse_zip_file(zipFilePath, parse_zip_file_v1, EcoSpoldV1)
+
+
+def test_parse_zip_file_v2(tmpdir) -> None:
+    """It reads zip file successfully."""
+    zipFilePath = __zip_data(tmpdir, os.path.join("data", "v2"))
+    _parse_zip_file(zipFilePath, parse_zip_file_v2, EcoSpoldV2)
+
+
+def test_validate_zip_file_v1(tmpdir) -> None:
+    """It validates zip file successfully."""
+    zipFilePath = __zip_data(tmpdir, os.path.join("data", "v1"))
+    for result in validate_zip_file_v1(zipFilePath):
+        assert result[1] is None
+
+
+def test_validate_zip_file_v2(tmpdir) -> None:
+    """It validates zip file successfully."""
+    zipFilePath = __zip_data(tmpdir, os.path.join("data", "v2"))
+    for result in validate_zip_file_v2(zipFilePath):
+        assert result[1] is None

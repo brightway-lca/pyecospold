@@ -4,7 +4,15 @@ from pathlib import Path
 from typing import List, Tuple, Union
 
 from lxml import etree
-from lxmlh.parsers import parse_directory, parse_file, save_file, validate_file
+from lxmlh import (
+    parse_directory,
+    parse_file,
+    parse_zip_file,
+    save_file,
+    validate_directory,
+    validate_file,
+    validate_zip_file,
+)
 
 from .config import Defaults
 from .model_v1 import AdministrativeInformation as AdministrativeInformationV1
@@ -190,6 +198,9 @@ def parse_directory_v1(
     Returns a list of tuples of file paths and corresponding EcoSpold classes
     representing the root of the XML file.
     """
+    if valid_suffixes is None:
+        valid_suffixes = [".xml", ".spold"]
+
     return parse_directory(
         dir_path=dir_path,
         schema_path=Defaults.SCHEMA_V1_FILE,
@@ -211,11 +222,146 @@ def parse_directory_v2(
     Returns a list of tuples of file paths and corresponding EcoSpold classes
     representing the root of the XML file.
     """
+    if valid_suffixes is None:
+        valid_suffixes = [".xml", ".spold"]
+
     return parse_directory(
         dir_path=dir_path,
         schema_path=Defaults.SCHEMA_V2_FILE,
         lookup=EcospoldLookupV2(),
         valid_suffixes=valid_suffixes,
+    )
+
+
+def validate_directory_v1(
+    dir_path: Union[str, Path, StringIO], valid_suffixes: Union[List[str], None] = None
+) -> List[Tuple[Path, Union[None, List[str]]]]:
+    """Validates an Ecospold V1 XML file to custom Ecospold classes.
+
+    Parameters:
+        dir_path: the directory path, should contain files of version 1 of EcoSpold.
+        valid_suffixes: a list of valid file suffixes which will only be considered for
+        parsing. If None, defaults to [".xml", ".spold"].
+
+    Returns a list of tuples of file paths and corresponding list of errors, which
+    is ``None`` if no errors.
+    """
+    if valid_suffixes is None:
+        valid_suffixes = [".xml", ".spold"]
+
+    return validate_directory(
+        dir_path, Defaults.SCHEMA_V1_FILE, valid_suffixes=valid_suffixes
+    )
+
+
+def validate_directory_v2(
+    dir_path: Union[str, Path, StringIO], valid_suffixes: Union[List[str], None] = None
+) -> List[Tuple[Path, Union[None, List[str]]]]:
+    """Validates an Ecospold V1 XML file to custom Ecospold classes.
+
+    Parameters:
+        dir_path: the directory path, should contain files of version 2 of EcoSpold.
+        valid_suffixes: a list of valid file suffixes which will only be considered for
+        parsing. If None, defaults to [".xml", ".spold"].
+
+    Returns a list of tuples of file paths and corresponding list of errors, which
+    is ``None`` if no errors.
+    """
+    if valid_suffixes is None:
+        valid_suffixes = [".xml", ".spold"]
+
+    return validate_directory(
+        dir_path, Defaults.SCHEMA_V2_FILE, valid_suffixes=valid_suffixes
+    )
+
+
+def parse_zip_file_v1(
+    file_path: Union[str, Path], valid_suffixes: Union[List[str], None] = None
+) -> List[Tuple[Path, EcoSpoldV1]]:
+    """Parses a directory of Ecospold XML files to a list of custom Ecospold classes.
+
+    Parameters:
+    file_path: the ZIP file path, should contain files of version 1 of EcoSpold.
+    valid_suffixes: a list of valid file suffixes which will only be considered for
+    parsing. If None, defaults to [".xml", ".spold"].
+
+    Returns a list of tuples of file paths and corresponding EcoSpold classes
+    representing the root of the XML file.
+    """
+    if valid_suffixes is None:
+        valid_suffixes = [".xml", ".spold"]
+
+    return parse_zip_file(
+        file_path=file_path,
+        schema_path=Defaults.SCHEMA_V1_FILE,
+        lookup=EcospoldLookupV1(),
+        valid_suffixes=valid_suffixes,
+    )
+
+
+def parse_zip_file_v2(
+    file_path: Union[str, Path], valid_suffixes: Union[List[str], None] = None
+) -> List[Tuple[Path, EcoSpoldV2]]:
+    """Parses a directory of Ecospold XML files to a list of custom Ecospold classes.
+
+    Parameters:
+    file_path: the ZIP file path, should contain files of version 2 of EcoSpold.
+    valid_suffixes: a list of valid file suffixes which will only be considered for
+    parsing. If None, defaults to [".xml", ".spold"].
+
+    Returns a list of tuples of file paths and corresponding EcoSpold classes
+    representing the root of the XML file.
+    """
+    if valid_suffixes is None:
+        valid_suffixes = [".xml", ".spold"]
+
+    return parse_zip_file(
+        file_path=file_path,
+        schema_path=Defaults.SCHEMA_V2_FILE,
+        lookup=EcospoldLookupV2(),
+        valid_suffixes=valid_suffixes,
+    )
+
+
+def validate_zip_file_v1(
+    file_path: Union[str, Path, StringIO], valid_suffixes: Union[List[str], None] = None
+) -> List[Tuple[Path, Union[None, List[str]]]]:
+    """Validates an Ecospold V1 XML file to custom Ecospold classes.
+
+    Parameters:
+        file_path: the ZIP file path, should contain files of version 1 of EcoSpold.
+        valid_suffixes: a list of valid file suffixes which will only be considered for
+        parsing. If None, defaults to [".xml", ".spold"].
+
+    Returns a list of tuples of file paths and corresponding list of errors, which
+    is ``None`` if no errors.
+    """
+    if valid_suffixes is None:
+        valid_suffixes = [".xml", ".spold"]
+
+    return validate_zip_file(
+        file_path, Defaults.SCHEMA_V1_FILE, valid_suffixes=valid_suffixes
+    )
+
+
+def validate_zip_file_v2(
+    file_path: Union[str, Path, StringIO], valid_suffixes: Union[List[str], None] = None
+) -> List[Tuple[Path, Union[None, List[str]]]]:
+    """Validates an Ecospold V2 XML file to custom Ecospold classes.
+
+    Parameters:
+        file_path: the ZIP file path, should contain files of version 2 of EcoSpold.
+        valid_suffixes: a list of valid file suffixes which will only be considered for
+        parsing. If None, defaults to [".xml", ".spold"].
+
+    Returns a list of tuples of file paths and corresponding list of errors, which
+    is ``None`` if no errors.
+    """
+    if valid_suffixes is None:
+        valid_suffixes = [".xml", ".spold"]
+
+    return validate_zip_file(
+        file_path, Defaults.SCHEMA_V2_FILE, valid_suffixes=valid_suffixes
     )
 
 
