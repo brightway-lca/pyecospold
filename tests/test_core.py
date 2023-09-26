@@ -118,7 +118,7 @@ def _validate_directory(
         os.path.join(dirPath, f"v{dataset_version}_1.xml"),
         os.path.join(dirPath, f"v{dataset_version}_2.spold"),
     ]
-    result = validator(dirPath)
+    result = sorted(validator(dirPath))
 
     assert len(result) == len(files)
     for i in range(2):
