@@ -122,7 +122,7 @@ def _validate_directory(
 
     assert len(result) == len(files)
     for i in range(2):
-        assert result[i][0] == Path(files[i])
+        assert str(result[i][0]) == str(files[i])
         assert result[i][1] is None
 
 
