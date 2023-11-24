@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- use newer version of lxml to support python 3.12
+- Bump deps to support python 3.12
 
 ## [3.3.2] - 2023-09-26
 
