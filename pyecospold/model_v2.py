@@ -1219,6 +1219,11 @@ class IntermediateExchange(CustomExchange):
         )
 
     @property
+    def groupType(self) -> str:
+        """Returns the type of the group, either `input` or `output`."""
+        return "input" if self.find("inputGroup", self.nsmap) is not None else "output"
+
+    @property
     def groupStr(self) -> List[str]:
         """Choice between _inputGroupStr and _outputGroupStr. Check their
         documentation for more information."""
@@ -1297,6 +1302,11 @@ class ElementaryExchange(CustomExchange):
             if self.find("inputGroup", self.nsmap) is not None
             else self._outputGroup
         )
+
+    @property
+    def groupType(self) -> str:
+        """Returns the type of the group, either `input` or `output`."""
+        return "input" if self.find("inputGroup", self.nsmap) is not None else "output"
 
     @property
     def groupStr(self) -> List[str]:

@@ -304,6 +304,7 @@ def test_parse_file_v2_intermediate_exchange(eco_spold: EcoSpold) -> None:
     comments = ["Literature value."]
     intermediateExchangeId = "1125e767-7b5d-442e-81d6-9b0d3e1919ac"
     group = 5
+    groupType = "input"
     groupStr = "From Technosphere (unspecified)"
     outGroup = 0
     outGroupStr = "ReferenceProduct"
@@ -319,6 +320,7 @@ def test_parse_file_v2_intermediate_exchange(eco_spold: EcoSpold) -> None:
     assert intermediateExchange.productionVolumeAmount == productionVolumeAmount
     assert intermediateExchange.intermediateExchangeId == intermediateExchangeId
     assert intermediateExchange.group == group
+    assert intermediateExchange.groupType == groupType
     assert intermediateExchange.groupStr == groupStr
     assert intermediateExchange.names == names
     assert intermediateExchange.unitNames == unitNames
@@ -358,6 +360,7 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
         + "assumed to be emitted into rivers."
     ]
     group = 4
+    groupType = "output"
     groupStr = "ToEnvironment"
     inGroup = 4
     inGroupStr = "FromEnvironment"
@@ -390,6 +393,7 @@ def test_parse_file_v2_elementary_exchange(eco_spold: EcoSpold) -> None:
     assert elementaryExchange.unitNames == unitNames
     assert elementaryExchange.comments == comments
     assert elementaryExchange.group == group
+    assert elementaryExchange.groupType == groupType
     assert elementaryExchange.groupStr == groupStr
     assert elementaryExchange.synonyms == synonyms
     assert elementaryExchange.tags == tags
