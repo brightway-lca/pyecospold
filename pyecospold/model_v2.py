@@ -34,6 +34,68 @@ class EcoSpold(etree.ElementBase):
     def _childActivityDataset(self) -> "ActivityDataset":
         return get_element(self, "childActivityDataset")
 
+    @property
+    def geography(self) -> "Geography":
+        """synonym for ecospold.activityDataset.activityDescription.geography[0]"""
+        return self.activityDataset.activityDescription.geography[0]
+
+    @property
+    def geographyShortName(self) -> str:
+        """synonym
+        for ecospold.activityDataset.activityDescription.geography.shortNames[0]"""
+        return self.geography.shortNames[0]
+
+    @property
+    def activity(self) -> "Activity":
+        """synonym for ecospold.activityDataset.activityDescription.activity[0]"""
+        return self.activityDataset.activityDescription.activity[0]
+
+    @property
+    def activityName(self) -> str:
+        """synonym for
+        ecospold.activityDataset.activityDescription.activity[0].activityNames[0]"""
+        return self.activity.activityNames[0]
+
+    def elementary_exchange(self, i: int) -> "ElementaryExchange":
+        """synonym for ecospold.activityDataset.flowData.elementaryExchanges[i]"""
+        return self.activityDataset.flowData.elementaryExchanges[i]
+
+    def elementary_exchange_compartment(self, i: int, j: int) -> str:
+        """synonym for
+        ecospold.activityDataset.flowData.elementaryExchanges[i]
+        .compartment.compartments[j]"""
+        return self.elementary_exchange(i).compartment.compartments[j]
+
+    def elementary_exchange_sub_compartment(self, i: int, j: int) -> str:
+        """synonym for
+        ecospold.activityDataset.flowData.elementaryExchanges[i]
+        .compartment.subCompartments[j]"""
+        return self.elementary_exchange(i).compartment.subCompartments[j]
+
+    def elementary_exchange_name(self, i: int, j: int) -> str:
+        """synonym for
+        ecospold.activityDataset.flowData.elementaryExchanges[i].names[j]"""
+        return self.elementary_exchange(i).names[j]
+
+    def elementary_exchange_unit_name(self, i: int, j: int) -> str:
+        """synonym for
+        ecospold.activityDataset.flowData.elementaryExchanges[i].unitNames[j]"""
+        return self.elementary_exchange(i).unitNames[j]
+
+    def intermediate_exchange(self, i: int) -> "IntermediateExchange":
+        """synonym for ecospold.activityDataset.flowData.intermediateExchanges[i]"""
+        return self.activityDataset.flowData.intermediateExchanges[i]
+
+    def intermediate_exchange_name(self, i: int, j: int) -> str:
+        """synonym for
+        ecospold.activityDataset.flowData.intermediateExchanges[i].names[j]"""
+        return self.intermediate_exchange(i).names[j]
+
+    def intermediate_exchange_unit_name(self, i: int, j: int) -> str:
+        """synonym for
+        ecospold.activityDataset.flowData.intermediateExchanges[i].unitNames[j]"""
+        return self.intermediate_exchange(i).unitNames[j]
+
 
 class ActivityDataset(etree.ElementBase):
     """Contains information about one individual activity. Information is divided into

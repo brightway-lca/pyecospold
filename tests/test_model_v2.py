@@ -37,8 +37,34 @@ def _eco_spold() -> EcoSpold:
 
 def test_parse_file_v2_eco_spold(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
+    geographyId = "0723d252-7e2a-11de-9820-0019e336be3a"
+    geographyShortName = "RER"
+    activityName = "formic acid production, methyl formate route"
+    elementaryExchangeCompartment = "water"
+    elementaryExchangeSubCompartment = "surface water"
+    elementaryExchangeName = "BOD5, Biological Oxygen Demand"
+    elementaryExchangeUnitName = "kg"
+    intermediateExchangeName = "water, deionised, from tap water, at user"
+    intermediateExchangeUnitName = "kg"
+
     assert isinstance(eco_spold, EcoSpold)
     assert isinstance(eco_spold.activityDataset, ActivityDataset)
+    assert eco_spold.geography.geographyId == geographyId
+    assert eco_spold.geographyShortName == geographyShortName
+    assert eco_spold.activityName == activityName
+    assert (
+        eco_spold.elementary_exchange_compartment(0, 0) == elementaryExchangeCompartment
+    )
+    assert (
+        eco_spold.elementary_exchange_sub_compartment(0, 0)
+        == elementaryExchangeSubCompartment
+    )
+    assert eco_spold.elementary_exchange_name(0, 0) == elementaryExchangeName
+    assert eco_spold.elementary_exchange_unit_name(0, 0) == elementaryExchangeUnitName
+    assert eco_spold.intermediate_exchange_name(0, 0) == intermediateExchangeName
+    assert (
+        eco_spold.intermediate_exchange_unit_name(0, 0) == intermediateExchangeUnitName
+    )
 
 
 def test_parse_file_v2_activity_dataset() -> None:

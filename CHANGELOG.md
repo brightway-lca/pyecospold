@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.4.3] - 2024-02-03
+
+### Added
+
+- EcoSpold.geography
+- EcoSpold.geographyShortName
+- EcoSpold.activity
+- EcoSpold.activityName
+- EcoSpold.elementary_exchange()
+- EcoSpold.elementary_exchange_compartment()
+- EcoSpold.elementary_exchange_sub_compartment()
+- EcoSpold.elementary_exchange_name()
+- EcoSpold.elementary_exchange_unit_name()
+- EcoSpold.intermediate_exchange()
+- EcoSpold.intermediate_exchange_name()
+- EcoSpold.intermediate_exchange_unit_name()
+
 ## [3.4.2] - 2024-02-02
 
 ### Added
