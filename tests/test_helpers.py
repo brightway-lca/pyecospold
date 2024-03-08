@@ -1,6 +1,6 @@
 """Test cases for the __helpers__ module."""
 
-from datetime import datetime
+from datetime import date
 
 import pytest
 from lxml.etree import DocumentInvalid
@@ -49,7 +49,7 @@ def test_set_attribute_list_success(process_information: ProcessInformation) -> 
 
 def test_set_element_text_success(process_information: ProcessInformation) -> None:
     "It sets attribute correctly."
-    startDate = datetime(2000, 1, 1)
+    startDate = date(2000, 1, 1)
     process_information.timePeriod.startDate = startDate
 
     assert process_information.timePeriod.startDate == startDate

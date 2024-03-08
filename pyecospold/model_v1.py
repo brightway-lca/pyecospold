@@ -1,5 +1,5 @@
 """Custom EcoSpold Python classes for v1 of EcoSpold schema."""
-from datetime import datetime
+from datetime import date, datetime
 from typing import ClassVar, Dict, List
 
 from lxml import etree
@@ -793,44 +793,44 @@ class TimePeriod(etree.ElementBase):
     or year-month (0000-00) only. 2000 and 2000-12 means: until 31.12.2000."""
 
     @property
-    def startDate(self) -> datetime:
+    def startDate(self) -> date:
         """Start date of the time period for which the dataset is valid. If it is only
         known that data is older than a certain data, 'startDate' is left blank."""
         return self._parse_date(self._startDate)
 
     @startDate.setter
-    def startDate(self, date: datetime) -> None:
-        self._write_date(date, "start")
+    def startDate(self, new_date: date) -> None:
+        self._write_date(new_date, "start")
 
     @property
-    def endDate(self) -> datetime:
+    def endDate(self) -> date:
         """End date of the time period for which the dataset is valid."""
         return self._parse_date(self._endDate)
 
     @endDate.setter
-    def endDate(self, date: datetime) -> None:
-        self._write_date(date, "end")
+    def endDate(self, new_date: date) -> None:
+        self._write_date(new_date, "end")
 
     def _parse_date(
         self,
-        date: str,
+        date_str: str,
         default_month: int = 1,
         default_day: int = 1,
-    ) -> datetime:
-        if len(date) == 10:
-            return datetime(
-                int(date[:4]),
-                int(date[5:7]),
-                int(date[8:]),
+    ) -> date:
+        if len(date_str) == 10:
+            return date(
+                int(date_str[:4]),
+                int(date_str[5:7]),
+                int(date_str[8:]),
             )
-        if len(date) == 7:
-            return datetime(int(date[:4]), int(date[5:]), default_day)
-        return datetime(int(date), default_month, default_day)
+        if len(date_str) == 7:
+            return date(int(date_str[:4]), int(date_str[5:]), default_day)
+        return date(int(date_str), default_month, default_day)
 
-    def _write_date(self, date: datetime, prefix: str) -> None:
-        month = "0" * (date.month < 10) + str(date.month)
-        day = "0" * (date.day < 10) + str(date.day)
-        setattr(self, f"_{prefix}Date", f"{date.year}-{month}-{day}")
+    def _write_date(self, date_d: date, prefix: str) -> None:
+        month = "0" * (date_d.month < 10) + str(date_d.month)
+        day = "0" * (date_d.day < 10) + str(date_d.day)
+        setattr(self, f"_{prefix}Date", f"{date_d.year}-{month}-{day}")
 
     def _init(self):
         # 1. Check for fooDate is present, because _init is called multiple times

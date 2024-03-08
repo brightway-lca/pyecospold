@@ -1,6 +1,6 @@
 """Test cases for the __model_v1__ module."""
 
-from datetime import datetime
+from datetime import date, datetime
 from io import StringIO
 
 import numpy as np
@@ -289,9 +289,9 @@ def test_parse_file_v1_technology(eco_spold: EcoSpold) -> None:
 def test_parse_file_v1_time_period(eco_spold: EcoSpold) -> None:
     """It parses attributes correctly."""
     text = "Year when reference used for this inventory was published."
-    startDate = datetime(1999, 1, 1)
-    endDate = datetime(1999, 1, 1)
-    modifiedEndDate = datetime(2000, 3, 4)
+    startDate = date(1999, 1, 1)
+    endDate = date(1999, 1, 1)
+    modifiedEndDate = date(2000, 3, 4)
     processInformation = eco_spold.datasets[0].metaInformation.processInformation
     timePeriod = processInformation.timePeriod
 
