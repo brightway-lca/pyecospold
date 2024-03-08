@@ -701,16 +701,16 @@ class DataSetInformation(etree.ElementBase):
     timestamp = create_attribute_v1("timestamp", datetime)
     """datetime: Automatically generated date when dataset is created"""
 
-    version = create_attribute_v1("version", float)
-    """float: The ecoinvent version number is used as follows: with a major update
+    version = create_attribute_v1("version", str)
+    """str: The ecoinvent version number is used as follows: with a major update
     (e.g. every second year) the version number is increased by
     one (1.00, 2.00, etc.). The digits after the decimal point
     (e.g., 1.01, 1.02, etc.) are used for minor updates (corrected errors)
     within the period of two major updates. The version number is placed manually.
     """
 
-    internalVersion = create_attribute_v1("internalVersion", float)
-    """float: The internalVersion number is used to discern different versions during
+    internalVersion = create_attribute_v1("internalVersion", str)
+    """str: The internalVersion number is used to discern different versions during
     the working period until the dataset is entered into the database). The
     internalVersion is generated automatically with each change made in the
     dataset or related file."""

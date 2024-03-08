@@ -309,8 +309,8 @@ def test_parse_file_v1_dataset_information(eco_spold: EcoSpold) -> None:
     _type = 1
     typeStr = "Unit process"
     timestamp = datetime(2003, 9, 12, 10, 14, 36)
-    version = 1.3
-    internalVersion = 53.03
+    version = "1.3"
+    internalVersion = "53.03"
     energyValues = 0
     energyValuesStr = "Undefined"
     languageCode = "en"
