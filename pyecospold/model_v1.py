@@ -172,10 +172,10 @@ class ModellingAndValidation(etree.ElementBase):
         return get_element(self, "representativeness")
 
     @property
-    def source(self) -> "Source":
+    def sources(self) -> List["Source"]:
         """Contains information about author(s), title, kind of publication,
         place of publication, name of editors (if any), etc.."""
-        return get_element(self, "source")
+        return get_element_list(self, "source")
 
     @property
     def validation(self) -> "Validation":

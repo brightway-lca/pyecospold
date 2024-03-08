@@ -119,7 +119,7 @@ def test_parse_file_v1_modelling_and_validation(eco_spold: EcoSpold) -> None:
     modellingAndValidation = dataset.metaInformation.modellingAndValidation
 
     assert isinstance(modellingAndValidation.representativeness, Representativeness)
-    assert isinstance(modellingAndValidation.source, Source)
+    assert isinstance(modellingAndValidation.sources[0], Source)
     assert isinstance(modellingAndValidation.validation, Validation)
 
 
@@ -373,7 +373,7 @@ def test_parse_file_v1_source(eco_spold: EcoSpold) -> None:
     modellingAndValidation = eco_spold.datasets[
         0
     ].metaInformation.modellingAndValidation
-    source = modellingAndValidation.source
+    source = modellingAndValidation.sources[0]
 
     assert source.number == number
     assert source.sourceType == sourceType
