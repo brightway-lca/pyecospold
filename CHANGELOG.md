@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 3.1 size constraint on percent
 
-## [3.5.0] - 2024-02-03
+## [3.5.0] - 2024-03-08
 
 ### Changed
 
