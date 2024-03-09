@@ -438,7 +438,6 @@ All Rights Reserved.
 				<xsd:appinfo>
 					<spoldID>722</spoldID>
 					<type>Number(Decimal)</type>
-					<size>3.1</size>
 					<options>Maximum
 					100</options>
 					<multipleOccurences>No</multipleOccurences>
