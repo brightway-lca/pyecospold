@@ -52,7 +52,7 @@ Corrected the handling of CAS numbers based on [the official documentation](http
 ## Usage
 
 ```python
-from pyecospold import parse_file_v1, save_ecopsold_file, Defaults
+from pyecospold import parse_file_v1, save_ecospold_file, Defaults
 
 # Override defaults if needed, else skip. Defaults are already set.
 Defaults.config_defaults("config.ini")  # Replace with your own config file
@@ -71,7 +71,7 @@ referenceFunction.amount
 >> 2.0
 
 # Save final EcoSpold class as an XML file, make sure root directory exists.
-save_ecopsold_file(ecoSpold, "out/00001_new.xml")  # Replace with your own path
+save_ecospold_file(ecoSpold, "out/00001_new.xml")  # Replace with your own path
 ```
 
 # Config file

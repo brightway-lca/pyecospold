@@ -13,7 +13,7 @@ from pyecospold import (
     parse_file_v1,
     parse_zip_file_v1,
     parse_zip_file_v2,
-    save_ecopsold_file,
+    save_ecospold_file,
     validate_directory_v1,
     validate_directory_v2,
     validate_file_v1,
@@ -80,7 +80,7 @@ def test_save_file(tmpdir) -> None:
     inputPath = "data/v1/v1_1.xml"
     metaInformation = parse_file_v1(inputPath)
     outputPath = os.path.join(tmpdir, os.urandom(24).hex())
-    save_ecopsold_file(metaInformation, outputPath, fill_defaults=False)
+    save_ecospold_file(metaInformation, outputPath, fill_defaults=False)
 
     with open(inputPath, encoding="utf-8") as inputFile:
         with open(outputPath, encoding="utf-8") as outputFile:
@@ -96,7 +96,7 @@ def test_save_file_defaults(tmpdir) -> None:
     expectedOutputPath = "data/tests/v1_1_defaults.xml"
     metaInformation = parse_file_v1(inputPath)
     outputPath = os.path.join(tmpdir, os.urandom(24).hex())
-    save_ecopsold_file(metaInformation, outputPath, fill_defaults=True)
+    save_ecospold_file(metaInformation, outputPath, fill_defaults=True)
 
     with open(expectedOutputPath, encoding="utf-8") as inputFile:
         with open(outputPath, encoding="utf-8") as outputFile:
