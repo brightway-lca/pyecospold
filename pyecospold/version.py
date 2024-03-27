@@ -1,22 +1,15 @@
-"""Utility module containing pyecospold version and retrieval methods."""
-import importlib.metadata
-from typing import Union
+"""Version information for lxmlh package."""
+import pathlib
 
 
-def get_version_tuple() -> tuple:
-    """Returns version as (major, minor, micro)."""
-
-    def as_integer(version: str) -> Union[int, str]:
-        """Tries parsing version else returns as is."""
-        try:
-            return int(version)
-        except ValueError:  # pragma: no cover
-            return version  # pragma: no cover
-
-    return tuple(
-        as_integer(v)
-        for v in importlib.metadata.version("pyecospold").strip().split(".")
-    )
+def _get_version():
+    """Return the version number."""
+    versionFile = pathlib.Path(__file__).parent / "VERSION"
+    # Read the version number from VERSION file
+    with open(versionFile, "r", encoding="UTF-8") as vf:
+        # The full version, including alpha/beta/rc tags
+        versionList = vf.read().strip().split(".")
+    return ".".join(versionList)
 
 
-__version__ = get_version_tuple()
+__version__ = _get_version()

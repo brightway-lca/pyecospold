@@ -577,11 +577,11 @@ class ReferenceFunction(etree.ElementBase):
     generalComment = create_attribute_v1("generalComment", str)
     """str: Free text for general information about the dataset.
     It may contain information about:
-        - the intended application of the dataset
-        - information sources used
-        - data selection principles
-        -  modelling choices (exclusion of intermediate product flows, processes,
-        allocation if done before entering into database).
+    - the intended application of the dataset
+    - information sources used
+    - data selection principles
+    -  modelling choices (exclusion of intermediate product flows, processes,
+    allocation if done before entering into database).
     """
 
     infrastructureIncluded = create_attribute_v1("infrastructureIncluded", bool)
@@ -754,13 +754,13 @@ class TimePeriod(etree.ElementBase):
     text = create_attribute_v1("text", str)
     """str: Additional explanations concerning the temporal validity of the flow data
     reported. It may comprise information about:
-        - how strong the temporal correlation is for the unit process at issue
-        (e.g., are four year old data still adequate for the process operated
-        today?),
-        - why data is not valid for the entire period,
-        - for which smaller periods data are valid,
-        - whether for certain elementary and intermediate product flows a different
-        time period is valid.
+    - how strong the temporal correlation is for the unit process at issue
+    (e.g., are four year old data still adequate for the process operated
+    today?),
+    - why data is not valid for the entire period,
+    - for which smaller periods data are valid,
+    - whether for certain elementary and intermediate product flows a different
+    time period is valid.
     The fact that data are based on forecasts should be reported under
     'representativeness'."""
 
