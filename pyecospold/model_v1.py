@@ -1,4 +1,5 @@
 """Custom EcoSpold Python classes for v1 of EcoSpold schema."""
+
 from datetime import date, datetime
 from typing import ClassVar, Dict, List
 

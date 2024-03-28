@@ -1,4 +1,5 @@
 """Internal helper classes."""
+
 from typing import Callable, Optional
 
 from lxmlh import create_attribute, create_attribute_list, create_element_text

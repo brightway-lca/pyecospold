@@ -1,4 +1,5 @@
 """Defaults configuration."""
+
 import configparser
 import os
 from dataclasses import dataclass

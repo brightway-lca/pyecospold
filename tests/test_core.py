@@ -1,4 +1,5 @@
 """Test cases for the __core__ module."""
+
 import os
 import zipfile
 from io import StringIO
