@@ -16,6 +16,7 @@ MOCK_MODULES = [
     'lxmlh',
     'numpy',
     'pycasreg',
+    'pycasreg.validation',
 ]
 
 sys.modules.update((module, MagicMock()) for module in MOCK_MODULES)
