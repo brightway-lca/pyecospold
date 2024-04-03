@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 import datetime
-import importlib
+import importlib.metadata
 
 project = 'pyecospold'
 copyright = f'{datetime.date.today().year}, Mina Sami'
