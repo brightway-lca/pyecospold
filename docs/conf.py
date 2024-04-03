@@ -12,12 +12,12 @@ import importlib.metadata
 project = 'pyecospold'
 copyright = f'{datetime.date.today().year}, Mina Sami'
 author = 'Mina Sami'
-version = release = importlib.metadata.version("pyecospold")
+version = release = importlib.metadata.version('pyecospold')
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.viewcode"]
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
