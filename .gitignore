@@ -137,3 +137,6 @@ xs3p-master
 
 # Output directory
 out
+
+# VSCode
+.vscode
