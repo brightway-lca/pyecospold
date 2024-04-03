@@ -7,12 +7,28 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 import datetime
-import importlib.metadata
+import os
+import sys
+from unittest.mock import MagicMock
+
+MOCK_MODULES = [
+    'lxml',
+    'lxmlh',
+    'numpy',
+    'pycasreg',
+]
+
+sys.modules.update((module, MagicMock()) for module in MOCK_MODULES)
+sys.path.insert(0, os.path.abspath('../'))
+
+
+from pyecospold import __version__
+
 
 project = 'pyecospold'
 copyright = f'{datetime.date.today().year}, Mina Sami'
 author = 'Mina Sami'
-version = release = importlib.metadata.version('pyecospold')
+version = release = __version__
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
