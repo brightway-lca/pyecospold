@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ecoSpold xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.EcoInvent.org/EcoSpold01"
+  xsi:schemaLocation="http://www.EcoInvent.org/EcoSpold01 C:\Programme\ecoinvent\EcoSpold\EcoSpold01Dataset.xsd"
+  validationId="0" validationStatus="validationStatus">
+  <dataset validCompanyCodes="CompanyCodes.xml" validRegionalCodes="RegionalCodes.xml"
+    validCategories="Categories.xml" validUnits="Units.xml" number="1"
+    timestamp="2006-10-31T20:34:59" generator="EcoAdmin 1.1.17.110" internalSchemaVersion="1.0">
+    <metaInformation>
+      <processInformation>
+        <referenceFunction name="compost plant, open" localName="Kompostieranlage, offen"
+          infrastructureProcess="true" unit="unit" category="agricultural means of production"
+          subCategory="buildings" localCategory="Landwirtschaftliche Produktionsmittel"
+          localSubCategory="Gebäude" amount="1"
+          includedProcesses="Building materials required for a compost plant and its construction as well as the disposal of these materials were included. Land use during construction and use is considered. The lifetime of the plant was assumed as 25 years. Transport of the building materials to the construction site were included."
+          generalComment="The inventory refers to a compost plant over the lifetime of 25 years. The compost plant is constructed for a treating capactiy of 10‘000 tons biogenic waste per year. The total turnover of the plant over the entire lifetime of 25 years amounts thus 250‘000 tons biogenic waste."
+          formula="0" infrastructureIncluded="true" datasetRelatesToProduct="true">
+          <synonym>0</synonym>
+        </referenceFunction>
+        <geography location="CH" text="Values refer to the situtation in Switzerland." />
+        <technology text="Refer to open plant composting." />
+        <timePeriod dataValidForEntirePeriod="true"
+          text="Year when reference used for this inventory was published.">
+          <startYear>1999</startYear>
+          <endYear>1999</endYear>
+        </timePeriod>
+        <dataSetInformation type="1" impactAssessmentResult="false" timestamp="2003-09-12T10:14:36"
+          version="1.3" internalVersion="53.03" energyValues="0" languageCode="en"
+          localLanguageCode="de" />
+      </processInformation>
+      <modellingAndValidation>
+        <representativeness samplingProcedure="Data come from one compost plant in Switzerland."
+          extrapolations="none" uncertaintyAdjustments="none" />
+        <source number="146" sourceType="4" firstAuthor="Nemecek, T."
+          additionalAuthors="Heil A., Huguenin, O., Meier, S., Erzinger S., Blaser S., Dux. D., Zimmermann A.,"
+          year="2003" title="Life Cycle Inventories of Agricultural Production Systems"
+          titleOfAnthology="Final report ecoinvent 2000" placeOfPublications="Dübendorf, CH"
+          publisher="Swiss Centre for LCI, FAL &amp; FAT" volumeNo="15" text="CD-ROM" />
+        <validation proofReadingDetails="Passed." proofReadingValidator="291" />
+      </modellingAndValidation>
+      <administrativeInformation>
+        <dataEntryBy person="309" qualityNetwork="1" />
+        <dataGeneratorAndPublication person="309" dataPublishedIn="2"
+          referenceToPublishedSource="146" copyright="true" accessRestrictedTo="0" />
+        <person number="309" name="name" address="address"
+          telephone="telephone" telefax="telefax" email="email@domain.com"
+          companyCode="EMPA-SG" countryCode="CH" />
+        <person number="291" name="name" address="address"
+          telephone="telephone" telefax="telefax" email="email@domain.com"
+          companyCode="EMPA-SG" countryCode="CH" />
+      </administrativeInformation>
+    </metaInformation>
+    <flowData>
+      <exchange number="1" category="agricultural means of production" subCategory="buildings"
+        localCategory="Landwirtschaftliche Produktionsmittel" localSubCategory="Gebäude"
+        name="compost plant, open" location="CH" unit="unit" meanValue="1" formula="0"
+        localName="Kompostieranlage, offen" infrastructureProcess="true">
+        <outputGroup>0</outputGroup>
+      </exchange>
+      <exchange number="2156" category="waste management" subCategory="recycling"
+        localCategory="Entsorgungssysteme" localSubCategory="Recycling" CASNumber="007439-89-6"
+        name="disposal, building, reinforcement steel, to recycling" location="CH" unit="kg"
+        uncertaintyType="1" meanValue="21200" standardDeviation95="1.22" formula="Fe"
+        generalComment="(2,3,1,1,1,5)"
+        localName="Entsorgung, Gebäude, Armierungseisen, ins Recycling"
+        infrastructureProcess="false">
+        <inputGroup>5</inputGroup>
+      </exchange>
+      <allocation referenceToCoProduct="1" allocationMethod="-1" fraction="97.6">
+        <referenceToInputOutput>1</referenceToInputOutput>
+      </allocation>
+    </flowData>
+  </dataset>
+</ecoSpold>

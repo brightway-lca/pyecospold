@@ -140,3 +140,5 @@ out
 
 # VSCode
 .vscode
+
+.DS_Store
