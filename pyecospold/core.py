@@ -1,5 +1,7 @@
 """Core Ecospold module containing parsing and saving functionalities."""
 
+from __future__ import annotations
+
 from io import StringIO
 from pathlib import Path
 from typing import List, Tuple, Union

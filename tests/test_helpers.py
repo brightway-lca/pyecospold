@@ -49,7 +49,7 @@ def test_set_attribute_list_success(process_information: ProcessInformation) -> 
 
 def test_set_element_text_success(process_information: ProcessInformation) -> None:
     "It sets attribute correctly."
-    startDate = date(2000, 1, 1)
+    startDate = date(1970, 1, 1)
     process_information.timePeriod.startDate = startDate
 
     assert process_information.timePeriod.startDate == startDate

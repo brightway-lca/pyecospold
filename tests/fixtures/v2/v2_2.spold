@@ -1,0 +1,1941 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="ffed8e5b-8ecb-4a93-bc79-a1404afd9fcd"
+        activityNameId="8b542688-aa36-45d5-b2f0-3b15ade03700"
+        parentActivityId="dca19657-6614-4b1d-98aa-0658dd2ced39" inheritanceDepth="0" type="1"
+        specialActivityType="0" energyValues="0">
+        <activityName xml:lang="en">formic acid production, methyl formate route</activityName>
+        <synonym xml:lang="en">methanoic acid</synonym>
+        <includedActivitiesStart xml:lang="en">From the reception of methyl formate at the factory
+          gate.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">This activity ends with 1 kg of formic acid, 100% af
+          the factory gate. The dataset includes the input materials, energy uses, infrastructure
+          and emissions.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="1">This data represents the production of 1 kg of formic acid
+            from methyl formate. Raw materials and energy consumptions are modelled with literature
+            data. The emissions are estimated. Infrastructure is included with a default value.</text>
+          <text xml:lang="en" index="2">[This dataset was already contained in the ecoinvent
+            database version 2. It was not individually updated during the transfer to ecoinvent
+            version 3. Life Cycle Impact Assessment results may still have changed, as they are
+            affected by changes in the supply chain, i.e. in other datasets. This dataset was
+            generated following the ecoinvent quality guidelines for version 2. It may have been
+            subject to central changes described in the ecoinvent version 3 change report
+            (http://www.ecoinvent.org/database/ecoinvent-version-3/reports-of-changes/), and the
+            results of the central updates were reviewed extensively. The changes added e.g.
+            consistent water flows and other information throughout the database. The documentation
+            of this dataset can be found in the ecoinvent reports of version 2, which are still
+            available via the ecoinvent website. The change report linked above covers all central
+            changes that were made during the conversion process.]</text>
+        </generalComment>
+        <tag>ConvertedDataset</tag>
+      </activity>
+      <classification classificationId="7ac1cbc6-1385-4a68-8647-ed7aa78db201">
+        <classificationSystem xml:lang="en">EcoSpold01Categories</classificationSystem>
+        <classificationValue xml:lang="en">chemicals/organics</classificationValue>
+      </classification>
+      <classification classificationId="28f738cc-bb73-48f8-b633-f83fb9bc5ddc">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">2011:Manufacture of basic chemicals</classificationValue>
+      </classification>
+      <geography geographyId="0723d252-7e2a-11de-9820-0019e336be3a">
+        <shortname xml:lang="en">RER</shortname>
+        <comment>
+          <text xml:lang="en" index="1">The inventory is modelled for Europe.</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="16">To keep undesirable reesterification as low as possible,
+            the time of direct contact between methanol and formic acid must be as short as
+            possible, and separation must be carried out at the lowest possible temperature.
+            Introduction of methyl formate into the lower part of the column in which lower boiling
+            methyl formate and methanol are separated from water and formic acid, has also been
+            suggested. This largely prevents reesterification because of the excess methyl formate
+            present in the critical region of the column.</text>
+          <text xml:lang="en" index="5">In the two processes mentioned, the first stage involves
+            carbonylation of methanol in the liquid phase with carbon monoxide, in the presence of a
+            basic catalyst:
+          </text>
+          <text xml:lang="en" index="6"></text>
+          <text xml:lang="en" index="18">Formic acid is marketed in concentrations exceeding 85 wt
+            %; therefore, dehydration of the hydrolysis mixture is an important step in the
+            production of formic acid from methyl formate. For dehydration, the azeotropic point
+            must be overcome. The concentration of formic acid in the azeotropic mixture increases
+            if distillation is carried out under pressure, but the higher boiling point at high
+            pressure also increases the decomposition rate of formic acid. At the same time, the
+            selection of sufficiently corrosion-resistant materials presents considerable problems.
+            A number of entrainers have been proposed for azeotropic distillation.</text>
+          <text xml:lang="en" index="8">As a rule, the catalyst is sodium methoxide. Potassium
+            methoxide has also been proposed as a catalyst; it is more soluble in methyl formate and
+            gives a higher reaction rate. Although fairly high pressures were initially preferred,
+            carbonylation is carried out in new plants at lower pressure. Under these conditions,
+            reaction temperature and catalyst concentration must be increased to achieve acceptable
+            conversion. According to published data, ca. 4.5 MPa, 80 °C, and 2.5 wt % sodium
+            methoxide are employed. About 95 % carbon monoxide, but only about 30 % methanol, is
+            converted under these circumstances. Nearly quantitative conversion of methanol to
+            methyl formate can, nevertheless, be achieved by recycling the unreacted methanol. The
+            carbonylation of methanol is an equilibrium reaction. The reaction rate can be raised by
+            increasing the temperature, the carbon monoxide partial pressure, the catalyst
+            concentration, and the interface between gas and liquid. </text>
+          <text xml:lang="en" index="11">In the second stage, the methyl formate obtained is
+            hydrolyzed:</text>
+          <text xml:lang="en" index="3">Although the carbonylation of methanol is relatively
+            problem-free and has been carried out industrially for a long time, only recently has
+            the hydrolysis of methyl formate been developed into an economically feasible process.
+            The main problems are associated with work-up of the hydrolysis mixture. Because of the
+            unfavorable position of the equilibrium, reesterification of methanol and formic acid to
+            methyl formate occurs rapidly during the separation of unreacted methyl formate.
+            Problems also arise in the selection of sufficiently corrosion-resistant materials</text>
+          <text xml:lang="en" index="15">A two-stage hydrolysis has been suggested, in which a
+            water-soluble formamide is used in the second stage; this forms a salt-like compound
+            with formic acid. It also shifts the equilibrium in the direction of formic acid.</text>
+          <text xml:lang="en" index="17">Dehydration of the Hydrolysis Mixture</text>
+          <text xml:lang="en" index="2">Synthesis of formic acid by hydrolysis of methyl formate is
+            based on a two-stage process: in the first stage, methanol is carbonylated with carbon
+            monoxide; in the second stage, methyl formate is hydrolyzed to formic acid and methanol.
+            The methanol is returned to the first stage.</text>
+          <imageUrl index="12">https://db3.ecoinvent.org/images/2ddc19c0-905f-42c3-b14c-e68332befec9</imageUrl>
+          <text xml:lang="en" index="10">Hydrolysis of Methyl Formate</text>
+          <text xml:lang="en" index="1">The worldwide installed capacity for producing formic acid
+            was about 330 000 t/a in 1988. </text>
+          <text xml:lang="en" index="19">Reference:</text>
+          <text xml:lang="en" index="9">To synthesize methyl formate, gas mixtures with a low
+            proportion of carbon monoxide must first be concentrated. In a side reaction, sodium
+            methoxide reacts with methyl formate to form sodium formate and dimethyl ether, and
+            becomes inactivated. The substances used must be anhydrous; otherwise, sodium formate is
+            precipitated to an increasing extent. Sodium formate is considerably less soluble in
+            methyl formate than in methanol. The risk of encrustation and blockage due to
+            precipitation of sodium formate can be reduced by adding poly(ethylene glycol). The
+            carbon monoxide used must contain only a small amount of carbon dioxide; otherwise, the
+            catalytically inactive carbonate is precipitated.
+            Basic catalysts may reverse the reaction, and methyl formate decomposes into methanol
+            and carbon monoxide. Therefore, undecomposed sodium methoxide in the methyl formate must
+            be neutralized.
+          </text>
+          <text xml:lang="en" index="13">The equilibrium constant for methyl formate hydrolysis
+            depends on the water: ester ratio. With a molar ratio of 1, the constant is 0.14, but
+            with a water: methyl formate molar ratio of 15, it is 0.24. Because of the unfavorable
+            position of this equilibrium, a large excess of either water or methyl formate must be
+            used to obtain an economically worthwhile methyl formate conversion. If methyl formate
+            and water are used in a molar ratio of 1 : 1, the conversion is only 30 %, but if the
+            molar ratio of water to methyl formate is increased to 5 – 6, the conversion of methyl
+            formate rises to 60 %. However, a dilute aqueous solution of formic acid is obtained
+            this way, and excess water must be removed from the formic acid with the expenditure of
+            as little energy as possible.</text>
+          <text xml:lang="en" index="4">Carbonylation of Methanol
+          </text>
+          <text xml:lang="en" index="20">Gräfje, H., Körnig, W., Weitz, H.-M., Reiß, W.:
+            Butanediols, Butenediol, and Butynediol, Chapter 1. In: Ullmann's Encyclopedia of
+            Industrial Chemistry, Sev-enth Edition, 2004 Electronic Release (ed. Fiedler E.,
+            Grossmann G., Kersebohm D., Weiss G. and Witte C.). 7 th Electronic Release Edition.
+            WileyInterScience, New York, Online-Version under:
+            http://www.mrw.interscience.wiley.com/ueic/articles/a04_455/frame.html</text>
+          <imageUrl index="7">https://db3.ecoinvent.org/images/a0ec6e15-92c8-4d44-82bb-84e90e58b171</imageUrl>
+          <text xml:lang="en" index="14">Another way to overcome the unfavorable position of the
+            equilibrium is to hydrolyze methyl formate in the presence of a tertiary amine, e.g.,
+            1-(n-pentyl)imidazole. The base forms a salt-like compound with formic acid; therefore,
+            the concentration of free formic acid decreases and the hydrolysis equilibrium is
+            shifted in the direction of products. In a subsequent step formic acid can be distilled
+            from the base without decomposition.</text>
+        </comment>
+      </technology>
+      <timePeriod startDate="1984-01-01" endDate="2014-12-31" isDataValidForEntirePeriod="true">
+        <comment>
+          <text xml:lang="en" index="1">Time of publications</text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="2592e17c-df72-4446-91f5-fa1f1e0e8042"
+        unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="water_deionised_input"
+        casNumber="007732-18-5" amount="0.6"
+        intermediateExchangeId="360e2eb0-f81c-4e4b-ba6b-c7a690f31275"
+        activityLinkId="cd1f547f-577f-4e1b-bd23-fb73d53497eb">
+        <name xml:lang="en">water, deionised, from tap water, at user</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment>EcoSpold01Location=CH</comment>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.6" mu="-0.51" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Herman 1984</comment>
+        </uncertainty>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0"
+          isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual
+            entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0"
+          isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="336dd4ef-cece-4c49-b412-5fe565ec8b8f"
+        unitId="980b811e-3905-4797-82a5-173f5568bc7e" amount="0"
+        intermediateExchangeId="1125e767-7b5d-442e-81d6-9b0d3e1919ac" productionVolumeAmount="0">
+        <name xml:lang="en">heat, district or industrial, natural gas</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <normal meanValue="0" variance="0" varianceWithPedigreeUncertainty="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1"
+            geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="87aac152-8cbe-48da-80fa-ac048384e613"
+        unitId="5b972631-34e3-4db7-a615-f6931770a0cb" amount="4E-10"
+        intermediateExchangeId="3d0fe4e0-eac9-4704-b3fd-09b8594d0fbe"
+        activityLinkId="a05ffe94-a5a7-4004-870a-f50627e2e244">
+        <name xml:lang="en">chemical factory, organics</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment>EcoSpold01Location=RER</comment>
+        <comment xml:lang="en">Estimation. This module assumes a built area of about 4.2 ha, an
+          average output of 50'000 t/a, and plant life of fifty years.
+        </comment>
+        <uncertainty>
+          <lognormal meanValue="4E-10" mu="-21.64" variance="0.27"
+            varianceWithPedigreeUncertainty="0.448" />
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5"
+            geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en">Estimation</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="d8fae286-154d-4da2-9d6e-68c0df0ab462"
+        unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="630-08-0" amount="0.6144"
+        intermediateExchangeId="d349d8a1-79fb-433e-8bf4-64fbda6f657a"
+        activityLinkId="e46ee8d8-f1e0-4da6-813a-ef33b3f114bb">
+        <name xml:lang="en">carbon monoxide</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=RER</comment>
+        <uncertainty>
+          <lognormal meanValue="0.6144" mu="-0.49" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">CO. It is assumed that CO is produced from partial combustion of
+            heavy heating oil.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.428571428571429"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">CO. It is assumed that CO is produced from partial combustion of
+            heavy heating oil.</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.428571428571429"
+          isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual
+            entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.428571428571429"
+          isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ad13b351-1731-4020-86d6-f559b4d1c740"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" productionVolumeAmount="0">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <normal meanValue="0" variance="0" varianceWithPedigreeUncertainty="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1"
+            geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="4d141374-3fb8-4107-bbb8-ae42340152f6"
+        unitId="980b811e-3905-4797-82a5-173f5568bc7e" amount="0"
+        intermediateExchangeId="71e2f1db-a2c5-44d0-8337-dfff15be974d" productionVolumeAmount="0">
+        <name xml:lang="en">heat, district or industrial, other than natural gas</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <normal meanValue="0" variance="0" varianceWithPedigreeUncertainty="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1"
+            geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="7caf2882-c7af-4fe9-9ce8-d1616d08166e"
+        unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="64-18-6" amount="1"
+        intermediateExchangeId="118a9202-6b68-44aa-82b5-2c2bf5bc02cf"
+        productionVolumeAmount="256000000">
+        <name xml:lang="en">formic acid</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Formic acid is a colorless liquid with a pungent odor, which is
+          completely miscible with water and many polar solvents but only partially miscible with
+          hydrocarbons. Formic acid has been detected in the poison or defense systems of ants,
+          bees, and other insects and also of cnidarians.
+
+          Formic acid is used primarily in dyeing, in the textile and leather industries; in rubber
+          production; and as an intermediate in the chemical and pharmaceutical industries. The use
+          of formic acid as an aid in the ensilage of green forage has increased sharply.
+
+          The worldwide production of formic acid is about 260 000 t/a in 1987 and 390 000 t/a in
+          1995.</comment>
+        <comment>EcoSpold01Location=RER</comment>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.4"
+          isDefiningValue="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">CH2O</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0"
+          isDefiningValue="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0"
+          isDefiningValue="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1"
+          isDefiningValue="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0"
+          isDefiningValue="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">CH2O</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1"
+          isDefiningValue="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.404"
+          isDefiningValue="true" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based
+            on: 2004 import and export prices (total trades (USD) divided by total weight (kg) in
+            EU27, USA, China, Japan and India) from UN Commodity Trade Statistics Database
+            (http://data.un.org/Explorer.aspxDatabase [Accessed 2 July 2010]). Commodity: Formic
+            acid</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.4"
+          isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual
+            entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.4"
+          isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">unknown
+          //Comment added during dataset update://
+          Calculated with 80% capacity utilisation from 320 million kg European capacity according
+          to http://www.dfcinternational.com/files/DuniaFormicAcidSurvey15June2008.pdf</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="161deacd-51b0-40ac-bb29-03bbcf37eded"
+        unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000067-56-1" amount="0.04"
+        intermediateExchangeId="4a0b47d3-c643-4b67-841b-b5689787f7a1"
+        activityLinkId="8fc0a383-daac-4de7-8e40-1fee1ca4f39f">
+        <name xml:lang="en">methanol</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment>EcoSpold01Location=GLO</comment>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.04" mu="-3.22" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.375"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">CH3OH</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">CH3OH</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.375"
+          isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual
+            entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.375"
+          isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="6791e9b4-5f26-4511-9289-fd4038ffdc71"
+        unitId="980b811e-3905-4797-82a5-173f5568bc7e" amount="14.5211941344067"
+        intermediateExchangeId="1125e767-7b5d-442e-81d6-9b0d3e1919ac"
+        activityLinkId="9cd1a7a7-257a-46d4-b434-3b6b4a6ef9bb">
+        <name xml:lang="en">heat, district or industrial, natural gas</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="14.5211941344067" mu="2.96" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="010fbe67-c86c-42d5-98d7-fb0bb36630c1"
+        unitId="980b811e-3905-4797-82a5-173f5568bc7e" amount="0.108805865593314"
+        intermediateExchangeId="1125e767-7b5d-442e-81d6-9b0d3e1919ac"
+        activityLinkId="81689832-3b4f-4762-bfed-86cf34a156dd">
+        <name xml:lang="en">heat, district or industrial, natural gas</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.108805865593314" mu="2.96" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="300942c7-d2bf-451f-8d6c-b44ba9d0cb19"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00218659508564004"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="53b0364f-3a53-49c4-bdc7-804bc21a305c">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00218659508564004" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="3a35840b-8c9c-4ad7-9d18-1c75dfc5e3dc"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000753743606252286"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="84b7a804-cd83-4e66-8f11-cb742b21c939">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000753743606252286" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="096883f4-a60e-4555-a788-02a2ed6b5a29"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0111604898781731"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="348f9761-466b-4be6-89bb-115f45c31701">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0111604898781731" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="f1d35690-cd13-4c98-a5ba-178d5b22b733"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00225779534197357"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="049c9371-fbd2-468e-943c-b437629ceff1">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00225779534197357" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="2d45c55f-fa70-4af4-ab2c-082cacdb11c6"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00524915086409765"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="b5023086-b753-4853-9f28-486bbee0ebf1">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00524915086409765" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="9584df18-5376-4d3d-b2f2-984e9822bf9a"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0464080522400665"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="da6465f6-dbaa-47ef-8e55-48c28e291690">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0464080522400665" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="7165b81b-912f-4677-822e-d27d654a1749"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00269255492889804"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="cfa2cfb7-9608-4a18-bae5-59d6fce88c89">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00269255492889804" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="b2b497ae-8aa9-43ba-a9b8-58780cc13734"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0115483552070057"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="a4db1dc2-e3ab-4e43-befb-54d8208bc735">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0115483552070057" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="b84c8fd6-aaad-4770-b065-6aa22593a2f0"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0230577177525212"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="f06c13ae-f824-42c7-9030-ec7b43641c51">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0230577177525212" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="6a77bb97-87b2-41be-9af0-a09d351fb469"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0100155313532324"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="13e4f9bc-8014-4284-8260-e426975f93bd">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0100155313532324" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="73b85d97-2faf-42e7-9502-5d1cd2be1754"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.039981735256169"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="19c514e1-0b55-485c-b1c3-97c777bd9c44">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.039981735256169" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="9cba509a-4b13-435c-b5b0-4c5c97fcb829"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00436168132405607"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="e7cc7ed4-7548-483f-b3d2-fe901425364e">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00436168132405607" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="f2d0d356-ee2c-477a-bbbd-2ced5b463439"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00328766539468223"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="c0d87f67-7c7c-4a2e-af31-6c28b3618e1a">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00328766539468223" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="58caae82-c591-47a1-bcf9-7348bf4eb12a"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000652740588823766"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="43e67309-fc28-4806-b293-d3db4312619c">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000652740588823766" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="a32602e9-74dd-48f4-ad55-b203af10b865"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00111034609635706"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="2a9c44c8-5169-491d-85f3-ae5475e1ddf8">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00111034609635706" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="0d741f02-7973-4e22-a9c1-4a86feb5f036"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00710628372622085"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="55120fba-61d4-44be-937b-c43c2566cb78">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00710628372622085" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="bc28eb11-5104-41e2-9f4d-a8f0726fb15d"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00508519273461547"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="4fc4c999-4a17-4745-90b8-db50647a27d0">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00508519273461547" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="b8730c33-c499-4ac5-8b89-52119d493ddb"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00430456652253399"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="a0c84a92-f929-40f9-ac3f-580b55990c21">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00430456652253399" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="44c440e4-ca97-4130-ba21-b34b0146ac95"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0014422131536222"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="cc4f560a-896c-4870-87e3-08caecc2952d">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0014422131536222" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="c7eaf328-e35f-48b7-a223-4f0c19da938f"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0132884241977386"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="ec9cc9f6-d053-4079-87c7-0319706c683e">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0132884241977386" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="4c6b66c1-8bb8-4aad-ae77-a0e5fb920a66"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00259241078066534"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="92ee5f3f-47af-4691-9dce-06cc43c548c8">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00259241078066534" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="a006fc35-fcf2-43b1-a3b2-2144caabf083"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00055268232751065"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="b707b8ed-20cb-4790-893e-6c77117843b9">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00055268232751065" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="3dbf29d4-77d8-4d0e-a2b9-15077f09cc0d"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0275456528483629"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="ce51bbe1-72f1-4ca9-aab5-5659fdf7fe0e">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0275456528483629" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="5fd95bbe-063e-4880-9e42-c2bdd6a2b75e"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00740018876503071"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="4dbffe07-b6c8-4f7a-acfe-7757e143c389">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00740018876503071" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="33e3bee0-f07b-4d55-b336-393139afe96c"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00511743811970336"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="c73ca35b-69dc-4323-b597-6eda9a448c8b">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00511743811970336" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="5ad77e1f-bca3-42bc-bebb-03ac82049cd1"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00520775336885909"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="833b6fe7-8c0a-481b-8de1-d39999bf95bb">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00520775336885909" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="a6f5fbc2-72f2-4338-8fed-61c63508c66d"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00989520377889787"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="ea22d023-a5e1-4267-90e5-4e1f3a564d7c">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00989520377889787" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="0a8fcdb7-1f01-4b32-8728-87137e51b41b"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0304831572719091"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="0943262d-a300-4d59-91ee-b84441e32fa2">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0304831572719091" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="380aabed-0bb8-4a48-be3c-cb74fffb2c42"
+        unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00309467748638131"
+        intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d"
+        activityLinkId="c3a19710-b8ef-4b86-8916-4abc5c942098">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <comment>EcoSpold01Location=UCTE</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00309467748638131" mu="-2.02" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="4ea4ca52-5640-4764-9a90-6d86be160fc9"
+        unitId="980b811e-3905-4797-82a5-173f5568bc7e" amount="8.03082196058295"
+        intermediateExchangeId="71e2f1db-a2c5-44d0-8337-dfff15be974d"
+        activityLinkId="0a0c8069-80d0-410d-a91f-869362eeee4a">
+        <name xml:lang="en">heat, district or industrial, other than natural gas</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="8.03082196058295" mu="2.96" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="21c980fd-cd41-4b83-86fd-532b1ae52af7"
+        unitId="980b811e-3905-4797-82a5-173f5568bc7e" amount="0.13502803941705"
+        intermediateExchangeId="71e2f1db-a2c5-44d0-8337-dfff15be974d"
+        activityLinkId="2552c0cf-ea79-4b38-a91a-1d4cd151a87e">
+        <name xml:lang="en">heat, district or industrial, other than natural gas</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.13502803941705" mu="2.96" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <elementaryExchange id="719770d0-4b1e-4c44-bd9e-72c4687a6ee0"
+        unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.0011"
+        elementaryExchangeId="70d467b6-115e-43c5-add2-441de9411348">
+        <name xml:lang="en">BOD5, Biological Oxygen Demand</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculation. This value was calculated from the amount of methyl
+          formate in the treated waste water assuming a carbon conversion of 96% for COD. The worst
+          case scenario, BOD=COD, was used.
+
+          It is assumed that the manufacturing plant is located in an urban/industrial area and
+          consequently the emissions are categorised as emanating in a high population density area.
+          The emissions into water are assumed to be emitted into rivers.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0011" mu="-6.81" variance="0.01"
+            varianceWithPedigreeUncertainty="0.188" />
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5"
+            geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en">Calculated from the water emissions</comment>
+        </uncertainty>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="387f2844-5643-4a95-9a19-abcc533e32de"
+        unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" variableName="water_cooling_UNO_input"
+        casNumber="007732-18-5" amount="0.3755"
+        elementaryExchangeId="fc1c42ce-a759-49fa-b987-f1ec5e503db1">
+        <name xml:lang="en">Water, cooling, unspecified natural origin</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.3755" mu="-0.98" variance="0.03"
+            varianceWithPedigreeUncertainty="0.0707" />
+          <pedigreeMatrix reliability="1" completeness="3" temporalCorrelation="5"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Mc Ketta 1985</comment>
+        </uncertainty>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="9081.65213442325"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.1101"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">TDS in an average river used as approximation. That is, 110.1 mg/L
+            (The Natural Water Cycle, by UNESCO)</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1000"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0104328554239022"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Tab 4.8, calculated from bicarbonate content in river (The Natural
+            Water Cycle, by UNESCO)</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="999.8899"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0104328554239022"
+          isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual
+            entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.00114865738217163"
+          isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="30347aef-a90b-46ba-8746-b53741aa779d">
+          <compartment xml:lang="en">natural resource</compartment>
+          <subcompartment xml:lang="en">in water</subcompartment>
+        </compartment>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="7e483680-b3f8-4063-af73-83e8052bc1e1"
+        unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.0011"
+        elementaryExchangeId="fc0b5c85-3b49-42c2-a3fd-db7e57b696e3">
+        <name xml:lang="en">COD, Chemical Oxygen Demand</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculation. This data was calculated from the amount of methyl
+          formate in the treated waste water assuming a carbon conversion of 96% for COD. The worst
+          case scenario BOD=COD was used.
+
+          It is assumed that the manufacturing plants are located in an urban/industrial area and
+          consequently the emissions are categorised as emanating in a high population density area.
+          Water emissions are assumed to be emitted into rivers.
+
+        </comment>
+        <uncertainty>
+          <lognormal meanValue="0.0011" mu="-6.81" variance="0.01"
+            varianceWithPedigreeUncertainty="0.188" />
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5"
+            geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en">Calculated from the water emissions</comment>
+        </uncertainty>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="7df2b96c-031b-4a48-a387-7820298c046e"
+        unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.00042"
+        elementaryExchangeId="f65558fb-61a1-4e48-b4f2-60d62f14b085">
+        <name xml:lang="en">TOC, Total Organic Carbon</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculation. This data was calculated from the amount of methyl
+          formate in the treated waste water assuming a carbon conversion of 96% for COD. The worst
+          case scenario TOC=DOC was used.
+
+          It is assumed that the manufacturing plants are located in an urban/industrial area and
+          consequently the emissions are categorised as emanating in a high population density area.
+          Water emissions are assumed to be emitted into rivers.
+
+        </comment>
+        <uncertainty>
+          <lognormal meanValue="0.00042" mu="-7.78" variance="0.01"
+            varianceWithPedigreeUncertainty="0.188" />
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5"
+            geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en">Calculated from the water emissions</comment>
+        </uncertainty>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="2f5d60a7-7736-40f7-9767-f50a2a46cbf7"
+        unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000124-38-9" amount="0.013913"
+        elementaryExchangeId="f9749677-9c9f-4678-ab55-c607dfdc2cb9">
+        <name xml:lang="en">Carbon dioxide, fossil</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Estimation. The carbon contained in the removed methyl formate during
+          waste water treatment was accounted for as CO2 emissions to air.
+
+          Air emissions occurring from the purge vent, the distillation vent and fugitive emission
+          sources were estimated to 0.2% of the raw material input.
+
+          It is assumed that the manufacturing plants are located in an urban/industrial area and
+          consequently the emissions are categorised as emanating in a high population density area.
+
+
+        </comment>
+        <uncertainty>
+          <lognormal meanValue="0.013913" mu="-4.27" varianceWithPedigreeUncertainty="0.02" />
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5"
+            geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en">Calculated from the water treatment</comment>
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.272916486782489"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.272916486782489"
+          isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual
+            entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.272916486782489"
+          isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="f8833dcb-107e-4c6e-b7af-725a8e144140"
+        unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" variableName="water_to_water_unspecified"
+        casNumber="007732-18-5" amount="0.23047075" isCalculatedAmount="true"
+        mathematicalRelation="(water_deionised_input/1000)*(1-fraction_WDI_to_air)+water_cooling_UNO_input*(1-fraction_CW_to_air)"
+        elementaryExchangeId="2404b41a-2eed-4e9d-8ab6-783946fdf5d6">
+        <name xml:lang="en">Water</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">Calculated value based on literature values and expert opinion. See
+          comments in the parametres' comment field.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.23047075" mu="-1.47" variance="0.04"
+            varianceWithPedigreeUncertainty="0.0487" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4"
+            geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="1f45c101-983d-43ff-a576-9601b15e0c65"
+          variableName="fraction_origin_unspecified_Ww" amount="0.997930323045332"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">fraction, origin: unspecified</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">This property represent the fraction of the amount of the exchange
+            which origin is unspecified. It can be either salt or fresh water.</comment>
+        </property>
+        <property propertyId="ed9ccf89-0acb-4097-8f74-867ed82f5fd0"
+          variableName="fraction_origin_salt_water_Ww" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">fraction, origin: salt water</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">This property represent the fraction of the amount of the exchange
+            which origin is salt water.</comment>
+        </property>
+        <property propertyId="d2efbebc-9ec8-4ce3-aea4-f4353094f458"
+          variableName="fraction_origin_fresh_water_Ww" amount="0.00206967695466778"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">fraction, origin: fresh water</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">This property represent the fraction of the amount of the exchange
+            which origin is fresh water.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" variableName="WM" amount="1000"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25"
+          variableName="C_content_non_fossil" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" variableName="WWM" amount="1000"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" variableName="DM" amount="0"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" variableName="C_content_fossil"
+          amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0"
+          isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual
+            entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0"
+          isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e47f0a6c-3be8-4027-9eee-de251784f708">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="47a0555e-67ec-46b4-ac11-d09433e8765b"
+        unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000107-31-3" amount="0.001054"
+        elementaryExchangeId="af3b0f01-3f06-46c7-a3b7-66bfec083264">
+        <name xml:lang="en">Methyl formate</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Estimation. The water emissions were estimated to 0.8% of the
+          intermediate methyl formate. The carbon contained in the removed methyl formate during
+          waste water treatment was accounted for as CO2 emissions to air.
+
+          It is assumed that the manufacturing plants are located in an urban/industrial area and
+          consequently the emissions are categorised as emanating in a high population density area.
+          Water emissions are assumed to be emitted into rivers.
+        </comment>
+        <uncertainty>
+          <lognormal meanValue="0.001054" mu="-6.86" varianceWithPedigreeUncertainty="0.02" />
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5"
+            geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en">Estimation</comment>
+        </uncertainty>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.400016252429538"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.400016252429538"
+          isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual
+            entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.400016252429538"
+          isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="b4a9900e-84a4-437d-a0f5-d7fe1e9bc0fb"
+        unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000630-08-0" amount="0.006144"
+        elementaryExchangeId="6edcc2df-88a3-48e1-83d8-ffc38d31c35b">
+        <name xml:lang="en">Carbon monoxide, fossil</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Estimation. Air emissions occurring from the purge vent, the
+          distillation vent and fugitive emission sources were estimated to 0.2% of the raw material
+          input.
+
+          It is assumed that the manufacturing plants are located in an urban/industrial area and
+          consequently the emissions are categorised as emanating in a high population density area.
+
+
+        </comment>
+        <uncertainty>
+          <lognormal meanValue="0.006144" mu="-5.09" variance="0.62"
+            varianceWithPedigreeUncertainty="0.798" />
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5"
+            geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en">Estimation</comment>
+        </uncertainty>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.428805015280039"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.428805015280039"
+          isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual
+            entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.428805015280039"
+          isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="8e2558c7-1770-44b7-a251-a2d19b96c5ea"
+        unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" variableName="water_to_air_unspecified"
+        casNumber="007732-18-5" amount="0.14562925" isCalculatedAmount="true"
+        mathematicalRelation="(water_deionised_input/1000*fraction_WDI_to_air)+(water_cooling_UNO_input*fraction_CW_to_air)"
+        elementaryExchangeId="075e433b-4be4-448e-9510-9a5029c1ce94">
+        <name xml:lang="en">Water</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">Calculated value based on literature values and expert opinion. See
+          comments in the parametres' comment field.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.14562925" mu="-1.93" variance="0.04"
+            varianceWithPedigreeUncertainty="0.0487" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4"
+            geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="1f45c101-983d-43ff-a576-9601b15e0c65"
+          variableName="fraction_origin_unspecified" amount="0.999155389456445"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">fraction, origin: unspecified</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">This property represent the fraction of the amount of the exchange
+            which origin is unspecified. It can be either salt or fresh water.</comment>
+        </property>
+        <property propertyId="d2efbebc-9ec8-4ce3-aea4-f4353094f458"
+          variableName="fraction_origin_fresh_water" amount="0.000844610543554952"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">fraction, origin: fresh water</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">This property represent the fraction of the amount of the exchange
+            which origin is fresh water.</comment>
+        </property>
+        <property propertyId="ed9ccf89-0acb-4097-8f74-867ed82f5fd0"
+          variableName="fraction_origin_salt_water" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">fraction, origin: salt water</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">This property represent the fraction of the amount of the exchange
+            which origin is salt water.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1000"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="1000"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0"
+          isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual
+            entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0"
+          isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="7011f0aa-f5f9-4901-8c10-884ad8296812">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="39d0d488-592d-4ff1-9074-e34799b79979"
+        unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000107-31-3" amount="0.00264"
+        elementaryExchangeId="a71b27f2-3bcb-4bcc-a0c6-b6a123f0b42e">
+        <name xml:lang="en">Methyl formate</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Estimation. Air emissions occurring from the purge vent, the
+          distillation vent and fugitive emission sources were estimated to 0.2% of the raw material
+          input.
+
+          It is assumed that the manufacturing plants are located in an urban/industrial area and
+          consequently the emissions are categorised as emanating in a high population density area.
+
+        </comment>
+        <uncertainty>
+          <lognormal meanValue="0.00264" mu="-5.94" varianceWithPedigreeUncertainty="0.02" />
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5"
+            geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en">Estimation</comment>
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1"
+          unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.400016252429538"
+          unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.400016252429538"
+          isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual
+            entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.400016252429538"
+          isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="2d4d37f5-e0b7-4e4a-9c31-a7c51c886cbf"
+        unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.00042"
+        elementaryExchangeId="960c0f37-f34c-4fc1-b77c-22d8b35fd8d5">
+        <name xml:lang="en">DOC, Dissolved Organic Carbon</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculation. This data was calculated from the amount of methyl
+          formate in the treated waste water assuming a carbon conversion of 96% for COD. The worst
+          case scenario TOC=DOC was used.
+
+          It is assumed that the manufacturing plants are located in an urban/industrial area and
+          consequently the emissions are categorised as emanating in a high population density area.
+          Water emissions are assumed to be emitted into rivers.
+
+        </comment>
+        <uncertainty>
+          <lognormal meanValue="0.00042" mu="-7.78" variance="0.01"
+            varianceWithPedigreeUncertainty="0.188" />
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5"
+            geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en">Calculated from the water emissions</comment>
+        </uncertainty>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <parameter parameterId="e952df4c-1ca5-4710-9f53-be47be9191c1"
+        variableName="fraction_CW_R_to_air" amount="0.771">
+        <name xml:lang="en">fraction, cooling water, recirculating system, to air</name>
+        <uncertainty>
+          <lognormal meanValue="0.771" mu="-0.26" variance="0.04"
+            varianceWithPedigreeUncertainty="0.0413" />
+          <pedigreeMatrix reliability="2" completeness="3" temporalCorrelation="1"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <comment xml:lang="en">Calculated based on literature value (Scown, C.D., 2011, Water
+          Footprint of U.S. Transportation Fuels and supplying information of the article) (Vionnet,
+          S., Quantis Water Database - Technical Report, 2012). </comment>
+      </parameter>
+      <parameter parameterId="ca04da6b-a4e4-4172-8be4-0ad990e2e549"
+        variableName="fraction_WDI_to_air" mathematicalRelation="fraction_PW_to_air"
+        isCalculatedAmount="true" amount="0.205">
+        <name xml:lang="en">fraction, water, deionised, to air</name>
+        <uncertainty>
+          <lognormal meanValue="0.205" mu="-1.58" variance="0.04"
+            varianceWithPedigreeUncertainty="0.092025" />
+          <pedigreeMatrix reliability="4" completeness="4" temporalCorrelation="3"
+            geographicalCorrelation="2" furtherTechnologyCorrelation="4" />
+        </uncertainty>
+        <comment xml:lang="en">Calculated value. See comment in the other parametres present in this
+          dataset. Deionised water is considered to be always used as process water, thus process
+          water fractions to air are applied to all deionised water input flows to calculate the
+          amount of water consumed in the processes.</comment>
+      </parameter>
+      <parameter parameterId="daadf2d4-7bbb-4f69-8ab5-58df4c1685eb"
+        variableName="fraction_PW_to_air" amount="0.205">
+        <name xml:lang="en">fraction, process water, to air</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <uncertainty>
+          <lognormal meanValue="0.205" mu="-1.58" variance="0.04"
+            varianceWithPedigreeUncertainty="0.092025" />
+          <pedigreeMatrix reliability="4" completeness="4" temporalCorrelation="3"
+            geographicalCorrelation="2" furtherTechnologyCorrelation="4" />
+        </uncertainty>
+        <comment xml:lang="en">Literature value (Statistics Canada, 2007 &amp; Shaffer, K.H., 2008,
+          Consumptive water use in the Great Lakes Basin, USGS) (Vionnet, S., Quantis Water Database
+          - Technical Report, 2012).</comment>
+      </parameter>
+      <parameter parameterId="606c3625-2a78-4202-87a6-16f43eec86c3"
+        variableName="fraction_CW_CP_to_air" amount="0.032">
+        <name xml:lang="en">fraction, cooling water, cooling pond system, to air</name>
+        <uncertainty>
+          <lognormal meanValue="0.032" mu="-3.44" variance="0.04"
+            varianceWithPedigreeUncertainty="0.0413" />
+          <pedigreeMatrix reliability="2" completeness="3" temporalCorrelation="1"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <comment xml:lang="en">Calculated based on literature value (Scown, C.D., 2011, Water
+          Footprint of U.S. Transportation Fuels and supplying information of the article) (Vionnet,
+          S., Quantis Water Database - Technical Report, 2012). </comment>
+      </parameter>
+      <parameter parameterId="0b267c5e-0421-434c-8209-62d70a1f2f07"
+        variableName="fraction_CW_OT_to_air" amount="0.004">
+        <name xml:lang="en">fraction, cooling water, once-through system, to air</name>
+        <uncertainty>
+          <lognormal meanValue="0.004" mu="-5.52" variance="0.04"
+            varianceWithPedigreeUncertainty="0.0413" />
+          <pedigreeMatrix reliability="2" completeness="3" temporalCorrelation="1"
+            geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <comment xml:lang="en">Calculated based on literature value (Scown, C.D., 2011, Water
+          Footprint of U.S. Transportation Fuels and supplying information of the article) (Vionnet,
+          S., Quantis Water Database - Technical Report, 2012). </comment>
+      </parameter>
+      <parameter parameterId="d1efa4be-e613-43fd-9d73-e8b92b39b283"
+        variableName="fraction_CW_to_air"
+        mathematicalRelation="(0.5*fraction_CW_OT_to_air)+(0.5*fraction_CW_R_to_air)"
+        isCalculatedAmount="true" amount="0.3875">
+        <name xml:lang="en">fraction, cooling water, to air</name>
+        <uncertainty>
+          <lognormal meanValue="0.3875" mu="-0.95" variance="0.04"
+            varianceWithPedigreeUncertainty="0.092025" />
+          <pedigreeMatrix reliability="4" completeness="4" temporalCorrelation="3"
+            geographicalCorrelation="2" furtherTechnologyCorrelation="4" />
+        </uncertainty>
+        <comment xml:lang="en">Calculated value based on literature value (see comments of the other
+          parametres present in this dataset) and expert opinion. In the case when no
+          industry/literature data are available about the type of cooling or directly fraction,
+          cooling water, to air specific for the process a default assumption is applied. It is
+          assumed that the once-through cooling system is used in 50% of all cases and recirculating
+          system is used in another 50% of all cases. </comment>
+      </parameter>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness percent="100" systemModelId="06590a66-662a-4885-8494-ad0cf410f956">
+        <systemModelName xml:lang="en">Allocation, ecoinvent default</systemModelName>
+        <samplingProcedure xml:lang="en">Literature data</samplingProcedure>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from year 2006 to the year
+          of the calculation (2014). The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="4e412379-4901-477d-bbc1-3e2797ab9350" isActiveAuthor="false"
+        personName="personName" personEmail="personEmail@domain.com" />
+      <dataGeneratorAndPublication personId="4e412379-4901-477d-bbc1-3e2797ab9350"
+        personName="personName" personEmail="personEmail@domain.com" dataPublishedIn="2"
+        publishedSourceId="71272329-1b17-415b-9f9b-299ebfbce109" publishedSourceYear="2007"
+        publishedSourceFirstAuthor="Sutter, J." isCopyrightProtected="true" pageNumbers="solvents"
+        accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="37" minorRevision="0"
+        internalSchemaVersion="2.0.10" defaultLanguage="en" creationTimestamp="2010-07-28T18:41:06"
+        lastEditTimestamp="2011-09-22T18:30:49" fileGenerator="EcoEditor 2.0.43.6348"
+        fileTimestamp="2011-09-22T18:30:49" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

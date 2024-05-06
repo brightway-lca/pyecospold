@@ -5,7 +5,7 @@ from io import StringIO
 
 import numpy as np
 import pytest
-from lxml.etree import XMLSyntaxError
+from lxml import etree
 
 from pyecospold.core import parse_file_v1
 from pyecospold.model_v1 import (
@@ -32,19 +32,14 @@ from pyecospold.model_v1 import (
 )
 
 
-@pytest.fixture(name="eco_spold")
-def _eco_spold() -> EcoSpold:
-    return parse_file_v1("data/v1/v1_1.xml")
-
-
-def test_parse_file_v1_fail() -> None:
+def test_parse_file_v1_fail(fixtures_dir) -> None:
     """It fails on schema violation."""
-    with open("data/v1/v1_1.xml", encoding="utf-8") as file:
+    with open(fixtures_dir / "v1" / "v1_1.xml", encoding="utf-8") as file:
         xmlStr = file.read()
     xmlStr = xmlStr.replace('amount="1"', 'amount="abc"')
     xmlStr = xmlStr.replace("<?xml version='1.0' encoding='UTF-8'?>", "")
 
-    with pytest.raises(XMLSyntaxError):
+    with pytest.raises(etree.XMLSyntaxError):
         parse_file_v1(StringIO(xmlStr))
 
 
@@ -286,22 +281,111 @@ def test_parse_file_v1_technology(eco_spold: EcoSpold) -> None:
     assert technology.text == text
 
 
-def test_parse_file_v1_time_period(eco_spold: EcoSpold) -> None:
-    """It parses attributes correctly."""
-    text = "Year when reference used for this inventory was published."
-    startDate = date(1999, 1, 1)
-    endDate = date(1999, 1, 1)
-    modifiedEndDate = date(2000, 3, 4)
-    processInformation = eco_spold.datasets[0].metaInformation.processInformation
-    timePeriod = processInformation.timePeriod
+def test_parse_file_v1_time_period_start_year(v1_timeperiod_fixture):
+    xml_text = """<timePeriod dataValidForEntirePeriod="true" text="foo bar">
+        <startYear>1995</startYear>
+        <endYear>1995</endYear>
+    </timePeriod>"""
+    tp = v1_timeperiod_fixture(xml_text)
 
-    assert timePeriod.dataValidForEntirePeriod
-    assert timePeriod.text == text
-    assert timePeriod.startDate == startDate
-    assert timePeriod.endDate == endDate
+    assert tp.startDate == date(1995, 1, 1)
+    assert tp.endDate == date(1995, 12, 31)
 
-    timePeriod.endDate = modifiedEndDate
-    assert timePeriod.endDate == modifiedEndDate
+
+def test_parse_file_v1_time_period_validity(v1_timeperiod_fixture):
+    xml_text = """<timePeriod dataValidForEntirePeriod="true" text="foo bar">
+        <startYear>1995</startYear>
+        <endYear>1995</endYear>
+    </timePeriod>"""
+    tp = v1_timeperiod_fixture(xml_text)
+
+    assert tp.dataValidForEntirePeriod
+    assert tp.text == "foo bar"
+
+    xml_text = """<timePeriod dataValidForEntirePeriod="false">
+        <startYear>1995</startYear>
+        <endYear>1995</endYear>
+    </timePeriod>"""
+    tp = v1_timeperiod_fixture(xml_text)
+
+    assert not tp.dataValidForEntirePeriod
+    assert not tp.text
+
+
+def test_parse_file_v1_time_period_date(v1_timeperiod_fixture):
+    xml_text = """<timePeriod dataValidForEntirePeriod="true" text="foo bar">
+        <startDate>1995-02-03</startDate>
+        <endDate>1995-04-21</endDate>
+    </timePeriod>"""
+    tp = v1_timeperiod_fixture(xml_text)
+
+    assert tp.startDate == date(1995, 2, 3)
+    assert tp.endDate == date(1995, 4, 21)
+
+
+def test_parse_file_v1_time_period_year_month_january(v1_timeperiod_fixture):
+    xml_text = """<timePeriod dataValidForEntirePeriod="true" text="foo bar">
+        <startYearMonth>1995-01</startYearMonth>
+        <endYearMonth>1995-01</endYearMonth>
+    </timePeriod>"""
+    tp = v1_timeperiod_fixture(xml_text)
+
+    assert tp.startDate == date(1995, 1, 1)
+    assert tp.endDate == date(1995, 1, 31)
+
+
+def test_parse_file_v1_time_period_year_month_december(v1_timeperiod_fixture):
+    xml_text = """<timePeriod dataValidForEntirePeriod="true" text="foo bar">
+        <startYearMonth>1995-12</startYearMonth>
+        <endYearMonth>1995-12</endYearMonth>
+    </timePeriod>"""
+    tp = v1_timeperiod_fixture(xml_text)
+
+    assert tp.startDate == date(1995, 12, 1)
+    assert tp.endDate == date(1995, 12, 31)
+
+
+def test_parse_file_v1_time_period_year_month_february(v1_timeperiod_fixture):
+    xml_text = """<timePeriod dataValidForEntirePeriod="true" text="foo bar">
+        <startYearMonth>1995-02</startYearMonth>
+        <endYearMonth>1995-02</endYearMonth>
+    </timePeriod>"""
+    tp = v1_timeperiod_fixture(xml_text)
+
+    assert tp.startDate == date(1995, 2, 1)
+    assert tp.endDate == date(1995, 2, 28)
+
+
+def test_parse_file_v1_time_period_set_new_values(v1_timeperiod_fixture):
+    xml_text = """<timePeriod dataValidForEntirePeriod="true" text="foo bar">
+        <startDate>1995-02-03</startDate>
+        <endDate>1995-04-05</endDate>
+    </timePeriod>"""
+    tp = v1_timeperiod_fixture(xml_text)
+
+    tp.startDate = date(1990, 5, 6)
+    tp.endDate = date(2012, 1, 2)
+
+    assert tp.startDate == date(1990, 5, 6)
+    assert tp._startDate == "1990-05-06"
+    assert tp.endDate == date(2012, 1, 2)
+    assert tp._endDate == "2012-01-02"
+
+
+def test_parse_file_v1_time_period_set_new_values_errors(v1_timeperiod_fixture):
+    xml_text = """<timePeriod dataValidForEntirePeriod="true" text="foo bar">
+        <startDate>1995-02-03</startDate>
+        <endDate>1995-04-05</endDate>
+    </timePeriod>"""
+    tp = v1_timeperiod_fixture(xml_text)
+    with pytest.raises(ValueError):
+        tp.startDate = "1990-05-06"
+    with pytest.raises(ValueError):
+        tp.startDate = date(2022, 1, 2)
+    with pytest.raises(ValueError):
+        tp.endDate = "2012-01-02"
+    with pytest.raises(ValueError):
+        tp.endDate = date(1970, 5, 6)
 
 
 def test_parse_file_v1_dataset_information(eco_spold: EcoSpold) -> None:

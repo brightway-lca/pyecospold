@@ -3,6 +3,8 @@
 from datetime import date, datetime
 from typing import ClassVar, Dict, List
 
+from dateutil.parser import parse
+from dateutil.relativedelta import relativedelta
 from lxml import etree
 from lxmlh import get_element, get_element_list
 from pycasreg.validation import validate_cas
@@ -797,74 +799,68 @@ class TimePeriod(etree.ElementBase):
     def startDate(self) -> date:
         """Start date of the time period for which the dataset is valid. If it is only
         known that data is older than a certain data, 'startDate' is left blank."""
-        return self._parse_date(self._startDate)
+        return parse(self._startDate).date()
 
     @startDate.setter
     def startDate(self, new_date: date) -> None:
-        self._write_date(new_date, "start")
+        if not isinstance(new_date, date):
+            raise ValueError("`new_date` must be a `datetime.date` instance")
+        if new_date > self.endDate:
+            raise ValueError("`new_date` is after `timePeriod.endDate`")
+        self._startDate = new_date.isoformat()
 
     @property
     def endDate(self) -> date:
         """End date of the time period for which the dataset is valid."""
-        return self._parse_date(self._endDate)
+        return parse(self._endDate).date()
 
     @endDate.setter
     def endDate(self, new_date: date) -> None:
-        self._write_date(new_date, "end")
-
-    def _parse_date(
-        self,
-        date_str: str,
-        default_month: int = 1,
-        default_day: int = 1,
-    ) -> date:
-        if len(date_str) == 10:
-            return date(
-                int(date_str[:4]),
-                int(date_str[5:7]),
-                int(date_str[8:]),
-            )
-        if len(date_str) == 7:
-            return date(int(date_str[:4]), int(date_str[5:]), default_day)
-        return date(int(date_str), default_month, default_day)
-
-    def _write_date(self, date_d: date, prefix: str) -> None:
-        month = "0" * (date_d.month < 10) + str(date_d.month)
-        day = "0" * (date_d.day < 10) + str(date_d.day)
-        setattr(self, f"_{prefix}Date", f"{date_d.year}-{month}-{day}")
+        if not isinstance(new_date, date):
+            raise ValueError("`new_date` must be a `datetime.date` instance")
+        if new_date < self.startDate:
+            raise ValueError("`new_date` is before `timePeriod.startDate`")
+        self._endDate = new_date.isoformat()
 
     def _init(self):
-        # 1. Check for fooDate is present, because _init is called multiple times
-        # 2. Get Value from either fooYearMonth or fooYear
-        # 3. Write the value to fooDate and delete the other 2
-        if len(self._startDate) > 0:
-            return
+        """Harmonize all possible date formats to actual dates.
 
-        defaultMonth = 1
-        defaultDay = 1
-        dateElements = []
-        for prefix in ["start", "end"]:  # Must be in this order
-            yearMonth = getattr(self, f"_{prefix}YearMonth")
-            year = getattr(self, f"_{prefix}Year")
+        Shortcircuit evaluation is dates are already present as _init is called 
+        multiple times.
 
-            month = defaultMonth
-            day = defaultDay
-            # fooYearMonth is present
-            if len(yearMonth) != 0:
-                yearInt = int(yearMonth[:4])
-                month = int(yearMonth[5:])
-            # fooYear is present
-            elif len(year) != 0:
-                yearInt = int(year)
+        The documentation claims that dates can be blank, but blank values are not 
+        valid `xsd:date` instances, so we don't support that proposition."""
+        if not len(self._startDate) > 0:
+            # Create the element; so much love for XML right now
+            elem = etree.SubElement(self, f"{{{dict(self.nsmap)[None]}}}startDate")
 
-            dateElements.append(
-                etree.SubElement(self, f"{{{dict(self.nsmap)[None]}}}{prefix}Date")
-            )
-            dateElements[-1].text = f"{yearInt}-0{month}-0{day}"
-            for elementName in [f"{prefix}YearMonth", f"{prefix}Year"]:
-                element = get_element(self, elementName)
-                if element is not None:
-                    self.remove(element)
+            start_year_month = getattr(self, "_startYearMonth")
+            if start_year_month:
+                elem.text = (
+                    parse(start_year_month).date() + relativedelta(day=1)
+                ).isoformat()
+                self.remove(get_element(self, "startYearMonth"))
+            else:
+                elem.text = (
+                    parse(self._startYear).date() + relativedelta(day=1, month=1)
+                ).isoformat()
+                self.remove(get_element(self, "startYear"))
+        # Repetitive but less ugly than f-string interpolation everywhere
+        if not len(self._endDate) > 0:
+            elem = etree.SubElement(self, f"{{{dict(self.nsmap)[None]}}}endDate")
+
+            end_year_month = getattr(self, "_endYearMonth")
+            if end_year_month:
+                # Dateutil will figure out actual last day of month on its own. Thanks!
+                elem.text = (
+                    parse(end_year_month).date() + relativedelta(day=31)
+                ).isoformat()
+                self.remove(get_element(self, "endYearMonth"))
+            else:
+                elem.text = (
+                    parse(self._endYear).date() + relativedelta(day=31, month=12)
+                ).isoformat()
+                self.remove(get_element(self, "endYear"))
 
 
 class Representativeness(etree.ElementBase):

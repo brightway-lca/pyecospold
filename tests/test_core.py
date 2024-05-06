@@ -91,10 +91,10 @@ def test_save_file(tmpdir) -> None:
             assert translatedOutput == translatedInput
 
 
-def test_save_file_defaults(tmpdir) -> None:
+def test_save_file_defaults(tmpdir, fixtures_dir) -> None:
     """It saves read file correctly."""
-    inputPath = "data/v1/v1_1.xml"
-    expectedOutputPath = "data/tests/v1_1_defaults.xml"
+    inputPath = fixtures_dir / "v1" / "v1_1.xml"
+    expectedOutputPath = fixtures_dir / "v1" / "v1_1_defaults.xml"
     metaInformation = parse_file_v1(inputPath)
     outputPath = os.path.join(tmpdir, os.urandom(24).hex())
     save_ecospold_file(metaInformation, outputPath, fill_defaults=True)
