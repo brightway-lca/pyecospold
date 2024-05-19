@@ -16,7 +16,6 @@ from .core import (
     validate_zip_file_v1,
     validate_zip_file_v2,
 )
-from .version import __version__
 
 __all__ = (
     "__version__",
@@ -35,3 +34,4 @@ __all__ = (
     "save_ecospold_file",
     "Defaults",
 )
+__version__ = "3.6.0"
