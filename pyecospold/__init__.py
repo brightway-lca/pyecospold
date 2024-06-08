@@ -1,4 +1,22 @@
-"""pyecospold."""
+__all__ = (
+    "__version__",
+    "parse_directory_v1",
+    "parse_directory_v2",
+    "parse_file_v1",
+    "parse_file_v2",
+    "parse_zip_file_v1",
+    "parse_zip_file_v2",
+    "validate_directory_v1",
+    "validate_directory_v2",
+    "validate_file_v1",
+    "validate_file_v2",
+    "validate_zip_file_v1",
+    "validate_zip_file_v2",
+    "save_ecospold_file",
+    "Defaults",
+)
+
+__version__ = "3.6.1"
 
 from .config import Defaults
 from .core import (
@@ -17,21 +35,3 @@ from .core import (
     validate_zip_file_v2,
 )
 
-__all__ = (
-    "__version__",
-    "parse_directory_v1",
-    "parse_directory_v2",
-    "parse_file_v1",
-    "parse_file_v2",
-    "parse_zip_file_v1",
-    "parse_zip_file_v2",
-    "validate_directory_v1",
-    "validate_directory_v2",
-    "validate_file_v1",
-    "validate_file_v2",
-    "validate_zip_file_v1",
-    "validate_zip_file_v2",
-    "save_ecospold_file",
-    "Defaults",
-)
-__version__ = "3.6.0"

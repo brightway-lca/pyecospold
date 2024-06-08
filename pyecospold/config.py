@@ -9,7 +9,7 @@ from typing import Any, Callable, ClassVar, Dict
 import numpy as np
 from lxml import etree
 
-from .version import __version__
+from . import __version__
 
 
 @dataclass
