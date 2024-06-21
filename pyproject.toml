@@ -67,7 +67,7 @@ include-package-data = true
 packages = ["pyecospold"]
 
 [tool.setuptools.dynamic]
-version = { attr = "pyecospold.version.__version__" }
+version = { attr = "pyecospold.__version__" }
 
 [tool.pytest.ini_options]
 addopts = "--cov pyecospold --cov-report term-missing --verbose"
