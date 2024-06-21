@@ -8,13 +8,12 @@ authors = [
   { name="Mina Sami", email="sami.mg@outlook.com" }
 ]
 maintainers = [
-  { name="Mina Sami", email="sami.mg@outlook.com" }
+  { name="Mina Sami", email="sami.mg@outlook.com" },
+  { name="Chris Mutel", email="cmutel@gmail.com" }
 ]
 description = "A Python package that converts ecospold XML formats to their Python equivalents and export the same data back to XML."
 readme = "README.md"
 dynamic = ["version"]
-# Add here all kinds of additional classifiers as defined under
-# https://pypi.org/classifiers/
 classifiers = [
     "Development Status :: 4 - Beta",
     "Programming Language :: Python",
@@ -37,9 +36,9 @@ dependencies = [
 ]
 
 [project.urls]
-source = "https://github.com/sami-m-g/pyecospold"
-homepage = "https://github.com/sami-m-g/pyecospold"
-tracker = "https://github.com/sami-m-g/pyecospold/issues"
+source = "https://github.com/brightway-lca/pyecospold"
+homepage = "https://github.com/brightway-lca/pyecospold"
+tracker = "https://github.com/brightway-lca/pyecospold/issues"
 
 [project.optional-dependencies]
 # Getting recursive dependencies to work is a pain, this
