@@ -1,4 +1,5 @@
 """Test cases for the __cas_validation__ module."""
+
 import math
 
 import pytest

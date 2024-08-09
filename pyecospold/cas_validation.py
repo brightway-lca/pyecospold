@@ -22,6 +22,7 @@ Similarly, for 110-63-4:
     1 * 3 + 2 * 6 + 3 * 0 + 4 * 1 + 5 * 1 = 24
 
 """
+
 import math
 from typing import Union
 
