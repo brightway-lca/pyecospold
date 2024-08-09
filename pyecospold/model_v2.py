@@ -5,7 +5,7 @@ from typing import Dict, List
 
 from lxml import etree
 from lxmlh import get_element, get_element_list, get_inner_text_list
-from pycasreg.validation import validate_cas
+from .cas_validation import validate_cas
 
 from .helpers import (
     create_attribute_list_v2,
