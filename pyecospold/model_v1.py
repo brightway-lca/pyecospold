@@ -7,8 +7,8 @@ from dateutil.parser import parse
 from dateutil.relativedelta import relativedelta
 from lxml import etree
 from lxmlh import get_element, get_element_list
-from .cas_validation import validate_cas
 
+from .cas_validation import validate_cas
 from .helpers import (
     create_attribute_list_v1,
     create_attribute_v1,
@@ -825,10 +825,10 @@ class TimePeriod(etree.ElementBase):
     def _init(self):
         """Harmonize all possible date formats to actual dates.
 
-        Shortcircuit evaluation is dates are already present as _init is called 
+        Shortcircuit evaluation is dates are already present as _init is called
         multiple times.
 
-        The documentation claims that dates can be blank, but blank values are not 
+        The documentation claims that dates can be blank, but blank values are not
         valid `xsd:date` instances, so we don't support that proposition."""
         if not len(self._startDate) > 0:
             # Create the element; so much love for XML right now
