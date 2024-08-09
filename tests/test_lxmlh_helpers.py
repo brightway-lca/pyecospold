@@ -1,7 +1,7 @@
 """Test cases for the __helpers__ module."""
 
 from lxml import etree
-from lxmlh import fill_in_defaults
+from pyecospold.lxmlh import fill_in_defaults
 
 
 def test_create_attribute(ship_order: etree.ElementTree) -> None:

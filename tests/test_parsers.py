@@ -3,7 +3,7 @@
 import os
 
 from lxml import etree
-from lxmlh.parsers import (
+from pyecospold.lxmlh.parsers import (
     parse_zip_file,
     save_file,
     validate_directory,
