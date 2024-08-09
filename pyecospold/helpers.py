@@ -2,9 +2,8 @@
 
 from typing import Callable, Optional
 
-from lxmlh import create_attribute, create_attribute_list, create_element_text
-
 from .config import Defaults
+from .lxmlh import create_attribute, create_attribute_list, create_element_text
 
 
 def create_attribute_v1(

@@ -7,7 +7,9 @@ from pathlib import Path
 from typing import List, Tuple, Union
 
 from lxml import etree
-from lxmlh import (
+
+from .config import Defaults
+from .lxmlh import (
     parse_directory,
     parse_file,
     parse_zip_file,
@@ -16,8 +18,6 @@ from lxmlh import (
     validate_file,
     validate_zip_file,
 )
-
-from .config import Defaults
 from .model_v1 import AdministrativeInformation as AdministrativeInformationV1
 from .model_v1 import Allocation
 from .model_v1 import DataEntryBy as DataEntryByV1

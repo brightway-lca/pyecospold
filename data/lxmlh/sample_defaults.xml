@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<shiporder
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schema.xsd"
+  orderid="889923" orderstatus="wip" ordertime="889923">
+  <orderperson>John Smith</orderperson>
+  <shipto>
+    <name>Ola Nordmann</name>
+    <address>Langgt 23</address>
+    <city>4000 Stavanger</city>
+    <country>Norway</country>
+  </shipto>
+  <item>
+    <note>Item1</note>
+    <note>Item1.1</note>
+  </item>
+  <item>
+    <note>Item2</note>
+  </item>
+  <discount>1</discount>
+  <discount>2</discount>
+</shiporder>

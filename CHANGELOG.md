@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [DEV]
 
 - Include `pycasreg` in source repo to avoid bumping version dominoes
+- Include `lxmlh` in source repo to avoid bumping version dominoes
 
 ## [3.6.2] - 2024-06-21
 

@@ -6,7 +6,6 @@ from typing import ClassVar, Dict, List
 from dateutil.parser import parse
 from dateutil.relativedelta import relativedelta
 from lxml import etree
-from lxmlh import get_element, get_element_list
 
 from .cas_validation import validate_cas
 from .helpers import (
@@ -14,6 +13,7 @@ from .helpers import (
     create_attribute_v1,
     create_element_text_v1,
 )
+from .lxmlh import get_element, get_element_list
 
 
 class EcoSpold(etree.ElementBase):

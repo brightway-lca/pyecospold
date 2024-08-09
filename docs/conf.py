@@ -13,7 +13,6 @@ from unittest.mock import MagicMock
 
 MOCK_MODULES = [
     'lxml',
-    'lxmlh',
     'numpy',
 ]
 
