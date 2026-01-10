@@ -1,4 +1,4 @@
-from .config import TIMESTAMP_FORMAT, TYPE_DEFAULTS, TYPE_FUNC_MAP
+from .config import TYPE_DEFAULTS, TYPE_FUNC_MAP
 from .helpers import (
     create_attribute,
     create_attribute_list,
@@ -31,7 +31,6 @@ __all__ = (
     "parse_file",
     "parse_zip_file",
     "save_file",
-    "TIMESTAMP_FORMAT",
     "TYPE_DEFAULTS",
     "TYPE_FUNC_MAP",
     "validate_directory",

@@ -7,7 +7,7 @@ TIMESTAMP_FORMAT: str = "%Y-%m-%dT%H:%M:%S"
 
 TYPE_FUNC_MAP: Dict[type, Callable[[str], Any]] = {
     bool: lambda string: string.lower() == "true",
-    datetime: lambda string: datetime.strptime(string, TIMESTAMP_FORMAT),
+    datetime: lambda string: datetime.fromisoformat(string),
 }
 
 TYPE_DEFAULTS: Dict[type, Any] = {
