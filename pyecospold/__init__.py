@@ -16,7 +16,7 @@ __all__ = (
     "Defaults",
 )
 
-__version__ = "4.0.0"
+__version__ = "4.0.1"
 
 from .config import Defaults
 from .core import (
